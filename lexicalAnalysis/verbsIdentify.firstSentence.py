@@ -22,6 +22,7 @@ if 'nlp' not in locals():
      nlp = spacy.load('en')
 
 from os import path
+from collections import Counter
 
 inFn = path.join( path.dirname(__file__), "..", "data/extracted.nice.csv" )
 #outFn = "/home/alec/data projects/NYTIMESobituaries/extracted.noBody.nice.abberations.csv"
@@ -44,6 +45,9 @@ def followRecursive(tree):
     total.append(tree)
     return total
 
+whatTheyDid = Counter()
+whatTheyIs = Counter()
+
 with open(inFn) as inF:
     rs = reader(inF)
     
@@ -51,11 +55,11 @@ with open(inFn) as inF:
     
     n = 0
     for r in rs:
-        if n > 1000:
-            break
+        # if n > 1000:
+        #     break
         n += 1
         if n%100 == 0:
-            break
+            #break
             print n
         
         body = r[head.index('fullBody')]
@@ -109,7 +113,12 @@ with open(inFn) as inF:
             if x['POS_coarse'] == "VERB":
                 whatHeDid.append( x['lemma'] )
 
-        print whatHeDid, whatHeIs
+        whatTheyDid.update( whatHeDid )
+        whatTheyIs.update( whatHeIs )
+
+print whatTheyDid
+print whatTheyIs
+
 
 # import random
 
