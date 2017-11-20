@@ -19,7 +19,7 @@ from nltk import sent_tokenize
 import re
 
 if 'nlp' not in locals():
-    nlp = spacy.load('en')
+     nlp = spacy.load('en')
 
 from os import path
 
@@ -30,6 +30,19 @@ whatAnyoneDid = {}
 whatAnyoneWas = {}
 
 debug = False
+
+def followNoun(w, tree):
+    pass
+
+def followRecursive(tree):
+    total = []
+    for x in tree['modifiers']:
+        total += followRecursive(x)
+    
+    del tree['modifiers']
+
+    total.append(tree)
+    return total
 
 with open(inFn) as inF:
     rs = reader(inF)
@@ -80,97 +93,43 @@ with open(inFn) as inF:
         name = commaSplit[0]
         clause = nlp(unicode(commaSplit[1]))
         
+        whatHeIs = []
+        whatHeDid = []
         
-        print name, clause
-        print clause.print_tree()[0]['lemma']
-        print [x['arc'] for x in clause.print_tree()[0]['modifiers']]
-        
-        continue
-        
-        if debug:
-            print nameParts
-        
-        if debug:
-            print "Processing %s" % name
-        whatHeDid = set()
-        whatHeWas = set()
-        
-        sentences = sent_tokenize(body)
-        #print sentences
-        for s in sentences:
-            s = unicode(s)
-            
-            #print "-------------"
-            if debug:
-                print " ".join( s.split() )
-            doc = nlp(s)
-            
-            verbGroup = {}
-            
-            for chunk in doc.noun_chunks:
-                fullInfo = [chunk.text, chunk.root.text, chunk.root.dep_, chunk.root.head.text]
-                if chunk.root.dep_ in ['nsubj', 'dobj', 'attr']:
-                    idx = chunk.root.head.idx
-                    if idx not in verbGroup:
-                        verbGroup[idx] = []
-                    verbGroup[idx].append(fullInfo)
-                    
-            #print verbGroup
+        #print commaSplit[1]
+        tree = clause.print_tree()[0]
+        import json
+        #print json.dumps( tree, indent=4 )
 
-            for vi in verbGroup:
-                if "attr" in [x[-2] for x in verbGroup[vi]]:
-                    itWasHim = False
-                    whatItWas = None
-                    for info in verbGroup[vi]:
-                        for np in nameParts:
-                            if np in info[0].lower():
-                                itWasHim = True
-                        if info[-2] == 'attr':
-                            whatItWas = info[0]
-                            whatItWas = " ".join( whatItWas.split() )
-                    if itWasHim:
-                        whatHeWas.add( whatItWas )
-                        
-                        if whatItWas not in whatAnyoneWas:
-                            whatAnyoneWas[whatItWas] = {"count":0, "examples": []}
-                        whatAnyoneWas[whatItWas]['count'] += 1
-                        whatAnyoneWas[whatItWas]['examples'].append(" ".join( s.split() ))
-                else:
-                    for info in verbGroup[vi]:
-                        for np in nameParts:
-                            if np in info[0].lower():
-                                wD = info[-1]
-                                wD = " ".join( wD.split() )
-                                whatHeDid.add( wD )
-                                
-                                if wD not in whatAnyoneDid:
-                                    whatAnyoneDid[wD] = {"count":0, "examples": []}
-                                whatAnyoneDid[wD]['count'] += 1
-                                whatAnyoneDid[wD]['examples'].append(" ".join( s.split() ))
-             
-        if debug:
-            print "heDid:",whatHeDid
-            print "heWas:",whatHeWas
+        for x in followRecursive(tree):
+            #arc = x['arc']
+            #print x
+            if x['POS_coarse'] == "NOUN":
+                whatHeIs.append( x['lemma'] )
+            if x['POS_coarse'] == "VERB":
+                whatHeDid.append( x['lemma'] )
 
-import random
+        print whatHeDid, whatHeIs
 
-if False:
-    with open('whatAnyoneWas.csv', 'w') as csvF:
-        w = writer(csvF)
-        w.writerow(["what","count","examples"])
-        for word in whatAnyoneWas:
-            samp = whatAnyoneWas[word]['examples']
-            samp = random.sample(samp, min(len(samp), 5))
-            samp = "||".join(samp)
+# import random
+
+# if False:
+#     with open('whatAnyoneWas.csv', 'w') as csvF:
+#         w = writer(csvF)
+#         w.writerow(["what","count","examples"])
+#         for word in whatAnyoneWas:
+#             samp = whatAnyoneWas[word]['examples']
+#             samp = random.sample(samp, min(len(samp), 5))
+#             samp = "||".join(samp)
             
-            w.writerow([word,whatAnyoneWas[word]['count'],samp])
+#             w.writerow([word,whatAnyoneWas[word]['count'],samp])
             
-    with open('whatAnyoneDid.csv', 'w') as csvF:
-        w = writer(csvF)
-        w.writerow(["what","count","examples"])
-        for word in whatAnyoneDid:
-            samp = whatAnyoneDid[word]['examples']
-            samp = random.sample(samp, min(len(samp), 5))
-            samp = "||".join(samp)
+#     with open('whatAnyoneDid.csv', 'w') as csvF:
+#         w = writer(csvF)
+#         w.writerow(["what","count","examples"])
+#         for word in whatAnyoneDid:
+#             samp = whatAnyoneDid[word]['examples']
+#             samp = random.sample(samp, min(len(samp), 5))
+#             samp = "||".join(samp)
             
-            w.writerow([word,whatAnyoneDid[word]['count'],samp])
+#             w.writerow([word,whatAnyoneDid[word]['count'],samp])
