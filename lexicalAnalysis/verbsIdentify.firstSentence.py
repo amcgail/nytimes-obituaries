@@ -21,7 +21,9 @@ import re
 if 'nlp' not in locals():
     nlp = spacy.load('en')
 
-inFn = "/home/alec/data projects/NYTIMESobituaries/extracted.nice.csv"
+from os import path
+
+inFn = path.join( path.dirname(__file__), "..", "data/extracted.nice.csv" )
 #outFn = "/home/alec/data projects/NYTIMESobituaries/extracted.noBody.nice.abberations.csv"
 
 whatAnyoneDid = {}
