@@ -48,6 +48,8 @@ def followRecursive(tree):
 whatTheyDid = Counter()
 whatTheyIs = Counter()
 
+firstSentences = []
+
 with open(inFn) as inF:
     rs = reader(inF)
     
@@ -97,48 +99,45 @@ with open(inFn) as inF:
         name = commaSplit[0]
         clause = nlp(unicode(commaSplit[1]))
         
-        whatHeIs = []
-        whatHeDid = []
+        firstSentences.append([firstSentence, commaSplit[1]])
         
-        #print commaSplit[1]
-        tree = clause.print_tree()[0]
-        import json
-        #print json.dumps( tree, indent=4 )
-
-        for x in followRecursive(tree):
-            #arc = x['arc']
-            #print x
-            if x['POS_coarse'] == "NOUN":
-                whatHeIs.append( x['lemma'] )
-            if x['POS_coarse'] == "VERB":
-                whatHeDid.append( x['lemma'] )
-
-        whatTheyDid.update( whatHeDid )
-        whatTheyIs.update( whatHeIs )
-
-print whatTheyDid
-print whatTheyIs
-
-
-# import random
-
-# if False:
-#     with open('whatAnyoneWas.csv', 'w') as csvF:
-#         w = writer(csvF)
-#         w.writerow(["what","count","examples"])
-#         for word in whatAnyoneWas:
-#             samp = whatAnyoneWas[word]['examples']
-#             samp = random.sample(samp, min(len(samp), 5))
-#             samp = "||".join(samp)
+        if False:
+            whatHeIs = []
+            whatHeDid = []
             
-#             w.writerow([word,whatAnyoneWas[word]['count'],samp])
+            #print commaSplit[1]
+            tree = clause.print_tree()[0]
+            import json
+            #print json.dumps( tree, indent=4 )
+            for x in followRecursive(tree):
+                #arc = x['arc']
+                #print x
+                if x['POS_coarse'] == "NOUN":
+                    whatHeIs.append( x['lemma'] )
+                if x['POS_coarse'] == "VERB":
+                    whatHeDid.append( x['lemma'] )
+    
+            whatTheyDid.update( whatHeDid )
+            whatTheyIs.update( whatHeIs )
+
+import random
+
+if False:
+     with open(path.join( '..', 'outputOfAnalyses', 'whatAnyoneWas.firstSentence.csv'), 'w') as csvF:
+         w = writer(csvF)
+         w.writerow(["what","count"])
+         for word in whatTheyIs:
+             w.writerow([word,whatTheyIs[word]])
             
-#     with open('whatAnyoneDid.csv', 'w') as csvF:
-#         w = writer(csvF)
-#         w.writerow(["what","count","examples"])
-#         for word in whatAnyoneDid:
-#             samp = whatAnyoneDid[word]['examples']
-#             samp = random.sample(samp, min(len(samp), 5))
-#             samp = "||".join(samp)
-            
-#             w.writerow([word,whatAnyoneDid[word]['count'],samp])
+     with open(path.join( '..', 'outputOfAnalyses', 'whatAnyoneDid.firstSentence.csv'), 'w') as csvF:
+         w = writer(csvF)
+         w.writerow(["what","count"])
+         for word in whatTheyDid:
+             w.writerow([word,whatTheyDid[word]])
+             
+if True:
+    with open(path.join( '..', 'outputOfAnalyses', 'firstSentences.csv'), 'w') as csvF:
+         w = writer(csvF)
+         w.writerow(["sentence", "clause"])
+         for fs in firstSentences:
+             w.writerow(fs)
