@@ -1,0 +1,698 @@
+﻿Accountants, 160
+Actors, 150
+Actuaries, 020
+Acupuncturists, 079
+Administrative assistants, 169
+Admitting clerks, 205
+Adult education workers, 099
+Advertising account executives, 141, 164
+Advertising copywriters, 131
+Advertising managers, 164
+Aerospace engineers, 002
+Agricultural engineers, 013
+Agricultural supply sales workers, 272
+Agricultural technicians, 013, 162, 272, 523
+Agronomists, 040
+AIDS counselors, 195
+Air conditioning and heating technicians, 007
+Air conditioning engineers, 007
+Air conditioning, heating, and refrigeration mechanics, 637, 827, 862
+Air pollution control technicians, 029
+Air traffic controllers, 193
+Aircraft mechanics, 621, 806
+Airline baggage and freight handlers, 357, 912, 919
+Airline dispatchers, 912
+Airline flight attendants, 352
+Airline reservations agents, 238
+Airline ticket agents, 238
+Airplane pilots, 196
+Airport managers, 184
+Airport utility workers, 912
+All-round machinists, 600
+Ambulance drivers, 375, 913
+Amusement and recreation attendants, 342, 349
+Anatomists, 041
+Anesthesiologists, 070
+Announcers, 159
+Anthropologists, 055
+Appliance service workers, 637, 723, 827
+Appraisers, 191
+Archaeologists, 055
+Architects, 001
+Architectural drafters, 001
+Architectural model makers, 777
+Armed services careers, 101, 166, 235, 378, 620, 623, 639, 829, 911–912
+Art and music therapists, 195
+Art directors, 141
+Artificial intelligence specialists, 003
+Artists, 141, 144
+Assemblers, 700–703, 706, 720–729, 806, 820–82893197C
+Astronomers, 021
+Athletic coaches, 153
+Athletic trainers, 153
+Auctioneers, 294
+Auditors, 160
+Auto body repairers, 807, 845
+Auto parts counter workers, 279, 620
+Auto sales workers, 273
+Automated manufacturing managers, 638
+Automobile driving instructors, 099
+Automotive exhaust emissions technicians, 010, 620
+Automotive mechanics, 620
+Avionics technicians, 823
+
+Bank clerks, 203, 209–210, 214–217, 219, 249
+Bank officers, 186
+Bank tellers, 211
+Barbers and hairstylists, 330, 332
+Bartenders, 312
+Bicycle repairers, 639
+Biochemists, 041
+Biological technicians, 049, 078, 199
+Biologists, 041
+Biomedical engineers, 019
+Biomedical equipment technicians, 019, 719
+Blacksmiths and forge shop workers, 610–612
+Blood bank technologists, 078
+Boat motor mechanics, 623
+Boiler tenders, 950–951
+Boilermaking workers, 601, 805
+Book editors, 132
+Bookbinders, 653, 977
+Bookkeepers, 210, 216
+Border patrol agents, 375
+Botanists, 041
+Bowling pin machine mechanics, 638
+Bricklayers, 861
+Broadcast technicians, 194, 962
+Brokerage clerks, 219
+Building custodians, 381–382
+Building inspectors, 182
+Business and family consumer scientists, 090–092, 096
+Business machine operators, 207–208, 210, 215–217
+
+Cable television engineers, 184
+Cable television technicians, 821
+CAD specialists, 003, 141
+Cafeteria attendants, 311, 319
+CAM operators, 003, 007, 012
+Camera operators, 143
+Candy, soft drink, and ice cream manufacturing workers, 520–524, 526, 529
+Car rental agents, 273, 295
+Car wash workers, 915
+Cardiac-monitor technicians/perfusionists, 078
+Cardiology technologists, 078
+Carpenters, 860
+Cartographers, 018, 029
+Cartoonists, 141
+Cashiers, 211
+Casino workers, 187
+Caterers, 187, 319
+Cement masons, 844, 869
+Ceramic engineers, 006
+Chauffeurs, 359, 913
+Cheese industry workers, 520–524, 526, 529
+Chemical engineers, 008
+Chemical technicians, 008, 022
+Chemists, 022
+Child monitors, 099, 301
+Chiropractors, 079
+Choreographers, 962
+City managers, 188
+Civil engineering technicians, 005
+Civil engineers, 005
+Claim adjusters, 241
+Claim examiners, 168, 241
+Coal miners, 930–934, 939
+College student personnel workers, 090, 166
+College teachers, 090, 099
+College/university administrators, 090
+Commercial artists, 017, 141, 970
+Companions, 309
+Comparison shoppers, 296
+Compensation specialists, 166
+Composers, 152
+Composite technicians, 701
+Computer artists, 141
+Computer consultants, 018, 020
+Computer database managers, 185
+Computer network technicians, 033
+Computer operators, 213
+Computer programmers, 020
+Computer security engineers, 033
+Computer servicers, 633
+Computer software documentation writers, 020
+Construction electricians, 824, 829
+Construction equipment dealers, 274
+Construction equipment mechanics, 620, 625
+Construction laborers, 869
+Construction millwrights, 638
+Construction supervisors, 182
+Consumer advocates, 096, 110
+Consumer credit counselors, 160, 205, 241, 249
+Controllers, 186
+Convention specialists, 187
+Cooks and chefs, 313, 315
+Cooperative extension service workers, 096
+Copy editors, 132
+Corrections officers, 372
+Correspondence clerks, 209
+Cosmetologists, 332
+Cotton, tobacco, and peanut farmers, 404
+Court clerks, 243
+Craftspeople, 700, 774, 979
+Credit collectors, 241
+Credit officials, 168, 186
+Crime laboratory technicians, 029, 199, 375
+Criminologists, 054
+Crop scientists, 040
+Cruise directors, 187
+Custom tailors and dressmakers, 785
+Custom upholsterers, 780
+Customs workers, 168
+
+Dairy farmers, 410
+Dancers, 151
+Darkroom technicians, 976
+Data entry keyers, 203
+Data processing managers, 169
+Day care workers, 359
+Demographers, 020, 059
+Demolition workers, 859, 869
+Dental and medical secretaries, 201
+Dental assistants, 079
+Dental hygienists, 078
+Dental laboratory technicians, 712
+Dentists, 072
+Desktop publishers, 979
+Detectives, 372, 375–376
+Dialysis technicians, 078
+Diesel mechanics, 625
+Dietetic technicians, 077
+Dietitians and nutritionists, 077, 096
+Dining room attendants, 311
+Direct market brokers, 259
+Direct sales workers, 291
+Directors, 150, 159
+Dishwashers, 318
+Display workers, 298
+Distribution managers, 163
+Divers, 349, 899
+Divorce mediators, 169
+Dock workers, 911, 922
+Door-to-door sales workers, 279, 291–292, 299
+Doorkeepers, 324
+Drafters, 001–003, 005, 007, 014, 017
+Dry cleaning workers, 361–363, 369, 782, 920
+Drywall installers and finishers, 842
+
+E-commerce project managers, 033, 185
+Economists, 050
+Electric power service workers, 239, 729, 821
+Electric power transmission and distribution workers, 821, 829, 952
+Electrical engineers, 003
+Electrical technicians, 003, 168
+Electrologists, 339
+Electromechanical technicians, 003
+Electroneurodiagnostic technologists, 078
+Electronics technicians, 003, 726, 828
+Electroplaters, 500
+Elementary and preschool teachers, 092, 099
+Elevator constructors and repair workers, 825
+Embalmers, 338
+Emergency medical technicians, 079
+Employee benefits managers, 166
+Employment agents, 045, 166
+Employment counselors, 166
+Energy conservation technicians, 003, 959
+Entomologists, 041
+Environmental technicians, 029, 955
+Environmental health specialists, 029
+Environmentalists, 029
+Epidemiologists, 041, 070, 073
+Equestrian workers, 159, 410, 418–419
+Equipment rental and leasing service agents, 295
+Ergonomists, 012, 019, 161
+Estimators, 169
+Executive search recruiters, 166
+Expediters, 221–222
+
+Family and consumer science researchers, 096
+Farm laborers, 421
+Farm managers, 421
+Farm office workers, 421
+Fast food franchise workers, 311, 313, 317, 319
+FBI special agents, 375
+Federal government workers, 168, 188, 375
+Fiction writers, 131
+File clerks, 206
+Film editors, 962
+Financial analysts, 020
+Fire protection engineers, 012
+Firefighters, 373
+Fish culture technicians, 446
+Fishers, 441–442, 446
+Fitness instructors, 153
+Fleet managers, 915
+Flight engineers, 621
+Flight information coordinators and radio operators, 912
+Flight instructors, 097, 196
+Floor covering installers, 864
+Floral designers, 142
+Fluid power technicians, 007, 600
+Food and beverage managers, 187
+Food brokers, 260
+Food canning and freezing workers, 520–526, 529
+Food processing technicians, 022, 041, 274
+Food scientists, 022, 040–041
+Foreign service workers, 188
+Forensic scientists, 059
+Forest products technicians, 260, 560–561, 563–564, 569
+Foresters, 005, 040, 452
+Forestry technicians, 451–455, 459
+Fruit growers, 403
+Fund-raisers, 293
+Funeral directors, 187, 338
+
+Gardeners and groundskeepers, 301, 406
+Gas station attendants, 915
+General managers, 189
+Genetic engineering research assistants, 078, 109, 199
+Genetic engineering research scientists, 041, 199
+Geographers, 029
+Geologists, 024
+Geophysicists, 024
+Geriatric aides, 355
+Geriatric social workers, 195
+Glaziers, 865
+Government inspectors and examiners, 168
+Grain farmers, 401
+Graphic designers, 141
+Ground radio operators and teletypists, 193
+Gunsmiths, 632
+
+Hazardous waste management technicians, 955
+Head waiters and waitresses, 311
+Health care administrators, 187
+Heavy construction contractors, 182
+Heavy equipment operators, 859
+Highway contractors, 182
+Highway engineers, 005
+Highway inspectors, 182
+Highway maintenance workers, 899
+Historians, 052
+Home caterers, 187, 319
+Home health aides, 354
+Home security consultants, 189
+Homemakers, 301–309
+Horticulturists, 040
+Hospice workers, 355
+Hospital administrators, 187
+Hospitality cashiers, 211
+Hotel bellhops and porters, 324
+Hotel desk clerks, 238
+Hotel executive housekeepers, 187
+Hotel houseworkers, 321, 323
+Hotel managers, 187
+Housekeepers, 301
+Hydraulic maintenance technicians, 638
+Hydrologists, 024
+
+Import and export workers, 162–163, 184–185
+Industrial designers, 142
+Industrial engineers, 012
+Industrial hygienists, 012, 079
+Industrial laser machine operators, 609
+Industrial machinery repairers, 626–631
+Industrial upholsterers, 780, 869
+Information marketing specialists, 299
+Inhalation therapists, 079
+Institutional child care workers, 359
+Instructional designers, 003
+Instrument makers, 600, 729–730
+Instrument repairers, 710, 729, 823
+Instrumentation technicians, 003
+Insulation workers, 863
+Insurance agents and brokers, 250
+Integrated circuit technicians, 590
+Intercity bus drivers, 913
+Interior designers, 142
+Internal Revenue Service workers, 110, 160, 168, 188
+Internet entrepreneurs, 030, 141, 979
+Interviewing clerks, 166, 205
+Investment bankers, 020
+Iron and steel workers, 801, 809, 869
+
+Jewelers, 199, 700, 770
+Journalists, 131–132
+Judges, 111
+
+Keypunch operators, 203
+
+Labor relations specialists, 166
+Laboratory animal care workers, 410
+Landscape architects, 001
+Laser and fiber optics technicians, 003, 019, 823
+Lathers, 842
+Laundry workers, 361, 363, 369, 581, 782, 920
+Lawyers, 110–111
+Legal secretaries, 201
+Licensed practical nurses, 079
+Lifeguards, 379
+Lighting technicians, 962
+Linguists, 059
+Literary and theatrical agents, 191
+Lithographic workers, 971–972, 979
+Livestock farmers, 410
+Local transit operators, 910, 913
+Local truck drivers, 905–906
+Locksmiths, 709
+Loggers, 454–455, 921–922, 929
+Long-haul truck drivers, 905
+Lumber mill workers, 455, 665, 667, 921
+
+Machine tool operators, 602–607, 609
+Magazine editors, 132
+Mail clerks, 209
+Mail service workers, 239
+Maintenance electricians, 824, 829
+Management consultant analysts, 161, 189, 199
+Management information systems (MIS) professionals, 161, 169
+Manufactured home assemblers and installers, 869
+Manufacturers' sales workers, 260–262, 269–277, 279
+Manufacturing engineers, 012
+Marble, tile, and terrazzo workers, 861
+Marina workers, 911
+Marine engineers and naval architects, 001, 014
+Marine-services technicians, 625, 825
+Marketing directors, 163, 189
+Marketing research workers, 045, 050, 189
+Marriage and family counselors, 195
+Massage therapists, 334
+Mathematicians, 020
+Meat packing workers, 520–523, 525–526, 529, 910
+Mechanical engineering technicians, 007
+Mechanical engineers, 007
+Media buyers, 162
+Media time sales workers, 259
+Medical assistants, 079
+Medical illustrators, 141
+Medical laboratory technologists, 078
+Medical laboratory workers, 078
+Medical physicists, 079
+Medical record administrators, 079
+Medical record technicians and clerks, 079, 245
+Meeting planners, 215
+Menu planners, 077
+Merchant marine captains, 197
+Merchant marine engineers and chief engineers, 197
+Merchant marine pursers, 197
+Merchant marine radio officers, 193
+Merchant marine stewards and cooks, 315, 350
+Messenger service workers, 239
+Metal miners, 930–934, 939
+Metallurgical engineers, 011
+Metallurgical technicians, 011
+Meteorologists, 025
+Meter readers, 209
+Microbiologists, 041, 078
+Microwave engineers, 003
+Mining engineers, 010
+Mining technicians, 007, 010–011, 018
+Models, 297, 961
+Motion picture projectionists, 960
+Motorcycle mechanics, 620
+Movers, 323
+Museum curators, 102
+Museum workers, 100, 102, 353
+Music teachers, 152
+Music video producers, 152, 187
+Musicians, 152
+
+Nannies, 099
+Network administrators, 033, 185
+Newspaper editors, 132
+Nuclear engineers, 015
+Nuclear medicine technologists, 078
+Nuclear technicians, 015, 199, 952, 955
+Numerical control machine operators, 609
+Nurse anesthetists, 075
+Nurse–midwives, 075
+Nursery workers, 272, 405
+Nurse's aides and orderlies, 355
+
+Occupational therapists, 076
+Occupational therapy assistants, 076
+Ocean technicians, 024, 041
+Oceanographers, 024, 041
+Office clerks, 203, 209
+Office machine servicers, 633
+Office managers, 186
+Office planners, 003, 012, 019, 142
+Operating room technicians, 079
+Operations research analysts, 020
+Ophthalmologists, 070
+Opticians, 299, 713, 716
+Optometric assistants, 079
+Optometrists, 079
+Ordinary and able seamen, 911
+Organizational developers, 012, 161, 166, 189, 199
+Orthoptists, 079
+Osteopathic physicians, 071
+Outdoor guides, 353
+Outplacement consultants, 199
+
+Painters and paperhangers, 840–841
+Pantry supervisors, 318
+Paralegal aides, 119
+Park rangers, 169
+Parking analysts, 199
+Parking attendants, 915
+Parole officers, 195
+Party planners, 359
+Pastry chefs and bakers, 313, 520, 524, 526
+Pathologists, 041, 070, 073
+Payroll clerks, 215
+Personal exercise instructors, 359
+Personal service workers, 359
+Personal shoppers, 296
+Personnel administrators, 166
+Personnel clerks, 166
+Pest control workers, 383, 389
+Pet care workers, 159, 410, 418
+Petroleum and natural gas exploration and production workers, 010, 541, 869, 914, 930–931
+Petroleum engineers, 010
+Pharmaceutical detail representatives, 262
+Pharmaceutical technicians, 074
+Pharmacists, 074
+Pharmacologists, 041, 073
+Photo researchers, 199
+Photographers, 143
+Physical therapists, 076
+Physical therapy assistants, 076
+Physician assistants, 079
+Physicians, 070
+Physicists, 023
+Piano and organ tuners and technicians, 730, 828
+Plasterers, 842
+Plumbers and pipe fitters, 862
+Podiatrists, 079
+Police officers, 375, 377
+Political scientists, 051
+Postal service workers, 188, 230, 243
+Poultry farmers, 411
+Power plant workers, 950, 952
+Power tool repairers, 729
+Power truck operators, 929
+Prepress workers, 650, 973, 979
+Printing press operators, 652
+Probation officers, 195
+Producers, 159, 187, 962
+Product managers, 141
+Production designers, 141–142, 333, 962
+Production managers, 141, 183, 652
+Production painters, 599, 741
+Production, planning, and expediting clerks, 012, 221–222
+Production supervisors, 183, 529, 539, 559, 653, 699
+Professional athletes, 153
+Proofreaders, 209
+Property/facilities managers, 186
+Prosthetists and orthotists, 078
+Psychiatric aides/technicians, 079
+Psychiatrists, 070
+Psychologists, 045
+Public health educators, 079
+Public librarians, 100
+Public relations managers, 165
+Public relations workers, 165
+Purchasing agents, 162
+
+Quality assurance technician, 033
+Quality control inspectors, 529, 579, 649, 652, 701, 725–726
+
+Radio and television newscasters, 159
+Radiologic technologists, 078
+Railroad brakers, 910
+Railroad clerks, 211, 221–222
+Railroad conductors, 198, 910
+Railroad engineers, 910
+Railroad maintenance workers, 610, 622, 804–805, 824
+Railroad signalers and signal maintainers, 822
+Railroad track workers, 869, 910
+Range managers, 040
+Real estate appraisers, 191
+Real estate developers, 189
+Real estate sales workers and brokers, 250
+Receptionists, 237
+Recreation workers, 076, 159, 187, 195
+Recreational therapists, 076
+Recycling and reclamation workers, 512, 515
+Refuse workers, 909, 955
+Registered nurses, 075
+Rehabilitation counselors, 045
+Religious vocations, 120
+Reprographic workers, 976
+Restaurant hosts and hostesses, 310
+Restaurant managers, 187
+Restaurant stewards, 310
+Resume writers, 199
+Retail butchers, 316
+Retail buyers, 162
+Retail store sales workers, 260–262, 270, 277, 279, 290
+Riggers, 869
+Robotics technicians, 166, 606, 609, 638
+Roofers, 804, 866
+Route delivery workers, 292
+Rug and carpet cleaners, 361–362, 369
+
+Safety engineers, 010, 012, 168
+Sales demonstrators, 297
+Sales managers, 163
+Sanitarians, 079
+Sanitary engineers, 005
+School administrators, 099
+School counselors, 045
+School librarians, 100
+School media specialists, 099–100
+Scriptwriters, 131
+Secondary school teachers, 091, 099
+Secretaries, 201
+Securities brokers, 251
+Security guards, 372, 376
+Semiconductor processors, 590
+Septic tank installers, 851
+Sheet metal workers, 804
+Shipping and receiving clerks, 222
+Shoe repairers, 365
+Short order cooks, 313
+Shorthand reporters, 202
+Singers, 152
+Small animal breeders, 410
+Small business owners, 185
+Social directors, 352
+Social workers, 195
+Sociologists, 054
+Software trainers, 018, 020
+Soil scientists, 040
+Solar energy technicians, 003, 637
+Sound technicians, 194, 962
+Special librarians, 100
+Special service bus drivers, 913
+Specification writers, 019
+Speech pathologists and audiologists, 076
+Sports instructors, 153
+Sports management professionals, 090, 153, 187
+Stadium managers, 187
+Stadium workers, 211, 291, 311, 344, 372
+Stagehands, 962
+State police officers, 375
+Stationary engineers, 950
+Statistical clerks, 215–216
+Statisticians, 020
+Stock clerks, 209, 219, 222, 299
+Stonemasons, 861
+Store managers, 185
+Substance abuse counselors, 045
+Supermarket workers, 211, 290, 299, 316, 920
+Surgeons, 070
+Surveyors, 018
+Surveyor's helpers, 018, 869
+Swimming instructors, 153
+Swimming pool servicers, 891, 869
+Systems analysts, 012, 020, 030, 161
+Systems engineers, 020
+
+Tape librarians, 206
+Tax preparers, 219
+Taxi drivers, 913
+Teacher's aides, 099, 249
+Technical support specialists, 018, 020, 033
+Technical writers, 131
+Telecommunications specialists, 253
+Telemarketing specialists, 253
+Telephone central office design engineers, 003
+Telephone central office supervisors, 822
+Telephone central office technicians, 822
+Telephone design engineers, 003
+Telephone line workers and cable splicers, 822, 829
+Telephone operators, 235
+Telephone service representatives, 239
+Telephone service technicians, 822
+Television and radio service technicians, 720
+Textile designers, 142
+Theater managers, 187
+Ticket takers, 344
+Tire changers/repairers, 915
+Title examiners, 119
+Tobacco industry workers, 520–523, 529, 790, 920
+Tool and die makers, 601
+Tour escorts, 353
+Tow truck operators, 919
+Trade show managers, 163
+Traffic engineers, 005
+Traffic managers, 184
+Translators and interpreters, 137
+Transportation engineers, 005
+Travel agents, 252
+Travel agents, corporate, 252
+Travel agents, incentive, 252
+Truck and bus dispatchers, 249, 913
+Truck terminal managers, 184
+
+Underwriters, 169, 186
+Union business agents, 187
+Urban and regional planners, 199
+Usability researchers, 018, 020
+Ushers, 344
+
+Vegetable farmers, 401–402, 404
+Vending machine route workers, 292
+Veterinarians, 073
+Vocational counselors, 045, 166
+Vocational education teachers, 097
+
+Waiters and waitresses, 311
+Ward clerks, 245
+Warehouse workers, 222, 921–922, 929
+Wastewater treatment plant operators, 955
+Watch repairers, 715
+Water resource engineers, 954
+Water well drillers, 859
+Web designers, 018, 020
+Webmasters, 018, 020, 185
+Wedding consultants, 299
+Welders, 810–812, 819
+Wholesale sales workers, 260–262, 269–277, 279
+Wildlife managers, 040–041, 180, 379
+Window cleaners, 389
+Wireless communications technicians, 823, 828
+Wood scientists and technologists, 040
+Word processors, 203, 209, 213, 616
+
+Youth organization workers, 096, 159, 195
+
+Zoo administrators, 041, 073, 102
+Zoo animal caretakers, 410, 412
+Zoologists, 04
+
+Read more: Dictionary of Occupational Titles/Occupational Information Network/Group Numbers - Compensation, Workers, and Technicians - StateUniversity.com http://careers.stateuniversity.com/pages/864/Dictionary-Occupational-Titles-Occupational-Information-Network-Group-Numbers.html#ixzz4x1Ai53a7
