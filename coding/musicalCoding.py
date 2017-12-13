@@ -86,8 +86,10 @@ if True:
             if firstRow:
                 head = r
                 firstRow = False
+                continue
             # if n > 1000:
             #     break
+            
             n += 1
             if n%100 == 0:
                 #break
@@ -126,7 +128,7 @@ if True:
                 continue
             
             name = commaSplit[0]
-            clause = nlp(unicode(commaSplit[1]))
+            clause = nlp(commaSplit[1])
             
             for s, c in occClassStr.items():
                 if s in firstSentence:
