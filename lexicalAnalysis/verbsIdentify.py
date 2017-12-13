@@ -12,22 +12,28 @@ https://spacy.io/usage/visualizers
 """
 
 from csv import reader, writer
-import spacy
-
-from nltk import sent_tokenize
 
 import re
 
 if 'nlp' not in locals():
+    import spacy
+    from nltk import sent_tokenize
     nlp = spacy.load('en')
 
-inFn = "/home/alec/data projects/NYTIMESobituaries/extracted.nice.csv"
+inFn = "/home/alec/projects/nytimes-obituaries/data/extracted.nice.csv"
 #outFn = "/home/alec/data projects/NYTIMESobituaries/extracted.noBody.nice.abberations.csv"
 
 whatAnyoneDid = {}
 whatAnyoneWas = {}
 
+import sexmachine.detector as gender
+detector = gender.Detector()
+
 debug = False
+
+from collections import Counter
+
+c = Counter()
 
 with open(inFn) as inF:
     rs = reader(inF)
@@ -44,6 +50,7 @@ with open(inFn) as inF:
         
         body = r[head.index('fullBody')]
         name = r[head.index('name')]
+    
         nameParts = re.split("[\s\.]", name)
         nameParts = [x.lower() for x in nameParts]
         nameParts = [x for x in nameParts if len(x) > 3]

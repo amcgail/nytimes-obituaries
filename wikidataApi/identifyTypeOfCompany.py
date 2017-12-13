@@ -3,6 +3,16 @@
 Created on Mon Nov 27 03:03:27 2017
 
 @author: alec
+
+
+NEXT STEPS
+give them the N/V by count within the sentences not matched
+expand the matcher
+named entity recognizer.
+    "_ of _". What categorization is necessary?
+expand lexicon hopefully through some automated means
+sub-terms should not be matched
+
 """
 
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -157,6 +167,44 @@ LIMIT 10000
         FILTER(LANG(?itemLabel) = "en") .
     }
 LIMIT 10000"""
+
+#instrumentalists
+,"""
+    SELECT distinct ?itemLabel
+    WHERE
+    {
+        ?p rdfs:label ?itemLabel .
+        ?p wdt:P279 wd:Q1278335 .
+        FILTER(LANG(?itemLabel) = "en") .
+    }
+LIMIT 10000"""
+
+
+#instrumentalists
+,"""
+    SELECT distinct ?itemLabel ?qLabel
+    WHERE
+    {
+        ?p rdfs:label ?itemLabel .
+        ?p wdt:P31 wd:Q12737077 .
+        ?p wdt:P425 ?q .
+        ?q rdfs:label ?qLabel .
+        FILTER(LANG(?itemLabel) = "en") .
+        FILTER(LANG(?qLabel) = "en") .
+    }
+LIMIT 10000"""
+
+
+#instrumentalists
+,"""
+    SELECT distinct ?itemLabel
+    WHERE
+    {
+        ?p rdfs:label ?itemLabel .
+        ?p wdt:P31 wd:Q31629 .
+        FILTER(LANG(?itemLabel) = "en") .
+    }
+LIMIT 10000"""
 ][-1]
 
 print query
@@ -166,4 +214,4 @@ results = sparql.query().convert()
 
 for r in results['results']['bindings']:
     if r["itemLabel"]["xml:lang"] == "en":
-        print(r["itemLabel"]["value"])
+        print(r["itemLabel"]["value"])#, r["qLabel"]["value"])
