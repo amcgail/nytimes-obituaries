@@ -11,13 +11,15 @@ https://spacy.io/usage/visualizers
 
 """
 
+import spacy
+
+if "nlp" not in locals():
+    nlp = spacy.load("en")
+
 from csv import reader, writer
 from nltk import sent_tokenize
 
 import re
-
-if 'nlp' not in locals():
-     nlp = spacy.load('en')
 
 from os import path
 from collections import Counter
@@ -49,9 +51,15 @@ if "musicalWords" not in locals() or True:
     musicalFn = path.join( path.dirname(__file__), "..", "occupationalClassifications", "Music Signifiers_KZ.csv" )
     with open(musicalFn) as musicalCsvF:
         musicalCsv = reader(musicalCsvF)
-        head = musicalCsv.next()
+        
+        firstRow = True
         
         for row in musicalCsv:
+            if firstRow:
+                head = row
+                firstRow = False
+                continue
+                
             for i, cat in enumerate(head):
                 if cat.strip() not in ["","Occupation","Verbs"]:
                     if cat not in musicalWords:
@@ -71,16 +79,19 @@ if True:
     with open(inFn) as inF:
         rs = reader(inF)
         
-        head = rs.next()
+        firstRow = True
         
         n = 0
         for r in rs:
+            if firstRow:
+                head = r
+                firstRow = False
             # if n > 1000:
             #     break
             n += 1
             if n%100 == 0:
                 #break
-                print n
+                print(n)
                 
             body = r[head.index('fullBody')]
             name = r[head.index('name')]
@@ -120,18 +131,18 @@ if True:
             for s, c in occClassStr.items():
                 if s in firstSentence:
                     coded.append([r[head.index('fName')], firstSentence, s, c])
-                    print s
+                    print(s)
             
             for cat, words in musicalWords.items():
                 for w in words:
                     if " %s " % w.lower() in firstSentence.lower():
                         coded.append([r[head.index('fName')], firstSentence, w, "KZ-%s"%cat])
-    
-outCSVfn = path.join( path.dirname(__file__), "naiveCoding.csv" )
-                
-with open(outCSVfn, 'w') as outF:
-    outCSV = writer(outF)
-    outCSV.writerow(["fn","firstSentence", "basedOn", "code"])
-    
-    for cr in coded:
-        outCSV.writerow(cr)
+if False:
+    outCSVfn = path.join( path.dirname(__file__), "naiveCoding.csv" )
+                    
+    with open(outCSVfn, 'w') as outF:
+        outCSV = writer(outF)
+        outCSV.writerow(["fn","firstSentence", "basedOn", "code"])
+        
+        for cr in coded:
+            outCSV.writerow(cr)
