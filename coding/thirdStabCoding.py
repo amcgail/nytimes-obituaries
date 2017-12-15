@@ -18,6 +18,7 @@ from collections import Counter
 import numpy as np
 import re
 import sys
+from itertools import chain
 
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
 
@@ -27,7 +28,7 @@ if 'nlp' not in locals():
     import spacy
     nlp = spacy.load('en')
 
-inFn = path.join( path.dirname(__file__), "..", "data","extracted.nice.csv" )
+inFn = path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" )
 
 debug = False
 
@@ -44,14 +45,20 @@ with open(inFn) as inF:
     
     n = 0
     for r in rs:
-        if n > 10000:
-            break
+        #if n > 10000:
+        #    break
         n += 1
         if n%100 == 0:
             #break
             print( n )
-            
+        
+        fn = r[head.index('fName')]
         body = r[head.index('fullBody')]
+        
+        if body.strip() == "":
+            print "skipping(noBody)", fn
+            continue
+        
         first500 = body[:500]
         name = r[head.index('name')]
         nameParts = re.split("[\s\.]", name)
@@ -120,22 +127,22 @@ with open(inFn) as inF:
         # print print r[head.index('fName')]
         rankedC = sorted( weightedC.items(), key=lambda x: -x[1] )
         topC = rankedC[:3]
-        topC = [ x[0] for x in topC ]
+        topC = [list(x) for x in topC]
         
         confidenceHist.append( confidence )
         
         if len(topC) > 0:
-            print( firstSentence, topC )
-            coded.append([r[head.index('fName')], firstSentence, confidence] + topC)
+            #print( firstSentence, topC )
+            coded.append([r[head.index('fName')], firstSentence, confidence] + list(chain( *topC )))
         else:
-            notCoded.append([r[head.index('fName')], firstSentence, confidence] + topC)
+            notCoded.append([r[head.index('fName')], firstSentence])
 
 if True:
     outCSVfn = path.join( path.dirname(__file__), "thirdStabCoding.csv" )
                     
     with open(outCSVfn, 'w') as outF:
         outCSV = writer(outF)
-        outCSV.writerow(["fn","firstSentence", "confidence", "codes"])
+        outCSV.writerow(["fn","firstSentence", "confidence", "confidence", "code"])
         
         for cr in coded:
             outCSV.writerow(cr)

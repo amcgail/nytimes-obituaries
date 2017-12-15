@@ -81,7 +81,7 @@ for f in os.listdir(source):
         
         csvRows.append([f, date, name, title, fullBody, first500, nWordsReport, nWordsCalc, distinctWords])
        
-outFn = "/home/alec/data projects/nytimes-obituaries/data/extracted.all.nice.csv"
+outFn = path.join( path.dirname( __file__ ), "..", "data", "extracted.all.nice.csv" )
 
 from csv import writer
 with open(outFn, 'w') as csvF:
