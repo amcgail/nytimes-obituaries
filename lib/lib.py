@@ -30,46 +30,60 @@ def allCodes():
 
 def code2word():
     pass
+
+def getAllCodesFromStr( codestr ):
+    try:
+        codes = json.loads( codestr )
+        if type(codes) != list:
+            codes = [codes]
+    except:
+        codes = codestr.split(",")
+        codes = [x.strip() for x in codes]
+    
+    codes = [ str(x) for x in codes ]
+    codes = [ x.replace("\xe2\x80\x93", "-") for x in codes ]
+    
+    # deal with dashes...
+    newcs = []
+    for c in codes:
+        
+        if "-" in c:
+            try:
+                s, e = c.split("-")
+                ilen = len(s)
+                
+                s = int(s)
+                e = int(e)
+                newc = [ ("%0" + str(ilen) + "d") % i for i in range(s, e+1) ]
+                newcs += newc
+            except:
+                print "skipping(malformed)", c
+                continue
+            
+            #print c, newc
+        else:
+            newcs.append(c)
+            
+    codes = newcs
+    return codes
+    
+
+def appendToKey( d, key, newItem ):
+    if key not in d:
+        d[key] = []
+    if type(newItem) == list:
+        d[key] += newItem
+    else:
+        d[key].append(newItem)    
     
 def word2code():
     print "Extracting word2code dictionary"
     ret = {}
     for d in allCodes():
-        codestr = d['code(s)']
-        try:
-            codes = json.loads( codestr )
-            if type(codes) != list:
-                codes = [codes]
-        except:
-            codes = codestr.split(",")
-            codes = [x.strip() for x in codes]
+        codes = d['code(s)'].split(",")
+        codes = [ x.strip() for x in codes ]
         
-        codes = [ str(x) for x in codes ]
-        codes = [ x.replace("\xe2\x80\x93", "-") for x in codes ]
-        
-        # deal with dashes...
-        newcs = []
-        for c in codes:
-            
-            if "-" in c:
-                try:
-                    s, e = c.split("-")
-                    ilen = len(s)
-                    
-                    s = int(s)
-                    e = int(e)
-                    newc = [ ("%0" + str(ilen) + "d") % i for i in range(s, e+1) ]
-                    newcs += newc
-                except:
-                    print "skipping(malformed)", c
-                    continue
-                
-                #print c, newc
-            else:
-                newcs.append(c)
-                
-        codes = newcs
-                
+        """
         if d['origin'] == 'OccTitleAlec':
             if "-" in codestr:
                 #print codestr
@@ -86,6 +100,7 @@ def word2code():
             codes = ["naics-%s" % x for x in codes]
         if d['origin'] == 'KZ-whatTheyWere':
             codes = ["isco08-%s" % x for x in codes]
+        """
         
         if d['term'] not in ret:
             ret[ d['term'] ] = []
@@ -94,14 +109,58 @@ def word2code():
     return ret
     
 w2c = word2code()
+
+countOcc2000 = {}
     
 def extractCodes(doc):
+    global countOcc2000
+    
     mySuccessfulCodes = []
         
-    for word in word_tokenize( doc ):
+    wTokens = word_tokenize( doc )
+    
+    # one word...
+    for i in range( len( wTokens ) ):
+        word = wTokens[i]
         if word in w2c:
             #print word
             mySuccessfulCodes += w2c[word]
+            
+            
+            for c in w2c[word]:
+                if "2000" in c:
+                    if word not in countOcc2000:
+                        countOcc2000[word] = 0
+                    countOcc2000[word] += 1
+                    break
+            
+    # two words...
+    for i in range( len( wTokens ) - 1 ):
+        word = " ".join( [wTokens[i], wTokens[i+1]] )
+        if word in w2c:
+            #print word
+            mySuccessfulCodes += w2c[word]
+            
+            for c in w2c[word]:
+                if "2000" in c:
+                    if word not in countOcc2000:
+                        countOcc2000[word] = 0
+                    countOcc2000[word] += 1
+                    break
+
+    # three words...
+    for i in range( len( wTokens ) - 2 ):
+        word = " ".join( [wTokens[i], wTokens[i+1], wTokens[i+2]] )
+        if word in w2c:
+            #print word
+            mySuccessfulCodes += w2c[word]
+            
+            for c in w2c[word]:
+                if "2000" in c:
+                    if word not in countOcc2000:
+                        countOcc2000[word] = 0
+                    countOcc2000[word] += 1
+                    break
             
     return mySuccessfulCodes
 

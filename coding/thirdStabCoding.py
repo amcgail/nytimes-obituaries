@@ -36,6 +36,7 @@ coded = []
 
 confidenceHist = []
 
+
 with open(inFn) as inF:
     rs = reader(inF)
     
@@ -43,12 +44,12 @@ with open(inFn) as inF:
     
     n = 0
     for r in rs:
-        # if n > 1000:
-        #     break
+        if n > 10000:
+            break
         n += 1
-        if n%10 == 0:
+        if n%100 == 0:
             #break
-            print n
+            print( n )
             
         body = r[head.index('fullBody')]
         first500 = body[:500]
@@ -124,7 +125,7 @@ with open(inFn) as inF:
         confidenceHist.append( confidence )
         
         if len(topC) > 0:
-            print firstSentence, topC
+            print( firstSentence, topC )
             coded.append([r[head.index('fName')], firstSentence, confidence] + topC)
         else:
             notCoded.append([r[head.index('fName')], firstSentence, confidence] + topC)
