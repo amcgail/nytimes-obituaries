@@ -13,26 +13,19 @@ import re
 from collections import Counter
 from nltk import word_tokenize
 
-source2 = "/home/alec/data projects/NYTIMESobituaries" # File path where all files are located
-
-inDir = "allmainfiles_stripped_ind"
-
-os.chdir(source2)
-print(os.getcwd())
+source = "/home/alec/Dropbox/NYT Obituaries/allmainfiles_stripped_ind" # File path where all files are located
 
 csvRows = []
 
-for f in os.listdir(inDir)[:10000]:
+for f in os.listdir(source):
     date = ''
     name = ''
     title = ''
     monthlist = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    n = 0
-    with open(os.path.join(inDir,f)) as nfile:
-        n +=1 
-        if n%100==0:
-            print(n)
-        print(f)
+    with open(os.path.join(source,f)) as nfile:
+        if len(csvRows)%100==0:
+            print(len(csvRows))
+        #print(f)
         ###############################
         ##Let's get the person's name
         ###############################
@@ -88,11 +81,11 @@ for f in os.listdir(inDir)[:10000]:
         
         csvRows.append([f, date, name, title, fullBody, first500, nWordsReport, nWordsCalc, distinctWords])
        
-outFn = "extracted.noBody.nice.csv"
+outFn = "/home/alec/data projects/nytimes-obituaries/data/extracted.all.nice.csv"
 
 from csv import writer
 with open(outFn, 'w') as csvF:
     w = writer(csvF)
-    w.writerow(["fName", "date", "name", "title", "nWordsReport", "nWordsCalc", "distinctWords"])
+    w.writerow(["fName", "date", "name", "title", "fullBody", "first500", "nWordsReport", "nWordsCalc", "distinctWords"])
     for r in csvRows:
-        w.writerow(r[:4] + r[6:])
+        w.writerow(r)
