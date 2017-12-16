@@ -11,7 +11,9 @@ https://spacy.io/usage/visualizers
 
 """
 
-from csv import reader, writer
+import csv
+from csv import reader
+from csv import QUOTE_MINIMAL
 from nltk import sent_tokenize, word_tokenize
 from os import path
 from collections import Counter
@@ -37,6 +39,7 @@ coded = []
 
 confidenceHist = []
 
+csv.field_size_limit(500 * 1024 * 1024)
 
 with open(inFn) as inF:
     rs = reader(inF)
@@ -55,7 +58,7 @@ with open(inFn) as inF:
         fn = r[head.index('fName')]
         body = r[head.index('fullBody')]
         
-        if body.strip() == "":
+        if len( body.strip() ) < 10:
             print "skipping(noBody)", fn
             continue
         
@@ -69,6 +72,10 @@ with open(inFn) as inF:
         nameParts = [x for x in nameParts if x not in namePartSkips]
         
         sentences = sent_tokenize(body)
+        
+        if len(sentences) < 2:
+            print "skipping(tooFewSentences)", fn
+            continue
         
         firstSentence = sentences[0].strip()
         firstSentence = " ".join( firstSentence.split() )
