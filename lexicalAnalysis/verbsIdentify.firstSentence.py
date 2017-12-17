@@ -99,7 +99,7 @@ with open(inFn) as inF:
         name = commaSplit[0]
         clause = nlp(unicode(commaSplit[1]))
         
-        firstSentences.append([firstSentence, commaSplit[1]])
+        firstSentences.append([r[head.index('fName')], r[head.index('first500')], firstSentence, commaSplit[1]])
         
         if False:
             whatHeIs = []
@@ -136,8 +136,8 @@ if False:
              w.writerow([word,whatTheyDid[word]])
              
 if True:
-    with open(path.join( '..', 'outputOfAnalyses', 'firstSentences.csv'), 'w') as csvF:
+    with open(path.join( '..', 'outputOfAnalyses', 'firstSentences.moreInfo.csv'), 'w') as csvF:
          w = writer(csvF)
-         w.writerow(["sentence", "clause"])
+         w.writerow(["fName", "first500", "sentence", "clause"])
          for fs in firstSentences:
              w.writerow(fs)
