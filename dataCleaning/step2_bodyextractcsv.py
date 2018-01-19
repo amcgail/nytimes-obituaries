@@ -34,7 +34,7 @@ for f in os.listdir(source):
         
         title = re.split("[0-9]+ of [0-9]+ DOCUMENTS", head)
         if len(title) < 2:
-            print "skipped(no DOC...)", f
+            print("skipped(no DOC...)", f)
             continue
         title = title[1]
         title = " ".join( title.split("\n")[3:] )

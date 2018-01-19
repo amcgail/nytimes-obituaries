@@ -59,7 +59,7 @@ with open(inFn) as inF:
         body = r[head.index('fullBody')]
         
         if len( body.strip() ) < 10:
-            print "skipping(noBody)", fn
+            print("skipping(noBody)", fn)
             continue
         
         first500 = body[:500]
@@ -74,7 +74,7 @@ with open(inFn) as inF:
         sentences = sent_tokenize(body)
         
         if len(sentences) < 2:
-            print "skipping(tooFewSentences)", fn
+            print("skipping(tooFewSentences)", fn)
             continue
         
         firstSentence = sentences[0].strip()

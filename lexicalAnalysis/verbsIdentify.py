@@ -45,7 +45,7 @@ with open(inFn) as inF:
         if n > 10000:
             break
         if n%100 == 0:
-            print n
+            print(n)
         n += 1
         
         body = r[head.index('fullBody')]
@@ -59,10 +59,10 @@ with open(inFn) as inF:
         nameParts = [x for x in nameParts if x not in namePartSkips]
         
         if debug:
-            print nameParts
+            print(nameParts)
         
         if debug:
-            print "Processing %s" % name
+            print("Processing %s" % name)
         whatHeDid = set()
         whatHeWas = set()
         
@@ -73,7 +73,7 @@ with open(inFn) as inF:
             
             #print "-------------"
             if debug:
-                print " ".join( s.split() )
+                print(" ".join( s.split() ))
             doc = nlp(s)
             
             verbGroup = {}
@@ -120,8 +120,8 @@ with open(inFn) as inF:
                                 whatAnyoneDid[wD]['examples'].append(" ".join( s.split() ))
              
         if debug:
-            print "heDid:",whatHeDid
-            print "heWas:",whatHeWas
+            print("heDid:",whatHeDid)
+            print("heWas:",whatHeWas)
 
 import random
       

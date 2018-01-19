@@ -24,7 +24,7 @@ with open(inFn) as inF:
         n += 1
         if n%10 == 0:
             break
-            print n
+            print(n)
             
         body = r[head.index('fullBody')]
         first500 = body[:500]
@@ -49,5 +49,5 @@ with open(inFn) as inF:
                         verbGroup[idx] = []
                     verbGroup[idx].append(fullInfo)
             
-            print s
-            print [to_nltk_tree(sent.root).pretty_print() for sent in doc.sents]
+            print(s)
+            print([to_nltk_tree(sent.root).pretty_print() for sent in doc.sents])

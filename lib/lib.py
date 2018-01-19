@@ -18,8 +18,8 @@ allCodeFn = path.join( path.dirname(__file__), "..", "coding", "allCodes.csv" )
 def loadNLP():
     global nlp
     if 'nlp' not in globals():
-        print "nlp not found in global namespace. Loading..."
-        print "NOTE: this variable is huge, and can eat up memory. Don't load in multiple terminals."
+        print("nlp not found in global namespace. Loading...")
+        print("NOTE: this variable is huge, and can eat up memory. Don't load in multiple terminals.")
         nlp = spacy.load('en')
 
 def allCodes():
@@ -57,7 +57,7 @@ def getAllCodesFromStr( codestr ):
                 newc = [ ("%0" + str(ilen) + "d") % i for i in range(s, e+1) ]
                 newcs += newc
             except:
-                print "skipping(malformed)", c
+                print("skipping(malformed)", c)
                 continue
             
             #print c, newc
@@ -77,7 +77,7 @@ def appendToKey( d, key, newItem ):
         d[key].append(newItem)    
     
 def word2code():
-    print "Extracting word2code dictionary"
+    print("Extracting word2code dictionary")
     ret = {}
     for d in allCodes():
         codes = d['code(s)'].split(",")
@@ -209,7 +209,7 @@ def extractLexical(doc, name):
         
         #print "-------------"
         if debug:
-            print " ".join( s.split() )
+            print(" ".join( s.split() ))
         doc = nlp(s)
         
         verbGroup = {}
