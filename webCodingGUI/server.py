@@ -44,7 +44,7 @@ def getRandom(num):
 		codeC = sorted(codeC, key=lambda x: x[1], reverse=True)[:len(colors)]
 
 		codesToKeep = [ x[0] for x in codeC ]
-		print codesToKeep
+		print(codesToKeep)
 
 		codeMap = {
 			codesToKeep[i]: colors[i]
