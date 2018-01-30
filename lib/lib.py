@@ -110,8 +110,56 @@ def word2code():
     
 w2c = word2code()
 
-countOcc2000 = {}
+def extractCodesDetailed(doc):
     
+    global countOcc2000
+    
+    mySuccessfulCodes = []
+        
+    wTokens = word_tokenize( doc )
+    
+    # one word...
+    for i in range( len( wTokens ) ):
+        word = wTokens[i]
+        if word in w2c:
+            #print word
+            mySuccessfulCodes += [
+                { 
+                    "code": c,
+                    "word": word
+                } for c in w2c[word]
+            ]
+            
+    # two words...
+    for i in range( len( wTokens ) - 1 ):
+        word = " ".join( [wTokens[i], wTokens[i+1]] )
+        if word in w2c:
+            #print word
+            mySuccessfulCodes += [
+                { 
+                    "code": c,
+                    "word": word
+                } for c in w2c[word]
+            ]
+
+
+    # three words...
+    for i in range( len( wTokens ) - 2 ):
+        word = " ".join( [wTokens[i], wTokens[i+1], wTokens[i+2]] )
+        if word in w2c:
+            #print word
+            mySuccessfulCodes += [
+                { 
+                    "code": c,
+                    "word": word
+                } for c in w2c[word]
+            ]
+            
+    return mySuccessfulCodes
+
+# I don't remember why this is here...
+countOcc2000 = {}
+
 def extractCodes(doc):
     global countOcc2000
     
@@ -269,3 +317,15 @@ def extractFirstSentence(body):
         firstSentence += " " + " ".join( sentences[1].strip().split() )
     
     return firstSentence
+    
+def getRandomDocs(num):
+    from random import sample
+    import csv
+    from csv import reader
+    
+    inFn = path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" )
+    
+    csv.field_size_limit(500 * 1024 * 1024)
+    with open(inFn) as inF:
+        rs = reader(inF)
+        return sample( list(rs), num )
