@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import csv
 from os import path
 from csv import DictReader
 import json
@@ -211,6 +212,41 @@ def extractCodes(doc):
                     break
             
     return mySuccessfulCodes
+    
+def extractCodesOnly2000(doc):
+    global countOcc2000
+    
+    mySuccessfulCodes = []
+        
+    wTokens = word_tokenize( doc )
+    
+    # one word...
+    for i in range( len( wTokens ) ):
+        word = wTokens[i]
+        if word in w2c:
+            for c in w2c[word]:
+                if "2000" in c:
+                    mySuccessfulCodes.append(c)
+            
+    # two words...
+    for i in range( len( wTokens ) - 1 ):
+        word = " ".join( [wTokens[i], wTokens[i+1]] )
+        if word in w2c:
+            for c in w2c[word]:
+                if "2000" in c:
+                    mySuccessfulCodes.append(c)
+            
+
+    # three words...
+    for i in range( len( wTokens ) - 2 ):
+        word = " ".join( [wTokens[i], wTokens[i+1], wTokens[i+2]] )
+        if word in w2c:
+            for c in w2c[word]:
+                if "2000" in c:
+                    mySuccessfulCodes.append(c)
+            
+            
+    return mySuccessfulCodes
 
 def followRecursive(tree):
     total = []
@@ -318,14 +354,9 @@ def extractFirstSentence(body):
     
     return firstSentence
     
+csv.field_size_limit(500 * 1024 * 1024)
+allDocs = list( DictReader( open( path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" ) ) ) )
+    
 def getRandomDocs(num):
     from random import sample
-    import csv
-    from csv import reader
-    
-    inFn = path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" )
-    
-    csv.field_size_limit(500 * 1024 * 1024)
-    with open(inFn) as inF:
-        rs = reader(inF)
-        return sample( list(rs), num )
+    return sample( allDocs, num )
