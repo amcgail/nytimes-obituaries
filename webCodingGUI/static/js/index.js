@@ -1,9 +1,56 @@
 function fillWith(docs) {
 	$(".bodies").html("");
 	for( var i in docs ) {
-		console.log("WOOP");
-		$div = $("<div class='doc'>");
-		$div.html( docs[i]['body'] );
+		var $doc = $("<div class='doc'>").html(docs[i]['body']);
+
+		var $comments = $(`<form class='comments'>
+			<input type='hidden' name='fn' value='`+ docs[i]["fn"] +`'>
+			<b>Code:</b> <input name='code'>
+			<b>New Vocab:</b> <input name='word'>
+		</form>`);
+		var $commentSub = $("<button type=button>Add new vocabulary</button>").click( ( function($c) {
+			return function() {
+				$.ajax({
+					type:"POST",
+					url:"/addVocab",
+					data: $c.serialize(),
+					success: function() {
+						alert("word successfully added");
+						$c.find("input").val("");
+					}
+				});
+			}
+		}) ($comments) ) ;
+		$comments.append($commentSub);
+		$doc.append($comments);
+
+		var $whichIsCorrect = $(`<form class='comments'>
+			<input type='hidden' name='fn' value='`+ docs[i]["fn"] +`'>
+			<b>What it's supposed to be:</b> <input name='code'>
+		</form>`)
+		var $correctSub = $("<button type=button>Mark correct coding</button>").click( ( function($c) {
+			return function() {
+				$.ajax({
+					type:"POST",
+					url:"/correctCoding",
+					data: $c.serialize(),
+					success: function() {
+						alert("I got your code");
+						$c.find("input").val("");
+					}
+				})
+			}
+		}) ($whichIsCorrect) ) ;
+		$whichIsCorrect.append( $correctSub);
+		$doc.append($whichIsCorrect);
+
+		//var $freeform = $("<textarea>");
+		//var $code = $("<div class='")
+
+		$div = $("<div>");
+		$div.append(
+			$doc
+		);
 		$(".bodies").append($div);
 	}
 
