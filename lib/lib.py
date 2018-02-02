@@ -4,7 +4,7 @@ from os import path
 from csv import DictReader
 import json
 from nltk import sent_tokenize, word_tokenize
-import spacy
+#import spacy
 import re
 
 
