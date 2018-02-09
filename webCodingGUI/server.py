@@ -163,7 +163,7 @@ def getRandom(num):
 			"fn": d["fName"],
 			"date": d["date"],
 			"title": d["title"],
-			"body": "<h2>%s</h2>" % d["fName"] + legend + body,
+			"body": "<h2>%s (%s)</h2>" % (d["title"], d["fName"]) + legend + body,
 			"codes": codes,
 			"codeMap": codeMap
 		})
