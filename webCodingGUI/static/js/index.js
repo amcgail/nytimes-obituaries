@@ -41,7 +41,7 @@ function fillWith(docs) {
 					}
 				});
 			}
-		}) ($comments) ) ;
+		}) ($commentRemDiv) ) ;
 		$commentRemDiv.append($commentRem);
 		$doc.append($commentRemDiv);
 
