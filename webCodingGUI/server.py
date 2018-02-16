@@ -64,6 +64,19 @@ def addVocab():
 	db['newWords'].insert({"code":code, "word":word, "time": datetime.now()})
 	return "1"
 
+@app.route('/delVocab', methods=['POST'])
+def delVocab():
+	from datetime import datetime
+	code = request.form["code"]
+	word = request.form["word"]
+
+	db['badWords'].insert({"code":code, "word":word, "time": datetime.now()})
+	return "1"
+ 
+@app.route('/seeAllComments')
+def nowhere():
+    return "under construction"
+ 
 @app.route('/correctCoding', methods=['POST'])
 def correctCoding():
 	from datetime import datetime

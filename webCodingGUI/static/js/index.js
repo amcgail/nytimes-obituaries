@@ -24,6 +24,27 @@ function fillWith(docs) {
 		$comments.append($commentSub);
 		$doc.append($comments);
 
+		var $commentRemDiv = $(`<form class='comments'>
+			<input type='hidden' name='fn' value='`+ docs[i]["fn"] +`'>
+			<b>Code:</b> <input name='code'>
+			<b>Bad Vocab:</b> <input name='word'>
+		</form>`);
+		var $commentRem = $("<button type=button>Remove vocabulary</button>").click( ( function($c) {
+			return function() {
+				$.ajax({
+					type:"POST",
+					url:"/delVocab",
+					data: $c.serialize(),
+					success: function() {
+						alert("word successfully marked for removal");
+						$c.find("input").val("");
+					}
+				});
+			}
+		}) ($comments) ) ;
+		$commentRemDiv.append($commentRem);
+		$doc.append($commentRemDiv);
+
 		var $whichIsCorrect = $(`<form class='comments'>
 			<input type='hidden' name='fn' value='`+ docs[i]["fn"] +`'>
 			<b>What it's supposed to be:</b> <input name='code'>
