@@ -11,13 +11,18 @@ https://spacy.io/usage/visualizers
 
 """
 
-from csv import reader, writer
+import csv
+from csv import reader
+from csv import QUOTE_MINIMAL
+
 from nltk import sent_tokenize, word_tokenize
 from os import path
 from collections import Counter
 import numpy as np
 import re
 import sys
+
+from itertools import chain
 
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
 
@@ -27,7 +32,7 @@ if 'nlp' not in locals():
     import spacy
     nlp = spacy.load('en')
 
-inFn = path.join( path.dirname(__file__), "..", "data","extracted.nice.csv" )
+inFn = path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" )
 
 debug = False
 
@@ -36,6 +41,7 @@ coded = []
 
 confidenceHist = []
 
+csv.field_size_limit(500 * 1024 * 1024)
 
 with open(inFn) as inF:
     rs = reader(inF)
@@ -44,14 +50,21 @@ with open(inFn) as inF:
     
     n = 0
     for r in rs:
-        if n > 10000:
-            break
+        #if n > 10000:
+        #    break
+
         n += 1
         if n%100 == 0:
             #break
             print( n )
-            
+
+        fn = r[head.index('fName')]
         body = r[head.index('fullBody')]
+        
+        if len( body.strip() ) < 10:
+            print("skipping(noBody)", fn)
+            continue
+        
         first500 = body[:500]
         name = r[head.index('name')]
         nameParts = re.split("[\s\.]", name)
@@ -62,6 +75,10 @@ with open(inFn) as inF:
         nameParts = [x for x in nameParts if x not in namePartSkips]
         
         sentences = sent_tokenize(body)
+        
+        if len(sentences) < 2:
+            print("skipping(tooFewSentences)", fn)
+            continue
         
         firstSentence = sentences[0].strip()
         firstSentence = " ".join( firstSentence.split() )
@@ -120,15 +137,15 @@ with open(inFn) as inF:
         # print print r[head.index('fName')]
         rankedC = sorted( weightedC.items(), key=lambda x: -x[1] )
         topC = rankedC[:3]
-        topC = [ x[0] for x in topC ]
+        topC = [list(x) for x in topC]
         
         confidenceHist.append( confidence )
         
         if len(topC) > 0:
-            print( firstSentence, topC )
-            coded.append([r[head.index('fName')], firstSentence, confidence] + topC)
+            #print( firstSentence, topC )
+            coded.append([r[head.index('fName')], firstSentence, confidence] + list(chain( *topC )))
         else:
-            notCoded.append([r[head.index('fName')], firstSentence, confidence] + topC)
+            notCoded.append([r[head.index('fName')], firstSentence])
 
 if True:
     outCSVfn = path.join( path.dirname(__file__), "thirdStabCoding.csv" )

@@ -62,7 +62,7 @@ with open(inFn) as inF:
         n += 1
         if n%100 == 0:
             #break
-            print n
+            print(n)
         
         body = r[head.index('fullBody')]
         name = r[head.index('name')]

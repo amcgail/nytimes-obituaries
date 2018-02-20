@@ -25,10 +25,10 @@ for line in open(occClassFn):
     for i, sp in enumerate(split):
         if sp.strip() == "":
             continue
-        print sp
-        print [ y in "0123456789-– " for y in sp.strip() ]
+        print(sp)
+        print([ y in "0123456789-– " for y in sp.strip() ])
         if np.all([ y in "0123456789-– " for y in sp.strip() ]):
-            print "breaking!"
+            print("breaking!")
             break
     
     s = ",".join( split[:i] ).strip().lower()
@@ -121,7 +121,7 @@ for row in range( 30960 ):
         appendToKey( codeWord, code, rearrange )
         appendToKey( wordCode, rearrange, code )
     elif len(tsplit) > 2:
-        print "skipped(2+ commas)", tsplit
+        print("skipped(2+ commas)", tsplit)
     else: # len(tsplit) == 1
         appendToKey( codeWord, code, term )
         appendToKey( wordCode, term, code )
@@ -242,7 +242,7 @@ while 1:
     codeA = fixNums(worksheet.cell(row, 1).value)
     codeB = fixNums(worksheet.cell(row, 2).value)
     
-    print codeA, codeB
+    print(codeA, codeB)
     
     def fixNumsTup(tup):
         nums = []

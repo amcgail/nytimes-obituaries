@@ -207,7 +207,7 @@ LIMIT 10000"""
 LIMIT 10000"""
 ][-1]
 
-print query
+print(query)
 
 sparql.setQuery(query)
 results = sparql.query().convert()
