@@ -1,2 +1,4 @@
 .*
-*.pyc
+**/.spyderworkspace
+**/*.pyc
+data/*

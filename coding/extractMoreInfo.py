@@ -55,7 +55,7 @@ with open(inFn) as inF:
         if n > 1000:
             break
         if n%100 == 0:
-            print n
+            print(n)
         n += 1
         
         body = r[head.index('fullBody')]

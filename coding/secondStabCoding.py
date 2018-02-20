@@ -48,7 +48,7 @@ with open(inFn) as inF:
         n += 1
         if n%10 == 0:
             #break
-            print n
+            print(n)
             
         if n > 100:
             break

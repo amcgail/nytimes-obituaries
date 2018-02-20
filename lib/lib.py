@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import csv
+
 from os import path
 from csv import DictReader
 import json
@@ -18,8 +20,8 @@ allCodeFn = path.join( path.dirname(__file__), "..", "coding", "allCodes.csv" )
 def loadNLP():
     global nlp
     if 'nlp' not in globals():
-        print "nlp not found in global namespace. Loading..."
-        print "NOTE: this variable is huge, and can eat up memory. Don't load in multiple terminals."
+        print("nlp not found in global namespace. Loading...")
+        print("NOTE: this variable is huge, and can eat up memory. Don't load in multiple terminals.")
         nlp = spacy.load('en')
 
 def allCodes():
@@ -57,7 +59,7 @@ def getAllCodesFromStr( codestr ):
                 newc = [ ("%0" + str(ilen) + "d") % i for i in range(s, e+1) ]
                 newcs += newc
             except:
-                print "skipping(malformed)", c
+                print("skipping(malformed)", c)
                 continue
             
             #print c, newc
@@ -77,7 +79,7 @@ def appendToKey( d, key, newItem ):
         d[key].append(newItem)    
     
 def word2code():
-    print "Extracting word2code dictionary"
+    print("Extracting word2code dictionary")
     ret = {}
     for d in allCodes():
         codes = d['code(s)'].split(",")
@@ -110,8 +112,56 @@ def word2code():
     
 w2c = word2code()
 
-countOcc2000 = {}
+def extractCodesDetailed(doc):
     
+    global countOcc2000
+    
+    mySuccessfulCodes = []
+        
+    wTokens = word_tokenize( doc )
+    
+    # one word...
+    for i in range( len( wTokens ) ):
+        word = wTokens[i]
+        if word in w2c:
+            #print word
+            mySuccessfulCodes += [
+                { 
+                    "code": c,
+                    "word": word
+                } for c in w2c[word]
+            ]
+            
+    # two words...
+    for i in range( len( wTokens ) - 1 ):
+        word = " ".join( [wTokens[i], wTokens[i+1]] )
+        if word in w2c:
+            #print word
+            mySuccessfulCodes += [
+                { 
+                    "code": c,
+                    "word": word
+                } for c in w2c[word]
+            ]
+
+
+    # three words...
+    for i in range( len( wTokens ) - 2 ):
+        word = " ".join( [wTokens[i], wTokens[i+1], wTokens[i+2]] )
+        if word in w2c:
+            #print word
+            mySuccessfulCodes += [
+                { 
+                    "code": c,
+                    "word": word
+                } for c in w2c[word]
+            ]
+            
+    return mySuccessfulCodes
+
+# I don't remember why this is here...
+countOcc2000 = {}
+
 def extractCodes(doc):
     global countOcc2000
     
@@ -163,6 +213,41 @@ def extractCodes(doc):
                     break
             
     return mySuccessfulCodes
+    
+def extractCodesOnly2000(doc):
+    global countOcc2000
+    
+    mySuccessfulCodes = []
+        
+    wTokens = word_tokenize( doc )
+    
+    # one word...
+    for i in range( len( wTokens ) ):
+        word = wTokens[i]
+        if word in w2c:
+            for c in w2c[word]:
+                if "2000" in c:
+                    mySuccessfulCodes.append(c)
+            
+    # two words...
+    for i in range( len( wTokens ) - 1 ):
+        word = " ".join( [wTokens[i], wTokens[i+1]] )
+        if word in w2c:
+            for c in w2c[word]:
+                if "2000" in c:
+                    mySuccessfulCodes.append(c)
+            
+
+    # three words...
+    for i in range( len( wTokens ) - 2 ):
+        word = " ".join( [wTokens[i], wTokens[i+1], wTokens[i+2]] )
+        if word in w2c:
+            for c in w2c[word]:
+                if "2000" in c:
+                    mySuccessfulCodes.append(c)
+            
+            
+    return mySuccessfulCodes
 
 def followRecursive(tree):
     total = []
@@ -209,7 +294,7 @@ def extractLexical(doc, name):
         
         #print "-------------"
         if debug:
-            print " ".join( s.split() )
+            print(" ".join( s.split() ))
         doc = nlp(s)
         
         verbGroup = {}
@@ -269,3 +354,10 @@ def extractFirstSentence(body):
         firstSentence += " " + " ".join( sentences[1].strip().split() )
     
     return firstSentence
+    
+csv.field_size_limit(500 * 1024 * 1024)
+allDocs = list( DictReader( open( path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" ) ) ) )
+    
+def getRandomDocs(num):
+    from random import sample
+    return sample( allDocs, num )

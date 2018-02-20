@@ -41,7 +41,7 @@ with open(inFn) as inF:
         
         n += 1
         if n % 20 == 0:
-            print n
+            print(n)
 
         body = r['fullBody']
         first500 = body[:500]
