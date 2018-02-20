@@ -30,6 +30,31 @@ def allCodes():
         codes = list(dr)
     return codes
 
+def firstSentence(body):
+    sentences = sent_tokenize(body)
+    
+    if len(sentences) < 2:
+        print("skipping(tooFewSentences)")
+        return ""
+    
+    firstSentence = sentences[0].strip()
+    firstSentence = " ".join( firstSentence.split() )
+    
+    reStartStrip = [
+        "[A-Z\s]+,.{1,30}[0-9]+\s*", # city and date
+        "\(AP\) -\s*", # AP tag
+    ]        
+    
+    for patt in reStartStrip:
+        findTag = re.match(patt, firstSentence)
+        if findTag:
+            firstSentence = firstSentence[findTag.end():]
+
+    if "," not in firstSentence:
+        firstSentence += " " + " ".join( sentences[1].strip().split() )
+        
+    return firstSentence
+
 def code2word():
     pass
 
