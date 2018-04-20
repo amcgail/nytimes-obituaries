@@ -14,12 +14,14 @@ https://spacy.io/usage/visualizers
 import csv
 from csv import reader
 from csv import QUOTE_MINIMAL
+
 from nltk import sent_tokenize, word_tokenize
 from os import path
 from collections import Counter
 import numpy as np
 import re
 import sys
+
 from itertools import chain
 
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
@@ -50,11 +52,12 @@ with open(inFn) as inF:
     for r in rs:
         #if n > 10000:
         #    break
+
         n += 1
         if n%100 == 0:
             #break
             print( n )
-        
+
         fn = r[head.index('fName')]
         body = r[head.index('fullBody')]
         
@@ -149,7 +152,7 @@ if True:
                     
     with open(outCSVfn, 'w') as outF:
         outCSV = writer(outF)
-        outCSV.writerow(["fn","firstSentence", "confidence", "confidence", "code"])
+        outCSV.writerow(["fn","firstSentence", "confidence", "codes"])
         
         for cr in coded:
             outCSV.writerow(cr)
