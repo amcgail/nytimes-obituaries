@@ -129,91 +129,33 @@ with open(inFn) as inF:
         beforeDeath = "died".join( dSplit[:-1] )
         afterDeath = dSplit[-1]
         
-
-        """
-        whatHeWas = ",".join( cSplit[1:] )
-        
-        whatHeWas = re.split( r"(who)|(whose)|,", whatHeWas )[0]
-        """
-        if False:
-            whw = whatHeWas
-            whw = nlp(whw.strip())
-            
-            if len(whw) == 0:
-                #print("skipping",fS)
-                skipped += 1
-                continue
-
-        if False:                
-            if str(whw[0]) not in ["a", "an", "the"]:
-                #print("skipping", fS)
-                skipped += 1
-                continue
-        
-            #entities = [ (e.start, e.end, e.text) for e in whw.ents ]
-            entities = [ (e.start, e.end, e.text) for e in whw.noun_chunks ]
-            
-            
-            #for w in whw:
-            #    print( w, w.pos_ )
-            #print(whw.root, whatHeWas)
-            #print(whatHeWas)
-
-        if False:
-            matches = matcher(whw)
-            guess = [ whw[s:e] for i,s,e in matches ]
-            #print(guess)
-        
-        if False:
-            print( beforeDeath )
-            print( guess )
-        
-        #whwCount.update( [ str(g[-1]) for g in guess ] )
-        
-        struct = "None"
-        
         cSplit = beforeDeath.split(",")
-        name = cSplit[0]
         whatHeWas = ",".join( cSplit[1:] )
-        whw = nlp(whatHeWas.strip())
+        whatHeWas = re.split( r"(who)|(whose)|,", whatHeWas )[0]
+        whw = whatHeWas
+        whw = nlp(whw.strip())
         
         print(whw)
         
-        # is the first thing really a name?
-        for x in name.split():
-            if ord(x[0]) > 90:
-                struct = "nameFail"
+        if len(whw) == 0:
+            #print("skipping",fS)
+            skipped += 1
+            continue
 
-        startStruct = [
-            ['DET', 'NOUN', 'PUNCT', 'NOUN', 'PUNCT', 'CCONJ', 'NOUN'],
-            ['DET', 'ADJ', 'NOUN', 'CCONJ', 'NOUN'],
-            ['DET', 'ADJ', 'ADJ', 'NOUN', 'CCONJ', 'NOUN'],
-            ['DET', 'NOUN', 'NOUN', 'CCONJ', 'NOUN'],
-            ['DET', 'NOUN', 'CCONJ', 'NOUN'],
-            ['DET', 'VERB', 'ADJ', 'NOUN'],
-            ['DET', 'VERB', 'NOUN', 'NOUN'],
-            ['DET', 'ADJ', 'NOUN'],
-            ['DET', 'NOUN'],
-            ['NOUN', 'PUNCT', 'NOUN', 'PUNCT', 'CCONJ', 'NOUN'],
-            ['NOUN', 'CCONJ', 'NOUN']
-        ]
-                
-        if struct == "None":
-            for ss in startStruct:
-                if posFind( ss, whw ) == 0:
-                    struct = "|".join(ss)
-                    break
-                
-        if struct == "None":
-            print(whw)
+        if str(whw[0]) not in ["a", "an", "the"]:
+            #print("skipping", fS)
+            skipped += 1
+            continue
         
-        sCount.update([struct])
-            
-        #print success, fail
+        #entities = [ (e.start, e.end, e.text) for e in whw.ents ]
+        entities = [ (e.start, e.end, e.text) for e in whw.noun_chunks ]
 
-        continue
-    
+        matches = matcher(whw)
+        guess = [ whw[s:e] for i,s,e in matches ]
+
         ambiguous = ["president","trustee","founder","chairman","professor","pioneer"]
+    
+        print(len(matches))
     
         for i,s,e in matches:
             p = whw[e-1]
@@ -239,24 +181,6 @@ with open(inFn) as inF:
                             for e in entities:
                                 if ofWhat.i in range(e[0],e[1]):
                                     print("%sOf:"%amb, e[2])
-                
-                
-    
-        state="S"
-        
-        what = ""
-        
-        adjectives = []
-        
-        for w in word_tokenize( whatHeWas.strip() ):
-            if state=="S":
-                if w in ["a","an","the"]:
-                    state="WHAT"
-                    
-            elif state=="WHAT":
-                #if w in ["in"]
-                
-                what += " "+ w
         
         #sParse = nlp(afterDeath)
         
