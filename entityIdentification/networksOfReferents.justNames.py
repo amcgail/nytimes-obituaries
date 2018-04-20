@@ -33,6 +33,20 @@ if 'nlp' not in locals():
     
     
     
+    
+import gender_guesser.detector as gender
+g = gender.Detector()
+
+def isname(x):
+    if len( x.split() ) > 1:
+        return any([isname(y) for y in x.split()])
+        
+    # if any word has a gender, we good    
+    return g.get_gender(x) in ['male', 'female']
+
+
+    
+    
 search_url = "https://www.wikidata.org/w/api.php?%s"
 
 sparquery = """SELECT ?lab
@@ -47,7 +61,8 @@ WHERE
 fail = 0
 success = 0
 
-searchResults = {}
+if 'searchResults' not in locals():
+    searchResults = {}
 
 def lookup(name):
     global searchResults
@@ -74,6 +89,9 @@ def lookup(name):
         labs = []                
                 
         for res in r['search']:
+            if res['match']['text'].lower() != name.lower():
+                continue
+            
             myid = res['id']
             sparql.setQuery(sparquery % "wd:%s" % myid)
             r2 = sparql.query().convert()
@@ -89,9 +107,27 @@ def lookup(name):
         searchResults[name] = list(set(labs))
         return list(set(labs))    
     
+"""
+CURRENT PROBLEMS:
+
+names have to be expanded:
+    Mr. Jones to James Earl Jones, where previously mentioned.
+    NO! Just get rid of "Mr.". we only need one referent
     
+the name of the guy himself has to be removed:
+
+    first noun chunk seems to work:
     
-    
+    for d in docs:
+        print(d[:150])
+        doc = nlp(d)
+        print(list(doc.noun_chunks)[0])
+        print("")
+        
+Then I need to actually look them up to verify it's a name!
+"""
+
+abbrev = ["Mr.","Mrs.","Ms.","Dr."]
     
 if True:
         
@@ -102,7 +138,7 @@ if True:
     with open(inFn) as inF:
         docs = [ x['fullBody'] for x in csv.DictReader(inF) ]
     
-    #docs = random.sample( docs, 1000 )
+    docs = random.sample( docs, 1000 )
             
     wordCV = CountVectorizer()
     wordCdoc = wordCV.fit_transform( docs )
@@ -110,49 +146,66 @@ if True:
     wordCword = wordCdoc.sum( axis=1 )
     wordCdoc = wordCdoc.sum( axis=0 )
         
-    wordGraph = set()
+    wordGraph = []
         
-    j = 0
     print("Constructing noun-based graph")
     for i,d in enumerate(docs):
-        if "Jack" not in d or "Nicholson" not in d:
-            continue
-        
-        #j += 1
-        #doc = nlp(d)
-        #print( [x for x in doc.sents if "Nicholson" in str(x)] )
-        
-        #continue
-    
         doc = nlp(d)
         if (i+1) % 100 == 0:
             print(i, "of", len(docs), "done")
+            
+        #print(d)
         
         verbGroup = {}
         
-        for chunk in doc.noun_chunks:
+        toAdd = set()
         
+        first = True
+        hisName = None
+        for chunk in doc.noun_chunks:
+            if first:
+                print("skipping(first)", chunk)
+                hisName = chunk
+                first = False
+                continue
+            
             ch = chunk.text
             ch.replace("\n", " ")
             ch.replace("  ", " ")
             ch = ch.strip()
+
+            # only if it's a name
+            if not isname(ch):
+                continue
+            
+            hasAbbrev = False
+            for a in abbrev:
+                if a in ch:
+                    hasAbbrev = True
+            if hasAbbrev and len(ch.split()) < 3:
+                continue
+            
+            if 'the' in [x.lower() for x in ch.split()]:
+                continue
+            
+            if not all([x.lower() != x for x in ch.split()]):
+                continue
             
             chunk = list(chunk)
             chunk = [ x for x in chunk if x.pos_ != 'SPACE' ]
 
             # expand if necessary
             nextWord = chunk[-1]
-            if nextWord.i+1 < len(nextWord.doc):
+            nextWord = nextWord.doc[ nextWord.i + 1 ]
+            while str(nextWord).lower() != str(nextWord) or nextWord.pos_ == 'SPACE':
+                if nextWord.pos_ != 'SPACE':
+                    chunk.append(nextWord)
+                    print("expanding: ", chunk, nextWord)
+
+                if nextWord.i+1 >= len(nextWord.doc):
+                    break
+                
                 nextWord = nextWord.doc[ nextWord.i + 1 ]
-                while str(nextWord).lower() != str(nextWord) or nextWord.pos_ == 'SPACE':
-                    if nextWord.pos_ != 'SPACE':
-                        chunk.append(nextWord)
-                        # print("expanding: ", chunk, nextWord)
-    
-                    if nextWord.i+1 >= len(nextWord.doc):
-                        break
-                    
-                    nextWord = nextWord.doc[ nextWord.i + 1 ]
                 
             ch = " ".join( [str(w) for w in chunk] )
             
@@ -161,11 +214,13 @@ if True:
             if ch == ch.lower():
                 continue
             
-            ch = " ".join( ch.split() )
-            
-            wordGraph.add( (i, ch) )
-
-if False:
+            toAdd.update([ch])
+        
+        #print(toAdd)
+        
+        for ch in toAdd:
+            wordGraph.append( (i, ch) )
+    
     print("Looking everything up in WikiData")
     
     whatItIsC = Counter()
@@ -185,37 +240,33 @@ if False:
         whatItIs = lookup(w)
         whatItIsC.update(whatItIs)
     
-
-nounChunks = [x[1] for x in wordGraph]
-
-import gender_guesser.detector as gender
-g = gender.Detector()
-
-def isname(x):
-    if len( x.split() ) > 1:
-        return any([isname(y) for y in x.split()])
-        
-    # if any word has a gender, we good    
-    return g.get_gender(x) != 'unknown'
-
-nounChunks = list(filter( isname, nounChunks ))
-
-if False:
-    # POST PROCESSING. filters out everything that's not a name... takes quite a while
     
-    chunkCounter = Counter(nounChunks)
-    nounChunks = [x for x in nounChunks if chunkCounter[x] > 1]
-    nounChunks = [ x for x in nounChunks if len(x.split()) > 1 ]
-    nounChunks = [x for x in nounChunks if 'human' in lookup(x)]
-
-wordGraph = list(set(wordGraph))
+    
+    
+    
+# POST PROCESSING    
+    
+nounChunks = [x[1] for x in wordGraph]
+chunkCounter = Counter(nounChunks)
+nounChunks = [x for x in nounChunks if chunkCounter[x] > 1]
+nounChunks = [ x for x in nounChunks if len(x.split()) > 1 ]
+#nounChunks = [x for x in nounChunks if 'human' in lookup(x)]
+print("Found 'people'")
+print( set(nounChunks) )
 
 referentGraph = []
 for d1,c1 in wordGraph:
     if c1 not in nounChunks:
         continue
+    if not isname(c1):
+        continue
     
     for c2 in nounChunks:
+        if c2 not in nounChunks:
+            continue
+        if not isname(c2):
+            continue
+        
         if c1 == c2:
             continue
         
@@ -225,57 +276,27 @@ for d1,c1 in wordGraph:
             else:
                 referentGraph.append( (c2, c1) )
 
-def okForGraph(x):
-    noNoWords = ["the","university","city"]
-    ws = x.lower().split()
-    
-    for nnw in noNoWords:
-        if nnw in ws:
-            return False
+tipoffs = ["city","the"]
+
+newreferentGraph = []            
+for i, (x,y) in enumerate( referentGraph ):
+    if i % 15 == 0:
+        print(i," of ",len(referentGraph)," done")
         
-    if not x.istitle(): # awesome that this exists
-        return False
-    if len(x.split()) == 1:
-        return False
-    if not any( isname(y) for y in x.split()[:-1] ):
-        return False
-    return True
-
-if False:
-    # do it again!?
+    getOut = False
+    for t in tipoffs:
+        if t in x.lower() or t in y.lower():
+            getOut = True
+    if getOut:
+        continue
     
-    newreferentGraph = []            
-    for i, (x,y) in enumerate( referentGraph ):
-        if i % 5 == 0:
-            print(i," of ",len(referentGraph)," done")
-        if "the" in x.lower() or "the" in y.lower():
-            continue
-        if 'human' in lookup(x) and 'human' in lookup(y):
-            newreferentGraph.append((x,y))
+    print(x,y)
+    if 'human' in lookup(x) and 'human' in lookup(y):
+        newreferentGraph.append((x,y))
         
-    referentGraph = [(x,y) for (x,y) in referentGraph if 'human' in lookup(x) and 'human' in lookup(y)]
-    referentGraph = Counter(referentGraph)
-
-referentGraphAg = Counter(referentGraph)
-referentGraphAg = {x: referentGraphAg[x] for x in referentGraphAg if okForGraph(x[0]) and okForGraph(x[1])}
-#referentGraph = list( filter( lambda x: , referentGraph ) )
-
-graphCSV = [
-    {
-     "Source": x[0],
-     "Target": x[1],
-     "weight": y
-    }
-    for (x,y) in referentGraphAg.items()
-]
-
-from csv import DictWriter
-
-with open('referentGraph.csv','w') as csvf:
-    dw = DictWriter(csvf, ('Source','Target','weight'))
-    dw.writeheader()
-    dw.writerows(graphCSV)
-
+referentGraph = [(x,y) for (x,y) in referentGraph if 'human' in lookup(x) and 'human' in lookup(y)]
+referentGraph = Counter(referentGraph)
+    
 [ x for x in searchResults if 'scientific article' in searchResults[x] ]
 [ x for x in searchResults if 'band' in searchResults[x] ]
 [ x for x in searchResults if 'private university' in searchResults[x] ]

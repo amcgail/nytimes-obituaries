@@ -8,8 +8,6 @@ from nltk import sent_tokenize, word_tokenize
 import spacy
 import re
 
-
-    
 debug = False
 
 codeWordFn = path.join( path.dirname(__file__), "..", "coding", "allCodes.codeWord.csv" )
