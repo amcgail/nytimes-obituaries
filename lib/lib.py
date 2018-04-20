@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import csv
+
 from os import path
 from csv import DictReader
 import json
