@@ -1,0 +1,271 @@
+Problematic:
+	Dave Longaberger, a born basket weaver and business visionary who figured out that the way to make basket weaving pay was to get a lot of other people to do the weaving and a lot more to do the selling, died on Wednesday at his home outside Newark, Ohio.
+
+	Leonard Marsh, a former window washer who helped found Snapple, the beverage concern, and was its longtime president and chief executive, died on Tuesday at his home in Manhasset, on Long Island.
+
+	# what kind of educator? public? private? middle school? high school?
+	'Frances R. Horwich, the amiable educator who engaged millions of preschoolers as the host of the pioneering children\'s program "Ding Dong School" in the 1950\'s, died yesterday.',
+	 'Perry London, a psychologist and educator who studied the altruistic behavior of people who rescued Jews from the Holocaust, died on Friday at the Robert Wood Johnson University Hospital in New Brunswick, N.J.',
+	 "Julius Raskin, a retired educator in New York City public schools who worked on programs designed to widen students' horizons, died on Oct. 9 at the Jewish Home and Hospital for the Aged in the Bronx.",
+	 'Isidore Adler, a scientist, educator and researcher who was among the first to map the chemical composition of the back of the moon, died of cancer on Monday at Holy Cross Hospital in Silver Spring, Md.',
+	 'Dr. Russell C. Smart, a retired educator who teamed with his wife to write 10 books on child rearing and family relations, died on Jan. 13 at his home in San Diego.',
+	 'Dr. John Perry Hubbard, a physician and educator who helped to develop more reliable testing methods for medical education and medical licensing, died Tuesday at his home in Newton Square, Pa.',
+	 'Dr. M. Irene Ferrer, a New York cardiologist and medical educator who helped refine the cardiac catheter and electrocardiogram, which have become diagnostic essentials in heart treatment, died at her apartment in Manhattan last Friday.',
+	 'Dr. Eugene M. Kleban, an educator and former executive director of the Polish Institute of Arts and Sciences of America, died of a cerebral hemorrhage Oct. 9 in his Manhattan home.',
+	 "Dick Katz, a pianist, record producer, educator and writer whose knowledge of jazz from the stride-piano era to 1960s modernism made him a valuable presence on New York's jazz scene for six decades, died on Tuesday in Manhattan.",
+	 'Alfred J. Kahn, a social-policy scholar and an educator who turned a critical eye on failures of local and state governments in child development and family support, and who later argued for a European-style social-welfare system available to all citizens, died on Feb. 13 in Hackensack, N.J.',
+	 'Aurelia Schober Plath, an educator and the editor of the correspondence of her daughter, the poet Sylvia Plath, died on Friday at the North Hill Health Center in Needham, Mass.'
+
+	 # categories of professor...
+	 'Dr. Milton Friedman, a cancer specialist and professor of radiology at the New York University School of Medicine from 1956 until his retirement in 1970, died after a stroke Feb. 12 at his home in Greenville, S.C.',
+	 'Edward Dudley Hume Johnson, a longtime professor at Princeton University who was an authority on aspects of British arts and letters, died on Dec. 9 at the Princeton Medical Center in New Jersey.',
+	 'Robert M. Edelstein, a professor of marketing and public policy at Adelphi University, died yesterday at Beth Israel Medical Center in Manhattan.',
+	 'Albert C. Todd, a professor of European languages and literatures who edited and translated poetry by his friend the Russian poet Yevgeny Yevtushenko, interpreted for him and once physically defended him from attackers, died on Nov. 9 in a Queens nursing home.',
+	 'Eleanor Burke Leacock, a professor of anthropology at City College of the City University of New York, died of a stroke Thursday at the Straub Medical Center Hospital in Honolulu.',
+	 'Wilbur Richard Knorr, a professor at Stanford University who studied the birth of mathematics in antiquity, died on March 18 at the Palo Alto Nursing Center.',
+	 'Paul Cortissoz, a professor of English, died on Wednesday at Westchester County Medical Center in Valhalla, N.Y.',
+	 'Dr. Marcus Singer, a longtime professor of anatomy and zoology who was Henry Willson Payne Professor of Anatomy at Case Western Reserve University in Cleveland, died on Saturday at his home in Cleveland Heights, Ohio.',
+	 'Thomas H. Smith, associate director of the New York State Writers Institute and an English professor at the State University at Albany died on Monday while swimming in the university pool.',
+	 'Benjamin Busch, a lawyer and a law professor, died on Sept. 15 at his home in Lakeville, Conn., after a long illness.',
+	 "Oliver Butterworth, an author of children's books and a professor of English at Hartford College for Women for 43 years, died on Monday at his home in West Hartford, Conn.",
+	 'Karl E. Case, an economics professor at Wellesley College who helped revolutionize how home prices are tracked by real estate professionals and home buyers alike, died on July 15 in Wellesley, Mass.',
+	 'Stanley V. Margolis, a geochemist and professor of geology at the University of California at Davis, died last Saturday at the Sutter Davis Hospital.',
+	 'Harold L. Stewart, a pathologist for 32 years at the National Institutes of Health and a clinical professor at Georgetown University, died on May 30.',
+	 'Arthur Casagrande, a former Harvard University professor who developed design principles over the past 40 years that changed the construction of earth and rockfill dams throughout the world, died Sunday at Massachusetts General Hospital in Boston.',
+	 'John G. Aston, emeritus professor of organic chemistry and former director of the Low Temperature Laboratory at Pennsylvania State University, died Monday at Centre Community Hospital in State College, Pa.',
+	 "Paul Howe Shepard Jr., a professor of natural philosophy and human ecology who wrote or edited books that won critics' praise, died on Tuesday at his home in Salt Lake City.",
+	 'Dr. Rowland L. Collins, professor of English at the University of Rochester and an authority on Old English literature and the Victorian period, died May 17 at Strong Memorial Hospital in Rochester.',
+	 'James W. Silver, a professor of American history at the University of Mississippi for more than 30 years whose outspokenly liberal views on racial equality stirred controversy throughout that state, died of complications from emphysema yesterday in Tampa, Fla.',
+	 "Charles Grosser, professor of social work at Columbia University's School of Social Work, died of a heart attack last Saturday in London.",
+	 'John M. Kernochan, a leading professor of copyright law and the founder of the Kernochan Center for Law, Media and the Arts at Columbia University, died on Oct. 29 at his home in Jamaica Plain, Mass.',
+	 'Daniel Katz, a retired University of Michigan psychology professor who was an expert on organizational psychology, died on Feb. 28.'
+
+#filmmaker
+epidemiologist
+weaver
+washer
+painter
+microbiologist
+screenwriter
+engineer
+educator
+scholar
+#composer
+!professor
+!emeritus
+teacher
+photographer
+writer
+researcher
+librarian
+assistant
+cleric
+songwriter
+pundit
+outfielder
+concertmaster
+chef
+baseman
+assemblyman
+
+executive
+chairman
+
+leader
+philanthropist
+benefactor
+widow
+
+partner
+
+
+
+
+
+
+
+
+film
+WDSU
+Trust
+Toscanini
+Theater
+Star
+Schulz
+Schneider
+Scenes
+S.J.
+Russo
+Race
+Pa.
+N.J.
+Museum
+Media
+Marzotto
+Lullaby
+Klansman
+Kan.
+Holocaust
+Haley
+Haimanot
+Graves
+Glickman
+F.B.I.
+Emperor
+Dolphins
+Dies
+Democrat
+D.J.
+Comets
+Colo.
+China
+Buckner
+Belinda
+Beehive
+Ashe
+Arts
+76
+1970
+
+
+
+
+
+
+
+
+
+
+
+authority
+expert
+pioneer
+businessman
+Republican
+star
+scientist
+industrialist
+figure
+creator
+Hall
+consultant
+AP
+general
+entrepreneur
+book
+Professor
+who
+stars
+secretary
+refugee
+proponent
+last
+knowledge
+innovator
+guard
+activist
+Secretary
+General
+Emeritus
+Commissioner
+American
+youngest
+writers
+wristwatch
+work
+winner
+wing
+walker
+visionary
+virtuoso
+versatile
+treatment
+tradition
+track
+toys
+titan
+time
+theorist
+theoretician
+theologian
+theater
+textbook
+television
+tackle
+survivor
+superintendent
+student
+stage
+spokesman
+speaker
+smoker
+skating
+sheriff
+sage
+roles
+role
+record
+recipient
+raiser
+queen
+quarterly
+programs
+professionals
+preservationist
+personality
+patriarch
+opponent
+operations
+one
+nun
+native
+muralist
+molecules
+moderator
+matriarch
+magnate
+laborer
+king
+jeweler
+jazz
+intellectual
+icon
+housekeeper
+helped
+gang
+friend
+form
+folklorists
+first
+fighter
+fields
+fashion
+famous
+fall
+explorer
+era
+end
+emigre
+dissident
+detective
+decorating
+decision
+dames
+cowgirl
+coordinator
+contributor
+confidante
+commissioner
+character
+chamber
+cerebral
+businesswoman
+boy
+bombing
+bluesman
+blues
+auteur
+array
+archetype
+ally
+aide
