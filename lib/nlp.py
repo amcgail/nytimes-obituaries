@@ -19,8 +19,11 @@ from g import debug
 class _nlp:
     def __init__(self):
         self.nlp = None
+        self.restricted = False
 
     def load(self):
+        if self.restricted:
+            raise Exception("I refuse to load SpaCy. In restricted mode.")
         if self.nlp is None:
             print("nlp not found in global namespace. Loading...")
             print("NOTE: this variable is huge, and can eat up memory. Don't load in multiple terminals.")

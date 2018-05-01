@@ -29,21 +29,74 @@ class Doc:
     def __init__(self, info):
         self.info = info
 
-        self.spacy = nlp.nlp(self.info['fullBody'])
-
-        self.fS = extractFirstSentence(self.info['fullBody'])
-        self.fS = nlp.nlp(self.fS.strip())
-        self.name = next(self.fS.noun_chunks)
-        self.nameS = str(self.name).strip()
+        self.id = info['fName']
 
         self.coded = False
         self.coding = None
         self.guess = None
 
+        # avoid heavy computations!
         self._age = None
+        self._fS = None
+        self._spacy = None
+        self._name = None
+        self._nameS = None
+
+    def dump(self):
+        if not self.coded:
+            raise Exception("Cannot dump what's not been coded!")
+
+        import json
+        d = {}
+        d['age'] = self.age
+        d['guess'] = self.guess
+        d['nameS'] = self.nameS
+
+        return json.dumps(d)
+
+    def load(self, d):
+        import json
+        d = json.loads(d)
+
+        self._age = d['age']
+        self._nameS = d['nameS']
+        self.guess = d['guess']
+
+        self.coded = True
 
     def __str__(self):
         return str(self.spacy)
+
+    @property
+    def name(self):
+        if self._name is None:
+            self._name = next(self.fS.noun_chunks)
+        return self._name
+
+    @property
+    def nameS(self):
+        if self._nameS is None:
+            self._nameS = str(self.name).strip()
+        return self._nameS
+
+    @property
+    def spacy(self):
+        if self._spacy is not None:
+            return self._spacy
+
+        spacy = nlp.nlp(self.info['fullBody'])
+        self._spacy = spacy
+        return spacy
+
+    @property
+    def fS(self):
+        if self._fS is not None:
+            return self._fS
+
+        fS = extractFirstSentence(self.info['fullBody'])
+        fS = nlp.nlp(fS.strip())
+        self._fS = fS
+        return fS
 
     @property
     def age(self):
@@ -52,7 +105,7 @@ class Doc:
 
         g.p.pdepth = 0
 
-        lastName = self.name.text.split()[-1]
+        lastName = self.nameS.split()[-1]
 
         rgxs = [
             r"(?:Mr\.?|Mrs\.?)\s*%s\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?" % lastName,
@@ -105,11 +158,12 @@ class Doc:
         self.coding = coding
 
         if len(self.fS) == 0:
-            g.p("Skipping. No content after trim.")
+            if self.coding.debug:
+                g.p("Skipping. No content after trim.")
             coding.stateCounter.update(["zeroLengthSkip"])
             return
 
-        if coding.debug:
+        if self.coding.debug:
             g.p.depth = 0
             g.p()
             g.p(self.fS)
@@ -124,10 +178,10 @@ class Doc:
                 lookhimup.update(coding.getOccCodes(x))
 
             if len(lookhimup) > 0:
-                if coding.debug:
+                if self.coding.debug:
                     g.p("WikiData returns %s which gives OCC %s" % (words, lookhimup))
 
-        if coding.debug:
+        if self.coding.debug:
             g.p("Extracted name: %s" % self.nameS)
 
         # extract information from the title
@@ -153,7 +207,8 @@ class Doc:
             except:
                 pass
 
-            print(tp)
+            if self.coding.debug:
+                g.p("Extracted from title:", tp)
 
         didSomething = False
 
@@ -201,7 +256,7 @@ class Doc:
                 followPreps = nlp.followRecursive(v, ['relcl', 'prep', 'pobj'])
                 asWhat = [x for x in followPreps if next(x.ancestors).text == 'as' and x.pos_ == 'pobj']
 
-                if coding.debug and len(asWhat):
+                if self.coding.debug and len(asWhat):
                     g.p('whoAs', asWhat)
 
                 if len(asWhat):
@@ -214,7 +269,7 @@ class Doc:
                             if vc.dep_ != 'attr':
                                 continue
 
-                            if coding.debug:
+                            if self.coding.debug:
                                 g.p('Expanded be verb', vc, vc.dep_)
 
                             # guesses.append(result)
@@ -226,7 +281,8 @@ class Doc:
                 continue
             finalGuess.append(guess['occ'][0])
 
-        g.p("finalGuess", finalGuess)
+        if self.coding.debug:
+            g.p("finalGuess", finalGuess)
 
         if True:
             moreGuesses = []
@@ -243,22 +299,23 @@ class Doc:
             for guess in moreGuesses:
                 stupidFinalGuess += guess['occ']
 
-            g.p("stupidFinalGuess", stupidFinalGuess)
+            if self.coding.debug:
+                g.p("stupidFinalGuess", stupidFinalGuess)
 
-            if set(stupidFinalGuess) != set(finalGuess):
-                g.p("And they're different!", extrad=1)
+                if set(stupidFinalGuess) != set(finalGuess):
+                    g.p("And they're different!", extrad=1)
 
         if not didSomething:
             if len(lookhimup) > 0:
                 coding.stateCounter.update(["justWikidata"])
             else:
-                if coding.debug:
+                if self.coding.debug:
                     g.p("Skipping. Strange grammatical construction.")
                 coding.stateCounter.update(["strangeGrammar"])
 
 class Coder:
 
-    def __init__(self, debug=True, mode="firstSentence"):
+    def __init__(self, debug=False, mode="firstSentence"):
         self.debug = debug
 
         # Initialize a bunch of variables
@@ -272,9 +329,47 @@ class Coder:
         # Generate the W2C dictionary, used for all coding
         self.generateW2C()
 
+    def loadCodes(self, fn):
+        import os
+        from os import path
+
+        assert(os.path.isdir(fn))
+
+        for d in self.docs:
+            assert(isinstance(d, Doc))
+
+            infn = path.join(fn, "%s.json" % d.id)
+
+            with open( infn ) as inF:
+                d.load(inF.read())
+
+    def dumpCodes(self, fn):
+        import os
+        from os import path
+        from shutil import rmtree
+
+        if os.path.isdir(fn):
+            if not g.query_yes_no("Directory exists. Replace?", default="no"):
+                return
+            rmtree(fn)
+
+        os.mkdir(fn)
+
+        for d in self.docs:
+            assert(isinstance(d, Doc))
+
+            outfn = path.join(fn, "%s.json" % d.id)
+
+            with open( outfn, 'w' ) as outf:
+                outf.write( d.dump() )
+
     def loadDocs(self, N=None, rand=True):
         import random
         with open(inFn) as inF:
+
+            if N is None:
+                self.docs = [Doc(info) for info in DictReader(inF)]
+                return
 
             if rand:
                 rs = DictReader(inF)
@@ -285,10 +380,13 @@ class Coder:
                 rows = rows[:N]
             else:
                 rs = DictReader(inF)
-                i = 0
+                j = 0
                 rows = []
                 for r in rs:
                     rows.append(r)
+                    j += 1
+                    if j >= N:
+                        break
 
         self.docs = [Doc(x) for x in rows]
 
@@ -298,7 +396,7 @@ class Coder:
         return [doc for doc in self.docs if occ in list(chain.from_iterable(guess['occ'] for guess in doc.guess)) ]
 
     def nounOCC(self, n):
-        debug = False
+        debug = self.debug
 
         # knownWords = ['member', 'merchant','professor','actor','engineer','scholar','songwriter','trustee','fighter']
         vagueWords = ['founder', 'director', 'president', 'member']
@@ -372,10 +470,19 @@ class Coder:
         self.specificCounters[space].update([key])
 
     def codeAll(self):
-        for index, d in enumerate(self.docs):
+        from time import time
+        from datetime import timedelta
 
-            if index % 100 == 0:
-                print("coding document", index)
+        lastPrintTime = time()
+        startTime = time()
+        ndocs = len(self.docs)
+
+        for index, d in enumerate(self.docs):
+            # every now and then, let us know how it's going!
+            if time() - lastPrintTime > 5:
+                secondsLeft = int( ( float(ndocs) - index ) * (time() - startTime) / index )
+                print("coding document %s/%s. ETA: %s" % (index, ndocs, timedelta(seconds=secondsLeft)))
+                lastPrintTime = time()
 
             d.code(coding=self)
 
