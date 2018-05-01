@@ -21,7 +21,7 @@ import sys
 
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
 
-from lib import *
+from g import *
 
 if 'nlp' not in locals():
     import spacy

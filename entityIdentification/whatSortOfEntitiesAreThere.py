@@ -10,7 +10,7 @@ sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
 
 inFn = path.join( path.dirname(__file__), "..", "data","extracted.nice.csv" )
 
-from lib import *
+from g import *
 
 with open(inFn) as inF:
     rs = reader(inF)

@@ -5,3 +5,4 @@ fact-extractor/*
 **/.spyderworkspace
 **/*.pyc
 data/*
+**/*.swp

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from csv import DictReader
-
-from collections import Counter
-
-from os import path
 import sys
+from collections import Counter
+from os import path
+
+from nlp import extractLexical
+from occ import extractFirstSentence
 
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
-from lib import *
+from g import *
 
 # get docs which weren't coded
 notCodedfn = path.join( path.dirname(__file__), "secondStabCoding.notCoded.csv" )
