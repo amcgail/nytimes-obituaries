@@ -11,7 +11,7 @@ from nltk import sent_tokenize
 basedir = path.join( path.dirname(__file__), '..', ".." )
 sys.path.append( path.join( basedir, 'lib' ) )
 
-from lib import *
+from g import *
 
 inFn = path.join( basedir, "data","extracted.all.nice.csv" )
 csv.field_size_limit(500 * 1024 * 1024)

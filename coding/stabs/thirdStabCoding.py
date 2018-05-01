@@ -11,22 +11,20 @@ https://spacy.io/usage/visualizers
 
 """
 
-import csv
-from csv import reader
-from csv import QUOTE_MINIMAL
-
-from nltk import sent_tokenize, word_tokenize
-from os import path
-from collections import Counter
-import numpy as np
-import re
 import sys
-
+from collections import Counter
+from csv import reader
 from itertools import chain
+from os import path
+
+from nltk import sent_tokenize
+
+from nlp import extractLexical
+from occ import extractCodes
 
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
 
-from lib import *
+from g import *
 
 if 'nlp' not in locals():
     import spacy

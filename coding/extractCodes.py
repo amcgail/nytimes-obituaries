@@ -7,7 +7,7 @@ Created on Sat Dec  9 13:50:48 2017
 import sys
 from os import path
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
-from lib import *
+from g import *
 
 import numpy as np
 

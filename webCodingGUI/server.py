@@ -1,17 +1,15 @@
-from flask import Flask, request, send_from_directory, url_for
-import json
 import sys
 from os import path
-import json
-from collections import Counter
-import re
 
+from flask import Flask, request, send_from_directory
 from pymongo import MongoClient
+
+from occ import extractCodesDetailed, getRandomDocs
 
 app = Flask(__name__, static_url_path='/static')
 
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
-from lib import *
+from g import *
 
 db = MongoClient()['occCodingNotes']
 
