@@ -70,7 +70,12 @@ class Doc:
     @property
     def name(self):
         if self._name is None:
-            self._name = next(self.fS.noun_chunks)
+            # name is ALMOST ALWAYS the first noun_chunk.
+            try:
+                name = next(self.fS.noun_chunks)
+                self._name = next(self.fS.noun_chunks)
+            except StopIteration:
+                self._name = self.info['title']
         return self._name
 
     @property
@@ -329,36 +334,52 @@ class Coder:
         # Generate the W2C dictionary, used for all coding
         self.generateW2C()
 
-    def loadCodes(self, fn):
+    def loadCodes(self, loadDir):
         import os
         from os import path
 
-        assert(os.path.isdir(fn))
+        loadDir = path.join(path.dirname(__file__), '..', 'codeDumps', loadDir)
 
-        for d in self.docs:
-            assert(isinstance(d, Doc))
+        assert(os.path.isdir(loadDir))
 
-            infn = path.join(fn, "%s.json" % d.id)
+        toLoad = os.listdir(loadDir)
 
-            with open( infn ) as inF:
-                d.load(inF.read())
+        numLoaded = 0
 
-    def dumpCodes(self, fn):
+        # loop through the entire CSV and see if any are in what I need to load.
+        with open(inFn) as inF:
+            for info in DictReader(inF):
+                thisFn = "%s.json" % info['fName']
+                if not thisFn in toLoad:
+                    continue
+
+                d = Doc(info)
+                with open(path.join(loadDir, thisFn)) as thisF:
+                    d.load(thisF.read())
+
+                self.docs.append(d)
+
+                numLoaded += 1
+
+        print("loaded %s documents" % numLoaded)
+
+    def dumpCodes(self, dumpDir):
         import os
         from os import path
         from shutil import rmtree
 
-        if os.path.isdir(fn):
-            if not g.query_yes_no("Directory exists. Replace?", default="no"):
-                return
-            rmtree(fn)
+        dumpDir = path.join(path.dirname(__file__), '..', 'codeDumps', dumpDir)
 
-        os.mkdir(fn)
+        if os.path.isdir(dumpDir):
+            if g.query_yes_no("Directory exists. Replace? If no, will keep previous codes if there are no updates.", default="no"):
+                rmtree(dumpDir)
+
+        os.mkdir(dumpDir)
 
         for d in self.docs:
             assert(isinstance(d, Doc))
 
-            outfn = path.join(fn, "%s.json" % d.id)
+            outfn = path.join(dumpDir, "%s.json" % d.id)
 
             with open( outfn, 'w' ) as outf:
                 outf.write( d.dump() )
@@ -837,3 +858,19 @@ def getRandomDocs(num):
 #         if posFind(ss, whw) == 0:
 #             struct = "|".join(ss)
 #             break
+
+def _codeToName():
+    c2n = {}
+    officialTitlesFn = path.join(path.dirname(__file__), '..', 'coding', 'occ2000.officialTitles.csv')
+    with open(officialTitlesFn) as officialTitlesF:
+        for row in DictReader(officialTitlesF):
+            if row['officialTitle'] == "":
+                continue
+
+            code = "occ2000-%03d" % int(row['code'])
+
+            c2n[code] = row['officialTitle']
+
+    return c2n
+
+codeToName = _codeToName()
