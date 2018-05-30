@@ -42,6 +42,7 @@ def companyNames():
 
 if "famousDict" not in locals():
     famousDict = {}
+
 def lookupFamous(name):
     import urllib
     import json

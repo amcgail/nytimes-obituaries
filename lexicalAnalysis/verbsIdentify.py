@@ -80,7 +80,7 @@ for doc in mycoder.docs:
     print("--OLD--")
 
     #print sentences
-    for sent in doc.spacy.sents:
+    for sent in doc.spacyFullBody.sents:
 
         verbGroup = {}
 

@@ -4,6 +4,20 @@ import sys
 
 debug = False
 
+def select(iterator, N=None, rand=True):
+    import itertools
+    import random
+
+    if N is None:
+        return list(iterator)
+
+    if rand:
+        rs = list(iterator)
+        random.shuffle(rs)
+        return rs[:N]
+    else:
+        return list( itertools.islice(iterator, N) )
+
 def code2word():
     pass
 

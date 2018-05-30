@@ -19,8 +19,8 @@ import occ
 sCount = Counter()
 
 mycoder = occ.Coder()
-mycoder.loadDocs(N=5000)
+mycoder.loadDocs(N=100)
 mycoder.codeAll()
-mycoder.dumpCodes("coding5000")
+mycoder.dumpCodes("coding100")
 
 mycoder.exportReport("report")

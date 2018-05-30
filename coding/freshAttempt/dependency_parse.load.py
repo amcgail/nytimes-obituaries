@@ -19,6 +19,6 @@ import occ
 sCount = Counter()
 
 mycoder = occ.Coder()
-mycoder.loadCodes("test")
+mycoder.loadPreviouslyCoded("test")
 
 # mycoder.exportReport("report")
