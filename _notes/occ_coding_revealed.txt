@@ -1,0 +1,29 @@
+Hi Alec
+
+
+A "occupational coding revealed" program might include the following:
+
+
+a few simple options on the sample thats examined: 
+(D) random sample or fixed sample (which facilitates looking at impact of changes); and separately, N
+
+display of the word-occupational code data structure
+
+display of obituary and how its coded, where user is able to look at the title, the first sentence, and the full entry (its good to be able to see all these, even if the routine is only working with the first sentence)
+if possible here to pinpoint what term is leading to the code in a text markup fashion, that would be great
+
+an option to look at the obituaries that dont receive a code, or that receive a particular code
+some simple summary statistics printed out, like percentage of the sample that receives a code, or percentage that receive each code
+
+It would be great if the user sees the program and can modify it to run in different ways -- with comments indicating how they can ask for different things
+
+i.e.,
+
+SampleType = "Random";
+
+/* options are "Random", "Fixed" */
+
+
+showing some of the underlying programming would promote learning by users (me, Abdullah, Katherine, Reid) even if there aren't options to modify, though there are also limiting benefits 
+
+David
