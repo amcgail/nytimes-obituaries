@@ -12,14 +12,14 @@ from collections import Counter
 
 basedir = path.join(path.dirname(__file__), "..")
 sys.path.append(path.join(basedir, 'lib'))
-import occ, wikidata, g, nlp
+import occ, wiki, g, nlp
 
 app = Flask(__name__, static_url_path='/static')
 
 db = MongoClient()['occCodingNotes']
 
 mycoder = occ.Coder()
-mycoder.loadCodes(path.join("..", "codeDumps", "coding5000"))
+mycoder.loadPreviouslyCoded(path.join("..", "codeDumps", "coding5000"))
 
 
 @app.route("/")

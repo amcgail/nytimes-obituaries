@@ -15,7 +15,7 @@ from os import path
 from collections import Counter
 from itertools import chain
 
-import g, nlp, wikidata
+import g, nlp, wiki
 
 csv.field_size_limit(500 * 1024 * 1024)
 allDocs = list( DictReader( open( path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" ) ) ) )
@@ -31,19 +31,20 @@ class Doc:
 
         self.id = info['fName']
 
-        self.coded = False
-        self.coding = None
+        self.isCoded = False
+        self.myCoder = None
+
         self.guess = None
 
         # avoid heavy computations!
         self._age = None
-        self._fS = None
-        self._spacy = None
-        self._name = None
+        self._spacyFirstSentence = None
+        self._spacyFullBody = None
+        self._spacyName = None
         self._nameS = None
 
     def dump(self):
-        if not self.coded:
+        if not self.isCoded:
             raise Exception("Cannot dump what's not been coded!")
 
         import json
@@ -51,6 +52,7 @@ class Doc:
         d['age'] = self.age
         d['guess'] = self.guess
         d['nameS'] = self.nameS
+        d['fS_str'] = str(self.spacyFirstSentence)
 
         return json.dumps(d)
 
@@ -62,45 +64,47 @@ class Doc:
         self._nameS = d['nameS']
         self.guess = d['guess']
 
-        self.coded = True
+        self.info['fS_str'] = d['fS_str']
+
+        self.isCoded = True
 
     def __str__(self):
-        return str(self.spacy)
+        return str(self.spacyFullBody)
 
     @property
-    def name(self):
-        if self._name is None:
+    def spacyName(self):
+        if self._spacyName is None:
             # name is ALMOST ALWAYS the first noun_chunk.
             try:
-                name = next(self.fS.noun_chunks)
-                self._name = next(self.fS.noun_chunks)
+                name = next(self.spacyFirstSentence.noun_chunks)
+                self._spacyName = next(self.spacyFirstSentence.noun_chunks)
             except StopIteration:
-                self._name = self.info['title']
-        return self._name
+                self._spacyName = self.info['title']
+        return self._spacyName
 
     @property
     def nameS(self):
         if self._nameS is None:
-            self._nameS = str(self.name).strip()
+            self._nameS = str(self.spacyName).strip()
         return self._nameS
 
     @property
-    def spacy(self):
-        if self._spacy is not None:
-            return self._spacy
+    def spacyFullBody(self):
+        if self._spacyFullBody is not None:
+            return self._spacyFullBody
 
         spacy = nlp.nlp(self.info['fullBody'])
-        self._spacy = spacy
+        self._spacyFullBody = spacy
         return spacy
 
     @property
-    def fS(self):
-        if self._fS is not None:
-            return self._fS
+    def spacyFirstSentence(self):
+        if self._spacyFirstSentence is not None:
+            return self._spacyFirstSentence
 
         fS = extractFirstSentence(self.info['fullBody'])
         fS = nlp.nlp(fS.strip())
-        self._fS = fS
+        self._spacyFirstSentence = fS
         return fS
 
     @property
@@ -124,7 +128,7 @@ class Doc:
             r"([0-9]{1,3})",
         ]
 
-        sents = list(self.spacy.sents)
+        sents = list(self.spacyFullBody.sents)
 
         foundReasonableAge = False
         # look for these sentences, in order
@@ -159,34 +163,34 @@ class Doc:
     def code(self, coding):
         assert isinstance(coding, Coder)
 
-        self.coded = True
-        self.coding = coding
+        self.isCoded = True
+        self.myCoder = coding
 
-        if len(self.fS) == 0:
-            if self.coding.debug:
+        if len(self.spacyFirstSentence) == 0:
+            if self.myCoder.debug:
                 g.p("Skipping. No content after trim.")
             coding.stateCounter.update(["zeroLengthSkip"])
             return
 
-        if self.coding.debug:
+        if self.myCoder.debug:
             g.p.depth = 0
             g.p()
-            g.p(self.fS)
+            g.p(self.spacyFirstSentence)
 
             g.p.depth += 1
 
         lookhimup = set()
 
         if len(self.nameS) > 0:
-            words = wikidata.lookupFamous(self.nameS)
+            words = wiki.lookupFamous(self.nameS)
             for x in words:
                 lookhimup.update(coding.getOccCodes(x))
 
             if len(lookhimup) > 0:
-                if self.coding.debug:
+                if self.myCoder.debug:
                     g.p("WikiData returns %s which gives OCC %s" % (words, lookhimup))
 
-        if self.coding.debug:
+        if self.myCoder.debug:
             g.p("Extracted name: %s" % self.nameS)
 
         # extract information from the title
@@ -212,7 +216,7 @@ class Doc:
             except:
                 pass
 
-            if self.coding.debug:
+            if self.myCoder.debug:
                 g.p("Extracted from title:", tp)
 
         didSomething = False
@@ -220,7 +224,7 @@ class Doc:
         guesses = []
 
         # Alec McGail, scientist and genius, died today.
-        nameChildren = list(self.name.root.children)
+        nameChildren = list(self.spacyName.root.children)
         apposHooks = list(filter(lambda x: x.dep_ == 'appos', nameChildren))
 
         if len(apposHooks) > 0:
@@ -261,7 +265,7 @@ class Doc:
                 followPreps = nlp.followRecursive(v, ['relcl', 'prep', 'pobj'])
                 asWhat = [x for x in followPreps if next(x.ancestors).text == 'as' and x.pos_ == 'pobj']
 
-                if self.coding.debug and len(asWhat):
+                if self.myCoder.debug and len(asWhat):
                     g.p('whoAs', asWhat)
 
                 if len(asWhat):
@@ -274,7 +278,7 @@ class Doc:
                             if vc.dep_ != 'attr':
                                 continue
 
-                            if self.coding.debug:
+                            if self.myCoder.debug:
                                 g.p('Expanded be verb', vc, vc.dep_)
 
                             # guesses.append(result)
@@ -286,7 +290,7 @@ class Doc:
                 continue
             finalGuess.append(guess['occ'][0])
 
-        if self.coding.debug:
+        if self.myCoder.debug:
             g.p("finalGuess", finalGuess)
 
         if True:
@@ -294,7 +298,7 @@ class Doc:
             # more stupid guesses...
             # literally expand every noun
 
-            for w in self.fS:
+            for w in self.spacyFirstSentence:
                 if w.pos_ != 'NOUN':
                     continue
                 guess = coding.nounOCC(w)
@@ -304,7 +308,7 @@ class Doc:
             for guess in moreGuesses:
                 stupidFinalGuess += guess['occ']
 
-            if self.coding.debug:
+            if self.myCoder.debug:
                 g.p("stupidFinalGuess", stupidFinalGuess)
 
                 if set(stupidFinalGuess) != set(finalGuess):
@@ -314,7 +318,7 @@ class Doc:
             if len(lookhimup) > 0:
                 coding.stateCounter.update(["justWikidata"])
             else:
-                if self.coding.debug:
+                if self.myCoder.debug:
                     g.p("Skipping. Strange grammatical construction.")
                 coding.stateCounter.update(["strangeGrammar"])
 
@@ -326,7 +330,7 @@ class Coder:
         # Initialize a bunch of variables
         self.w2c = {}
         self.allResults = []
-        self.docs = []
+        self.obituaries = []
         self.stateCounter = Counter()
         self.specificCounters = {}
         self.synMap = {}
@@ -334,7 +338,7 @@ class Coder:
         # Generate the W2C dictionary, used for all coding
         self.generateW2C()
 
-    def loadCodes(self, loadDir):
+    def loadPreviouslyCoded(self, loadDir, N=None, rand=True):
         import os
         from os import path
 
@@ -344,24 +348,24 @@ class Coder:
 
         toLoad = os.listdir(loadDir)
 
-        numLoaded = 0
+        def produceDocs():
+            global numLoaded
+            # loop through the entire CSV and see if any are in what I need to load.
+            with open(inFn) as inF:
+                for info in DictReader(inF):
+                    thisFn = "%s.json" % info['fName']
+                    if not thisFn in toLoad:
+                        continue
 
-        # loop through the entire CSV and see if any are in what I need to load.
-        with open(inFn) as inF:
-            for info in DictReader(inF):
-                thisFn = "%s.json" % info['fName']
-                if not thisFn in toLoad:
-                    continue
+                    d = Doc(info)
+                    with open(path.join(loadDir, thisFn)) as thisF:
+                        d.load(thisF.read())
 
-                d = Doc(info)
-                with open(path.join(loadDir, thisFn)) as thisF:
-                    d.load(thisF.read())
+                    yield d
 
-                self.docs.append(d)
+        self.obituaries = g.select(produceDocs(), N=N, rand=rand)
 
-                numLoaded += 1
-
-        print("loaded %s documents" % numLoaded)
+        print("loaded %s documents" % len(self.obituaries))
 
     def dumpCodes(self, dumpDir):
         import os
@@ -376,7 +380,7 @@ class Coder:
 
         os.mkdir(dumpDir)
 
-        for d in self.docs:
+        for d in self.obituaries:
             assert(isinstance(d, Doc))
 
             outfn = path.join(dumpDir, "%s.json" % d.id)
@@ -385,36 +389,37 @@ class Coder:
                 outf.write( d.dump() )
 
     def loadDocs(self, N=None, rand=True):
-        import random
         with open(inFn) as inF:
+            rows = DictReader(inF)
+            rows = g.select(rows, N=N, rand=rand)
 
-            if N is None:
-                self.docs = [Doc(info) for info in DictReader(inF)]
-                return
+        self.obituaries = [Doc(dict(x)) for x in rows]
 
-            if rand:
-                rs = DictReader(inF)
-                rows = map(dict, rs)
-                rows = list(rows)
+    def findObitsByInfo(self, **kwargs):
+        found = []
+        for d in self.obituaries:
+            thisOneSucks = False
+            for k in kwargs:
+                if not d.info[ k ] == kwargs[ v ]:
+                    thisOneSucks = True
+                    break
+            if not thisOneSucks:
+                found.append(d)
+        return found
 
-                random.shuffle(rows)
-                rows = rows[:N]
-            else:
-                rs = DictReader(inF)
-                j = 0
-                rows = []
-                for r in rs:
-                    rows.append(r)
-                    j += 1
-                    if j >= N:
-                        break
+    def findObitByInfo(self, **kwargs):
+        import random
+        findAll = findDocsByInfo(**kwargs)
 
-        self.docs = [Doc(x) for x in rows]
+        if len(findAll) == 0:
+            return None
+
+        return random.choice(  )
 
     def docsByOcc(self, occ):
         occ = "occ2000-%s" % occ
         from itertools import chain
-        return [doc for doc in self.docs if occ in list(chain.from_iterable(guess['occ'] for guess in doc.guess)) ]
+        return [doc for doc in self.obituaries if occ in list(chain.from_iterable(guess['occ'] for guess in doc.guess))]
 
     def nounOCC(self, n):
         debug = self.debug
@@ -496,9 +501,9 @@ class Coder:
 
         lastPrintTime = time()
         startTime = time()
-        ndocs = len(self.docs)
+        ndocs = len(self.obituaries)
 
-        for index, d in enumerate(self.docs):
+        for index, d in enumerate(self.obituaries):
             # every now and then, let us know how it's going!
             if time() - lastPrintTime > 5:
                 secondsLeft = int( ( float(ndocs) - index ) * (time() - startTime) / index )
@@ -649,26 +654,26 @@ class Coder:
         OCCmultiple = Counter()
         OCCcomb = Counter()
 
-        for d in self.docs:
+        for d in self.obituaries:
             guesses = list(chain.from_iterable(y['occ'] for y in d.guess))
             if len(guesses) == 1:
                 OCCsingle.update(guesses)
 
         # should it be fractional?
-        for d in self.docs:
+        for d in self.obituaries:
             guesses = list(chain.from_iterable(y['occ'] for y in d.guess))
             for y in guesses:
                 OCCmultiple[y] += 1. / len(guesses)
 
         # or tuples?
-        for d in self.docs:
+        for d in self.obituaries:
             guesses = list(set(chain.from_iterable(y['occ'] for y in d.guess)))
             guesses = tuple(sorted(guesses))
             OCCcomb[guesses] += 1
 
         OCCgraph = Counter()
         # we could build a graph
-        for d in self.docs:
+        for d in self.obituaries:
             guesses = list(set(chain.from_iterable(y['occ'] for y in d.guess)))
             for x1 in guesses:
                 for x2 in guesses:
@@ -683,10 +688,10 @@ class Coder:
             w("<h1>20 Top Single Occupations</h1>")
             for occ, count in OCCsingle.most_common(20):
                 w("<h2 id='%s'>%s had %s obituaries</h2>" % (occ, occ, count))
-                for doc in self.docs:
+                for doc in self.obituaries:
                     guesses = list(chain.from_iterable(guess['occ'] for guess in doc.guess))
                     if len(guesses) == 1 and guesses[0] == occ:
-                        w("<p>%s</p>" % doc.fS)
+                        w("<p>%s</p>" % doc.spacyFirstSentence)
 
     def extractCodes(self, doc):
 
