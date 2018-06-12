@@ -6,23 +6,30 @@ Created on Fri Apr 27 12:57:10 2018
 @author: alec
 """
 import re
-
-from nltk import sent_tokenize
-from nltk.corpus import wordnet as wn
-import csv
-from csv import DictReader
 from os import path
 from collections import Counter
 from itertools import chain
 
+import numpy as np
+
+from csv import reader, writer
+import xlrd
+
+import csv
+from csv import DictReader, DictWriter
+
+from nltk import sent_tokenize
+from nltk.corpus import wordnet as wn
+
+
 import g, nlp, wiki
+
 
 csv.field_size_limit(500 * 1024 * 1024)
 allDocs = list( DictReader( open( path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" ) ) ) )
 
 codeWordFn = path.join( path.dirname(__file__), "..", "coding", "allCodes.codeWord.csv" )
 wordCodeFn = path.join( path.dirname(__file__), "..", "coding", "allCodes.wordCode.csv" )
-allCodeFn = path.join( path.dirname(__file__), "..", "coding", "allCodes.csv" )
 inFn = path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" )
 
 class Doc:
@@ -328,15 +335,18 @@ class Coder:
         self.debug = debug
 
         # Initialize a bunch of variables
-        self.w2c = {}
         self.allResults = []
         self.obituaries = []
         self.stateCounter = Counter()
         self.specificCounters = {}
-        self.synMap = {}
 
         # Generate the W2C dictionary, used for all coding
         self.generateW2C()
+
+    def generateW2C(self):
+        self.w2c = {}
+        for code in codes:
+            self.w2c[ code['term'] ] = code['code']
 
     def loadPreviouslyCoded(self, loadDir, N=None, rand=True):
         import os
@@ -512,114 +522,6 @@ class Coder:
 
             d.code(coding=self)
 
-    def generateW2C(self):
-        print("Extracting word2code dictionary")
-        w2c = {}
-
-        with open(allCodeFn) as allCodeF:
-            dr = DictReader(allCodeF)
-            codes = list(dr)
-
-        for d in codes:
-            theseC = d['code(s)'].split(",")
-            theseC = [x.strip() for x in theseC]
-
-            """
-            if d['origin'] == 'OccTitleAlec':
-                if "-" in codestr:
-                    #print codestr
-                    #print newcs
-                    pass
-
-            if d['origin'] == 'OccTitleAlec':
-                codes = ["occ-%s" % x for x in codes]
-            if d['origin'] == 'KZ-Music':
-                codes = ["music"]
-            if d['origin'] == 'Abdulla/David isco08':
-                codes = ["isco08-%s" % x for x in codes]
-            if d['origin'] == 'Abdulla/David naics':
-                codes = ["naics-%s" % x for x in codes]
-            if d['origin'] == 'KZ-whatTheyWere':
-                codes = ["isco08-%s" % x for x in codes]
-            """
-
-            if d['term'] not in w2c:
-                w2c[d['term']] = []
-            w2c[d['term']] += theseC
-
-        nw2c = {}
-
-        # filter out non-OCC2000 codes
-
-        for k, theseC in w2c.items():
-            if len(k.split()) != 1:
-                continue
-
-            def fCode(c):
-                try:
-                    n = int(c.lower().split("occ2000-")[1])
-                except ValueError:
-                    return False
-
-                if 620 <= n < 900:
-                    return False
-                return True
-
-            nc = [c for c in theseC if 'occ2000' in c]
-            nc = list(filter(fCode, nc))
-            if len(nc) == 0:
-                continue
-
-            nw2c[k] = nc
-
-        # my hand-coding
-
-        nw2c['professor'] = ['occ2000-220']
-        # w2c['scholar'] = ['occ2000-']
-        nw2c['writer'] = ['occ2000-285']
-        nw2c['photographer'] = ['occ2000-291']
-        nw2c['filmmaker'] = ['occ2000-271']
-        nw2c['football_player'] = ['occ2000-276']
-        nw2c['composer'] = ['occ2000-285']  # is this true!?
-        nw2c['virtuoso'] = ['occ2000-275']
-        nw2c['politician.n.01'] = ['occ2000-003']
-        nw2c['scholar'] = ['occ2000-186']  # not certain!
-        nw2c['politician.n.02'] = ['political proponent']  # actually a specific definition. interesting
-
-        # all except agent.n.02
-        for x in wn.synset('representative.n.01').hypernyms():
-            if x != nlp.wn.synset('agent.n.02'):
-                nw2c[x.name()] = ['occ2000-003']
-
-        nw2c['musician.n.01'] = nw2c['musician.n.02'] = ['occ2000-275']
-
-        # add alternative words, whose codes are themselves
-        altClass = ["volunteer", "thief", "defender", "champion", "veteran",
-                                                                  "leader",
-                    "philanthropist",
-                    "benefactor",
-                    "widow"]
-        for aC in altClass:
-            nw2c[aC] = [aC]
-
-        nw2c['epidemiologist'] = ['occ2000-165']
-        nw2c['painter'] = ['occ2000-260']
-        nw2c['sculptor'] = ['occ2000-260']
-        nw2c['player.n.01'] = ['occ2000-276']
-
-        # now expand this vocabulary with synonyms:
-        for k, v in nw2c.items():
-            syn = nlp.synonyms(k)
-
-            # synCodes = [ nw2c[x] for x in syn if x in nw2c ]
-            # if len(set( tuple(sorted(x)) for x in synCodes )) > 2:
-            #    continue
-
-            for y in syn:
-                self.synMap[y] = k
-
-        self.w2c = nw2c
-
     def getSentences(self, word):
         for res in self.allResults:
             words = [x['word'] for x in res['guesses']]
@@ -633,19 +535,14 @@ class Coder:
                 yield res['sentence']
 
 
-    def whatWordsThisCode(self, c):
-        initial = [x for x in list(self.w2c.keys()) if 'occ2000-%s' % c in self.w2c[x] and len(x.split()) == 1]
-        synonyms = [ k for (k,v) in self.synMap.items() if v in initial]
-        return initial+synonyms
+    def whatWordsThisCode(self, code):
+        return [x['term'] for x in codes if code == x['code']]
+        #initial = [x for x in list(self.w2c.keys()) if 'occ2000-%s' % c in self.w2c[x] and len(x.split()) == 1]
+        #synonyms = [ k for (k,v) in self.synMap.items() if v in initial]
+        #return initial+synonyms
 
-    def getOccCodes(self, k):
-        if k in self.synMap:
-            k = self.synMap[k]
-
-        if k in self.w2c:
-            return self.w2c[k]
-
-        return []
+    def getOccCodes(self, term):
+        return [x['code'] for x in codes if term == x['term']]
 
     def exportReport(self, fn):
         # make a simple count of OCC codes
@@ -738,7 +635,7 @@ class Coder:
                         "code": c,
                         "word": word
                     } for c in self.w2c[word]
-                    ]
+                ]
 
         # two words...
         for i in range(len(wTokens) - 1):
@@ -843,6 +740,209 @@ def getRandomDocs(num):
     from random import sample
     return sample( allDocs, num )
 
+def regenerateW2C():
+
+    codegen = []
+
+    occClassFn = path.join(path.dirname(__file__), "..", "w2c_source", "occupational titles.txt")
+    print("Extracting terms from the OCC titles file %s" % occClassFn)
+
+    # loop through each line in the OCC titles file
+    for line in open(occClassFn):
+        # comma-separate the line
+        split = line.split(",")
+
+        # loops through commas until an entry that represents an OCC code
+        for i, sp in enumerate(split):
+            if sp.strip() == "":
+                continue
+
+            if np.all([y in "0123456789-– " for y in sp.strip()]):
+                break
+
+        # now we construct the two parts
+        phrase = ",".join(split[:i]).strip().lower()
+        coded_occ = ",".join(split[i:]).strip()
+
+        if phrase == '':
+            continue
+        if coded_occ == '':
+            continue
+
+        this_codes = g.getAllCodesFromStr(coded_occ)
+
+        for code in this_codes:
+            codegen.append({
+                "term":phrase,
+                "code":code,
+                "source":"occupational titles.txt"
+            })
+
+    if False:
+        # ---------------   KATHERINE'S FILE   ----------------
+        # I used to load these, but they're not exactly corresponding to OCC categories
+        # so we'll just skip for now...
+
+        musicalWords = {}
+        musicalFn = path.join(path.dirname(__file__), "..", "occupationalClassifications", "Music Signifiers_KZ.csv")
+        with open(musicalFn) as musicalCsvF:
+            musicalCsv = reader(musicalCsvF)
+            head = musicalCsv.next()
+
+            for row in musicalCsv:
+                for i, cat in enumerate(head):
+                    if cat.strip() not in ["", "Occupation", "Verbs"]:
+                        if cat not in musicalWords:
+                            musicalWords[cat] = []
+                        if row[i].strip() == "":
+                            continue
+
+                        musicalWords[cat].append(row[i])
+
+        kat2 = {}
+
+        kat2Fn = path.join(path.dirname(__file__), "whatTheyWere_KZ.csv")
+        with open(kat2Fn) as kat2F:
+            katCsv = reader(kat2F)
+            head = katCsv.next()
+
+            for line in katCsv:
+                codegen = []
+                for i in re.split("[/\*]", line[2]):
+                    try:
+                        codegen.append(int(i))
+                    except ValueError:
+                        continue
+                if len(codegen) == 0:
+                    continue
+
+                kat2[line[0].lower()] = codegen
+
+    # ---------------   ABDULLAH'S FILE   ----------------
+    # now we're going to parse through Abdullah's file
+    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000.xls")
+    print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
+    workbook = xlrd.open_workbook(occ2000Fn)
+    worksheet = workbook.sheet_by_index(0)
+
+    for row in range(30960):
+        code = worksheet.cell(row, 0).value
+        term = worksheet.cell(row, 2).value.lower()
+
+        if "exc." in term:
+            continue
+
+        if code == "":
+            continue
+
+        justDelete = [
+            "\ specified, not listed",
+            "\ n.s.",
+            ", n.e.c.",
+            ", n.s.",
+            "\ any other type"
+        ]
+
+        for de in justDelete:
+            term = term.replace(de, "")
+
+        dontInclude = [
+        ]
+
+        tsplit = term.split(",")
+        tsplit = [x.strip() for x in tsplit]
+        tsplit = list(filter(lambda x: x not in dontInclude, tsplit))
+
+        if len(tsplit) == 2:
+            rearrange = " ".join([tsplit[1].strip(), tsplit[0].strip()])
+            codegen.append({
+                "term": rearrange,
+                "code": code,
+                "source": "occ2000.xls"
+            })
+        elif len(tsplit) > 2:
+            print("skipped(2+ commas)", tsplit)
+        else:  # len(tsplit) == 1
+            codegen.append({
+                "term": term,
+                "code": code,
+                "source": "occ2000.xls"
+            })
+
+    # my hand-coding
+    handCFN = path.join(path.dirname(__file__), "..", "w2c_source", "hand-coding.csv")
+    with open(handCFN) as handCF:
+        for c in DictReader(handCF):
+            c['source'] = "hand-coding.csv"
+            codegen.append(c)
+
+    # all except agent.n.02
+    for x in wn.synset('representative.n.01').hypernyms():
+        if x != nlp.wn.synset('agent.n.02'):
+            codegen.append({
+                "term": x.name(),
+                "code": "003",
+                "source": "hand-coded-synset"
+            })
+
+    # add alternative words, whose codes are themselves
+    altClass = ["volunteer", "thief", "defender", "champion", "veteran",
+                "leader",
+                "philanthropist",
+                "benefactor",
+                "widow"]
+    for aC in altClass:
+        codegen.append({
+            "term": aC,
+            "code": aC,
+            "source": "alt"
+        })
+
+    # strip whitespace from terms
+    for code in codegen:
+        code['term'] = code['term'].strip()
+
+    # SKIP EVERYTHING WITH MORE THAN ONE WORD :'((((
+    codegen = [ x for x in codegen if len(x['term'].split()) < 2 ]
+
+    # IF THERE ARE MULTIPLE DETERMINATIONS FOR A SINGLE WORD, SKIP
+    count_terms = Counter( [x['term'] for x in codegen] )
+    codegen = [ x for x in codegen if count_terms[x['term']] == 1 ]
+
+    # now expand this vocabulary with synonyms:
+    newcodes = []
+    for c in codegen:
+        # I guess somehow some of these are malformed!?
+        if "term" not in c:
+            print("wtf is this:", c)
+            continue
+
+        syn = nlp.synonyms(c['term'])
+
+        for y in syn:
+            newcodes.append({
+                "term": y,
+                "code": c['code'],
+                "source": "synonym:%s" % c['term']
+            })
+    codegen += newcodes
+
+    CSV_keys = list(sorted(set( chain.from_iterable([x.keys() for x in codegen]) )))
+    CSV_fn = path.join(path.dirname(__file__), "..", "w2c_source", "compiledCodes.csv")
+    with open(CSV_fn, 'w') as outCodesF:
+        CSV_w = DictWriter(outCodesF, fieldnames=CSV_keys)
+        CSV_w.writeheader()
+        for code in codegen:
+            CSV_w.writerow(code)
+
+    print( "CSV successfully written at '%s'" % CSV_fn)
+
+codes = None
+CSV_fn = path.join(path.dirname(__file__), "..", "w2c_source", "compiledCodes.csv")
+print("Loading term-code associations into variable 'codes' from %s..." % CSV_fn)
+with open(CSV_fn, 'r') as outCodesF:
+    CSV_r = DictReader(outCodesF)
+    codes = list(CSV_r)
 
 # startStruct = [
 #     ['DET', 'NOUN', 'PUNCT', 'NOUN', 'PUNCT', 'CCONJ', 'NOUN'],
