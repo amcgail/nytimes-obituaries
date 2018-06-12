@@ -58,13 +58,17 @@ def getAllCodesFromStr( codestr ):
     return codes
     
 
-def appendToKey( d, key, newItem ):
-    if key not in d:
-        d[key] = []
-    if type(newItem) == list:
-        d[key] += newItem
-    else:
-        d[key].append(newItem)
+def appendToKey(d, key_list, item_list):
+    if type(key_list) != list:
+        key_list = [key_list]
+
+    for key in key_list:
+        if key not in d:
+            d[key] = []
+        if type(item_list) == list:
+            d[key] += item_list
+        else:
+            d[key].append(item_list)
 
 class _p:
     def __init__(self):

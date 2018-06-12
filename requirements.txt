@@ -2,3 +2,4 @@ nltk
 spacy
 pptree
 SPARQLWrapper
+xlrd
