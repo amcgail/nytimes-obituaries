@@ -913,7 +913,7 @@ def regenerateW2C(expandSynonyms = False):
         code['term'] = code['term'].strip()
 
     # SKIP EVERYTHING WITH MORE THAN ONE WORD :'((((
-    codegen = [ x for x in codegen if len(x['term'].split()) < 2 ]
+    # codegen = [ x for x in codegen if len(x['term'].split()) < 2 ]
 
     # IF THERE ARE MULTIPLE DETERMINATIONS FOR A SINGLE WORD, SKIP
     count_terms = Counter( [x['term'] for x in codegen] )
