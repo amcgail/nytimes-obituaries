@@ -740,7 +740,7 @@ def getRandomDocs(num):
     from random import sample
     return sample( allDocs, num )
 
-def regenerateW2C():
+def regenerateW2C(expandSynonyms = False):
 
     codegen = []
 
@@ -900,6 +900,7 @@ def regenerateW2C():
                 "philanthropist",
                 "benefactor",
                 "widow"]
+
     for aC in altClass:
         codegen.append({
             "term": aC,
@@ -918,24 +919,26 @@ def regenerateW2C():
     count_terms = Counter( [x['term'] for x in codegen] )
     codegen = [ x for x in codegen if count_terms[x['term']] == 1 ]
 
-    # now expand this vocabulary with synonyms:
-    newcodes = []
-    for c in codegen:
-        # I guess somehow some of these are malformed!?
-        if "term" not in c:
-            print("wtf is this:", c)
-            continue
+    if expandSynonyms:
+        # now expand this vocabulary with synonyms:
+        newcodes = []
+        for c in codegen:
+            # I guess somehow some of these are malformed!?
+            if "term" not in c:
+                print("wtf is this:", c)
+                continue
 
-        syn = nlp.synonyms(c['term'])
+            syn = nlp.synonyms(c['term'])
 
-        for y in syn:
-            newcodes.append({
-                "term": y,
-                "code": c['code'],
-                "source": "synonym:%s" % c['term']
-            })
-    codegen += newcodes
+            for y in syn:
+                newcodes.append({
+                    "term": y,
+                    "code": c['code'],
+                    "source": "synonym:%s" % c['term']
+                })
+        codegen += newcodes
 
+    # and export the CSV
     CSV_keys = list(sorted(set( chain.from_iterable([x.keys() for x in codegen]) )))
     CSV_fn = path.join(path.dirname(__file__), "..", "w2c_source", "compiledCodes.csv")
     with open(CSV_fn, 'w') as outCodesF:
