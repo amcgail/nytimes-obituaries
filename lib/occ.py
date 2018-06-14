@@ -18,11 +18,8 @@ import xlrd
 import csv
 from csv import DictReader, DictWriter
 
-from nltk import sent_tokenize
-from nltk.corpus import wordnet as wn
-
-
 import g, nlp, wiki
+
 
 
 csv.field_size_limit(500 * 1024 * 1024)
@@ -124,7 +121,7 @@ class Doc:
         lastName = self.nameS.split()[-1]
 
         rgxs = [
-            r"(?:Mr\.?|Mrs\.?)\s*%s\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?" % lastName,
+            r"(?:Mr\.?|Mrs\.?)\s*%s\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?" % re.escape(lastName),
             r"(?:She|He)\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?",
             r"died.*at\s+the\s+age\s+of\s+([0-9]{1,3})",
             r"was\s*([0-9]{1,3})\s*years\s*old",
@@ -166,8 +163,37 @@ class Doc:
             self._age = age
             return age
 
-
+    # bag of words approach
     def code(self, coding):
+        assert isinstance(coding, Coder)
+
+        self.isCoded = True
+        self.myCoder = coding
+
+        fs = extractFirstSentence(self.info["fullBody"])
+        words = fs.split()
+
+        def ntuples(N):
+            return [ " ".join(words[i:i+N]) for i in range(len(words)-N) ]
+
+        allTuples = words + ntuples(2) + ntuples(3) + ntuples(4)
+
+        self.guess = []
+
+        for tup in allTuples:
+            if tup in term2code:
+                c = term2code[tup]["code"]
+                self.guess.append({
+                    "state": "first_sentence",
+                    "word": tup,
+                    "occ": [c]
+                })
+
+        self.age
+        self.spacyFirstSentence
+        self.nameS
+
+    def code_dependency(self, coding):
         assert isinstance(coding, Coder)
 
         self.isCoded = True
@@ -300,7 +326,7 @@ class Doc:
         if self.myCoder.debug:
             g.p("finalGuess", finalGuess)
 
-        if True:
+        if False:
             moreGuesses = []
             # more stupid guesses...
             # literally expand every noun
@@ -449,7 +475,7 @@ class Coder:
         }
 
         # we should try and stem / simplify the word to a canonical version used by wn
-        ns = wn.morphy(str(n))
+        ns = nlp.wn.morphy(str(n))
         if ns is None:
             ns = str(n)
         ns = ns.lower()
@@ -698,7 +724,7 @@ class Coder:
         return mySuccessfulCodes
 
 def extractFirstSentence(body):
-    sentences = sent_tokenize(body)
+    sentences = nlp.sent_tokenize(body)
 
     if len(sentences) < 2:
         print("skipping(tooFewSentences)")
@@ -886,7 +912,7 @@ def regenerateW2C(expandSynonyms = False):
             codegen.append(c)
 
     # all except agent.n.02
-    for x in wn.synset('representative.n.01').hypernyms():
+    for x in nlp.wn.synset('representative.n.01').hypernyms():
         if x != nlp.wn.synset('agent.n.02'):
             codegen.append({
                 "term": x.name(),
@@ -950,11 +976,16 @@ def regenerateW2C(expandSynonyms = False):
     print( "CSV successfully written at '%s'" % CSV_fn)
 
 codes = None
+term2code = {}
 CSV_fn = path.join(path.dirname(__file__), "..", "w2c_source", "compiledCodes.csv")
 print("Loading term-code associations into variable 'codes' from %s..." % CSV_fn)
+print("Loading term dictionary into variable 'term2code' from %s..." % CSV_fn)
 with open(CSV_fn, 'r') as outCodesF:
     CSV_r = DictReader(outCodesF)
     codes = list(CSV_r)
+
+for code in codes:
+    term2code[ code["term"] ] = code
 
 # startStruct = [
 #     ['DET', 'NOUN', 'PUNCT', 'NOUN', 'PUNCT', 'CCONJ', 'NOUN'],
@@ -984,7 +1015,7 @@ def _codeToName():
             if row['officialTitle'] == "":
                 continue
 
-            code = "occ2000-%03d" % int(row['code'])
+            code = "%03d" % int(row['code'])
 
             c2n[code] = row['officialTitle']
 
