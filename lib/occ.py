@@ -744,130 +744,139 @@ def regenerateW2C():
 
     codegen = []
 
-    occClassFn = path.join(path.dirname(__file__), "..", "w2c_source", "occupational titles.txt")
-    print("Extracting terms from the OCC titles file %s" % occClassFn)
-
-    # loop through each line in the OCC titles file
-    for line in open(occClassFn):
-        # comma-separate the line
-        split = line.split(",")
-
-        # loops through commas until an entry that represents an OCC code
-        for i, sp in enumerate(split):
-            if sp.strip() == "":
-                continue
-
-            if np.all([y in "0123456789-– " for y in sp.strip()]):
-                break
-
-        # now we construct the two parts
-        phrase = ",".join(split[:i]).strip().lower()
-        coded_occ = ",".join(split[i:]).strip()
-
-        if phrase == '':
-            continue
-        if coded_occ == '':
-            continue
-
-        this_codes = g.getAllCodesFromStr(coded_occ)
-
-        for code in this_codes:
-            codegen.append({
-                "term":phrase,
-                "code":code,
-                "source":"occupational titles.txt"
-            })
-
     if False:
-        # ---------------   KATHERINE'S FILE   ----------------
-        # I used to load these, but they're not exactly corresponding to OCC categories
-        # so we'll just skip for now...
+        # these seem to be complete shit.
+        # why did I run these!?
+        occClassFn = path.join(path.dirname(__file__), "..", "w2c_source", "occupational titles.txt")
+        print("Extracting terms from the OCC titles file %s" % occClassFn)
 
-        musicalWords = {}
-        musicalFn = path.join(path.dirname(__file__), "..", "occupationalClassifications", "Music Signifiers_KZ.csv")
-        with open(musicalFn) as musicalCsvF:
-            musicalCsv = reader(musicalCsvF)
-            head = musicalCsv.next()
+        # loop through each line in the OCC titles file
+        for line in open(occClassFn):
+            # comma-separate the line
+            split = line.split(",")
 
-            for row in musicalCsv:
-                for i, cat in enumerate(head):
-                    if cat.strip() not in ["", "Occupation", "Verbs"]:
-                        if cat not in musicalWords:
-                            musicalWords[cat] = []
-                        if row[i].strip() == "":
-                            continue
-
-                        musicalWords[cat].append(row[i])
-
-        kat2 = {}
-
-        kat2Fn = path.join(path.dirname(__file__), "whatTheyWere_KZ.csv")
-        with open(kat2Fn) as kat2F:
-            katCsv = reader(kat2F)
-            head = katCsv.next()
-
-            for line in katCsv:
-                codegen = []
-                for i in re.split("[/\*]", line[2]):
-                    try:
-                        codegen.append(int(i))
-                    except ValueError:
-                        continue
-                if len(codegen) == 0:
+            # loops through commas until an entry that represents an OCC code
+            for i, sp in enumerate(split):
+                if sp.strip() == "":
                     continue
 
-                kat2[line[0].lower()] = codegen
+                if np.all([y in "0123456789-– " for y in sp.strip()]):
+                    break
+
+            # now we construct the two parts
+            phrase = ",".join(split[:i]).strip().lower()
+            coded_occ = ",".join(split[i:]).strip()
+
+            if phrase == '':
+                continue
+            if coded_occ == '':
+                continue
+
+            this_codes = g.getAllCodesFromStr(coded_occ)
+
+            for code in this_codes:
+                codegen.append({
+                    "term":phrase,
+                    "code":code,
+                    "source":"occupational titles.txt"
+                })
+
+        if False:
+            # ---------------   KATHERINE'S FILE   ----------------
+            # I used to load these, but they're not exactly corresponding to OCC categories
+            # so we'll just skip for now...
+
+            musicalWords = {}
+            musicalFn = path.join(path.dirname(__file__), "..", "occupationalClassifications", "Music Signifiers_KZ.csv")
+            with open(musicalFn) as musicalCsvF:
+                musicalCsv = reader(musicalCsvF)
+                head = musicalCsv.next()
+
+                for row in musicalCsv:
+                    for i, cat in enumerate(head):
+                        if cat.strip() not in ["", "Occupation", "Verbs"]:
+                            if cat not in musicalWords:
+                                musicalWords[cat] = []
+                            if row[i].strip() == "":
+                                continue
+
+                            musicalWords[cat].append(row[i])
+
+            kat2 = {}
+
+            kat2Fn = path.join(path.dirname(__file__), "whatTheyWere_KZ.csv")
+            with open(kat2Fn) as kat2F:
+                katCsv = reader(kat2F)
+                head = katCsv.next()
+
+                for line in katCsv:
+                    codegen = []
+                    for i in re.split("[/\*]", line[2]):
+                        try:
+                            codegen.append(int(i))
+                        except ValueError:
+                            continue
+                    if len(codegen) == 0:
+                        continue
+
+                    kat2[line[0].lower()] = codegen
 
     # ---------------   ABDULLAH'S FILE   ----------------
     # now we're going to parse through Abdullah's file
-    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000.xls")
+    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000_updated.xls")
     print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
     workbook = xlrd.open_workbook(occ2000Fn)
-    worksheet = workbook.sheet_by_index(0)
 
-    for row in range(30960):
-        code = worksheet.cell(row, 0).value
-        term = worksheet.cell(row, 2).value.lower()
+    for wksheet_i in range(4, 14):
+        worksheet = workbook.sheet_by_index(wksheet_i)
 
-        if "exc." in term:
-            continue
+        for row in range(10000):
+            try:
+                code = worksheet.cell(row, 0).value
+            except IndexError:
+                break
 
-        if code == "":
-            continue
+            term = worksheet.cell(row, 3).value.lower()
 
-        justDelete = [
-            "\ specified, not listed",
-            "\ n.s.",
-            ", n.e.c.",
-            ", n.s.",
-            "\ any other type"
-        ]
+            if "exc." in term:
+                continue
 
-        for de in justDelete:
-            term = term.replace(de, "")
+            if code == "":
+                print("Breaking in worksheet %s at row %s" % (wksheet_i, row))
+                break
 
-        dontInclude = [
-        ]
+            terms = term.split("|")
 
-        tsplit = term.split(",")
-        tsplit = [x.strip() for x in tsplit]
-        tsplit = list(filter(lambda x: x not in dontInclude, tsplit))
+            justDelete = [
+                "\ specified, not listed",
+                "\ n.s.",
+                ", n.e.c.",
+                ", n.s.",
+                "\ any other type"
+            ]
 
-        if len(tsplit) == 2:
-            rearrange = " ".join([tsplit[1].strip(), tsplit[0].strip()])
-            codegen.append({
-                "term": rearrange,
-                "code": code,
-                "source": "occ2000.xls"
-            })
-        elif len(tsplit) > 2:
-            print("skipped(2+ commas)", tsplit)
-        else:  # len(tsplit) == 1
-            codegen.append({
-                "term": term,
-                "code": code,
-                "source": "occ2000.xls"
-            })
+            for term in terms:
+
+                thisOneBad = False
+                for de in justDelete:
+                    if de in term:
+                        thisOneBad = True
+                if thisOneBad:
+                    continue
+
+                if "," in term:
+                    continue
+
+                term = term.strip()
+                if term == "":
+                    continue
+
+                codegen.append({
+                    "term": term,
+                    "code": code,
+                    "source": "occ2000_updated.xls"
+                })
+                print((code, term))
 
     # my hand-coding
     handCFN = path.join(path.dirname(__file__), "..", "w2c_source", "hand-coding.csv")
