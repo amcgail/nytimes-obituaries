@@ -853,7 +853,7 @@ def regenerateW2C(expandSynonyms = False):
     print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
     workbook = xlrd.open_workbook(occ2000Fn)
 
-    for wksheet_i in range(4, 14):
+    for wksheet_i in list(range(4, 14))+[15]:
         worksheet = workbook.sheet_by_index(wksheet_i)
 
         for row in range(10000):
