@@ -855,6 +855,7 @@ def regenerateW2C(expandSynonyms = False):
 
     for wksheet_i in list(range(4, 14))+[15]:
         worksheet = workbook.sheet_by_index(wksheet_i)
+        print("Working on worksheet %s" % wksheet_i)
 
         for row in range(10000):
             try:
@@ -862,7 +863,12 @@ def regenerateW2C(expandSynonyms = False):
             except IndexError:
                 break
 
-            term = worksheet.cell(row, 3).value.lower()
+
+            term = worksheet.cell(row, 3).value
+            if type(term) == int:
+                continue
+
+            term = term.lower()
 
             if "exc." in term:
                 continue
