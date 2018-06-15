@@ -902,7 +902,7 @@ def regenerateW2C(expandSynonyms = False):
                     "code": code,
                     "source": "occ2000_updated.xls"
                 })
-                print((code, term))
+                #print((code, term))
 
     # my hand-coding
     handCFN = path.join(path.dirname(__file__), "..", "w2c_source", "hand-coding.csv")
