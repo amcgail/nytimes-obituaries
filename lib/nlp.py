@@ -35,6 +35,53 @@ class _nlp:
 
 nlp = _nlp()
 
+def first_name(name):
+    name = name.lower()
+    not_first_names = ["mr","dr",""]
+    names = re.split(r'[\.\s]', name)
+
+    inc = 0
+    last = names[inc]
+    while last in not_first_names:
+        inc += 1
+        last = names[inc]
+
+    return last
+
+def last_name(name):
+    name = name.lower()
+    names = re.split(r'[\.\s]', name)
+    not_last_names = ["3d", "jr", "iii", ""]
+
+    inc = 1
+    last = names[-inc]
+    while last in not_last_names:
+        inc += 1
+        last = names[-inc]
+
+    return last
+
+def names_match(n1, n2):
+    fn1 = first_name(n1)
+    fn2 = first_name(n2)
+    ln1 = last_name(n1)
+    ln2 = last_name(n2)
+
+    # last names should match exactly
+    if ln1 != ln2:
+        return False
+
+    # what about initials?
+    if len(fn1) == 1:
+        if fn1 != fn2[0]:
+            return False
+
+    if len(fn2) == 1:
+        if fn2 != fn1[0]:
+            return False
+
+    return True
+
 def follow(ws, deps):
     from itertools import chain
     if type(ws) != list:
