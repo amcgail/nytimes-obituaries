@@ -29,96 +29,115 @@ codeWordFn = path.join( path.dirname(__file__), "..", "coding", "allCodes.codeWo
 wordCodeFn = path.join( path.dirname(__file__), "..", "coding", "allCodes.wordCode.csv" )
 inFn = path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" )
 
-class Doc:
-    def __init__(self, info):
-        self.info = info
+def _problematic_for_pickling(val):
+    if isinstance(val, nlp.spacy.tokens.span.Span):
+        return True
+    if isinstance(val, nlp.spacy.tokens.doc.Doc):
+        return True
 
-        self.id = info['fName']
+class Doc:
+    def __init__(self, init_info={}):
+        self._prop_cache = init_info
 
         self.isCoded = False
         self.myCoder = None
-
-        self.guess = None
-
-        # avoid heavy computations!
-        self._age = None
-        self._spacyFirstSentence = None
-        self._spacyFullBody = None
-        self._spacyName = None
-        self._nameS = None
 
     def dump(self):
         if not self.isCoded:
             raise Exception("Cannot dump what's not been coded!")
 
-        import json
-        d = {}
-        d['age'] = self.age
-        d['guess'] = self.guess
-        d['nameS'] = self.nameS
-        d['fS_str'] = str(self.spacyFirstSentence)
+        import pickle
 
-        return json.dumps(d)
+        d = {
+            k:v
+            for k,v in self._prop_cache.items()
+            if not _problematic_for_pickling(v)
+        }
+
+        return pickle.dumps(d)
 
     def load(self, d):
-        import json
-        d = json.loads(d)
+        import pickle
+        d = pickle.loads(d)
 
-        self._age = d['age']
-        self._nameS = d['nameS']
-        self.guess = d['guess']
-
-        self.info['fS_str'] = d['fS_str']
+        self._prop_cache = d
 
         self.isCoded = True
 
     def __str__(self):
-        return str(self.spacyFullBody)
+        return str(self['spacyFullBody'])
 
-    @property
-    def spacyName(self):
-        if self._spacyName is None:
-            # name is ALMOST ALWAYS the first noun_chunk.
-            try:
-                name = next(self.spacyFirstSentence.noun_chunks)
-                self._spacyName = next(self.spacyFirstSentence.noun_chunks)
-            except StopIteration:
-                self._spacyName = self.info['title']
-        return self._spacyName
+    # _----------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------
+    #           This section defines all the functionality of this object as a picklable dictionary,
+    #                                  with lazy-generated attributes
+    # _----------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------
 
-    @property
-    def nameS(self):
-        if self._nameS is None:
-            self._nameS = str(self.spacyName).strip()
-        return self._nameS
+    def __getitem__(self, item):
+        method_name = "_prop_%s" % item
 
-    @property
-    def spacyFullBody(self):
-        if self._spacyFullBody is not None:
-            return self._spacyFullBody
+        if item in self._prop_cache:
+            return self._prop_cache[item]
 
-        spacy = nlp.nlp(self.info['fullBody'])
-        self._spacyFullBody = spacy
-        return spacy
+        if not hasattr(self, method_name):
+            raise AttributeError("This obituary has no property %s, and doesn't know how to generate it." % item)
 
-    @property
-    def spacyFirstSentence(self):
-        if self._spacyFirstSentence is not None:
-            return self._spacyFirstSentence
+        val = getattr(self, method_name)()
+        self._prop_cache[item] = val
+        return val
 
-        fS = extractFirstSentence(self.info['fullBody'])
-        fS = nlp.nlp(fS.strip())
-        self._spacyFirstSentence = fS
-        return fS
+    def __setitem__(self, key, value):
+        self._prop_cache[key] = value
 
-    @property
-    def age(self):
-        if self._age is not None:
-            return self._age
+    def keys(self):
+        return self._prop_cache.keys()
 
+    def _clear_spacy_props(self):
+        todel = []
+
+        for k,v in self._prop_cache.items():
+            if _problematic_for_pickling(v):
+                todel.append(k)
+
+        for k in todel:
+            del self._prop_cache[k]
+
+    def _get_all_props(self):
+        import inspect
+        all_methods = inspect.getmembers(self, predicate=inspect.ismethod)
+        all_method_names = [ x[0] for x in all_methods ]
+        prop_methods = filter(lambda x: x[:len("_prop")] == "_prop", all_method_names)
+
+        return prop_methods
+
+    def _prop_spacyName(self):
+        # name is ALMOST ALWAYS the first noun_chunk.
+        try:
+            return next( self['spacyFirstSentence'].noun_chunks )
+        except StopIteration:
+            return self['title']
+
+    def _prop_nameS(self):
+        return str(self['spacyName']).strip()
+
+    def _prop_spacyFullBody(self):
+        return nlp.nlp(self['fullBody'])
+
+    def _prop_firstSentence(self):
+        return extractFirstSentence(self['fullBody']).strip()
+
+    def _prop_spacyFirstSentence(self):
+        return nlp.nlp( self["firstSentence"] )
+
+    def _prop_age(self):
         g.p.pdepth = 0
 
-        lastName = self.nameS.split()[-1]
+        lastName = self["nameS"].split()[-1]
 
         rgxs = [
             r"(?:Mr\.?|Mrs\.?)\s*%s\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?" % re.escape(lastName),
@@ -132,7 +151,7 @@ class Doc:
             r"([0-9]{1,3})",
         ]
 
-        sents = list(self.spacyFullBody.sents)
+        sents = list(self['spacyFullBody'].sents)
 
         foundReasonableAge = False
         # look for these sentences, in order
@@ -160,8 +179,16 @@ class Doc:
                 break
 
         if foundReasonableAge:
-            self._age = age
             return age
+
+    # _----------------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------------
+    #                                                     END SECTION
+    # _----------------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------------
+
+
 
     # bag of words approach
     def code(self, coding):
@@ -170,7 +197,7 @@ class Doc:
         self.isCoded = True
         self.myCoder = coding
 
-        fs = extractFirstSentence(self.info["fullBody"])
+        fs = extractFirstSentence(self["fullBody"])
         words = fs.split()
 
         def ntuples(N):
@@ -178,20 +205,22 @@ class Doc:
 
         allTuples = words + ntuples(2) + ntuples(3) + ntuples(4)
 
-        self.guess = []
+        self['guess'] = []
 
         for tup in allTuples:
             if tup in term2code:
                 c = term2code[tup]["code"]
-                self.guess.append({
-                    "state": "first_sentence",
+                self['guess'].append({
+                    "where": "first_sentence",
                     "word": tup,
                     "occ": [c]
                 })
 
-        self.age
-        self.spacyFirstSentence
-        self.nameS
+        self['age']
+        self['spacyFirstSentence']
+        self['nameS']
+
+        self._clear_spacy_props()
 
     def code_dependency(self, coding):
         assert isinstance(coding, Coder)
@@ -199,7 +228,7 @@ class Doc:
         self.isCoded = True
         self.myCoder = coding
 
-        if len(self.spacyFirstSentence) == 0:
+        if len(self['spacyFirstSentence']) == 0:
             if self.myCoder.debug:
                 g.p("Skipping. No content after trim.")
             coding.stateCounter.update(["zeroLengthSkip"])
@@ -208,14 +237,14 @@ class Doc:
         if self.myCoder.debug:
             g.p.depth = 0
             g.p()
-            g.p(self.spacyFirstSentence)
+            g.p(self['spacyFirstSentence'])
 
             g.p.depth += 1
 
         lookhimup = set()
 
-        if len(self.nameS) > 0:
-            words = wiki.lookupFamous(self.nameS)
+        if len(self["nameS"]) > 0:
+            words = wiki.lookupFamous(self["nameS"])
             for x in words:
                 lookhimup.update(coding.getOccCodes(x))
 
@@ -224,11 +253,11 @@ class Doc:
                     g.p("WikiData returns %s which gives OCC %s" % (words, lookhimup))
 
         if self.myCoder.debug:
-            g.p("Extracted name: %s" % self.nameS)
+            g.p("Extracted name: %s" % self["nameS"])
 
         # extract information from the title
         dieWords = ['dies', 'die', 'dead']
-        t = self.info['title']
+        t = self['title']
         t = t.split("\n")[-1]  # gets rid of those gnarly prefixes
         ts = [x.strip() for x in re.split(r'[;,]|--', t)]
         ts = ts[1:]  # the name is always the first one
@@ -257,7 +286,7 @@ class Doc:
         guesses = []
 
         # Alec McGail, scientist and genius, died today.
-        nameChildren = list(self.spacyName.root.children)
+        nameChildren = list(self["spacyName"].root.children)
         apposHooks = list(filter(lambda x: x.dep_ == 'appos', nameChildren))
 
         if len(apposHooks) > 0:
@@ -331,7 +360,7 @@ class Doc:
             # more stupid guesses...
             # literally expand every noun
 
-            for w in self.spacyFirstSentence:
+            for w in self['spacyFirstSentence']:
                 if w.pos_ != 'NOUN':
                     continue
                 guess = coding.nounOCC(w)
@@ -354,6 +383,7 @@ class Doc:
                 if self.myCoder.debug:
                     g.p("Skipping. Strange grammatical construction.")
                 coding.stateCounter.update(["strangeGrammar"])
+
 
 class Coder:
 
@@ -389,12 +419,12 @@ class Coder:
             # loop through the entire CSV and see if any are in what I need to load.
             with open(inFn) as inF:
                 for info in DictReader(inF):
-                    thisFn = "%s.json" % info['fName']
+                    thisFn = "%s.pickle" % info['fName']
                     if not thisFn in toLoad:
                         continue
 
                     d = Doc(info)
-                    with open(path.join(loadDir, thisFn)) as thisF:
+                    with open(path.join(loadDir, thisFn), 'rb') as thisF:
                         d.load(thisF.read())
 
                     yield d
@@ -419,9 +449,9 @@ class Coder:
         for d in self.obituaries:
             assert(isinstance(d, Doc))
 
-            outfn = path.join(dumpDir, "%s.json" % d.id)
+            outfn = path.join(dumpDir, "%s.pickle" % d['fName'])
 
-            with open( outfn, 'w' ) as outf:
+            with open( outfn, 'wb' ) as outf:
                 outf.write( d.dump() )
 
     def loadDocs(self, N=None, rand=True):
@@ -436,7 +466,7 @@ class Coder:
         for d in self.obituaries:
             thisOneSucks = False
             for k in kwargs:
-                if not d.info[ k ] == kwargs[ v ]:
+                if not d.info[ k ] == kwargs[ k ]:
                     thisOneSucks = True
                     break
             if not thisOneSucks:
@@ -445,12 +475,12 @@ class Coder:
 
     def findObitByInfo(self, **kwargs):
         import random
-        findAll = findDocsByInfo(**kwargs)
+        findAll = self.findObitsByInfo(**kwargs)
 
         if len(findAll) == 0:
             return None
 
-        return random.choice(  )
+        return random.choice( findAll )
 
     def docsByOcc(self, occ):
         occ = "occ2000-%s" % occ
@@ -614,7 +644,7 @@ class Coder:
                 for doc in self.obituaries:
                     guesses = list(chain.from_iterable(guess['occ'] for guess in doc.guess))
                     if len(guesses) == 1 and guesses[0] == occ:
-                        w("<p>%s</p>" % doc.spacyFirstSentence)
+                        w("<p>%s</p>" % doc['spacyFirstSentence'])
 
     def extractCodes(self, doc):
 
