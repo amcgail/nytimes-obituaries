@@ -849,11 +849,11 @@ def regenerateW2C(expandSynonyms = False):
 
     # ---------------   ABDULLAH'S FILE   ----------------
     # now we're going to parse through Abdullah's file
-    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000_updated.xls")
+    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000.xls")
     print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
     workbook = xlrd.open_workbook(occ2000Fn)
 
-    for wksheet_i in list(range(4, 14))+[15]:
+    for wksheet_i in list(range(4, 15)):
         worksheet = workbook.sheet_by_index(wksheet_i)
         print("Working on worksheet %s" % wksheet_i)
 
@@ -862,7 +862,6 @@ def regenerateW2C(expandSynonyms = False):
                 code = worksheet.cell(row, 0).value
             except IndexError:
                 break
-
 
             term = worksheet.cell(row, 3).value
             if type(term) == int:
@@ -948,8 +947,9 @@ def regenerateW2C(expandSynonyms = False):
     # codegen = [ x for x in codegen if len(x['term'].split()) < 2 ]
 
     # IF THERE ARE MULTIPLE DETERMINATIONS FOR A SINGLE WORD, SKIP
-    count_terms = Counter( [x['term'] for x in codegen] )
-    codegen = [ x for x in codegen if count_terms[x['term']] == 1 ]
+    unique_term_code = set( (x['term'],x['code']) for x in codegen )
+    count_terms = Counter( x[0] for x in unique_term_code )
+    codegen = [ x for x in codegen if count_terms[ x['term'] ] == 1 ]
 
     if expandSynonyms:
         # now expand this vocabulary with synonyms:

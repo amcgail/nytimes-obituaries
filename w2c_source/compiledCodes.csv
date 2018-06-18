@@ -1,4 +1,5 @@
 code,source,term
+OCC_2000,occ2000_updated.xls,revised occtitle
 160,occ2000_updated.xls,agricultural consultant
 160,occ2000_updated.xls,agricultural researcher
 160,occ2000_updated.xls,agricultural scientist
@@ -6,6 +7,8 @@ code,source,term
 160,occ2000_updated.xls,agronomist
 160,occ2000_updated.xls,animal scientist
 160,occ2000_updated.xls,arborist
+160,occ2000_updated.xls,dairy bacteriologist
+160,occ2000_updated.xls,dairy bacteriologist
 160,occ2000_updated.xls,dairy scientist
 160,occ2000_updated.xls,floriculturist
 160,occ2000_updated.xls,food scientist
@@ -107,6 +110,7 @@ code,source,term
 165,occ2000_updated.xls,chemotherapist
 165,occ2000_updated.xls,endocrinologist
 165,occ2000_updated.xls,environmental epidemiologist
+165,occ2000_updated.xls,epidemiologist
 165,occ2000_updated.xls,histologist
 165,occ2000_updated.xls,histopathologist
 165,occ2000_updated.xls,immunochemist
@@ -291,6 +295,8 @@ code,source,term
 181,occ2000_updated.xls,survey researcher
 182,occ2000_updated.xls,abnormal psychologist
 182,occ2000_updated.xls,assistat school psychologist
+182,occ2000_updated.xls,associate school psychologist
+182,occ2000_updated.xls,associate school psychologist
 182,occ2000_updated.xls,child psychologist
 182,occ2000_updated.xls,clinical psychologist
 182,occ2000_updated.xls,counseling psychologist
@@ -309,6 +315,8 @@ code,source,term
 182,occ2000_updated.xls,organizational psychologist
 182,occ2000_updated.xls,preliminary school psychologist
 182,occ2000_updated.xls,school psychological examiner
+182,occ2000_updated.xls,psychology examiner at school
+182,occ2000_updated.xls,psychology examiner at school
 182,occ2000_updated.xls,psychologist
 182,occ2000_updated.xls,psychometric examiner
 182,occ2000_updated.xls,psychometrician
@@ -366,6 +374,14 @@ code,source,term
 190,occ2000_updated.xls,artificial breeder
 190,occ2000_updated.xls,agircultural lab assistant
 190,occ2000_updated.xls,lab assistant of agriculture
+190,occ2000_updated.xls,dairy and food lab assistant
+190,occ2000_updated.xls,dairy and food laboratory assistant
+190,occ2000_updated.xls,assistant of dairy and food laboratory
+190,occ2000_updated.xls,assistant of dairy and food lab
+190,occ2000_updated.xls,dairy and food lab assistant
+190,occ2000_updated.xls,dairy and food laboratory assistant
+190,occ2000_updated.xls,assistant of dairy and food laboratory
+190,occ2000_updated.xls,assistant of dairy and food lab
 190,occ2000_updated.xls,blood tester
 190,occ2000_updated.xls,butter fat tester
 190,occ2000_updated.xls,cattle tester
@@ -433,9 +449,13 @@ code,source,term
 192,occ2000_updated.xls,assayer
 192,occ2000_updated.xls,cement tester assistant
 192,occ2000_updated.xls,assistant cement tester
+192,occ2000_updated.xls,chemical laboratory assistant
+192,occ2000_updated.xls,chemical lab assistant
 192,occ2000_updated.xls,assistant chemist
 192,occ2000_updated.xls,assistant of chemical laboratory
 192,occ2000_updated.xls,assistant of chemical lab
+192,occ2000_updated.xls,chemical lab assistant
+192,occ2000_updated.xls,chemical laboratory assistant
 192,occ2000_updated.xls,assistant researcher of chemistry
 192,occ2000_updated.xls,assistant chemistry researcher
 192,occ2000_updated.xls,bleach analyst
@@ -576,6 +596,8 @@ code,source,term
 196,occ2000_updated.xls,asistsant researcher of political science
 196,occ2000_updated.xls,assistant psychologist
 196,occ2000_updated.xls,asistant psychologist of researcher
+196,occ2000_updated.xls,assistant researcher
+196,occ2000_updated.xls,assistant researcher
 196,occ2000_updated.xls,ballistic expert
 196,occ2000_updated.xls,ballistician
 196,occ2000_updated.xls,city planning aide
@@ -600,14 +622,18 @@ code,source,term
 196,occ2000_updated.xls,radiosonde operator
 196,occ2000_updated.xls,reactor operator
 196,occ2000_updated.xls,reactor test operator
+196,occ2000_updated.xls,associate research worker
+196,occ2000_updated.xls,associate research worker
 196,occ2000_updated.xls,scientific aide
 196,occ2000_updated.xls,associate scientist
 196,occ2000_updated.xls,smoke tester
 196,occ2000_updated.xls,soil conservation aide
 196,occ2000_updated.xls,soil technologist
 196,occ2000_updated.xls,soil tester
+196,occ2000_updated.xls,sonoscope operator
 196,occ2000_updated.xls,operator of sonoscopy
 196,occ2000_updated.xls,operator of sonoscope
+196,occ2000_updated.xls,sonoscope operator
 196,occ2000_updated.xls,ballistic technician
 196,occ2000_updated.xls,technician of ballistic
 196,occ2000_updated.xls,biomedical instrument technician
@@ -647,6 +673,7 @@ code,source,term
 196,occ2000_updated.xls,vector control specialist
 196,occ2000_updated.xls,water tester
 196,occ2000_updated.xls,weather observer
+OCC_2000,occ2000_updated.xls,revised occtitle
 200,occ2000_updated.xls,a.s.a.t.  c.o.r.e. counselor
 200,occ2000_updated.xls,asat core counselor
 200,occ2000_updated.xls,core counselor
@@ -670,6 +697,8 @@ code,source,term
 200,occ2000_updated.xls,child guidance counselor
 200,occ2000_updated.xls,clinical mental health counselor
 200,occ2000_updated.xls,coordinator of rehabilitation services
+200,occ2000_updated.xls,counselor
+200,occ2000_updated.xls,counselor
 200,occ2000_updated.xls,curriculum counselor
 200,occ2000_updated.xls,director of guidance
 200,occ2000_updated.xls,director of rehabilitation
@@ -682,6 +711,14 @@ code,source,term
 200,occ2000_updated.xls,educational counselor
 200,occ2000_updated.xls,extension course counselor
 200,occ2000_updated.xls,family therapist
+200,occ2000_updated.xls,girls advisor
+200,occ2000_updated.xls,girls counselor
+200,occ2000_updated.xls,girls' advisor
+200,occ2000_updated.xls,girls' counselor
+200,occ2000_updated.xls,girls advisor
+200,occ2000_updated.xls,girls counselor
+200,occ2000_updated.xls,girls' advisor
+200,occ2000_updated.xls,girls' counselor
 200,occ2000_updated.xls,guidance adviser
 200,occ2000_updated.xls,guidance counselor
 200,occ2000_updated.xls,hiv counselor
@@ -709,6 +746,7 @@ code,source,term
 200,occ2000_updated.xls,supervisor of special services
 200,occ2000_updated.xls,vocational rehabilitation supervisor
 200,occ2000_updated.xls,supervisor of vocational rehabilitation
+200,occ2000_updated.xls,counselor
 200,occ2000_updated.xls,drug abuse technician
 200,occ2000_updated.xls,teenage adviser
 200,occ2000_updated.xls,veterans rehabilitation counselor
@@ -743,6 +781,7 @@ code,source,term
 201,occ2000_updated.xls,home health care social worker
 201,occ2000_updated.xls,hospice social worker
 201,occ2000_updated.xls,hospital social worker
+201,occ2000_updated.xls,welfare investigator
 201,occ2000_updated.xls,investigator of welfare
 201,occ2000_updated.xls,juvenile officer
 201,occ2000_updated.xls,long term care social worker
@@ -785,6 +824,7 @@ code,source,term
 201,occ2000_updated.xls,welfare adviser
 201,occ2000_updated.xls,welfare analyst
 201,occ2000_updated.xls,welfare case worker
+201,occ2000_updated.xls,welfare investigator
 201,occ2000_updated.xls,welfare specialist
 202,occ2000_updated.xls,welfare aide
 202,occ2000_updated.xls,aide of welfare
@@ -857,6 +897,8 @@ code,source,term
 202,occ2000_updated.xls,sueprvisor of parole
 202,occ2000_updated.xls,human service technician
 202,occ2000_updated.xls,technician of human service
+202,occ2000_updated.xls,travelers' aid worker
+202,occ2000_updated.xls,travelers' aid worker
 202,occ2000_updated.xls,traveling representative
 202,occ2000_updated.xls,traveling secretary
 202,occ2000_updated.xls,truant officer
@@ -888,6 +930,8 @@ code,source,term
 204,occ2000_updated.xls,rector
 204,occ2000_updated.xls,reverend
 204,occ2000_updated.xls,vicar
+205,occ2000_updated.xls,children's director
+205,occ2000_updated.xls,children's director
 205,occ2000_updated.xls,director of religious activities
 205,occ2000_updated.xls,director of religious education
 205,occ2000_updated.xls,district superintendent
@@ -943,6 +987,7 @@ code,source,term
 206,occ2000_updated.xls,teacher for youth
 206,occ2000_updated.xls,traveling missionary
 206,occ2000_updated.xls,verger
+OCC_2000,occ2000_updated.xls,revised occtitle
 210,occ2000_updated.xls,legal arbitrator
 210,occ2000_updated.xls,attorney
 210,occ2000_updated.xls,attorney at law
@@ -1071,6 +1116,7 @@ code,source,term
 215,occ2000_updated.xls,title officer
 215,occ2000_updated.xls,title searcher
 215,occ2000_updated.xls,trial examiner
+OCC_2000,occ2000_updated.xls,revised occtitle
 220,occ2000_updated.xls,apparel machinery instructor
 220,occ2000_updated.xls,apparel machinary professor
 220,occ2000_updated.xls,professor of apparel machinary
@@ -1099,6 +1145,12 @@ code,source,term
 220,occ2000_updated.xls,ground school instructor
 220,occ2000_updated.xls,nursing instructor
 220,occ2000_updated.xls,private branch exchange service advisor
+220,occ2000_updated.xls,faculty
+220,occ2000_updated.xls,professor
+220,occ2000_updated.xls,faculty
+220,occ2000_updated.xls,professor
+220,occ2000_updated.xls,faculty
+220,occ2000_updated.xls,professor
 220,occ2000_updated.xls,lecturer of esl
 220,occ2000_updated.xls,professor esl
 220,occ2000_updated.xls,professor of english as a second language
@@ -1121,6 +1173,14 @@ code,source,term
 220,occ2000_updated.xls,professor of swahili
 220,occ2000_updated.xls,lecturer of abnormal psychology
 220,occ2000_updated.xls,professor of abnormal psychology
+220,occ2000_updated.xls,lecturer of accounting
+220,occ2000_updated.xls,accounting lecturer
+220,occ2000_updated.xls,professor of accounting
+220,occ2000_updated.xls,accounting professor
+220,occ2000_updated.xls,lecturer of accounting
+220,occ2000_updated.xls,accounting lecturer
+220,occ2000_updated.xls,professor of accounting
+220,occ2000_updated.xls,accounting professor
 220,occ2000_updated.xls,lecturer of acoustics
 220,occ2000_updated.xls,professor of acoustics
 220,occ2000_updated.xls,acoustics lecturer
@@ -1333,6 +1393,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  biostatistics
 220,occ2000_updated.xls,biostatistics lecturer
 220,occ2000_updated.xls,biostatistics professor
+220,occ2000_updated.xls,lecturer of  bookkeeping
+220,occ2000_updated.xls,professor of  bookkeeping
+220,occ2000_updated.xls,bookkeeping lecturer
+220,occ2000_updated.xls,bookkeeping professor
+220,occ2000_updated.xls,lecturer of  bookkeeping
+220,occ2000_updated.xls,professor of  bookkeeping
+220,occ2000_updated.xls,bookkeeping lecturer
+220,occ2000_updated.xls,bookkeeping professor
 220,occ2000_updated.xls,lecturer of  botany
 220,occ2000_updated.xls,professor of  botany
 220,occ2000_updated.xls,botany lecturer
@@ -1345,6 +1413,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  business administration
 220,occ2000_updated.xls,business administration lecturer
 220,occ2000_updated.xls,business administration professor
+220,occ2000_updated.xls,lecturer of  business education
+220,occ2000_updated.xls,professor of  business education
+220,occ2000_updated.xls,business education lecturer
+220,occ2000_updated.xls,business education professor
+220,occ2000_updated.xls,lecturer of  business education
+220,occ2000_updated.xls,professor of  business education
+220,occ2000_updated.xls,business education lecturer
+220,occ2000_updated.xls,business education professor
 220,occ2000_updated.xls,lecturer of  business law
 220,occ2000_updated.xls,professor of  business law
 220,occ2000_updated.xls,business law lecturer
@@ -1421,6 +1497,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  climatology
 220,occ2000_updated.xls,climatology lecturer
 220,occ2000_updated.xls,climatology professor
+220,occ2000_updated.xls,lecturer of  clinical laboratory aides
+220,occ2000_updated.xls,professor of  clinical laboratory aides
+220,occ2000_updated.xls,clinical laboratory aides lecturer
+220,occ2000_updated.xls,clinical laboratory aides professor
+220,occ2000_updated.xls,lecturer of  clinical laboratory aides
+220,occ2000_updated.xls,professor of  clinical laboratory aides
+220,occ2000_updated.xls,clinical laboratory aides lecturer
+220,occ2000_updated.xls,clinical laboratory aides professor
 220,occ2000_updated.xls,lecturer of  clinical laboratory service
 220,occ2000_updated.xls,professor of  clinical laboratory service
 220,occ2000_updated.xls,clinical laboratory service lecturer
@@ -1461,6 +1545,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  correctional therapy
 220,occ2000_updated.xls,correctional therapy lecturer
 220,occ2000_updated.xls,correctional therapy professor
+220,occ2000_updated.xls,lecturer of  corrective therapy aide
+220,occ2000_updated.xls,professor of  corrective therapy aide
+220,occ2000_updated.xls,corrective therapy aide lecturer
+220,occ2000_updated.xls,corrective therapy aide professor
+220,occ2000_updated.xls,lecturer of  corrective therapy aide
+220,occ2000_updated.xls,professor of  corrective therapy aide
+220,occ2000_updated.xls,corrective therapy aide lecturer
+220,occ2000_updated.xls,corrective therapy aide professor
 220,occ2000_updated.xls,lecturer of  costume design
 220,occ2000_updated.xls,professor of  costume design
 220,occ2000_updated.xls,costume design lecturer
@@ -1537,6 +1629,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  design
 220,occ2000_updated.xls,design lecturer
 220,occ2000_updated.xls,design professor
+220,occ2000_updated.xls,lecturer of  dietary aide
+220,occ2000_updated.xls,professor of  dietary aide
+220,occ2000_updated.xls,dietary aide lecturer
+220,occ2000_updated.xls,dietary aide professor
+220,occ2000_updated.xls,lecturer of  dietary aide
+220,occ2000_updated.xls,professor of  dietary aide
+220,occ2000_updated.xls,dietary aide lecturer
+220,occ2000_updated.xls,dietary aide professor
 220,occ2000_updated.xls,lecturer of  dietetics
 220,occ2000_updated.xls,professor of  dietetics
 220,occ2000_updated.xls,dietetics lecturer
@@ -1549,6 +1649,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  divinity
 220,occ2000_updated.xls,divinity lecturer
 220,occ2000_updated.xls,divinity professor
+220,occ2000_updated.xls,lecturer of  drafting
+220,occ2000_updated.xls,professor of  drafting
+220,occ2000_updated.xls,drafting lecturer
+220,occ2000_updated.xls,drafting professor
+220,occ2000_updated.xls,lecturer of  drafting
+220,occ2000_updated.xls,professor of  drafting
+220,occ2000_updated.xls,drafting lecturer
+220,occ2000_updated.xls,drafting professor
 220,occ2000_updated.xls,lecturer of  dramatic art
 220,occ2000_updated.xls,professor of  dramatic art
 220,occ2000_updated.xls,dramatic art lecturer
@@ -1597,6 +1705,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  electronic science
 220,occ2000_updated.xls,electronic science lecturer
 220,occ2000_updated.xls,electronic science professor
+220,occ2000_updated.xls,lecturer of  electronics
+220,occ2000_updated.xls,professor of  electronics
+220,occ2000_updated.xls,electronics lecturer
+220,occ2000_updated.xls,electronics professor
+220,occ2000_updated.xls,lecturer of  electronics
+220,occ2000_updated.xls,professor of  electronics
+220,occ2000_updated.xls,electronics lecturer
+220,occ2000_updated.xls,electronics professor
 220,occ2000_updated.xls,lecturer of  embryology
 220,occ2000_updated.xls,professor of  embryology
 220,occ2000_updated.xls,embryology lecturer
@@ -1781,6 +1897,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  geopolitics
 220,occ2000_updated.xls,geopolitics lecturer
 220,occ2000_updated.xls,geopolitics professor
+220,occ2000_updated.xls,lecturer of  gericare aide
+220,occ2000_updated.xls,professor of  gericare aide
+220,occ2000_updated.xls,gericare aide lecturer
+220,occ2000_updated.xls,gericare aide professor
+220,occ2000_updated.xls,lecturer of  gericare aide
+220,occ2000_updated.xls,professor of  gericare aide
+220,occ2000_updated.xls,gericare aide lecturer
+220,occ2000_updated.xls,gericare aide professor
 220,occ2000_updated.xls,lecturer of  german
 220,occ2000_updated.xls,professor of  german
 220,occ2000_updated.xls,german lecturer
@@ -1853,6 +1977,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  history
 220,occ2000_updated.xls,history lecturer
 220,occ2000_updated.xls,history professor
+220,occ2000_updated.xls,lecturer of  home care and home health aides
+220,occ2000_updated.xls,professor of  home care and home health aides
+220,occ2000_updated.xls,home care and home health aides lecturer
+220,occ2000_updated.xls,home care and home health aides professor
+220,occ2000_updated.xls,lecturer of  home care and home health aides
+220,occ2000_updated.xls,professor of  home care and home health aides
+220,occ2000_updated.xls,home care and home health aides lecturer
+220,occ2000_updated.xls,home care and home health aides professor
 220,occ2000_updated.xls,lecturer of  home economics
 220,occ2000_updated.xls,professor of  home economics
 220,occ2000_updated.xls,home economics lecturer
@@ -1861,6 +1993,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  horticulture
 220,occ2000_updated.xls,horticulture lecturer
 220,occ2000_updated.xls,horticulture professor
+220,occ2000_updated.xls,lecturer of  hospital aides and assistants
+220,occ2000_updated.xls,professor of  hospital aides and assistants
+220,occ2000_updated.xls,hospital aides and assistants lecturer
+220,occ2000_updated.xls,hospital aides and assistants professor
+220,occ2000_updated.xls,lecturer of  hospital aides and assistants
+220,occ2000_updated.xls,professor of  hospital aides and assistants
+220,occ2000_updated.xls,hospital aides and assistants lecturer
+220,occ2000_updated.xls,hospital aides and assistants professor
 220,occ2000_updated.xls,lecturer of  human anatomy
 220,occ2000_updated.xls,professor of  human anatomy
 220,occ2000_updated.xls,human anatomy lecturer
@@ -1909,6 +2049,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  in service education
 220,occ2000_updated.xls,in service education lecturer
 220,occ2000_updated.xls,in service education professor
+220,occ2000_updated.xls,lecturer of  industrial arts
+220,occ2000_updated.xls,professor of  industrial arts
+220,occ2000_updated.xls,industrial arts lecturer
+220,occ2000_updated.xls,industrial arts professor
+220,occ2000_updated.xls,lecturer of  industrial arts
+220,occ2000_updated.xls,professor of  industrial arts
+220,occ2000_updated.xls,industrial arts lecturer
+220,occ2000_updated.xls,industrial arts professor
 220,occ2000_updated.xls,lecturer of  industrial chemistry
 220,occ2000_updated.xls,professor of  industrial chemistry
 220,occ2000_updated.xls,industrial chemistry lecturer
@@ -1933,6 +2081,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  inhalation therapy
 220,occ2000_updated.xls,inhalation therapy lecturer
 220,occ2000_updated.xls,inhalation therapy professor
+220,occ2000_updated.xls,lecturer of  inhalation therapy aides
+220,occ2000_updated.xls,professor of  inhalation therapy aides
+220,occ2000_updated.xls,inhalation therapy aides lecturer
+220,occ2000_updated.xls,inhalation therapy aides professor
+220,occ2000_updated.xls,lecturer of  inhalation therapy aides
+220,occ2000_updated.xls,professor of  inhalation therapy aides
+220,occ2000_updated.xls,inhalation therapy aides lecturer
+220,occ2000_updated.xls,inhalation therapy aides professor
 220,occ2000_updated.xls,lecturer of  inorganic chemistry
 220,occ2000_updated.xls,professor of  inorganic chemistry
 220,occ2000_updated.xls,inorganic chemistry lecturer
@@ -2053,6 +2209,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  mathematics
 220,occ2000_updated.xls,mathematics lecturer
 220,occ2000_updated.xls,mathematics professor
+220,occ2000_updated.xls,lecturer of  meat cutting
+220,occ2000_updated.xls,professor of  meat cutting
+220,occ2000_updated.xls,meat cutting lecturer
+220,occ2000_updated.xls,meat cutting professor
+220,occ2000_updated.xls,lecturer of  meat cutting
+220,occ2000_updated.xls,professor of  meat cutting
+220,occ2000_updated.xls,meat cutting lecturer
+220,occ2000_updated.xls,meat cutting professor
 220,occ2000_updated.xls,lecturer of  mechanical drawing
 220,occ2000_updated.xls,professor of  mechanical drawing
 220,occ2000_updated.xls,mechanical drawing lecturer
@@ -2061,6 +2225,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  mechanical engineering
 220,occ2000_updated.xls,mechanical engineering lecturer
 220,occ2000_updated.xls,mechanical engineering professor
+220,occ2000_updated.xls,lecturer of  medical aides
+220,occ2000_updated.xls,professor of  medical aides
+220,occ2000_updated.xls,medical aides lecturer
+220,occ2000_updated.xls,medical aides professor
+220,occ2000_updated.xls,lecturer of  medical aides
+220,occ2000_updated.xls,professor of  medical aides
+220,occ2000_updated.xls,medical aides lecturer
+220,occ2000_updated.xls,medical aides professor
 220,occ2000_updated.xls,lecturer of  medical pathology
 220,occ2000_updated.xls,professor of  medical pathology
 220,occ2000_updated.xls,medical pathology lecturer
@@ -2081,10 +2253,26 @@ code,source,term
 220,occ2000_updated.xls,professor of  medicine
 220,occ2000_updated.xls,medicine lecturer
 220,occ2000_updated.xls,medicine professor
+220,occ2000_updated.xls,lecturer of  mental health aides
+220,occ2000_updated.xls,professor of  mental health aides
+220,occ2000_updated.xls,mental health aides lecturer
+220,occ2000_updated.xls,mental health aides professor
+220,occ2000_updated.xls,lecturer of  mental health aides
+220,occ2000_updated.xls,professor of  mental health aides
+220,occ2000_updated.xls,mental health aides lecturer
+220,occ2000_updated.xls,mental health aides professor
 220,occ2000_updated.xls,lecturer of  mental measurements
 220,occ2000_updated.xls,professor of  mental measurements
 220,occ2000_updated.xls,mental measurements lecturer
 220,occ2000_updated.xls,mental measurements professor
+220,occ2000_updated.xls,lecturer of  metal crafts
+220,occ2000_updated.xls,professor of  metal crafts
+220,occ2000_updated.xls,metal crafts lecturer
+220,occ2000_updated.xls,metal crafts professor
+220,occ2000_updated.xls,lecturer of  metal crafts
+220,occ2000_updated.xls,professor of  metal crafts
+220,occ2000_updated.xls,metal crafts lecturer
+220,occ2000_updated.xls,metal crafts professor
 220,occ2000_updated.xls,lecturer of  metallography
 220,occ2000_updated.xls,professor of  metallography
 220,occ2000_updated.xls,metallography lecturer
@@ -2109,6 +2297,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  microbiology
 220,occ2000_updated.xls,microbiology lecturer
 220,occ2000_updated.xls,microbiology professor
+220,occ2000_updated.xls,lecturer of  military science
+220,occ2000_updated.xls,professor of  military science
+220,occ2000_updated.xls,military science lecturer
+220,occ2000_updated.xls,military science professor
+220,occ2000_updated.xls,lecturer of  military science
+220,occ2000_updated.xls,professor of  military science
+220,occ2000_updated.xls,military science lecturer
+220,occ2000_updated.xls,military science professor
 220,occ2000_updated.xls,lecturer of  millinery
 220,occ2000_updated.xls,professor of  millinery
 220,occ2000_updated.xls,millinery lecturer
@@ -2177,10 +2373,42 @@ code,source,term
 220,occ2000_updated.xls,professor of  nuclear physics
 220,occ2000_updated.xls,nuclear physics lecturer
 220,occ2000_updated.xls,nuclear physics professor
+220,occ2000_updated.xls,lecturer of  nurse's aides
+220,occ2000_updated.xls,professor of  nurse's aides
+220,occ2000_updated.xls,nurse's aides lecturer
+220,occ2000_updated.xls,nurse's aides professor
+220,occ2000_updated.xls,lecturer of  nurse's aides
+220,occ2000_updated.xls,professor of  nurse's aides
+220,occ2000_updated.xls,nurse's aides lecturer
+220,occ2000_updated.xls,nurse's aides professor
+220,occ2000_updated.xls,lecturer of  nursing
+220,occ2000_updated.xls,professor of  nursing
+220,occ2000_updated.xls,nursing lecturer
+220,occ2000_updated.xls,nursing professor
+220,occ2000_updated.xls,lecturer of  nursing
+220,occ2000_updated.xls,professor of  nursing
+220,occ2000_updated.xls,nursing lecturer
+220,occ2000_updated.xls,nursing professor
+220,occ2000_updated.xls,lecturer of  nursing assistants
+220,occ2000_updated.xls,professor of  nursing assistants
+220,occ2000_updated.xls,nursing assistants lecturer
+220,occ2000_updated.xls,nursing assistants professor
+220,occ2000_updated.xls,lecturer of  nursing assistants
+220,occ2000_updated.xls,professor of  nursing assistants
+220,occ2000_updated.xls,nursing assistants lecturer
+220,occ2000_updated.xls,nursing assistants professor
 220,occ2000_updated.xls,lecturer of  nutrition
 220,occ2000_updated.xls,professor of  nutrition
 220,occ2000_updated.xls,nutrition lecturer
 220,occ2000_updated.xls,nutrition professor
+220,occ2000_updated.xls,lecturer of  nutrition aides
+220,occ2000_updated.xls,professor of  nutrition aides
+220,occ2000_updated.xls,nutrition aides lecturer
+220,occ2000_updated.xls,nutrition aides professor
+220,occ2000_updated.xls,lecturer of  nutrition aides
+220,occ2000_updated.xls,professor of  nutrition aides
+220,occ2000_updated.xls,nutrition aides lecturer
+220,occ2000_updated.xls,nutrition aides professor
 220,occ2000_updated.xls,lecturer of  obstetrics
 220,occ2000_updated.xls,professor of  obstetrics
 220,occ2000_updated.xls,obstetrics lecturer
@@ -2189,6 +2417,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  occupational therapy
 220,occ2000_updated.xls,occupational therapy lecturer
 220,occ2000_updated.xls,occupational therapy professor
+220,occ2000_updated.xls,lecturer of  occupational therapy aides
+220,occ2000_updated.xls,professor of  occupational therapy aides
+220,occ2000_updated.xls,occupational therapy aides lecturer
+220,occ2000_updated.xls,occupational therapy aides professor
+220,occ2000_updated.xls,lecturer of  occupational therapy aides
+220,occ2000_updated.xls,professor of  occupational therapy aides
+220,occ2000_updated.xls,occupational therapy aides lecturer
+220,occ2000_updated.xls,occupational therapy aides professor
 220,occ2000_updated.xls,lecturer of  oceanography
 220,occ2000_updated.xls,professor of  oceanography
 220,occ2000_updated.xls,oceanography lecturer
@@ -2269,6 +2505,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  pathology
 220,occ2000_updated.xls,pathology lecturer
 220,occ2000_updated.xls,pathology professor
+220,occ2000_updated.xls,lecturer of  pathology laboratory aides
+220,occ2000_updated.xls,professor of  pathology laboratory aides
+220,occ2000_updated.xls,pathology laboratory aides lecturer
+220,occ2000_updated.xls,pathology laboratory aides professor
+220,occ2000_updated.xls,lecturer of  pathology laboratory aides
+220,occ2000_updated.xls,professor of  pathology laboratory aides
+220,occ2000_updated.xls,pathology laboratory aides lecturer
+220,occ2000_updated.xls,pathology laboratory aides professor
 220,occ2000_updated.xls,lecturer of  pediatrics
 220,occ2000_updated.xls,professor of  pediatrics
 220,occ2000_updated.xls,pediatrics lecturer
@@ -2409,6 +2653,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  protozoology
 220,occ2000_updated.xls,protozoology lecturer
 220,occ2000_updated.xls,protozoology professor
+220,occ2000_updated.xls,lecturer of  psychiatric aides
+220,occ2000_updated.xls,professor of  psychiatric aides
+220,occ2000_updated.xls,psychiatric aides lecturer
+220,occ2000_updated.xls,psychiatric aides professor
+220,occ2000_updated.xls,lecturer of  psychiatric aides
+220,occ2000_updated.xls,professor of  psychiatric aides
+220,occ2000_updated.xls,psychiatric aides lecturer
+220,occ2000_updated.xls,psychiatric aides professor
 220,occ2000_updated.xls,lecturer of  psychiatry
 220,occ2000_updated.xls,professor of  psychiatry
 220,occ2000_updated.xls,psychiatry lecturer
@@ -2425,6 +2677,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  public health
 220,occ2000_updated.xls,public health lecturer
 220,occ2000_updated.xls,public health professor
+220,occ2000_updated.xls,lecturer of  public health aides
+220,occ2000_updated.xls,professor of  public health aides
+220,occ2000_updated.xls,public health aides lecturer
+220,occ2000_updated.xls,public health aides professor
+220,occ2000_updated.xls,lecturer of  public health aides
+220,occ2000_updated.xls,professor of  public health aides
+220,occ2000_updated.xls,public health aides lecturer
+220,occ2000_updated.xls,public health aides professor
 220,occ2000_updated.xls,lecturer of  public speaking
 220,occ2000_updated.xls,professor of  public speaking
 220,occ2000_updated.xls,public speaking lecturer
@@ -2461,6 +2721,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  recreation therapy
 220,occ2000_updated.xls,recreation therapy lecturer
 220,occ2000_updated.xls,recreation therapy professor
+220,occ2000_updated.xls,lecturer of  recreation therapy aides
+220,occ2000_updated.xls,professor of  recreation therapy aides
+220,occ2000_updated.xls,recreation therapy aides lecturer
+220,occ2000_updated.xls,recreation therapy aides professor
+220,occ2000_updated.xls,lecturer of  recreation therapy aides
+220,occ2000_updated.xls,professor of  recreation therapy aides
+220,occ2000_updated.xls,recreation therapy aides lecturer
+220,occ2000_updated.xls,recreation therapy aides professor
 220,occ2000_updated.xls,lecturer of  refrigeration engineering
 220,occ2000_updated.xls,professor of  refrigeration engineering
 220,occ2000_updated.xls,refrigeration engineering lecturer
@@ -2609,6 +2877,14 @@ code,source,term
 220,occ2000_updated.xls,professor of  surgery
 220,occ2000_updated.xls,surgery lecturer
 220,occ2000_updated.xls,surgery professor
+220,occ2000_updated.xls,lecturer of  surgical aides
+220,occ2000_updated.xls,professor of  surgical aides
+220,occ2000_updated.xls,surgical aides lecturer
+220,occ2000_updated.xls,surgical aides professor
+220,occ2000_updated.xls,lecturer of  surgical aides
+220,occ2000_updated.xls,professor of  surgical aides
+220,occ2000_updated.xls,surgical aides lecturer
+220,occ2000_updated.xls,surgical aides professor
 220,occ2000_updated.xls,lecturer of  survey research
 220,occ2000_updated.xls,professor of  survey research
 220,occ2000_updated.xls,survey research lecturer
@@ -2761,14 +3037,24 @@ code,source,term
 220,occ2000_updated.xls,professor of  zoology
 220,occ2000_updated.xls,zoology lecturer
 220,occ2000_updated.xls,zoology professor
+220,occ2000_updated.xls,teaching fellow
+220,occ2000_updated.xls,teaching fellow
 220,occ2000_updated.xls,teaching fellow lecturer
 220,occ2000_updated.xls,teaching fellow professor
+220,occ2000_updated.xls,textile machinery instructor
+220,occ2000_updated.xls,textile machinery instructor
 220,occ2000_updated.xls,textile machinery instructor lecturer
 220,occ2000_updated.xls,textile machinery instructor professor
+220,occ2000_updated.xls,trainer
+220,occ2000_updated.xls,trainer
 220,occ2000_updated.xls,trainer lecturer
 220,occ2000_updated.xls,trainer professor
+220,occ2000_updated.xls,visual educator
+220,occ2000_updated.xls,visual educator
 220,occ2000_updated.xls,visual educator lecturer
 220,occ2000_updated.xls,visual educator professor
+220,occ2000_updated.xls,weight control lecturer
+220,occ2000_updated.xls,weight control lecturer
 220,occ2000_updated.xls,weight control lecturer lecturer
 220,occ2000_updated.xls,weight control lecturer professor
 230,occ2000_updated.xls,teacher of  childhood development
@@ -2793,6 +3079,8 @@ code,source,term
 231,occ2000_updated.xls,grade 7 teacher
 231,occ2000_updated.xls,grade 8 teacher
 231,occ2000_updated.xls,teacher of  home teaching grades 7 and 8
+231,occ2000_updated.xls,home teacher
+231,occ2000_updated.xls,home teacher
 231,occ2000_updated.xls,teacher of  intermediate
 231,occ2000_updated.xls,intermediate teacher
 231,occ2000_updated.xls,teacher of  junior high school
@@ -2805,6 +3093,8 @@ code,source,term
 231,occ2000_updated.xls,reading teacher
 231,occ2000_updated.xls,teacher of  resource
 231,occ2000_updated.xls,resource teacher
+231,occ2000_updated.xls,visiting teacher
+231,occ2000_updated.xls,visiting teacher
 232,occ2000_updated.xls,director of rotc
 232,occ2000_updated.xls,accounting teacher
 232,occ2000_updated.xls,teacher of  accounting
@@ -2872,6 +3162,102 @@ code,source,term
 232,occ2000_updated.xls,teacher of  television repair
 232,occ2000_updated.xls,welding teacher
 232,occ2000_updated.xls,teacher of  welding
+233,occ2000_updated.xls,administrator of special education
+233,occ2000_updated.xls,administrator of special education
+233,occ2000_updated.xls,administrator of special education
+233,occ2000_updated.xls,teacher of  blind
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  blind
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  blind
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  braille
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  braille
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  braille
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  deaf
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  deaf
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  deaf
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  handicapped
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  handicapped
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  handicapped
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  lip reading
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  lip reading
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  lip reading
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  mentally retarded
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  mentally retarded
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,teacher of  mentally retarded
+233,occ2000_updated.xls,teacher of disabilities
+233,occ2000_updated.xls,disabilities teacher
+233,occ2000_updated.xls,special needs teacher
+233,occ2000_updated.xls,remedial reading teacher
+233,occ2000_updated.xls,remedial math teacher
+233,occ2000_updated.xls,remedial teacher
+233,occ2000_updated.xls,teacher of remedial reading
+233,occ2000_updated.xls,teacher of remedial math
+233,occ2000_updated.xls,remedial reading teacher
+233,occ2000_updated.xls,remedial math teacher
+233,occ2000_updated.xls,remedial teacher
+233,occ2000_updated.xls,teacher of remedial reading
+233,occ2000_updated.xls,teacher of remedial math
+233,occ2000_updated.xls,remedial reading teacher
+233,occ2000_updated.xls,remedial math teacher
+233,occ2000_updated.xls,remedial teacher
+233,occ2000_updated.xls,teacher of remedial reading
+233,occ2000_updated.xls,teacher of remedial math
+233,occ2000_updated.xls,teacher of special education
+233,occ2000_updated.xls,special education teacher
+233,occ2000_updated.xls,teacher of special education
+233,occ2000_updated.xls,special education teacher
+233,occ2000_updated.xls,teacher of special education
+233,occ2000_updated.xls,special education teacher
 234,occ2000_updated.xls,consumer education specialist
 234,occ2000_updated.xls,link trainer operator
 234,occ2000_updated.xls,private tutor
@@ -2985,6 +3371,8 @@ code,source,term
 254,occ2000_updated.xls,examination scorer
 254,occ2000_updated.xls,grader
 254,occ2000_updated.xls,clerical grader
+254,occ2000_updated.xls,grading clerk
+254,occ2000_updated.xls,grading clerk
 254,occ2000_updated.xls,kindergartens helper
 254,occ2000_updated.xls,paper grader
 254,occ2000_updated.xls,paraprofessional
@@ -3050,6 +3438,7 @@ code,source,term
 255,occ2000_updated.xls,farm management supervisor
 255,occ2000_updated.xls,home management supervisor
 255,occ2000_updated.xls,consultant teacher
+OCC_2000,occ2000_updated.xls,revised occtitle
 001,occ2000_updated.xls,board chairman
 001,occ2000_updated.xls,chair of the board of directors
 001,occ2000_updated.xls,chair of the governing board
@@ -3178,12 +3567,15 @@ code,source,term
 003,occ2000_updated.xls,u.s. senator
 003,occ2000_updated.xls,us senator
 003,occ2000_updated.xls,member of the senate
+OCC_2000,occ2000_updated.xls,revised occtitle
 100,occ2000_updated.xls,artificial intelligence specialist
 100,occ2000_updated.xls,business systems analyst
 100,occ2000_updated.xls,computer analyst
 100,occ2000_updated.xls,computer consultant \ n.e.c. or n.s.
+100,occ2000_updated.xls,computer consultant
 100,occ2000_updated.xls,computer research
 100,occ2000_updated.xls,computer scientist
+100,occ2000_updated.xls,computer systems analyst
 100,occ2000_updated.xls,computer systems design analyst
 100,occ2000_updated.xls,computer systems designer
 100,occ2000_updated.xls,computer systems planning
@@ -3191,7 +3583,9 @@ code,source,term
 100,occ2000_updated.xls,systems consultant
 100,occ2000_updated.xls,computer systems consultant
 100,occ2000_updated.xls,data procesing consultant
+100,occ2000_updated.xls,computer consultant
 100,occ2000_updated.xls,data processing consultant
+100,occ2000_updated.xls,data processing systems analyst
 100,occ2000_updated.xls,data processing systems project planner
 100,occ2000_updated.xls,digital computer systems analyst
 100,occ2000_updated.xls,engineering systems analyst
@@ -3205,13 +3599,16 @@ code,source,term
 100,occ2000_updated.xls,scientific systems analyst
 100,occ2000_updated.xls,software consultant \ n.e.c.
 100,occ2000_updated.xls,software consultant
+100,occ2000_updated.xls,computer systems analyst
 100,occ2000_updated.xls,computer system analyst
 100,occ2000_updated.xls,data processing anlayst
+100,occ2000_updated.xls,data processing systems analyst
 100,occ2000_updated.xls,systems architect
 100,occ2000_updated.xls,computer laboratory technician
 100,occ2000_updated.xls,computer lab technician
 101,occ2000_updated.xls,business programmer
 101,occ2000_updated.xls,client server programmer
+101,occ2000_updated.xls,computer programmer
 101,occ2000_updated.xls,computer programmer aide
 101,occ2000_updated.xls,database developer
 101,occ2000_updated.xls,digital computer programmer
@@ -3223,6 +3620,7 @@ code,source,term
 101,occ2000_updated.xls,object-oriented programmer
 101,occ2000_updated.xls,program coder
 101,occ2000_updated.xls,programmer
+101,occ2000_updated.xls,computer programmer
 101,occ2000_updated.xls,scientific programmer
 101,occ2000_updated.xls,senior programmer
 101,occ2000_updated.xls,computer programming supervisor
@@ -3238,6 +3636,10 @@ code,source,term
 102,occ2000_updated.xls,cne
 102,occ2000_updated.xls,computer applications developer
 102,occ2000_updated.xls,computer programmer analyst
+102,occ2000_updated.xls,microsoft certified systems (mcse)
+102,occ2000_updated.xls,mcse
+102,occ2000_updated.xls,mcse engineer
+102,occ2000_updated.xls,microsoft certified systems engineer
 102,occ2000_updated.xls,engineer of computer applications
 102,occ2000_updated.xls,computer applications engineer
 102,occ2000_updated.xls,engineer of computer software
@@ -3267,6 +3669,10 @@ code,source,term
 102,occ2000_updated.xls,information technology applications specialist
 102,occ2000_updated.xls,it systems specialist
 102,occ2000_updated.xls,infomration technology systems specialist
+102,occ2000_updated.xls,microsoft certified systems (mcse)
+102,occ2000_updated.xls,mcse
+102,occ2000_updated.xls,mcse engineer
+102,occ2000_updated.xls,microsoft certified systems engineer
 102,occ2000_updated.xls,program analyst
 102,occ2000_updated.xls,programmer analyst
 102,occ2000_updated.xls,quality assurance specialist
@@ -3330,6 +3736,8 @@ code,source,term
 110,occ2000_updated.xls,c.n.a. (certified novell administrator)
 110,occ2000_updated.xls,certified novell administrator
 110,occ2000_updated.xls,can
+110,occ2000_updated.xls,computer security information specialist
+110,occ2000_updated.xls,computer security information specialist
 110,occ2000_updated.xls,computer security specialist
 110,occ2000_updated.xls,computer systems administrator
 110,occ2000_updated.xls,data security
@@ -3439,11 +3847,13 @@ code,source,term
 131,occ2000_updated.xls,county surveyor
 131,occ2000_updated.xls,survey engineer
 131,occ2000_updated.xls,field map editor
+131,occ2000_updated.xls,geodetic surveyor
 131,occ2000_updated.xls,geophysical prospecting surveyor
 131,occ2000_updated.xls,land measurer
 131,occ2000_updated.xls,land use mapping
 131,occ2000_updated.xls,map maker
 131,occ2000_updated.xls,mapper
+131,occ2000_updated.xls,mine surveyor
 131,occ2000_updated.xls,mineral surveyor
 131,occ2000_updated.xls,photo cartographer
 131,occ2000_updated.xls,photogrammetrist
@@ -3452,6 +3862,8 @@ code,source,term
 131,occ2000_updated.xls,registered land surveyor
 131,occ2000_updated.xls,registered public surveyor
 131,occ2000_updated.xls,surveyor
+131,occ2000_updated.xls,geodetic surveyor
+131,occ2000_updated.xls,mine surveyor
 131,occ2000_updated.xls,professional surveyor
 131,occ2000_updated.xls,registered surveyor
 131,occ2000_updated.xls,topographer
@@ -3532,6 +3944,8 @@ code,source,term
 135,occ2000_updated.xls,adsorption engineer
 135,occ2000_updated.xls,engineer of chemical
 135,occ2000_updated.xls,chemical engineer
+135,occ2000_updated.xls,engineer of chemical research
+135,occ2000_updated.xls,chemical research engineer
 135,occ2000_updated.xls,engineer of chemical test
 135,occ2000_updated.xls,chemical test engineer
 135,occ2000_updated.xls,engineer of explosives
@@ -3544,6 +3958,8 @@ code,source,term
 135,occ2000_updated.xls,lubricating engineer
 135,occ2000_updated.xls,engineer of plastics
 135,occ2000_updated.xls,plastics engineer
+135,occ2000_updated.xls,engineer of chemical research
+135,occ2000_updated.xls,chemical research engineer
 135,occ2000_updated.xls,sand analyst
 135,occ2000_updated.xls,sand technologist
 136,occ2000_updated.xls,engineer of airport
@@ -3804,6 +4220,12 @@ code,source,term
 144,occ2000_updated.xls,boat engineer
 144,occ2000_updated.xls,engineer of hull
 144,occ2000_updated.xls,hull engineer
+144,occ2000_updated.xls,engineer of marine
+144,occ2000_updated.xls,marine engineer
+144,occ2000_updated.xls,engineer of marine
+144,occ2000_updated.xls,marine engineer
+144,occ2000_updated.xls,engineer of marine
+144,occ2000_updated.xls,marine engineer
 144,occ2000_updated.xls,engineer of naval
 144,occ2000_updated.xls,naval engineer
 144,occ2000_updated.xls,engineer of port
@@ -4100,6 +4522,10 @@ code,source,term
 155,occ2000_updated.xls,electronic technician
 155,occ2000_updated.xls,technician of electronic development
 155,occ2000_updated.xls,electronic development technician
+155,occ2000_updated.xls,technician of engineering
+155,occ2000_updated.xls,engineering technician
+155,occ2000_updated.xls,technician of engineering
+155,occ2000_updated.xls,engineering technician
 155,occ2000_updated.xls,technician of environmental
 155,occ2000_updated.xls,environmental technician
 155,occ2000_updated.xls,technician of experimental
@@ -4217,6 +4643,7 @@ code,source,term
 156,occ2000_updated.xls,transit man
 156,occ2000_updated.xls,transit man of surveying
 156,occ2000_updated.xls,surveying transit man
+OCC_2000,occ2000_updated.xls,revised occtitle
 004,occ2000_updated.xls,advertising director
 004,occ2000_updated.xls,advertising executive
 004,occ2000_updated.xls,campaign director
@@ -4225,6 +4652,7 @@ code,source,term
 004,occ2000_updated.xls,promotion manager
 004,occ2000_updated.xls,media director
 005,occ2000_updated.xls,director of marketing
+005,occ2000_updated.xls,director of sales
 005,occ2000_updated.xls,division head
 005,occ2000_updated.xls,fashion coordinator
 005,occ2000_updated.xls,fashion stylist
@@ -4239,6 +4667,7 @@ code,source,term
 005,occ2000_updated.xls,marketing representative
 005,occ2000_updated.xls,sales coordinator
 005,occ2000_updated.xls,sales director
+005,occ2000_updated.xls,director of sales
 005,occ2000_updated.xls,sales executive
 006,occ2000_updated.xls,director of fundraising
 006,occ2000_updated.xls,director of public information
@@ -4273,10 +4702,14 @@ code,source,term
 011,occ2000_updated.xls,information technology project manager
 011,occ2000_updated.xls,systems development manager
 012,occ2000_updated.xls,bank advisor
+012,occ2000_updated.xls,bank cashier
 012,occ2000_updated.xls,bank consultant
 012,occ2000_updated.xls,bank director
 012,occ2000_updated.xls,bank president
 012,occ2000_updated.xls,banker
+012,occ2000_updated.xls,budget director
+012,occ2000_updated.xls,budget director
+012,occ2000_updated.xls,bank cashier
 012,occ2000_updated.xls,city comptroller
 012,occ2000_updated.xls,city controller
 012,occ2000_updated.xls,city treasurer
@@ -4542,6 +4975,8 @@ code,source,term
 023,occ2000_updated.xls,department chairperson
 023,occ2000_updated.xls,department chairman
 023,occ2000_updated.xls,depatment chairwoman
+023,occ2000_updated.xls,director of admissions
+023,occ2000_updated.xls,director of admissions
 023,occ2000_updated.xls,director of child care center
 023,occ2000_updated.xls,director of extension work
 023,occ2000_updated.xls,director of health education
@@ -4550,6 +4985,9 @@ code,source,term
 023,occ2000_updated.xls,director of special services
 023,occ2000_updated.xls,director of student affairs
 023,occ2000_updated.xls,director of student financial aid
+023,occ2000_updated.xls,director of testing
+023,occ2000_updated.xls,director of testing
+023,occ2000_updated.xls,director of testing
 023,occ2000_updated.xls,director of vocational training
 023,occ2000_updated.xls,extension course coordinator
 023,occ2000_updated.xls,extension work director
@@ -4560,9 +4998,11 @@ code,source,term
 023,occ2000_updated.xls,buiness manager
 023,occ2000_updated.xls,montessori program director
 023,occ2000_updated.xls,preschool director
+023,occ2000_updated.xls,principal
 023,occ2000_updated.xls,provost
 023,occ2000_updated.xls,college registrar
 023,occ2000_updated.xls,school principal
+023,occ2000_updated.xls,principal
 023,occ2000_updated.xls,submaster
 023,occ2000_updated.xls,special educcation superintendant
 023,occ2000_updated.xls,superintendant of special education
@@ -4572,6 +5012,8 @@ code,source,term
 023,occ2000_updated.xls,school supervisor
 023,occ2000_updated.xls,team coordinator
 023,occ2000_updated.xls,testing director
+023,occ2000_updated.xls,vice principal
+023,occ2000_updated.xls,vice principal
 030,occ2000_updated.xls,management engineer
 030,occ2000_updated.xls,manufacturing chief engineer
 030,occ2000_updated.xls,engineering manager
@@ -4733,6 +5175,7 @@ code,source,term
 040,occ2000_updated.xls,mail superintendant
 040,occ2000_updated.xls,postal superintendant
 041,occ2000_updated.xls,duilding custodian
+041,occ2000_updated.xls,building superintendant
 041,occ2000_updated.xls,freeholder
 041,occ2000_updated.xls,housing relocator
 041,occ2000_updated.xls,land commissioner
@@ -4785,6 +5228,7 @@ code,source,term
 041,occ2000_updated.xls,oil lease buyer
 041,occ2000_updated.xls,property administrator
 041,occ2000_updated.xls,real estate administrator
+041,occ2000_updated.xls,building superintendant
 041,occ2000_updated.xls,rental superintendant
 042,occ2000_updated.xls,borough coordinator
 042,occ2000_updated.xls,bureau director
@@ -4967,6 +5411,7 @@ code,source,term
 043,occ2000_updated.xls,water registrar
 043,occ2000_updated.xls,watermaster
 043,occ2000_updated.xls,winemaker
+OCC_2000,occ2000_updated.xls,revised occtitle
 260,occ2000_updated.xls,animator
 260,occ2000_updated.xls,apprentice painter
 260,occ2000_updated.xls,apprentice of painting
@@ -5019,6 +5464,7 @@ code,source,term
 260,occ2000_updated.xls,inker
 260,occ2000_updated.xls,inker and opaquer
 260,occ2000_updated.xls,ivory carver
+260,occ2000_updated.xls,landscape painter
 260,occ2000_updated.xls,layout worker
 260,occ2000_updated.xls,medical artist
 260,occ2000_updated.xls,medical illustrator
@@ -5028,11 +5474,15 @@ code,source,term
 260,occ2000_updated.xls,music grapher
 260,occ2000_updated.xls,newspaper illustrator
 260,occ2000_updated.xls,oil painter
+260,occ2000_updated.xls,painter
 260,occ2000_updated.xls,painter of animated cartoons
 260,occ2000_updated.xls,animated cartoons painter
+260,occ2000_updated.xls,landscape painter
 260,occ2000_updated.xls,painter of landscape
 260,occ2000_updated.xls,statue painter
 260,occ2000_updated.xls,painter of statue
+260,occ2000_updated.xls,paintings restorer
+260,occ2000_updated.xls,paintings restorer
 260,occ2000_updated.xls,pattern illustrator
 260,occ2000_updated.xls,picture copyist
 260,occ2000_updated.xls,picture painter
@@ -5046,6 +5496,7 @@ code,source,term
 260,occ2000_updated.xls,scenic artist
 260,occ2000_updated.xls,scientific artist
 260,occ2000_updated.xls,scientific illustrator
+260,occ2000_updated.xls,sculptor
 260,occ2000_updated.xls,sketch artist
 260,occ2000_updated.xls,special effects specialist
 260,occ2000_updated.xls,sports cartoonist
@@ -5083,10 +5534,12 @@ code,source,term
 263,occ2000_updated.xls,director of mannequin
 263,occ2000_updated.xls,design maker
 263,occ2000_updated.xls,director of display
+263,occ2000_updated.xls,display director
 263,occ2000_updated.xls,displayer
 263,occ2000_updated.xls,display artist
 263,occ2000_updated.xls,display coordinator
 263,occ2000_updated.xls,display designer
+263,occ2000_updated.xls,display director
 263,occ2000_updated.xls,display trimmer
 263,occ2000_updated.xls,free lance display
 263,occ2000_updated.xls,free lance display artist
@@ -5319,6 +5772,7 @@ code,source,term
 274,occ2000_updated.xls,stripper
 274,occ2000_updated.xls,tap dancer
 275,occ2000_updated.xls,accompanist
+275,occ2000_updated.xls,music arranger
 275,occ2000_updated.xls,band leader
 275,occ2000_updated.xls,band master
 275,occ2000_updated.xls,bugler
@@ -5333,6 +5787,7 @@ code,source,term
 275,occ2000_updated.xls,chorus
 275,occ2000_updated.xls,chorus master
 275,occ2000_updated.xls,church organist
+275,occ2000_updated.xls,music composer
 275,occ2000_updated.xls,concert artist
 275,occ2000_updated.xls,concert pianist
 275,occ2000_updated.xls,concert singer
@@ -5345,6 +5800,8 @@ code,source,term
 275,occ2000_updated.xls,maestro
 275,occ2000_updated.xls,minister of music
 275,occ2000_updated.xls,music adapter
+275,occ2000_updated.xls,music arranger
+275,occ2000_updated.xls,music composer
 275,occ2000_updated.xls,music writer
 275,occ2000_updated.xls,musician
 275,occ2000_updated.xls,musicologist
@@ -5418,6 +5875,8 @@ code,source,term
 276,occ2000_updated.xls,variety performer
 276,occ2000_updated.xls,ventriloquist
 276,occ2000_updated.xls,wire walker
+280,occ2000_updated.xls,announcer
+280,occ2000_updated.xls,announcer
 280,occ2000_updated.xls,broadcaster
 280,occ2000_updated.xls,commercial announcer
 280,occ2000_updated.xls,dj
@@ -5459,6 +5918,7 @@ code,source,term
 281,occ2000_updated.xls,cub reporter
 281,occ2000_updated.xls,desk reporter
 281,occ2000_updated.xls,dramatic critic
+281,occ2000_updated.xls,editorial writer
 281,occ2000_updated.xls,feature writer
 281,occ2000_updated.xls,financial writer
 281,occ2000_updated.xls,foreign correspondent
@@ -5479,6 +5939,7 @@ code,source,term
 281,occ2000_updated.xls,news director
 281,occ2000_updated.xls,news reporter
 281,occ2000_updated.xls,news specialist
+281,occ2000_updated.xls,news writer
 281,occ2000_updated.xls,newscaster
 281,occ2000_updated.xls,newspaper correspondent
 281,occ2000_updated.xls,newspaper reporter
@@ -5488,7 +5949,9 @@ code,source,term
 281,occ2000_updated.xls,radio commentator
 281,occ2000_updated.xls,radio news writer
 281,occ2000_updated.xls,society reporter
+281,occ2000_updated.xls,news writer
 281,occ2000_updated.xls,editorials writer
+281,occ2000_updated.xls,editorial writer
 281,occ2000_updated.xls,writer of editorial
 281,occ2000_updated.xls,writer of editorials
 282,occ2000_updated.xls,biomedical communications specialist
@@ -5498,6 +5961,7 @@ code,source,term
 282,occ2000_updated.xls,manager of publications
 282,occ2000_updated.xls,press agent
 282,occ2000_updated.xls,press relations
+282,occ2000_updated.xls,press secretary
 282,occ2000_updated.xls,promotion specialist
 282,occ2000_updated.xls,public relations consultant
 282,occ2000_updated.xls,public relations counselor
@@ -5513,6 +5977,7 @@ code,source,term
 282,occ2000_updated.xls,public relations salesperson
 282,occ2000_updated.xls,public relations worker
 282,occ2000_updated.xls,sales service promoter
+282,occ2000_updated.xls,press secretary
 283,occ2000_updated.xls,advertising editor
 283,occ2000_updated.xls,art editor
 283,occ2000_updated.xls,book editor
@@ -5521,6 +5986,8 @@ code,source,term
 283,occ2000_updated.xls,continuity editor
 283,occ2000_updated.xls,continuity reader
 283,occ2000_updated.xls,copy editor
+283,occ2000_updated.xls,copy reader
+283,occ2000_updated.xls,copy reader
 283,occ2000_updated.xls,editor
 283,occ2000_updated.xls,editorial director
 283,occ2000_updated.xls,editorial specialist
@@ -5559,7 +6026,9 @@ code,source,term
 284,occ2000_updated.xls,process description writers
 284,occ2000_updated.xls,scientific writer
 284,occ2000_updated.xls,specifications writer
+284,occ2000_updated.xls,technical writer
 284,occ2000_updated.xls,technical writer and editor
+284,occ2000_updated.xls,technical writer
 285,occ2000_updated.xls,ad copy writer
 285,occ2000_updated.xls,ad writer
 285,occ2000_updated.xls,adapter
@@ -5607,6 +6076,7 @@ code,source,term
 285,occ2000_updated.xls,television script writer
 285,occ2000_updated.xls,television writer
 285,occ2000_updated.xls,verse writer
+285,occ2000_updated.xls,writer
 286,occ2000_updated.xls,braille translator
 286,occ2000_updated.xls,graphologist
 286,occ2000_updated.xls,interpreter
@@ -5674,6 +6144,8 @@ code,source,term
 290,occ2000_updated.xls,sound cutter
 290,occ2000_updated.xls,sound editor
 290,occ2000_updated.xls,sound effects person
+290,occ2000_updated.xls,sound mixer
+290,occ2000_updated.xls,sound mixer
 290,occ2000_updated.xls,sound person
 290,occ2000_updated.xls,sound printer
 290,occ2000_updated.xls,sound truck operator
@@ -5717,6 +6189,7 @@ code,source,term
 291,occ2000_updated.xls,medical photographer
 291,occ2000_updated.xls,news photographer
 291,occ2000_updated.xls,opthalmic photographer
+291,occ2000_updated.xls,photographer
 291,occ2000_updated.xls,photojournalist
 291,occ2000_updated.xls,portrait photographer
 291,occ2000_updated.xls,school photographer
@@ -5740,6 +6213,7 @@ code,source,term
 296,occ2000_updated.xls,best boy
 296,occ2000_updated.xls,densitometer reader
 296,occ2000_updated.xls,radar operator
+OCC_2000,occ2000_updated.xls,revised occtitle
 300,occ2000_updated.xls,chiropractor
 300,occ2000_updated.xls,d.c.
 300,occ2000_updated.xls,dc
@@ -5769,7 +6243,9 @@ code,source,term
 303,occ2000_updated.xls,consultant dietitian
 303,occ2000_updated.xls,dietician consultant
 303,occ2000_updated.xls,consultant of diet
+303,occ2000_updated.xls,diet counselor
 303,occ2000_updated.xls,diet consultant
+303,occ2000_updated.xls,diet counselor
 303,occ2000_updated.xls,diet therapist
 303,occ2000_updated.xls,dietetic intern
 303,occ2000_updated.xls,dietist
@@ -5992,11 +6468,16 @@ code,source,term
 314,occ2000_updated.xls,hearing therapist
 315,occ2000_updated.xls,o.t.
 315,occ2000_updated.xls,ot
+315,occ2000_updated.xls,occupational therapist
 315,occ2000_updated.xls,occupational therapy
+315,occ2000_updated.xls,occupational therapist
 316,occ2000_updated.xls,kinesiotherapist
 316,occ2000_updated.xls,p.t.  (physical therapist)
+316,occ2000_updated.xls,physical therapist
 316,occ2000_updated.xls,pt
 316,occ2000_updated.xls,pediatric physical therapist
+316,occ2000_updated.xls,physical therapist
+316,occ2000_updated.xls,physical therapist
 316,occ2000_updated.xls,physiotherapist
 316,occ2000_updated.xls,pulmonary physical therapist
 320,occ2000_updated.xls,dosimetrist
@@ -6040,7 +6521,9 @@ code,source,term
 325,occ2000_updated.xls,doctor of veterinary medicine
 325,occ2000_updated.xls,veterinarian epidemiologist
 325,occ2000_updated.xls,horse doctor
+325,occ2000_updated.xls,veterinary inspector
 325,occ2000_updated.xls,veterinarian inspector
+325,occ2000_updated.xls,veterinary inspector
 325,occ2000_updated.xls,inspector of veterinary
 325,occ2000_updated.xls,vet inspector
 325,occ2000_updated.xls,laboratory veterinarian
@@ -6073,6 +6556,7 @@ code,source,term
 326,occ2000_updated.xls,naturopathic doctor
 326,occ2000_updated.xls,naturopathic physician
 326,occ2000_updated.xls,sanipractic physician
+OCC_2000,occ2000_updated.xls,revised occtitle
 370,occ2000_updated.xls,city jailer
 370,occ2000_updated.xls,correction officer head
 370,occ2000_updated.xls,jailer chief
@@ -6235,6 +6719,7 @@ code,source,term
 382,occ2000_updated.xls,c.i.a. agent
 382,occ2000_updated.xls,cia agent
 382,occ2000_updated.xls,city detective
+382,occ2000_updated.xls,criminal investigator
 382,occ2000_updated.xls,deputy united states marshal
 382,occ2000_updated.xls,detective of narcotics
 382,occ2000_updated.xls,vice detective of narcotics
@@ -6250,6 +6735,7 @@ code,source,term
 382,occ2000_updated.xls,investigation officer
 382,occ2000_updated.xls,fbi investigator
 382,occ2000_updated.xls,child support investigator
+382,occ2000_updated.xls,criminal investigator
 382,occ2000_updated.xls,investigator detective
 382,occ2000_updated.xls,investigator of fraud
 382,occ2000_updated.xls,investigator of internal affairs
@@ -6342,16 +6828,19 @@ code,source,term
 391,occ2000_updated.xls,house officer
 391,occ2000_updated.xls,intelligence agent
 391,occ2000_updated.xls,cash shortage investigator
+391,occ2000_updated.xls,private investigator
 391,occ2000_updated.xls,shopping investigator
 391,occ2000_updated.xls,loss prevention analyst
 391,occ2000_updated.xls,private detective
 391,occ2000_updated.xls,private eye
+391,occ2000_updated.xls,private investigator
 391,occ2000_updated.xls,security consultant
 391,occ2000_updated.xls,skip locator
 391,occ2000_updated.xls,skip tracer
 391,occ2000_updated.xls,store detective
 391,occ2000_updated.xls,undercover agent
 391,occ2000_updated.xls,undercover operator
+392,occ2000_updated.xls,alarm investigator
 392,occ2000_updated.xls,armed guard
 392,occ2000_updated.xls,armored car driver
 392,occ2000_updated.xls,armored car guard
@@ -6361,6 +6850,7 @@ code,source,term
 392,occ2000_updated.xls,bodyguard
 392,occ2000_updated.xls,bouncer
 392,occ2000_updated.xls,camp guard
+392,occ2000_updated.xls,casino investigator
 392,occ2000_updated.xls,casino surveillance officer
 392,occ2000_updated.xls,customer security clerk
 392,occ2000_updated.xls,doorshaker
@@ -6383,7 +6873,9 @@ code,source,term
 392,occ2000_updated.xls,baggage inspector
 392,occ2000_updated.xls,security inspector
 392,occ2000_updated.xls,inspector of security
+392,occ2000_updated.xls,alarm investigator
 392,occ2000_updated.xls,investigator of alarm
+392,occ2000_updated.xls,casino investigator
 392,occ2000_updated.xls,investigator of casino
 392,occ2000_updated.xls,investigator of gaming
 392,occ2000_updated.xls,loss prevention representative
@@ -6405,18 +6897,23 @@ code,source,term
 392,occ2000_updated.xls,station gateman
 392,occ2000_updated.xls,supervisor of dance hall
 392,occ2000_updated.xls,dance hall supervisor
+392,occ2000_updated.xls,surveillance officer
+392,occ2000_updated.xls,surveillance officer
 392,occ2000_updated.xls,timber watchman
 392,occ2000_updated.xls,truck guard
 392,occ2000_updated.xls,watchguard
 394,occ2000_updated.xls,crossing flagman
 394,occ2000_updated.xls,crossing gateman
+394,occ2000_updated.xls,school crossing guard
 394,occ2000_updated.xls,crossing tender
 394,occ2000_updated.xls,crossing watchman
 394,occ2000_updated.xls,draw tender
 394,occ2000_updated.xls,crossing guard
+394,occ2000_updated.xls,school crossing guard
 394,occ2000_updated.xls,passenger or freight flagman
 394,occ2000_updated.xls,patrol lady
 394,occ2000_updated.xls,patrol mother
+394,occ2000_updated.xls,school crossing guard
 394,occ2000_updated.xls,school patrol
 394,occ2000_updated.xls,school traffic guard
 394,occ2000_updated.xls,subway guard
@@ -6435,6 +6932,7 @@ code,source,term
 395,occ2000_updated.xls,victim advocate clerk
 395,occ2000_updated.xls,victims advocate specialist
 395,occ2000_updated.xls,victim advocate specialist
+OCC_2000,occ2000_updated.xls,revised occtitle
 400,occ2000_updated.xls,chef
 400,occ2000_updated.xls,chef de cuisine
 400,occ2000_updated.xls,chef de froid
@@ -6779,6 +7277,8 @@ code,source,term
 425,occ2000_updated.xls,tree specialist
 425,occ2000_updated.xls,tree surgeon
 425,occ2000_updated.xls,vine pruner
+425,occ2000_updated.xls,weed controller
+425,occ2000_updated.xls,weed controller
 425,occ2000_updated.xls,weed sprayer
 430,occ2000_updated.xls,casino floor person
 430,occ2000_updated.xls,crap game box person
@@ -7310,6 +7810,8 @@ code,source,term
 472,occ2000_updated.xls,cash register operator
 472,occ2000_updated.xls,casino change attendant
 472,occ2000_updated.xls,change booth attendant
+472,occ2000_updated.xls,change person
+472,occ2000_updated.xls,change person
 472,occ2000_updated.xls,check cashier
 472,occ2000_updated.xls,check out cashier
 472,occ2000_updated.xls,clerk checker
@@ -7319,6 +7821,8 @@ code,source,term
 472,occ2000_updated.xls,disbursing officer
 472,occ2000_updated.xls,drivers' cash clerk
 472,occ2000_updated.xls,fare collector
+472,occ2000_updated.xls,floor cashier
+472,occ2000_updated.xls,floor cashier
 472,occ2000_updated.xls,gaming change person
 472,occ2000_updated.xls,grocery check out
 472,occ2000_updated.xls,grocery checker
@@ -7599,6 +8103,10 @@ code,source,term
 496,occ2000_updated.xls,leaflet distributor
 496,occ2000_updated.xls,linen controller
 496,occ2000_updated.xls,livestock auctioneer
+496,occ2000_updated.xls,memorial adviser
+496,occ2000_updated.xls,memorial adviser
+496,occ2000_updated.xls,memorial counselor
+496,occ2000_updated.xls,memorial counselor
 496,occ2000_updated.xls,merchandise shopper
 496,occ2000_updated.xls,mystery shopper
 496,occ2000_updated.xls,personal shopper
@@ -8642,6 +9150,8 @@ code,source,term
 563,occ2000_updated.xls,yarn weigher
 570,occ2000_updated.xls,administrative aide
 570,occ2000_updated.xls,clerk secretary
+570,occ2000_updated.xls,community youth secretary
+570,occ2000_updated.xls,community youth secretary
 570,occ2000_updated.xls,confidential secretary
 570,occ2000_updated.xls,dental secretary
 570,occ2000_updated.xls,escrow secretary
@@ -9176,6 +9686,8 @@ code,source,term
 605,occ2000_updated.xls,chicken tender
 605,occ2000_updated.xls,chicken vaccinator
 605,occ2000_updated.xls,chopper operator
+605,occ2000_updated.xls,chore tender
+605,occ2000_updated.xls,chore tender
 605,occ2000_updated.xls,citrus picker
 605,occ2000_updated.xls,combine driver
 605,occ2000_updated.xls,combine operator
@@ -9204,21 +9716,41 @@ code,source,term
 605,occ2000_updated.xls,crop scout
 605,occ2000_updated.xls,culler
 605,occ2000_updated.xls,custom grinder
+605,occ2000_updated.xls,custom work
+605,occ2000_updated.xls,custom work
 605,occ2000_updated.xls,dairy hand
 605,occ2000_updated.xls,dairy worker
 605,occ2000_updated.xls,debeaker
 605,occ2000_updated.xls,detasseler
+605,occ2000_updated.xls,ditch cleaner
+605,occ2000_updated.xls,ditch cleaner
+605,occ2000_updated.xls,ditch tender
+605,occ2000_updated.xls,ditch tender
 605,occ2000_updated.xls,egg gatherer
 605,occ2000_updated.xls,egg setter
 605,occ2000_updated.xls,farm equipment operator
+605,occ2000_updated.xls,farm laborer \ n.e.c.
+605,occ2000_updated.xls,farm laborer \ n.e.c.
 605,occ2000_updated.xls,farm machine tender
 605,occ2000_updated.xls,farm tractor operator
+605,occ2000_updated.xls,farmer \ specified type not listed
+605,occ2000_updated.xls,farmer \ specified type not listed
 605,occ2000_updated.xls,feed grinder
 605,occ2000_updated.xls,fence rider
 605,occ2000_updated.xls,fertilizer applicator
 605,occ2000_updated.xls,fertilizing machine operator
 605,occ2000_updated.xls,field aide
+605,occ2000_updated.xls,field broomer
+605,occ2000_updated.xls,field broomer
+605,occ2000_updated.xls,field hand
+605,occ2000_updated.xls,field hand
+605,occ2000_updated.xls,field handyman
+605,occ2000_updated.xls,field handyman
+605,occ2000_updated.xls,field hauler
+605,occ2000_updated.xls,field hauler
 605,occ2000_updated.xls,fig caprifier
+605,occ2000_updated.xls,firebreak cutter
+605,occ2000_updated.xls,firebreak cutter
 605,occ2000_updated.xls,fleece tier
 605,occ2000_updated.xls,flower cutter
 605,occ2000_updated.xls,flower picker
@@ -9248,17 +9780,27 @@ code,source,term
 605,occ2000_updated.xls,hatchery laborer
 605,occ2000_updated.xls,haul cane brakeman
 605,occ2000_updated.xls,hay baler
+605,occ2000_updated.xls,hay buckler
+605,occ2000_updated.xls,hay buckler
 605,occ2000_updated.xls,hay chopper
 605,occ2000_updated.xls,hay rake operator
+605,occ2000_updated.xls,hay stacker
+605,occ2000_updated.xls,hay stacker
 605,occ2000_updated.xls,herb digger
 605,occ2000_updated.xls,herder
 605,occ2000_updated.xls,herdsman
+605,occ2000_updated.xls,hired hand
+605,occ2000_updated.xls,hired hand
+605,occ2000_updated.xls,hired help
+605,occ2000_updated.xls,hired help
 605,occ2000_updated.xls,hoe sharpener
 605,occ2000_updated.xls,hoer
 605,occ2000_updated.xls,honey extractor
 605,occ2000_updated.xls,hop picker
 605,occ2000_updated.xls,hop trainer
 605,occ2000_updated.xls,hop worker
+605,occ2000_updated.xls,hose sprayer
+605,occ2000_updated.xls,hose sprayer
 605,occ2000_updated.xls,hydro sprayer operator
 605,occ2000_updated.xls,incubator machine operator
 605,occ2000_updated.xls,incubator operator
@@ -9278,12 +9820,18 @@ code,source,term
 605,occ2000_updated.xls,lint cleaner
 605,occ2000_updated.xls,liquid fertilizer servicer
 605,occ2000_updated.xls,livestock caretaker
+605,occ2000_updated.xls,livestock feeder
+605,occ2000_updated.xls,livestock feeder
+605,occ2000_updated.xls,livestock handler
+605,occ2000_updated.xls,livestock handler
 605,occ2000_updated.xls,livestock showman
 605,occ2000_updated.xls,migratory farm hand
 605,occ2000_updated.xls,migratory worker
 605,occ2000_updated.xls,milk bottler
 605,occ2000_updated.xls,milk house worker
 605,occ2000_updated.xls,milker machine
+605,occ2000_updated.xls,milking machine operator
+605,occ2000_updated.xls,milking machine operator
 605,occ2000_updated.xls,milkman
 605,occ2000_updated.xls,mule driver
 605,occ2000_updated.xls,mushroom cultivator
@@ -9312,6 +9860,10 @@ code,source,term
 605,occ2000_updated.xls,planting material remover
 605,occ2000_updated.xls,planting material unloader
 605,occ2000_updated.xls,portable feed mill operator
+605,occ2000_updated.xls,portable track line marker
+605,occ2000_updated.xls,portable track line marker
+605,occ2000_updated.xls,portable trackman
+605,occ2000_updated.xls,portable trackman
 605,occ2000_updated.xls,potato bucker
 605,occ2000_updated.xls,potato loader
 605,occ2000_updated.xls,potato picker
@@ -9325,6 +9877,8 @@ code,source,term
 605,occ2000_updated.xls,poultry pinner
 605,occ2000_updated.xls,poultry tender
 605,occ2000_updated.xls,poultry vaccinator
+605,occ2000_updated.xls,produce wrapper
+605,occ2000_updated.xls,produce wrapper
 605,occ2000_updated.xls,propagator laborer
 605,occ2000_updated.xls,puller
 605,occ2000_updated.xls,raking machine operator
@@ -9370,6 +9924,8 @@ code,source,term
 605,occ2000_updated.xls,vegetable trimmer
 605,occ2000_updated.xls,vineyard tender
 605,occ2000_updated.xls,wool sacker
+605,occ2000_updated.xls,worker
+605,occ2000_updated.xls,worker
 605,occ2000_updated.xls,worm farm laborer
 605,occ2000_updated.xls,worm packer
 605,occ2000_updated.xls,worm picker
@@ -11126,6 +11682,8 @@ code,source,term
 722,occ2000_updated.xls,interlocker maintainer
 722,occ2000_updated.xls,irrigation equipment installer
 722,occ2000_updated.xls,irrigation pump installer
+722,occ2000_updated.xls,machine maintenance
+722,occ2000_updated.xls,machine maintenance
 722,occ2000_updated.xls,roundhouse worker
 722,occ2000_updated.xls,signal constructor
 722,occ2000_updated.xls,signal fitter
@@ -11133,6 +11691,8 @@ code,source,term
 722,occ2000_updated.xls,test rack operator
 722,occ2000_updated.xls,triple valve tester
 722,occ2000_updated.xls,trolley car overhauler
+722,occ2000_updated.xls,trucksmith
+722,occ2000_updated.xls,trucksmith
 724,occ2000_updated.xls,outboard motor tester
 724,occ2000_updated.xls,small engine specialist
 726,occ2000_updated.xls,auto tire worker
@@ -11561,12 +12121,18 @@ code,source,term
 770,occ2000_updated.xls,station chief
 275,hand-coding.csv,musician.n.01
 275,hand-coding.csv,musician.n.02
+220,hand-coding.csv,professor
+285,hand-coding.csv,writer
+291,hand-coding.csv,photographer
 271,hand-coding.csv,filmmaker
 276,hand-coding.csv,football_player
 275,hand-coding.csv,virtuoso
 003,hand-coding.csv,politician.n.01
 186,hand-coding.csv,scholar
 proponent,hand-coding.csv,politician.n.02
+165,hand-coding.csv,epidemiologist
+260,hand-coding.csv,painter
+260,hand-coding.csv,sculptor
 276,hand-coding.csv,player.n.01
 003,hand-coded-synset,negotiator.n.01
 volunteer,alt,volunteer
