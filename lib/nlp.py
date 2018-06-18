@@ -75,10 +75,14 @@ def names_match(n1, n2):
     if len(fn1) == 1:
         if fn1 != fn2[0]:
             return False
-
-    if len(fn2) == 1:
+    elif len(fn2) == 1:
         if fn2 != fn1[0]:
             return False
+
+    # under normal circumstances,
+    #  require the first names to be equal...
+    if fn1 != fn2:
+        return False
 
     return True
 
