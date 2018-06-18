@@ -1,8 +1,0 @@
-.*
-*.bin.gz
-*.bin
-fact-extractor/*
-**/.spyderworkspace
-**/*.pyc
-data/*
-**/*.swp
