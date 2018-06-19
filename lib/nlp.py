@@ -38,7 +38,9 @@ nlp = _nlp()
 def first_name(name):
     name = name.lower()
     not_first_names = ["mr","dr",""]
-    names = re.split(r'[\.\s]', name)
+
+    # is this faster than using re.?
+    names = name.replace(".", " ").split()
 
     inc = 0
     last = names[inc]
@@ -50,7 +52,9 @@ def first_name(name):
 
 def last_name(name):
     name = name.lower()
-    names = re.split(r'[\.\s]', name)
+
+    # is this faster than using re.?
+    names = name.replace(".", " ").split()
     not_last_names = ["3d", "jr", "iii", ""]
 
     inc = 1
