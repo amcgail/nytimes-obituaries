@@ -33,14 +33,12 @@ class _nlp:
         self.load()
         return self.nlp(*args, **kwargs)
 
-nlp = _nlp()
+spacy_parse = _nlp()
 
 def first_name(name):
     name = name.lower()
     not_first_names = ["mr","dr",""]
-
-    # is this faster than using re.?
-    names = name.replace(".", " ").split()
+    names = re.split(r'[\.\s]', name)
 
     inc = 0
     last = names[inc]
@@ -52,9 +50,7 @@ def first_name(name):
 
 def last_name(name):
     name = name.lower()
-
-    # is this faster than using re.?
-    names = name.replace(".", " ").split()
+    names = re.split(r'[\.\s]', name)
     not_last_names = ["3d", "jr", "iii", ""]
 
     inc = 1
@@ -64,6 +60,34 @@ def last_name(name):
         last = names[-inc]
 
     return last
+
+def names_match_list(nl1, nl2):
+    names1 = [(first_name(n), last_name(n)) for n in nl1]
+    names2 = [(first_name(n), last_name(n)) for n in nl2]
+
+    for i, (fn1, ln1) in enumerate(names1):
+        for j, (fn2, ln2) in enumerate(names2):
+            # last names should match exactly
+            if ln1 != ln2:
+                continue
+
+            # what about initials?
+            if len(fn1) == 1:
+                if fn1 != fn2[0]:
+                    continue
+            elif len(fn2) == 1:
+                if fn2 != fn1[0]:
+                    continue
+
+            # under normal circumstances,
+            #  require the first names to be equal...
+            if fn1 != fn2:
+                continue
+
+            #if we've gotten this far, we have a match!
+            matches.append((i,j))
+
+    return matches
 
 def names_match(n1, n2):
     fn1 = first_name(n1)
@@ -146,7 +170,7 @@ def followRecursiveNLTK(tree):
 
 
 def extractNV(doc):
-    doc = nlp.nlp(doc)
+    doc = spacy_parse.nlp(doc)
     tree = doc.print_tree()[0]
     N = []
     V = []
@@ -341,9 +365,7 @@ def extractLexical(doc, name):
 
     whatHeDid = set()
     whatHeWas = set()
-    sentences = nlp.sent_tokenize(doc)
-
-    nlp.loadNLP()
+    sentences = sent_tokenize(doc)
 
     for s in sentences:
         s = str(s)
@@ -351,7 +373,7 @@ def extractLexical(doc, name):
         #print "-------------"
         if debug:
             print(" ".join( s.split() ))
-        doc = nlp(s)
+        doc = spacy_parse(s)
 
         verbGroup = {}
 

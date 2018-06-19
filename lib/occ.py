@@ -126,13 +126,13 @@ class Doc:
         return str(self['spacyName']).strip()
 
     def _prop_spacyFullBody(self):
-        return nlp.nlp(self['fullBody'])
+        return nlp.spacy_parse(self['fullBody'])
 
     def _prop_firstSentence(self):
         return extractFirstSentence(self['fullBody']).strip()
 
     def _prop_spacyFirstSentence(self):
-        return nlp.nlp( self["firstSentence"] )
+        return nlp.spacy_parse(self["firstSentence"])
 
     def _prop_age(self):
         g.p.pdepth = 0
