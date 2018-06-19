@@ -65,6 +65,8 @@ def names_match_list(nl1, nl2):
     names1 = [(first_name(n), last_name(n)) for n in nl1]
     names2 = [(first_name(n), last_name(n)) for n in nl2]
 
+    matches = []
+
     for i, (fn1, ln1) in enumerate(names1):
         for j, (fn2, ln2) in enumerate(names2):
             # last names should match exactly
