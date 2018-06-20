@@ -3,3 +3,4 @@ spacy
 pptree
 SPARQLWrapper
 xlrd
+humanize

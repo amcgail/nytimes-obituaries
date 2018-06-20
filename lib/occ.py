@@ -412,6 +412,7 @@ class Coder:
             self.w2c[ code['term'] ] = code['code']
 
     def loadPreviouslyCoded(self, loadDirName, N=None, rand=True):
+        import humanize
         import os
         from os import path
         from datetime import datetime
@@ -442,8 +443,11 @@ class Coder:
         print("Successfully loaded %s documents." % len(self.obituaries))
 
         mod_time = os.stat(loadDir).st_mtime
-        mod_dt = str(datetime.fromtimestamp(int(mod_time)))
-        print("Directory `%s` was last modified on %s" % (loadDirName, mod_dt))
+        mod_dt = datetime.fromtimestamp(int(mod_time))
+        now_dt = datetime.now()
+        time_diff = humanize.naturaldelta(now_dt - mod_dt)
+
+        print("Directory `%s` was last modified %s ago" % (loadDirName, time_diff))
 
     def dumpCodes(self, dumpDir):
         import os
@@ -769,7 +773,7 @@ def extractFirstSentence(body):
     sentences = nlp.sent_tokenize(body)
 
     if len(sentences) < 2:
-        print("skipping(tooFewSentences)")
+        # print("skipping(tooFewSentences)")
         return ""
 
     fS = sentences[0].strip()
