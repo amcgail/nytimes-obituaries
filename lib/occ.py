@@ -404,11 +404,12 @@ class Coder:
         for code in codes:
             self.w2c[ code['term'] ] = code['code']
 
-    def loadPreviouslyCoded(self, loadDir, N=None, rand=True):
+    def loadPreviouslyCoded(self, loadDirName, N=None, rand=True):
         import os
         from os import path
+        from datetime import datetime
 
-        loadDir = path.join(path.dirname(__file__), '..', 'codeDumps', loadDir)
+        loadDir = path.join(path.dirname(__file__), '..', 'codeDumps', loadDirName)
 
         assert(os.path.isdir(loadDir))
 
@@ -431,7 +432,11 @@ class Coder:
 
         self.obituaries = g.select(produceDocs(), N=N, rand=rand)
 
-        print("loaded %s documents" % len(self.obituaries))
+        print("Successfully loaded %s documents." % len(self.obituaries))
+
+        mod_time = os.stat(loadDir).st_mtime
+        mod_dt = str(datetime.fromtimestamp(int(mod_time)))
+        print("Directory `%s` was last modified on %s" % (loadDirName, mod_dt))
 
     def dumpCodes(self, dumpDir):
         import os
