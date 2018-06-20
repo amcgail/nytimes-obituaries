@@ -189,6 +189,14 @@ class Doc:
     # _----------------------------------------------------------------------------------------------------------------
 
 
+    def codedFirstSentenceHtml(self):
+        html = self["firstSentence"]
+
+        for x in self['guess']:
+            repl = r"\1<b>\2 (%s)</b>\3" % ",".join(x['occ'])
+            html = re.sub( r"([^a-zA-Z]|^)(%s)([^a-zA-Z]|$)" % re.escape(x['word']), repl=repl, string=html )
+
+        return html
 
     # bag of words approach
     def code(self, coding):
@@ -197,8 +205,7 @@ class Doc:
         self.isCoded = True
         self.myCoder = coding
 
-        fs = extractFirstSentence(self["fullBody"])
-        words = fs.split()
+        words = self["firstSentence"].split()
 
         def ntuples(N):
             return [ " ".join(words[i:i+N]) for i in range(len(words)-N) ]
@@ -216,9 +223,9 @@ class Doc:
                     "occ": [c]
                 })
 
-        self['age']
-        self['spacyFirstSentence']
-        self['nameS']
+        # simply make sure everything that can be generated is...
+        for x in self.keys():
+            self[x]
 
         self._clear_spacy_props()
 
