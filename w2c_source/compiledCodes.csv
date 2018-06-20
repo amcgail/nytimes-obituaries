@@ -1,5 +1,26 @@
 code,source,term
 OCC_2000,occ2000_updated.xls,revised occtitle
+050,occ2000_updated.xls,advance agent
+050,occ2000_updated.xls,artist's representative
+050,occ2000_updated.xls,author's agent
+050,occ2000_updated.xls,booker
+050,occ2000_updated.xls,booking agent
+050,occ2000_updated.xls,boxing promoter
+050,occ2000_updated.xls,circus agent
+050,occ2000_updated.xls,dramatic agent
+050,occ2000_updated.xls,exhibitor
+050,occ2000_updated.xls,film booker
+050,occ2000_updated.xls,jockey's agent
+050,occ2000_updated.xls,literary agent
+050,occ2000_updated.xls,booking manager
+050,occ2000_updated.xls,patent agent
+050,occ2000_updated.xls,patent broker
+050,occ2000_updated.xls,picture booker
+050,occ2000_updated.xls,promoter
+050,occ2000_updated.xls,promotional representative
+050,occ2000_updated.xls,talent scout
+050,occ2000_updated.xls,theatrical agent
+OCC_2000,occ2000_updated.xls,revised occtitle
 001,occ2000_updated.xls,board chairman
 001,occ2000_updated.xls,chair of the board of directors
 001,occ2000_updated.xls,chair of the governing board
@@ -8,24 +29,19 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 001,occ2000_updated.xls,board director
 001,occ2000_updated.xls,member of the governing board
 001,occ2000_updated.xls,bureau chief
-001,occ2000_updated.xls,c.e.o. (chief executive officer)
 001,occ2000_updated.xls,ceo
 001,occ2000_updated.xls,chief executive officer
 001,occ2000_updated.xls,chief executive
 001,occ2000_updated.xls,c.e.o.
-001,occ2000_updated.xls,c.f.o. (chief financial officer)
 001,occ2000_updated.xls,cfo
 001,occ2000_updated.xls,chief financial officer
 001,occ2000_updated.xls,c.f.o.
-001,occ2000_updated.xls,c.i.o. (chief information officer)
 001,occ2000_updated.xls,cio
 001,occ2000_updated.xls,c.i.o.
 001,occ2000_updated.xls,chief information officer
 001,occ2000_updated.xls,chairman of the board
-001,occ2000_updated.xls,chief executive officer (c.e.o.)
-001,occ2000_updated.xls,chief financial officer (c.f.o.)
-001,occ2000_updated.xls,chief information officer (c.i.o.)
-001,occ2000_updated.xls,chief operating officer (c.o.o.)
+001,occ2000_updated.xls,chief operating officer
+001,occ2000_updated.xls,coo
 001,occ2000_updated.xls,city superintendent
 001,occ2000_updated.xls,city superintendent of schools
 001,occ2000_updated.xls,college president
@@ -45,11 +61,14 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 001,occ2000_updated.xls,mayor
 001,occ2000_updated.xls,mayoress
 001,occ2000_updated.xls,president
+001,occ2000_updated.xls,prime minister
+001,occ2000_updated.xls,premier
 001,occ2000_updated.xls,railroad commissioner
 001,occ2000_updated.xls,road commissioner
 001,occ2000_updated.xls,school commissioner
 001,occ2000_updated.xls,school superintendent
-001,occ2000_updated.xls,superintendant of schools
+001,occ2000_updated.xls,superintendent of schools
+001,occ2000_updated.xls,schools superintendent
 001,occ2000_updated.xls,secretary of state
 001,occ2000_updated.xls,state superintendent of public instruction
 001,occ2000_updated.xls,state superintendent of schools
@@ -57,6 +76,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 001,occ2000_updated.xls,town supervisor
 001,occ2000_updated.xls,tax commissioner
 001,occ2000_updated.xls,u.s. commissioner
+001,occ2000_updated.xls,us commissioner
 001,occ2000_updated.xls,vice president
 001,occ2000_updated.xls,water commissioner
 002,occ2000_updated.xls,adjutant general
@@ -71,6 +91,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 002,occ2000_updated.xls,general superintendent
 002,occ2000_updated.xls,installation superintendant
 002,occ2000_updated.xls,brokerage office manager
+002,occ2000_updated.xls,field party manager
 002,occ2000_updated.xls,general manager
 002,occ2000_updated.xls,general manager of operations
 002,occ2000_updated.xls,industrial organization manager
@@ -78,6 +99,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 002,occ2000_updated.xls,operations manager
 002,occ2000_updated.xls,radio station manager
 002,occ2000_updated.xls,manager of radio station
+002,occ2000_updated.xls,television station manager
 002,occ2000_updated.xls,mine superintendent
 002,occ2000_updated.xls,park superintendent
 002,occ2000_updated.xls,refinery superintendent
@@ -125,6 +147,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 003,occ2000_updated.xls,member of the house
 003,occ2000_updated.xls,member of the house of representatives
 003,occ2000_updated.xls,selectman
+003,occ2000_updated.xls,selectwoman
 003,occ2000_updated.xls,senator
 003,occ2000_updated.xls,tribal council member
 003,occ2000_updated.xls,tribal delegate
@@ -171,12 +194,17 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 006,occ2000_updated.xls,public relations director
 006,occ2000_updated.xls,publicity director
 010,occ2000_updated.xls,director of records management
+010,occ2000_updated.xls,maintenance superintendent
+010,occ2000_updated.xls,maintenance manger
+010,occ2000_updated.xls,adminsitrative services manager
 010,occ2000_updated.xls,facilities manager
 010,occ2000_updated.xls,property disposal manager
 010,occ2000_updated.xls,propoerty utilization manager
 010,occ2000_updated.xls,space officer
 010,occ2000_updated.xls,maintenance superintendant
 011,occ2000_updated.xls,chief technology officer
+011,occ2000_updated.xls,compuster systems management consultant
+011,occ2000_updated.xls,director of computer information systems
 011,occ2000_updated.xls,director of network
 011,occ2000_updated.xls,enterprise resource planner
 011,occ2000_updated.xls,information technology planning and policy analyst
@@ -203,13 +231,39 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 012,occ2000_updated.xls,city controller
 012,occ2000_updated.xls,city treasurer
 012,occ2000_updated.xls,comptroller
+012,occ2000_updated.xls,controller
 012,occ2000_updated.xls,county treasurer
 012,occ2000_updated.xls,financial director
 012,occ2000_updated.xls,financial officer
 012,occ2000_updated.xls,financier
 012,occ2000_updated.xls,foreign exchange dealer
+012,occ2000_updated.xls,atm manager
+012,occ2000_updated.xls,account manager
+012,occ2000_updated.xls,accounts manager
+012,occ2000_updated.xls,accounting manager
+012,occ2000_updated.xls,actuarial manager
+012,occ2000_updated.xls,auditing manager
+012,occ2000_updated.xls,bank manager
+012,occ2000_updated.xls,fi branch manager
+012,occ2000_updated.xls,budget manager
+012,occ2000_updated.xls,credit manager
+012,occ2000_updated.xls,credit and collection manager
+012,occ2000_updated.xls,credit department manager
+012,occ2000_updated.xls,credit office manager
+012,occ2000_updated.xls,credit union manager
+012,occ2000_updated.xls,exchange floor manager
+012,occ2000_updated.xls,financial manager
+012,occ2000_updated.xls,financial institution manager
+012,occ2000_updated.xls,investment manager
+012,occ2000_updated.xls,loan manager
+012,occ2000_updated.xls,loan and credit manager
 012,occ2000_updated.xls,reserve officer
 012,occ2000_updated.xls,state comptroller
+012,occ2000_updated.xls,accounting supervisor
+012,occ2000_updated.xls,accounts supervisor
+012,occ2000_updated.xls,auditor supervisor
+012,occ2000_updated.xls,supervisor auditor
+012,occ2000_updated.xls,supervisor of auditors
 012,occ2000_updated.xls,treasurer
 012,occ2000_updated.xls,trust officer
 013,occ2000_updated.xls,apprenticeship training representative
@@ -429,6 +483,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 021,occ2000_updated.xls,manager of nut farm
 021,occ2000_updated.xls,horticultural farm manager
 021,occ2000_updated.xls,machine milker
+021,occ2000_updated.xls,ranch hand
 021,occ2000_updated.xls,renter
 021,occ2000_updated.xls,share cropper
 021,occ2000_updated.xls,share worker
@@ -443,6 +498,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 022,occ2000_updated.xls,home improvement contractor
 022,occ2000_updated.xls,construction manager
 022,occ2000_updated.xls,project manager
+022,occ2000_updated.xls,painting contractor
 022,occ2000_updated.xls,sewer contractor
 022,occ2000_updated.xls,construction superintendant
 022,occ2000_updated.xls,street supervisor
@@ -501,6 +557,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 023,occ2000_updated.xls,testing director
 023,occ2000_updated.xls,vice principal
 023,occ2000_updated.xls,vice principal
+030,occ2000_updated.xls,chief engineer
 030,occ2000_updated.xls,management engineer
 030,occ2000_updated.xls,manufacturing chief engineer
 030,occ2000_updated.xls,engineering manager
@@ -511,6 +568,11 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 031,occ2000_updated.xls,director of food service
 031,occ2000_updated.xls,luncheonette operator
 031,occ2000_updated.xls,lunchroom operator
+031,occ2000_updated.xls,banquet manager
+031,occ2000_updated.xls,catering manager
+031,occ2000_updated.xls,food and beverage manager
+031,occ2000_updated.xls,food production manager
+031,occ2000_updated.xls,food service manager
 031,occ2000_updated.xls,restauranteur
 031,occ2000_updated.xls,saloonkeeper
 031,occ2000_updated.xls,tavern keeper
@@ -655,7 +717,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 036,occ2000_updated.xls,manager of research
 036,occ2000_updated.xls,wild life manager
 036,occ2000_updated.xls,manager of wild life
-040,occ2000_updated.xls,branch manager
 040,occ2000_updated.xls,manager of branch
 040,occ2000_updated.xls,postmaster
 040,occ2000_updated.xls,station superintendent
@@ -746,7 +807,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 042,occ2000_updated.xls,division commander
 042,occ2000_updated.xls,division director
 042,occ2000_updated.xls,field administrator
-042,occ2000_updated.xls,club manager
 042,occ2000_updated.xls,manager of club
 042,occ2000_updated.xls,counseling services manager
 042,occ2000_updated.xls,manager of counseling services
@@ -785,6 +845,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 043,occ2000_updated.xls,county official
 043,occ2000_updated.xls,county recorder
 043,occ2000_updated.xls,diplomat
+043,occ2000_updated.xls,ambassador
 043,occ2000_updated.xls,director of consumer affairs
 043,occ2000_updated.xls,director of entertainment
 043,occ2000_updated.xls,director of professional services
@@ -881,6 +942,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 043,occ2000_updated.xls,register in chancery
 043,occ2000_updated.xls,register of deeds
 043,occ2000_updated.xls,register of wills
+043,occ2000_updated.xls,registrar
 043,occ2000_updated.xls,registration officer
 043,occ2000_updated.xls,risk management
 043,occ2000_updated.xls,safety coordinator
@@ -1111,7 +1173,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 062,occ2000_updated.xls,placement assistant
 062,occ2000_updated.xls,retirement assistant
 062,occ2000_updated.xls,benefit specialist
-062,occ2000_updated.xls,business agent
 062,occ2000_updated.xls,compensation expert
 062,occ2000_updated.xls,compensation specialist
 062,occ2000_updated.xls,labor contract analyst
@@ -1137,6 +1198,8 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 062,occ2000_updated.xls,industrial relations analyst
 062,occ2000_updated.xls,industrial relations counselor
 062,occ2000_updated.xls,industrial relations worker
+062,occ2000_updated.xls,industrial relations professional
+062,occ2000_updated.xls,industrial relations employee
 062,occ2000_updated.xls,job analyst
 062,occ2000_updated.xls,job development specialist
 062,occ2000_updated.xls,job interviewer
@@ -1154,6 +1217,8 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 062,occ2000_updated.xls,manpower development specialist
 062,occ2000_updated.xls,mediator
 062,occ2000_updated.xls,morale officer
+062,occ2000_updated.xls,personnel negotiator
+062,occ2000_updated.xls,labor relations negotiator
 062,occ2000_updated.xls,occupational analyst
 062,occ2000_updated.xls,older worker specialist
 062,occ2000_updated.xls,pension administrator
@@ -1258,6 +1323,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 072,occ2000_updated.xls,conference producer
 072,occ2000_updated.xls,conference service coordinator
 072,occ2000_updated.xls,convention planner
+072,occ2000_updated.xls,convention manager
 072,occ2000_updated.xls,meeting planner
 073,occ2000_updated.xls,administrative analyst
 073,occ2000_updated.xls,administrative assistant
@@ -1277,6 +1343,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 073,occ2000_updated.xls,ship purser
 073,occ2000_updated.xls,social security specialist
 073,occ2000_updated.xls,special service officer
+073,occ2000_updated.xls,order department supervisor
 073,occ2000_updated.xls,technical consultant
 073,occ2000_updated.xls,veterans contact representative
 080,occ2000_updated.xls,account auditor
@@ -1313,9 +1380,11 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 080,occ2000_updated.xls,systems accountant
 080,occ2000_updated.xls,tax accountant
 080,occ2000_updated.xls,tax expert
+080,occ2000_updated.xls,accounting technician
 080,occ2000_updated.xls,traveling accountant
 080,occ2000_updated.xls,traveling auditor
 080,occ2000_updated.xls,traveling repair accountant
+081,occ2000_updated.xls,real estate appraiser
 081,occ2000_updated.xls,area land man
 081,occ2000_updated.xls,assessor
 081,occ2000_updated.xls,bank appraiser
@@ -1323,6 +1392,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 081,occ2000_updated.xls,county assessor
 081,occ2000_updated.xls,easement man
 081,occ2000_updated.xls,house evaluator
+081,occ2000_updated.xls,land inspector
 081,occ2000_updated.xls,land appraiser
 081,occ2000_updated.xls,licensed appraiser
 081,occ2000_updated.xls,personal property assessor
@@ -1331,12 +1401,14 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 081,occ2000_updated.xls,real estate appraiser
 081,occ2000_updated.xls,real estate assessor
 081,occ2000_updated.xls,real estate evaluator
+081,occ2000_updated.xls,real estate appriser
 081,occ2000_updated.xls,tax appraiser
 081,occ2000_updated.xls,tax assessor
 082,occ2000_updated.xls,budget analyst
 082,occ2000_updated.xls,budget examiner
 082,occ2000_updated.xls,budget officer
 082,occ2000_updated.xls,cost analyst
+082,occ2000_updated.xls,budget engineer
 082,occ2000_updated.xls,fiscal agent
 083,occ2000_updated.xls,credit analyst
 083,occ2000_updated.xls,credit negotiator
@@ -1345,6 +1417,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 084,occ2000_updated.xls,bond analyst
 084,occ2000_updated.xls,commodity analyst
 084,occ2000_updated.xls,corporate financial analyst
+084,occ2000_updated.xls,statistical financial analyst
 084,occ2000_updated.xls,fiscal analyst
 084,occ2000_updated.xls,investment analyst
 084,occ2000_updated.xls,investor
@@ -1391,6 +1464,9 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 091,occ2000_updated.xls,mortgage loan officer
 091,occ2000_updated.xls,mortgage underwriter
 091,occ2000_updated.xls,real estate officer
+091,occ2000_updated.xls,loan supervisor
+091,occ2000_updated.xls,mortgage supervisor
+091,occ2000_updated.xls,mortgage and loan supervisor
 093,occ2000_updated.xls,city collector
 093,occ2000_updated.xls,collector of internal revenue
 093,occ2000_updated.xls,collector of port
@@ -1611,7 +1687,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 110,occ2000_updated.xls,computer security information specialist
 110,occ2000_updated.xls,computer security specialist
 110,occ2000_updated.xls,computer systems administrator
-110,occ2000_updated.xls,data security
+110,occ2000_updated.xls,data security administrator
 110,occ2000_updated.xls,information systems administrator
 110,occ2000_updated.xls,information systems security officer
 110,occ2000_updated.xls,information systems security specialist
@@ -1831,6 +1907,13 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 135,occ2000_updated.xls,chemical research engineer
 135,occ2000_updated.xls,sand analyst
 135,occ2000_updated.xls,sand technologist
+135,occ2000_updated.xls,monomer recovery supervisor
+135,occ2000_updated.xls,supervisor of monomer recovery
+135,occ2000_updated.xls,poly area supervisor
+135,occ2000_updated.xls,supervisor of poly area
+135,occ2000_updated.xls,polymerization supervisor
+135,occ2000_updated.xls,supervisor of polymerization
+135,occ2000_updated.xls,technical superviosr
 136,occ2000_updated.xls,engineer of airport
 136,occ2000_updated.xls,airport engineer
 136,occ2000_updated.xls,engineer of architectural
@@ -2489,7 +2572,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 156,occ2000_updated.xls,levelman
 156,occ2000_updated.xls,map compiler
 156,occ2000_updated.xls,map drafter
-156,occ2000_updated.xls,party chief
 156,occ2000_updated.xls,plane tableman
 156,occ2000_updated.xls,spud setter
 156,occ2000_updated.xls,stake driver
@@ -2625,7 +2707,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 165,occ2000_updated.xls,malariologist
 165,occ2000_updated.xls,medical epidemiologist
 165,occ2000_updated.xls,medical physicist
-165,occ2000_updated.xls,medical research
 165,occ2000_updated.xls,medical researcher
 165,occ2000_updated.xls,medical scientist
 165,occ2000_updated.xls,microbiologist public health
@@ -3186,7 +3267,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 200,occ2000_updated.xls,aids counselor
 200,occ2000_updated.xls,addiction counselor
 200,occ2000_updated.xls,admissions counselor
-200,occ2000_updated.xls,adviser
 200,occ2000_updated.xls,alcoholic counselor
 200,occ2000_updated.xls,boy's worker
 200,occ2000_updated.xls,boys counselor
@@ -3203,8 +3283,8 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 200,occ2000_updated.xls,child guidance counselor
 200,occ2000_updated.xls,clinical mental health counselor
 200,occ2000_updated.xls,coordinator of rehabilitation services
-200,occ2000_updated.xls,counselor
-200,occ2000_updated.xls,counselor
+200,occ2000_updated.xls,education counselor
+200,occ2000_updated.xls,family counselor
 200,occ2000_updated.xls,curriculum counselor
 200,occ2000_updated.xls,director of guidance
 200,occ2000_updated.xls,director of rehabilitation
@@ -3252,7 +3332,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 200,occ2000_updated.xls,supervisor of special services
 200,occ2000_updated.xls,vocational rehabilitation supervisor
 200,occ2000_updated.xls,supervisor of vocational rehabilitation
-200,occ2000_updated.xls,counselor
 200,occ2000_updated.xls,drug abuse technician
 200,occ2000_updated.xls,teenage adviser
 200,occ2000_updated.xls,veterans rehabilitation counselor
@@ -3321,7 +3400,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 201,occ2000_updated.xls,social worker
 201,occ2000_updated.xls,case supervisor
 201,occ2000_updated.xls,supervisor of case
-201,occ2000_updated.xls,supervisor of field
 201,occ2000_updated.xls,supervisor of home
 201,occ2000_updated.xls,social work supervisor
 201,occ2000_updated.xls,supervisor of social work
@@ -3381,7 +3459,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 202,occ2000_updated.xls,parole officer
 202,occ2000_updated.xls,political organizer
 202,occ2000_updated.xls,political worker
-202,occ2000_updated.xls,politician
 202,occ2000_updated.xls,probation and patrol agent
 202,occ2000_updated.xls,probation officer
 202,occ2000_updated.xls,probation worker
@@ -3399,9 +3476,9 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 202,occ2000_updated.xls,social service worker
 202,occ2000_updated.xls,student officer
 202,occ2000_updated.xls,parole supervisor
-202,occ2000_updated.xls,sueprvisor of parole
+202,occ2000_updated.xls,supervisor of parole
 202,occ2000_updated.xls,human service technician
-202,occ2000_updated.xls,technician of human service
+202,occ2000_updated.xls,technician of human services
 202,occ2000_updated.xls,travelers' aid worker
 202,occ2000_updated.xls,travelers' aid worker
 202,occ2000_updated.xls,traveling representative
@@ -3411,8 +3488,16 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 202,occ2000_updated.xls,veterans service officer
 202,occ2000_updated.xls,welfare service aide
 202,occ2000_updated.xls,welfare visitor
+204,occ2000_updated.xls,assistant minister
 204,occ2000_updated.xls,bishop
-204,occ2000_updated.xls,brother
+204,occ2000_updated.xls,cardinal
+204,occ2000_updated.xls,pope
+204,occ2000_updated.xls,imam
+204,occ2000_updated.xls,mufti
+204,occ2000_updated.xls,mullah
+204,occ2000_updated.xls,mollah
+204,occ2000_updated.xls,shadhu
+204,occ2000_updated.xls,sadhu
 204,occ2000_updated.xls,catechist
 204,occ2000_updated.xls,chaplain
 204,occ2000_updated.xls,christian science practitioner
@@ -3421,11 +3506,13 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 204,occ2000_updated.xls,deacon
 204,occ2000_updated.xls,deaconess
 204,occ2000_updated.xls,elder
+204,occ2000_updated.xls,elderess
 204,occ2000_updated.xls,evangelist
 204,occ2000_updated.xls,marriage performer
 204,occ2000_updated.xls,minister
 204,occ2000_updated.xls,mohel
 204,occ2000_updated.xls,ordained minister
+204,occ2000_updated.xls,church minister
 204,occ2000_updated.xls,parish priest
 204,occ2000_updated.xls,pastor
 204,occ2000_updated.xls,preacher
@@ -3440,7 +3527,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 205,occ2000_updated.xls,director of religious activities
 205,occ2000_updated.xls,director of religious education
 205,occ2000_updated.xls,district superintendent
-205,occ2000_updated.xls,manager
 205,occ2000_updated.xls,minister of education
 205,occ2000_updated.xls,religious education director
 205,occ2000_updated.xls,church supervisor
@@ -3467,23 +3553,22 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 206,occ2000_updated.xls,missionary
 206,occ2000_updated.xls,monk
 206,occ2000_updated.xls,novice
+206,occ2000_updated.xls,nun
+206,occ2000_updated.xls,christian science nurse
 206,occ2000_updated.xls,parish visitor
 206,occ2000_updated.xls,parish worker
 206,occ2000_updated.xls,pastoral worker
 206,occ2000_updated.xls,postulant
-206,occ2000_updated.xls,prior
 206,occ2000_updated.xls,religious healer
 206,occ2000_updated.xls,religious worker
 206,occ2000_updated.xls,sacristan
 206,occ2000_updated.xls,salvationist
 206,occ2000_updated.xls,shochet
 206,occ2000_updated.xls,shohet
-206,occ2000_updated.xls,sister
 206,occ2000_updated.xls,sister superior
 206,occ2000_updated.xls,spiritual advisor
 206,occ2000_updated.xls,subprior
 206,occ2000_updated.xls,sunday school missionary
-206,occ2000_updated.xls,superior
 206,occ2000_updated.xls,bible teacher
 206,occ2000_updated.xls,teacher of bible
 206,occ2000_updated.xls,teacher of religion
@@ -3517,6 +3602,11 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 210,occ2000_updated.xls,insurance attorney
 210,occ2000_updated.xls,insurance counselor
 210,occ2000_updated.xls,law writer
+210,occ2000_updated.xls,law partner
+210,occ2000_updated.xls,partner in law firm
+210,occ2000_updated.xls,partner in the law firm
+210,occ2000_updated.xls,legal partner
+210,occ2000_updated.xls,lawyer
 210,occ2000_updated.xls,legal adviser
 210,occ2000_updated.xls,legal counsel
 210,occ2000_updated.xls,legal examiner
@@ -3555,6 +3645,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 211,occ2000_updated.xls,criminal judge
 211,occ2000_updated.xls,hearing examiner
 211,occ2000_updated.xls,hearing officer
+211,occ2000_updated.xls,judge
 211,occ2000_updated.xls,jurist
 211,occ2000_updated.xls,justice
 211,occ2000_updated.xls,justice of the peace
@@ -5541,10 +5632,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 220,occ2000_updated.xls,textile machinery instructor
 220,occ2000_updated.xls,textile machinery instructor lecturer
 220,occ2000_updated.xls,textile machinery instructor professor
-220,occ2000_updated.xls,trainer
-220,occ2000_updated.xls,trainer
-220,occ2000_updated.xls,trainer lecturer
-220,occ2000_updated.xls,trainer professor
 220,occ2000_updated.xls,visual educator
 220,occ2000_updated.xls,visual educator
 220,occ2000_updated.xls,visual educator lecturer
@@ -5557,9 +5644,12 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 230,occ2000_updated.xls,teacher of  day care
 230,occ2000_updated.xls,teacher of  head start
 230,occ2000_updated.xls,teacher of  kindergarten
+230,occ2000_updated.xls,kindergarten teacher
 230,occ2000_updated.xls,teacher of  nursery school
+230,occ2000_updated.xls,nursery school teacher
 230,occ2000_updated.xls,teacher of  prekindergarten
 230,occ2000_updated.xls,teacher of  preschool
+230,occ2000_updated.xls,preschool teacher
 231,occ2000_updated.xls,supervisor of music
 231,occ2000_updated.xls,music supervisor
 231,occ2000_updated.xls,teacher of  elementary school
@@ -5592,6 +5682,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 231,occ2000_updated.xls,visiting teacher
 231,occ2000_updated.xls,visiting teacher
 232,occ2000_updated.xls,director of rotc
+232,occ2000_updated.xls,music director/teaching
 232,occ2000_updated.xls,accounting teacher
 232,occ2000_updated.xls,teacher of  accounting
 232,occ2000_updated.xls,auto body repair teacher
@@ -5798,7 +5889,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 240,occ2000_updated.xls,curator
 240,occ2000_updated.xls,docent coordinator
 240,occ2000_updated.xls,field collector
-240,occ2000_updated.xls,collections manager
 240,occ2000_updated.xls,manager of collections
 240,occ2000_updated.xls,museum curator
 240,occ2000_updated.xls,museum director
@@ -5827,6 +5917,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 243,occ2000_updated.xls,hospital librarian
 243,occ2000_updated.xls,institution librarian
 243,occ2000_updated.xls,law librarian
+243,occ2000_updated.xls,librarian
 243,occ2000_updated.xls,professional librarian
 243,occ2000_updated.xls,library professional
 243,occ2000_updated.xls,manager of  circulation
@@ -6139,16 +6230,17 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 263,occ2000_updated.xls,window dresser
 263,occ2000_updated.xls,window trimmer
 270,occ2000_updated.xls,actor
+270,occ2000_updated.xls,movie star
 270,occ2000_updated.xls,actress
+270,occ2000_updated.xls,movie starlet
+270,occ2000_updated.xls,starlet
 270,occ2000_updated.xls,dramatic reader
 270,occ2000_updated.xls,elocutionist
 270,occ2000_updated.xls,impresario
 270,occ2000_updated.xls,minstrel
 270,occ2000_updated.xls,monologist
 270,occ2000_updated.xls,motion picture actor
-270,occ2000_updated.xls,second
 270,occ2000_updated.xls,soubrette
-270,occ2000_updated.xls,stand in
 270,occ2000_updated.xls,television actor
 270,occ2000_updated.xls,theatrical performer
 270,occ2000_updated.xls,theatrical trouper
@@ -6169,11 +6261,14 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 271,occ2000_updated.xls,television producer
 272,occ2000_updated.xls,archer
 272,occ2000_updated.xls,athlete
+272,occ2000_updated.xls,athletic coach
 272,occ2000_updated.xls,auto racer
 272,occ2000_updated.xls,ball player
+272,occ2000_updated.xls,baseball coach
 272,occ2000_updated.xls,baseball player
 272,occ2000_updated.xls,baseball scout
 272,occ2000_updated.xls,baseball umpire
+272,occ2000_updated.xls,basketball coach
 272,occ2000_updated.xls,basketball player
 272,occ2000_updated.xls,bicycle racer
 272,occ2000_updated.xls,bicyclist
@@ -6194,6 +6289,8 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,ice skater
 272,occ2000_updated.xls,jai alai player
 272,occ2000_updated.xls,jockey
+272,occ2000_updated.xls,sports judge
+272,occ2000_updated.xls,athletics judge
 272,occ2000_updated.xls,baseball club manager
 272,occ2000_updated.xls,motorcyclist
 272,occ2000_updated.xls,oarsman
@@ -6276,6 +6373,8 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,wrestler
 274,occ2000_updated.xls,acrobatic dancer
 274,occ2000_updated.xls,ballet dancer
+274,occ2000_updated.xls,ballerina
+274,occ2000_updated.xls,ballerino
 274,occ2000_updated.xls,choreographer
 274,occ2000_updated.xls,dance director
 274,occ2000_updated.xls,dancer
@@ -6812,6 +6911,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 306,occ2000_updated.xls,d.o.
 306,occ2000_updated.xls,dermatologist
 306,occ2000_updated.xls,diagnostic radiologist
+306,occ2000_updated.xls,diagnostician
 306,occ2000_updated.xls,doctor
 306,occ2000_updated.xls,doctor of medicine
 306,occ2000_updated.xls,doctor of osteopathy
@@ -7570,6 +7670,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 371,occ2000_updated.xls,traffic sergeant
 371,occ2000_updated.xls,uniform force captain
 372,occ2000_updated.xls,battalion chief
+372,occ2000_updated.xls,captain
 372,occ2000_updated.xls,captain of fire prevention bureau
 372,occ2000_updated.xls,fire prevention bureau chief
 372,occ2000_updated.xls,fire boss
@@ -7673,6 +7774,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 380,occ2000_updated.xls,reformatory attendant
 380,occ2000_updated.xls,sergeant at arms
 380,occ2000_updated.xls,turnkey
+382,occ2000_updated.xls,agent
 382,occ2000_updated.xls,c.i.a. agent
 382,occ2000_updated.xls,cia agent
 382,occ2000_updated.xls,city detective
@@ -8597,7 +8699,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 455,occ2000_updated.xls,chair car attendant
 455,occ2000_updated.xls,chair lift operator
 455,occ2000_updated.xls,club car attendant
-455,occ2000_updated.xls,conductor
 455,occ2000_updated.xls,dining car conductor
 455,occ2000_updated.xls,dining car hop
 455,occ2000_updated.xls,dining car steward
@@ -8871,6 +8972,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 481,occ2000_updated.xls,insurance solicitor
 481,occ2000_updated.xls,life insurance sales
 481,occ2000_updated.xls,network contractor
+481,occ2000_updated.xls,organizer
 481,occ2000_updated.xls,pension agent
 481,occ2000_updated.xls,placer
 482,occ2000_updated.xls,block trader
@@ -8985,8 +9087,10 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 492,occ2000_updated.xls,buyer broker
 492,occ2000_updated.xls,buyers' agent
 492,occ2000_updated.xls,real estate agent
+492,occ2000_updated.xls,real-estate agent
 492,occ2000_updated.xls,real estate and insurance agent
 492,occ2000_updated.xls,real estate broker
+492,occ2000_updated.xls,real-estate broker
 492,occ2000_updated.xls,realtor
 492,occ2000_updated.xls,right-of-way agent
 492,occ2000_updated.xls,right-of-way buyer
@@ -9432,6 +9536,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 524,occ2000_updated.xls,customer representative
 524,occ2000_updated.xls,customer service agent
 524,occ2000_updated.xls,customer service clerk
+524,occ2000_updated.xls,customer service representative
 524,occ2000_updated.xls,customer support
 524,occ2000_updated.xls,film rental clerk
 524,occ2000_updated.xls,film replacement orderer
@@ -10016,7 +10121,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 563,occ2000_updated.xls,city weighmaster
 563,occ2000_updated.xls,coal weigher
 563,occ2000_updated.xls,cotton acreage measurer
-563,occ2000_updated.xls,counter
 563,occ2000_updated.xls,counter weigher
 563,occ2000_updated.xls,field cane scale clerk
 563,occ2000_updated.xls,field cane scaler
@@ -10352,7 +10456,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 593,occ2000_updated.xls,catalogue compiler
 593,occ2000_updated.xls,catalogue maker
 593,occ2000_updated.xls,charge out clerk
-593,occ2000_updated.xls,charter
 593,occ2000_updated.xls,circular clerk
 593,occ2000_updated.xls,circular stuffer
 593,occ2000_updated.xls,clerk stenographer
@@ -10384,6 +10487,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 593,occ2000_updated.xls,freight claim investigator
 593,occ2000_updated.xls,girl friday
 593,occ2000_updated.xls,hearing stenographer
+593,occ2000_updated.xls,claim inspector
 593,occ2000_updated.xls,intermission coordinator
 593,occ2000_updated.xls,investigation clerk
 593,occ2000_updated.xls,laboratory clerk
@@ -10859,8 +10963,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 605,occ2000_updated.xls,vegetable trimmer
 605,occ2000_updated.xls,vineyard tender
 605,occ2000_updated.xls,wool sacker
-605,occ2000_updated.xls,worker
-605,occ2000_updated.xls,worker
+605,occ2000_updated.xls,migrant worker
 605,occ2000_updated.xls,worm farm laborer
 605,occ2000_updated.xls,worm packer
 605,occ2000_updated.xls,worm picker
@@ -11029,7 +11132,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 613,occ2000_updated.xls,carriage rider
 613,occ2000_updated.xls,carriage setter
 613,occ2000_updated.xls,cat swamper
-613,occ2000_updated.xls,catcher
 613,occ2000_updated.xls,cattyman
 613,occ2000_updated.xls,chain hooker
 613,occ2000_updated.xls,chain puller
@@ -11167,7 +11269,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 613,occ2000_updated.xls,skidway man
 613,occ2000_updated.xls,slackman
 613,occ2000_updated.xls,slipper
-613,occ2000_updated.xls,sniper
 613,occ2000_updated.xls,snubber
 613,occ2000_updated.xls,splitter
 613,occ2000_updated.xls,spool tender
@@ -11206,7 +11307,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 613,occ2000_updated.xls,tong setter
 613,occ2000_updated.xls,tongsman
 613,occ2000_updated.xls,topper
-613,occ2000_updated.xls,trailer
 613,occ2000_updated.xls,tree marker
 613,occ2000_updated.xls,tree shear operator
 613,occ2000_updated.xls,whistle punk
@@ -11302,7 +11402,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 622,occ2000_updated.xls,ladle builder
 622,occ2000_updated.xls,ladle liner
 622,occ2000_updated.xls,ladle patcher
-622,occ2000_updated.xls,liner
 622,occ2000_updated.xls,manhole builder
 622,occ2000_updated.xls,mason
 622,occ2000_updated.xls,mason liner
@@ -11547,7 +11646,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 626,occ2000_updated.xls,dope pourer
 626,occ2000_updated.xls,dowel pin man
 626,occ2000_updated.xls,dredge pipeman
-626,occ2000_updated.xls,drifter
 626,occ2000_updated.xls,dust handler
 626,occ2000_updated.xls,fire pot operator
 626,occ2000_updated.xls,flare man
@@ -12207,7 +12305,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 682,occ2000_updated.xls,hole digger operator
 682,occ2000_updated.xls,horizontal drill operator
 682,occ2000_updated.xls,horizontal earth boring machine operator
-682,occ2000_updated.xls,jumper
 682,occ2000_updated.xls,machine driller
 682,occ2000_updated.xls,post hole digger
 682,occ2000_updated.xls,post hole digging machine operator
@@ -12332,6 +12429,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 694,occ2000_updated.xls,company laborer
 694,occ2000_updated.xls,drainman
 694,occ2000_updated.xls,dumper bailer operator
+694,occ2000_updated.xls,extra
 694,occ2000_updated.xls,flame channeler
 694,occ2000_updated.xls,floorhand
 694,occ2000_updated.xls,foot worker
@@ -12849,7 +12947,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 736,occ2000_updated.xls,machinery mover
 736,occ2000_updated.xls,machinery rigger
 736,occ2000_updated.xls,maintenance millwright
-736,occ2000_updated.xls,mover
 736,occ2000_updated.xls,plant changer
 741,occ2000_updated.xls,electric installer
 741,occ2000_updated.xls,electric powerline examiner
@@ -13074,6 +13171,7 @@ thief,alt,thief
 defender,alt,defender
 champion,alt,champion
 veteran,alt,veteran
+leader,alt,leader
 philanthropist,alt,philanthropist
 benefactor,alt,benefactor
 widow,alt,widow

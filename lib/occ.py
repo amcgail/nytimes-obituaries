@@ -883,11 +883,12 @@ def regenerateW2C(expandSynonyms = False):
     print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
     workbook = xlrd.open_workbook(occ2000Fn)
 
-    for wksheet_i in list(range(4, 17)):
+    for wksheet_i in list(range(3, 17)):
         worksheet = workbook.sheet_by_index(wksheet_i)
         print("Working on worksheet %s" % wksheet_i)
 
         for row in range(10000):
+            print(row)
             try:
                 code = worksheet.cell(row, 0).value
             except IndexError:
