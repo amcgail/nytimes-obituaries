@@ -8,6 +8,7 @@ Created on Fri Apr 27 12:46:36 2018
 import re
 
 import spacy
+
 from nltk.corpus import wordnet as wn
 from pptree import print_tree
 from nltk import word_tokenize, sent_tokenize
@@ -41,12 +42,16 @@ def first_name(name):
     names = re.split(r'[\.\s]', name)
 
     inc = 0
-    last = names[inc]
-    while last in not_first_names:
+    first = names[inc]
+    while first in not_first_names:
         inc += 1
-        last = names[inc]
+        if inc >= len(names):
+            first = None
+            break
 
-    return last
+        first = names[inc]
+
+    return first
 
 def last_name(name):
     name = name.lower()
@@ -57,6 +62,10 @@ def last_name(name):
     last = names[-inc]
     while last in not_last_names:
         inc += 1
+        if inc >= len(names):
+            last = None
+            break
+
         last = names[-inc]
 
     return last
@@ -163,31 +172,13 @@ def followRecursive(ws, deps, depth=0):
 def followRecursiveNLTK(tree):
     total = []
     for x in tree['modifiers']:
-        total += followRecursive(x)
+        total += followRecursiveNLTK(x)
     
     del tree['modifiers']
 
     total.append(tree)
     return total
 
-
-def extractNV(doc):
-    doc = spacy_parse.nlp(doc)
-    tree = doc.print_tree()[0]
-    N = []
-    V = []
-    for x in followRecursiveNLTK(tree):
-        #arc = x['arc']
-        #print x
-        if x['POS_coarse'] == "NOUN":
-            N.append( x['lemma'] )
-        if x['POS_coarse'] == "VERB":
-            V.append( x['lemma'] )
-    return {
-        "N": N,
-        "V": V
-    }
-    
 # accepts a synset
 def printHyponymTree(s):
     print_tree( synsetNode(s), "hyponyms" )
@@ -367,48 +358,39 @@ def extractLexical(doc, name):
 
     whatHeDid = set()
     whatHeWas = set()
-    sentences = sent_tokenize(doc)
 
-    for s in sentences:
-        s = str(s)
+    verbGroup = {}
 
-        #print "-------------"
-        if debug:
-            print(" ".join( s.split() ))
-        doc = spacy_parse(s)
+    for chunk in doc.noun_chunks:
+        fullInfo = [chunk.text, chunk.root.text, chunk.root.dep_, chunk.root.head.text]
+        if chunk.root.dep_ in ['nsubj', 'dobj', 'attr']:
+            idx = chunk.root.head.idx
+            if idx not in verbGroup:
+                verbGroup[idx] = []
+            verbGroup[idx].append(fullInfo)
 
-        verbGroup = {}
+    #print verbGroup
 
-        for chunk in doc.noun_chunks:
-            fullInfo = [chunk.text, chunk.root.text, chunk.root.dep_, chunk.root.head.text]
-            if chunk.root.dep_ in ['nsubj', 'dobj', 'attr']:
-                idx = chunk.root.head.idx
-                if idx not in verbGroup:
-                    verbGroup[idx] = []
-                verbGroup[idx].append(fullInfo)
-
-        #print verbGroup
-
-        for vi in verbGroup:
-            if "attr" in [x[-2] for x in verbGroup[vi]]:
-                itWasHim = False
-                whatItWas = None
-                for info in verbGroup[vi]:
-                    for np in nameParts:
-                        if np in info[0].lower():
-                            itWasHim = True
-                    if info[-2] == 'attr':
-                        whatItWas = info[0]
-                        whatItWas = " ".join( whatItWas.split() )
-                if itWasHim:
-                    whatHeWas.add( whatItWas )
-            else:
-                for info in verbGroup[vi]:
-                    for np in nameParts:
-                        if np in info[0].lower():
-                            wD = info[-1]
-                            wD = " ".join( wD.split() )
-                            whatHeDid.add( wD )
+    for vi in verbGroup:
+        if "attr" in [x[-2] for x in verbGroup[vi]]:
+            itWasHim = False
+            whatItWas = None
+            for info in verbGroup[vi]:
+                for np in nameParts:
+                    if np in info[0].lower():
+                        itWasHim = True
+                if info[-2] == 'attr':
+                    whatItWas = info[0]
+                    whatItWas = " ".join( whatItWas.split() )
+            if itWasHim:
+                whatHeWas.add( whatItWas )
+        else:
+            for info in verbGroup[vi]:
+                for np in nameParts:
+                    if np in info[0].lower():
+                        wD = info[-1]
+                        wD = " ".join( wD.split() )
+                        whatHeDid.add( wD )
     return {
         "did": list(whatHeDid),
         "was": list(whatHeWas)

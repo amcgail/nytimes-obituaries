@@ -4,7 +4,7 @@ import sys
 
 debug = False
 
-def select(iterator, N=None, rand=True):
+def select(iterator, N=None, start=0, rand=True):
     import itertools
     import random
 
@@ -14,9 +14,9 @@ def select(iterator, N=None, rand=True):
     if rand:
         rs = list(iterator)
         random.shuffle(rs)
-        return rs[:N]
+        return rs[start:start+N]
     else:
-        return list( itertools.islice(iterator, N) )
+        return list( itertools.islice(iterator, start, start+N) )
 
 def code2word():
     pass
