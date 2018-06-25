@@ -17,11 +17,12 @@ sys.path.append( path.join( basedir, 'lib' ) )
 import occ
 
 sCount = Counter()
+#mycoder.loadPreviouslyCoded("bagOfWords10000")
+
+i = int( sys.argv[1] )
+print( "DOING %s" % i )
 
 mycoder = occ.Coder()
-#mycoder.loadPreviouslyCoded("bagOfWords10000")
-mycoder.loadDocs(10000)
+mycoder.loadDocs(start=10000 * i, N=10000, rand=False)
 mycoder.codeAll()
-mycoder.dumpCodes("bagOfWords10000")
-
-#mycoder.exportReport("report")
+mycoder.dumpCodes("codingAll_%s" % i)

@@ -37,6 +37,11 @@ def _problematic_for_pickling(val):
 
 class Doc:
     def __init__(self, init_info={}):
+        # the info it's initialized with has "_" before it, so everything on top is coded.
+        init_info = {
+            "_%s"%k: v
+            for k,v in init_info.items()
+        }
         self._prop_cache = init_info
 
         self.isCoded = False
@@ -65,7 +70,7 @@ class Doc:
         self.isCoded = True
 
     def __str__(self):
-        return str(self['spacyFullBody'])
+        return self['firstSentence']
 
     # _----------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------
@@ -107,13 +112,21 @@ class Doc:
         for k in todel:
             del self._prop_cache[k]
 
-    def _get_all_props(self):
+    def _get_all_prop_methods(self):
         import inspect
         all_methods = inspect.getmembers(self, predicate=inspect.ismethod)
         all_method_names = [ x[0] for x in all_methods ]
         prop_methods = filter(lambda x: x[:len("_prop")] == "_prop", all_method_names)
 
-        return prop_methods
+        return list(prop_methods)
+
+    def _get_all_props(self):
+        return [x[len("_prop_"):] for x in self._get_all_prop_methods()]
+
+    def _prop_title(self):
+        t = self['_title']
+        t = t.split("\n")[-1].strip()  # gets rid of those gnarly prefixes
+        return t
 
     def _prop_spacyName(self):
         # name is ALMOST ALWAYS the first noun_chunk.
@@ -122,8 +135,107 @@ class Doc:
         except StopIteration:
             return self['title']
 
-    def _prop_nameS(self):
+    def _prop_fullBody(self):
+        fb = re.sub(r"\s+", " ", self['_fullBody'])
+        fb = fb.strip()
+        return fb
+
+    def _prop_proper_nouns(self):
+        proper_nouns = []
+
+        for chunk in self['spacyFullBody'].noun_chunks:
+
+            #ch = chunk.text
+            #ch.replace("\n", " ")
+            #ch.replace("  ", " ")
+            #ch = ch.strip()
+
+            if chunk.text == chunk.text.lower():
+                continue
+
+            # words that aren't spaces...
+            chunk = list(chunk)
+            chunk = [x for x in chunk if x.pos_ != 'SPACE']
+
+            # expand if necessary
+            nextWord = chunk[-1]
+            if nextWord.i + 1 < len(nextWord.doc):
+                nextWord = nextWord.doc[nextWord.i + 1]
+
+                # if it has capitalization, keep going.
+                while str(nextWord).lower() != str(nextWord) or nextWord.pos_ == 'SPACE':
+                    # skip spaces...
+                    if nextWord.pos_ != 'SPACE':
+                        chunk.append(nextWord)
+
+                    if nextWord.i + 1 >= len(nextWord.doc):
+                        break
+
+                    nextWord = nextWord.doc[nextWord.i + 1]
+
+            # turn the chunk into a string.
+            ch = " ".join([str(w) for w in chunk])
+
+            proper_nouns.append(ch)
+
+        return proper_nouns
+
+    def _prop___extractLexical(self):
+        return nlp.extractLexical(self["spacyFullBody"], self["name"])
+
+    def _prop_whatTheyWere(self):
+        return self["__extractLexical"]["was"]
+
+    def _prop_whatTheyDid(self):
+        return self["__extractLexical"]["did"]
+
+    def _prop_nouns(self):
+        doc = self["spacyFullBody"]
+
+        nouns = []
+        for x in doc:
+            if x.pos_ == "NOUN":
+                nouns.append(str(x))
+        return nouns
+
+    def _prop_verbs(self):
+        doc = self["spacyFullBody"]
+
+        verbs = []
+        for x in doc:
+            if x.pos_ == "VERB":
+                verbs.append(str(x))
+        return verbs
+
+    def _prop_guess(self):
+        words = self["firstSentence"].split()
+
+        def ntuples(N):
+            return [ " ".join(words[i:i+N]) for i in range(len(words)-N) ]
+
+        allTuples = words + ntuples(2) + ntuples(3) + ntuples(4)
+
+        guess = []
+
+        for tup in allTuples:
+            if tup in term2code:
+                c = term2code[tup]["code"]
+                guess.append({
+                    "where": "first_sentence",
+                    "word": tup,
+                    "occ": [c]
+                })
+
+        return guess
+
+    def _prop_name(self):
         return str(self['spacyName']).strip()
+
+    def _prop_first_name(self):
+        return nlp.first_name(self["name"])
+
+    def _prop_last_name(self):
+        return nlp.last_name(self["name"])
 
     def _prop_spacyFullBody(self):
         return nlp.spacy_parse(self['fullBody'])
@@ -137,7 +249,7 @@ class Doc:
     def _prop_age(self):
         g.p.pdepth = 0
 
-        lastName = self["nameS"].split()[-1]
+        lastName = self["name"].split()[-1]
 
         rgxs = [
             r"(?:Mr\.?|Mrs\.?)\s*%s\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?" % re.escape(lastName),
@@ -199,33 +311,18 @@ class Doc:
         return html
 
     # bag of words approach
-    def code(self, coding):
+    def code(self, coding, toRecode=None):
         assert isinstance(coding, Coder)
+
+        if toRecode is None:
+            toRecode = self._get_all_props()
 
         self.isCoded = True
         self.myCoder = coding
 
-        words = self["firstSentence"].split()
-
-        def ntuples(N):
-            return [ " ".join(words[i:i+N]) for i in range(len(words)-N) ]
-
-        allTuples = words + ntuples(2) + ntuples(3) + ntuples(4)
-
-        self['guess'] = []
-
-        for tup in allTuples:
-            if tup in term2code:
-                c = term2code[tup]["code"]
-                self['guess'].append({
-                    "where": "first_sentence",
-                    "word": tup,
-                    "occ": [c]
-                })
-
-        # simply make sure everything that can be generated is...
-        for x in self.keys():
-            self[x]
+        # we go through and rerun anything in toRecode
+        for x in toRecode:
+            self[ x ] = getattr(self, "_prop_%s" % x)()
 
         self._clear_spacy_props()
 
@@ -250,8 +347,8 @@ class Doc:
 
         lookhimup = set()
 
-        if len(self["nameS"]) > 0:
-            words = wiki.lookupFamous(self["nameS"])
+        if len(self["name"]) > 0:
+            words = wiki.lookupFamous(self["name"])
             for x in words:
                 lookhimup.update(coding.getOccCodes(x))
 
@@ -260,12 +357,11 @@ class Doc:
                     g.p("WikiData returns %s which gives OCC %s" % (words, lookhimup))
 
         if self.myCoder.debug:
-            g.p("Extracted name: %s" % self["nameS"])
+            g.p("Extracted name: %s" % self["name"])
 
         # extract information from the title
         dieWords = ['dies', 'die', 'dead']
         t = self['title']
-        t = t.split("\n")[-1]  # gets rid of those gnarly prefixes
         ts = [x.strip() for x in re.split(r'[;,]|--', t)]
         ts = ts[1:]  # the name is always the first one
 
@@ -465,15 +561,15 @@ class Coder:
         for d in self.obituaries:
             assert(isinstance(d, Doc))
 
-            outfn = path.join(dumpDir, "%s.pickle" % d['fName'])
+            outfn = path.join(dumpDir, "%s.pickle" % d['_fName'])
 
             with open( outfn, 'wb' ) as outf:
                 outf.write( d.dump() )
 
-    def loadDocs(self, N=None, rand=True):
+    def loadDocs(self, N=None, start=0, rand=True):
         with open(inFn) as inF:
             rows = DictReader(inF)
-            rows = g.select(rows, N=N, rand=rand)
+            rows = g.select(rows, N=N, start=start, rand=rand)
 
         self.obituaries = [Doc(dict(x)) for x in rows]
 
@@ -577,7 +673,7 @@ class Coder:
         # specificCounters[result['state']].update(result['occ'])
         self.specificCounters[space].update([key])
 
-    def codeAll(self):
+    def codeAll(self, toRecode=None):
         from time import time
         from datetime import timedelta
 
@@ -592,7 +688,7 @@ class Coder:
                 print("coding document %s/%s. ETA: %s" % (index, ndocs, timedelta(seconds=secondsLeft)))
                 lastPrintTime = time()
 
-            d.code(coding=self)
+            d.code(coding=self, toRecode=toRecode)
 
     def getSentences(self, word):
         for res in self.allResults:
@@ -1033,6 +1129,7 @@ term2code = {}
 CSV_fn = path.join(path.dirname(__file__), "..", "w2c_source", "compiledCodes.csv")
 print("Loading term-code associations into variable 'codes' from %s..." % CSV_fn)
 print("Loading term dictionary into variable 'term2code' from %s..." % CSV_fn)
+
 with open(CSV_fn, 'r') as outCodesF:
     CSV_r = DictReader(outCodesF)
     codes = list(CSV_r)
