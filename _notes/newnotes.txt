@@ -1,0 +1,17 @@
+gender
+harvard inquirer lexicons http://www.wjh.harvard.edu/~inquirer/homecat.htm
+also LIWC if I can get it
+
+exclude terms matched within other terms.
+
+the highlighting doesn't **really** work
+
+maybe exclude the "fullBody", in order to save space?
+	maybe not
+
+stanley lieberson
+	names gender etc.
+
+	https://www.amazon.com/Matter-Taste-Fashions-Culture-Change/dp/0300173873
+	https://www.jstor.org/stable/3003767?seq=1#page_scan_tab_contents
+	https://www.jstor.org/stable/2781457?seq=1#page_scan_tab_contents
