@@ -1,3 +1,5 @@
+lda
+sklearn
 nltk
 spacy
 pptree

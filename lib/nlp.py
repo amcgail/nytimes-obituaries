@@ -16,6 +16,9 @@ from nltk import word_tokenize, sent_tokenize
 import g
 from g import debug
 
+import gender_guesser.detector as gender
+gender_detector = gender.Detector()
+
 # this SpaCy object is so large, we should wait to load it until it's needed
 class _nlp:
     def __init__(self):
@@ -35,6 +38,61 @@ class _nlp:
         return self.nlp(*args, **kwargs)
 
 spacy_parse = _nlp()
+
+class _inquirer_lexicon:
+    def __init__(self):
+        self.lexicon = None
+
+    def load(self):
+        from os import path
+        if self.lexicon is not None:
+            return
+
+        print("Loading general inquirer lexicon from disk...")
+        inquirer_lexicon_path = path.join(path.dirname(__file__), "..", "generalInquirerLexicon", "inqdict.txt")
+
+        self.lexicon = {}
+        with open(inquirer_lexicon_path) as inq_f:
+            lines = inq_f.read().split("\n")
+            lines = lines[1:]
+
+            for l in lines:
+                lsp = l.split()
+                if len(lsp) < 2:
+                    continue
+
+                (word, source) = lsp[0:2]
+                dictionaries = " ".join( lsp[2:] )
+                dictionaries = dictionaries.split("|")[0]
+                dictionaries = dictionaries.split()
+
+                word = word.split("#")[0]
+
+                for d in dictionaries:
+
+                    if d not in self.lexicon:
+                        self.lexicon[d] = set()
+
+                    self.lexicon[d].add(word)
+
+    def __getitem__(self, item):
+        self.load()
+        return self.lexicon[item]
+
+    def dictionaries(self):
+        self.load()
+        return sorted(list(self.lexicon.keys()))
+
+    def countWords(self, lexiconName, doc):
+        self.load()
+
+        count = 0
+        for x in word_tokenize( doc ):
+            if x.upper() in self.lexicon[lexiconName]:
+                count += 1
+        return count
+
+inquirer_lexicon = _inquirer_lexicon()
 
 def first_name(name):
     name = name.lower()
@@ -474,3 +532,27 @@ def extractLexical(doc, name):
 #             myhyp.append(w2)
 #
 #     hyponymSets[w1] = myhyp
+
+def getTuples(words, minTuple, maxTuple):
+    def ntuples(N):
+        return [tuple(words[i:i + N]) for i in range(len(words) - N)]
+
+    allTuples = []
+    for i in range(minTuple, maxTuple+1):
+        allTuples += ntuples(i)
+
+    return allTuples
+
+def tupleBaggerAndSearch(doc, dictionary):
+    allTuples = getTuples(word_tokenize(doc), 1, 4)
+    allTuples = [" ".join(x) for x in allTuples]
+    return bagOfWordsSearch(allTuples, dictionary)
+
+def bagOfWordsSearch(bag, dictionary):
+    extracted = []
+
+    for word in bag:
+        if word in dictionary:
+            extracted.append( dictionary[word] )
+
+    return extracted
