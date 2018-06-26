@@ -5,22 +5,20 @@ Created on Fri Apr 27 12:57:10 2018
 
 @author: alec
 """
-import re
-from os import path
-from collections import Counter
-from itertools import chain
-
-import numpy as np
-
-from csv import reader, writer
-import xlrd
 
 import csv
+import re
+from collections import Counter
 from csv import DictReader, DictWriter
+from csv import reader
+from itertools import chain
+from os import path
 
-import g, nlp, wiki
+import xlrd
 
-
+import g
+import nlp
+import wiki
 
 csv.field_size_limit(500 * 1024 * 1024)
 allDocs = list( DictReader( open( path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" ) ) ) )
@@ -128,12 +126,65 @@ class Doc:
         t = t.split("\n")[-1].strip()  # gets rid of those gnarly prefixes
         return t
 
+    def _prop_date(self):
+        import datetime
+        return datetime.datetime.strptime(self['_date'], "%B %d, %Y")
+
     def _prop_spacyName(self):
         # name is ALMOST ALWAYS the first noun_chunk.
         try:
             return next( self['spacyFirstSentence'].noun_chunks )
         except StopIteration:
             return self['title']
+
+    def _prop_kinship(self):
+        my_props = set()
+
+        toSearch = self['firstSentence']
+
+        # don't want lexicon (or a name) to be spotted in the "died on the 3rd with is family"
+        toSearch = toSearch.split("died")[0]
+        toSearch = toSearch.split("dead")[0]
+        toSearch = toSearch.split("killed")[0]
+        toSearch = toSearch.split("drowned")[0]
+
+        # their own name might get confusing for this analysis...
+        toSearch = toSearch.replace(self["name"], "")
+
+        # intelligent tokenization
+        toSearchWords = nlp.word_tokenize( toSearch )
+
+        kinMatch = 0
+        kinMatchStronger = 0
+
+        lexicon = nlp.inquirer_lexicon["KIN"]
+
+        for x in toSearchWords:
+            if x.upper() in lexicon:
+                kinMatch += 1
+        for x in nlp.getTuples( toSearchWords, 2, 2 ):
+            if x[0].upper() in lexicon and x[1].upper() == "OF":
+                kinMatchStronger += 1
+
+        if kinMatch > 0:
+            my_props.add("lex_match")
+        if kinMatchStronger > 0:
+            my_props.add("lex_match_strong")
+
+        # I also need a full name that matches in the last name...
+        for names in nlp.getTuples(toSearchWords, 2, 3):
+            # must be capitalized...
+            if any( x[0].lower() == x[0] for x in names ):
+                continue
+
+            # last must be the same name!
+            if names[-1].lower() != self["last_name"]:
+                continue
+
+            my_props.add("name_match")
+            break
+
+        return my_props
 
     def _prop_fullBody(self):
         fb = re.sub(r"\s+", " ", self['_fullBody'])
@@ -228,105 +279,8 @@ class Doc:
 
         return guess
 
-    def _prop_name(self):
-        return str(self['spacyName']).strip()
-
-    def _prop_first_name(self):
-        return nlp.first_name(self["name"])
-
-    def _prop_last_name(self):
-        return nlp.last_name(self["name"])
-
-    def _prop_spacyFullBody(self):
-        return nlp.spacy_parse(self['fullBody'])
-
-    def _prop_firstSentence(self):
-        return extractFirstSentence(self['fullBody']).strip()
-
-    def _prop_spacyFirstSentence(self):
-        return nlp.spacy_parse(self["firstSentence"])
-
-    def _prop_age(self):
-        g.p.pdepth = 0
-
-        lastName = self["name"].split()[-1]
-
-        rgxs = [
-            r"(?:Mr\.?|Mrs\.?)\s*%s\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?" % re.escape(lastName),
-            r"(?:She|He)\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?",
-            r"died.*at\s+the\s+age\s+of\s+([0-9]{1,3})",
-            r"was\s*([0-9]{1,3})\s*years\s*old",
-            r"was\s*([0-9]{1,3})",
-            r"([0-9]{1,3})\s*years\s*old",
-            r"was\s*believed\s*to\s*be([^,\.]*)",
-            r"was\s*in\s*(?:his|her)\s*([^,\.]*)",
-            r"([0-9]{1,3})",
-        ]
-
-        sents = list(self['spacyFullBody'].sents)
-
-        foundReasonableAge = False
-        # look for these sentences, in order
-        for rgx in rgxs:
-            for s in sents:
-                fAge = re.findall(rgx, s.text)
-                if len(fAge) == 0:
-                    continue
-
-                for sAge in fAge:
-                    try:
-                        age = int(sAge)
-                        if age > 120 or age < 5:
-                            continue
-
-                        foundReasonableAge = True
-                        break
-                    except ValueError:
-                        continue
-
-                if foundReasonableAge:
-                    break
-
-            if foundReasonableAge:
-                break
-
-        if foundReasonableAge:
-            return age
-
-    # _----------------------------------------------------------------------------------------------------------------
-    # _----------------------------------------------------------------------------------------------------------------
-    #                                                     END PROPERTIES SECTION
-    # _----------------------------------------------------------------------------------------------------------------
-    # _----------------------------------------------------------------------------------------------------------------
-    # _----------------------------------------------------------------------------------------------------------------
-
-
-    def codedFirstSentenceHtml(self):
-        html = self["firstSentence"]
-
-        for x in self['guess']:
-            repl = r"\1<b>\2 (%s)</b>\3" % ",".join(x['occ'])
-            html = re.sub( r"([^a-zA-Z]|^)(%s)([^a-zA-Z]|$)" % re.escape(x['word']), repl=repl, string=html )
-
-        return html
-
-    # bag of words approach
-    def code(self, coding, toRecode=None):
-        assert isinstance(coding, Coder)
-
-        if toRecode is None:
-            toRecode = self._get_all_props()
-
-        self.isCoded = True
-        self.myCoder = coding
-
-        # we go through and rerun anything in toRecode
-        for x in toRecode:
-            self[ x ] = getattr(self, "_prop_%s" % x)()
-
-        self._clear_spacy_props()
-
-    def code_dependency(self, coding):
+    def _WAIT_prop_OCC_syntax(self):
+        coding = self.myCoder
         assert isinstance(coding, Coder)
 
         self.isCoded = True
@@ -486,6 +440,168 @@ class Doc:
                 if self.myCoder.debug:
                     g.p("Skipping. Strange grammatical construction.")
                 coding.stateCounter.update(["strangeGrammar"])
+
+    def _prop_OCC_weighted(self):
+        fS = self["firstSentence"]
+        name = self["name"]
+
+        allCodes = []
+
+        wasDidC = []
+        wasDidC += nlp.bagOfWordsSearch(self["whatTheyDid"], term2code)
+        wasDidC += nlp.bagOfWordsSearch(self["whatTheyWere"], term2code)
+
+        for x in wasDidC:
+            allCodes.append({
+                "where": "wasDid",
+                "word": x['term'],
+                "occ": x['code']
+            })
+
+        def justCodes(l):
+            return [x['code'] for x in l]
+
+        wasDidC = Counter(justCodes(wasDidC))
+        fsC = Counter(justCodes(nlp.tupleBaggerAndSearch(fS, term2code)))
+        f500C = Counter(justCodes(nlp.tupleBaggerAndSearch(self['_first500'], term2code)))
+        bodyC = Counter(justCodes(nlp.tupleBaggerAndSearch(self['_fullBody'], term2code)))
+
+        weightedC = {}
+        w = {}
+        w['did'] = 5
+        w['fS'] = min(1, 6 * 10. / len(fS)) if len(fS) > 0 else 1
+        w['f500'] = 0.5 * 6 * 10. / 500
+        w['body'] = min(0.1, 0.1 * 6 * 10. / len(self['_fullBody'])) if len(self['_fullBody']) > 0 else 1
+
+        # print w
+        for x in set(fsC.keys() + f500C.keys() + bodyC.keys()):
+            weightedC[x] = wasDidC[x] * w['did'] + fsC[x] * w['fS'] + f500C[x] * w['f500'] + bodyC[x] * w['body']
+
+        # this is the confidence of our favorite...
+        confidence = max(weightedC.values()) if len(weightedC) > 0 else -1
+
+        # order list by the confidences...
+        rankedC = sorted(weightedC.items(), key=lambda x: -x[1])
+
+        # and take the top 3
+        topC = rankedC[:3]
+        topC = [list(x) for x in topC]
+
+        # then idk do something...
+
+    def _prop_gender(self):
+        male = nlp.inquirer_lexicon.countWords("MALE", self['_fullBody'])
+        female = nlp.inquirer_lexicon.countWords("Female", self['_fullBody'])
+
+        # if the results are unconclusive from this simple check:
+        if male + female < 4 or abs(male - female) / (male + female) < 0.25:
+            guess = nlp.gender_detector.get_gender(self["first_name"])
+            if guess in ["male","female"]:
+                return guess
+
+            # if this even didn't work!
+            return "unknown"
+
+        if male > female:
+            return "male"
+        return "female"
+
+    def _prop_name(self):
+        return str(self['spacyName']).strip()
+
+    def _prop_first_name(self):
+        return nlp.first_name(self["name"])
+
+    def _prop_last_name(self):
+        return nlp.last_name(self["name"])
+
+    def _prop_spacyFullBody(self):
+        return nlp.spacy_parse(self['fullBody'])
+
+    def _prop_firstSentence(self):
+        return extractFirstSentence(self['fullBody']).strip()
+
+    def _prop_spacyFirstSentence(self):
+        return nlp.spacy_parse(self["firstSentence"])
+
+    def _prop_age(self):
+        g.p.pdepth = 0
+
+        lastName = self["name"].split()[-1]
+
+        rgxs = [
+            r"(?:Mr\.?|Mrs\.?)\s*%s\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?" % re.escape(lastName),
+            r"(?:She|He)\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?",
+            r"died.*at\s+the\s+age\s+of\s+([0-9]{1,3})",
+            r"was\s*([0-9]{1,3})\s*years\s*old",
+            r"was\s*([0-9]{1,3})",
+            r"([0-9]{1,3})\s*years\s*old",
+            r"was\s*believed\s*to\s*be([^,\.]*)",
+            r"was\s*in\s*(?:his|her)\s*([^,\.]*)",
+            r"([0-9]{1,3})",
+        ]
+
+        sents = list(self['spacyFullBody'].sents)
+
+        foundReasonableAge = False
+        # look for these sentences, in order
+        for rgx in rgxs:
+            for s in sents:
+                fAge = re.findall(rgx, s.text)
+                if len(fAge) == 0:
+                    continue
+
+                for sAge in fAge:
+                    try:
+                        age = int(sAge)
+                        if age > 120 or age < 5:
+                            continue
+
+                        foundReasonableAge = True
+                        break
+                    except ValueError:
+                        continue
+
+                if foundReasonableAge:
+                    break
+
+            if foundReasonableAge:
+                break
+
+        if foundReasonableAge:
+            return age
+
+    # _----------------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------------
+    #                                                     END PROPERTIES SECTION
+    # _----------------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------------
+    # _----------------------------------------------------------------------------------------------------------------
+
+    def codedFirstSentenceHtml(self):
+        html = self["firstSentence"]
+
+        for x in self['guess']:
+            repl = r"\1<b>\2 (%s)</b>\3" % ",".join(x['occ'])
+            html = re.sub( r"([^a-zA-Z]|^)(%s)([^a-zA-Z]|$)" % re.escape(x['word']), repl=repl, string=html )
+
+        return html
+
+    # bag of words approach
+    def code(self, coding, toRecode=None):
+        assert isinstance(coding, Coder)
+
+        if toRecode is None:
+            toRecode = self._get_all_props()
+
+        self.isCoded = True
+        self.myCoder = coding
+
+        # we go through and rerun anything in toRecode
+        for x in toRecode:
+            self[ x ] = getattr(self, "_prop_%s" % x)()
+
+        self._clear_spacy_props()
 
 
 class Coder:
@@ -673,7 +789,7 @@ class Coder:
         # specificCounters[result['state']].update(result['occ'])
         self.specificCounters[space].update([key])
 
-    def codeAll(self, toRecode=None):
+    def codeAll(self, toRecode=None, verbose=False):
         from time import time
         from datetime import timedelta
 
@@ -682,6 +798,9 @@ class Coder:
         ndocs = len(self.obituaries)
 
         for index, d in enumerate(self.obituaries):
+            if verbose:
+                print("coding document %s" % index)
+
             # every now and then, let us know how it's going!
             if time() - lastPrintTime > 5:
                 secondsLeft = int( ( float(ndocs) - index ) * (time() - startTime) / index )
@@ -758,112 +877,73 @@ class Coder:
                     if len(guesses) == 1 and guesses[0] == occ:
                         w("<p>%s</p>" % doc['spacyFirstSentence'])
 
-    def extractCodes(self, doc):
+    def generateHandCodingSheets_table(self, info=["firstSentence", "guess"], toCode=["guess"]):
+        colNames = info + [ "corrected <b>%s</b>" % x for x in toCode ]
 
-        mySuccessfulCodes = []
+        col_data = 75 / len(info)
+        col_input = 25 / len(toCode)
 
-        wTokens = nlp.word_tokenize(doc)
+        html = ""
 
-        # one word...
-        for i in range(len(wTokens)):
-            word = wTokens[i]
-            if word in self.w2c:
-                # print word
-                mySuccessfulCodes += self.w2c[word]
+        html += """
+        <style>
+        .col_data{ width: %s%%; }
+        .col_input{ width: %s%%; }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid;
+            padding: 7px 17px;
+        }
+        </style>
+        """ % (col_data, col_input)
 
-        # two words...
-        for i in range(len(wTokens) - 1):
-            word = " ".join([wTokens[i], wTokens[i + 1]])
-            if word in self.w2c:
-                # print word
-                mySuccessfulCodes += self.w2c[word]
+        html += "<table>"
+        html += "<tr>%s</tr>" % "".join( "<td>%s</td>" % x for x in colNames )
+        for d in self.obituaries:
+            colVals = [d[x] for x in info]
+            html += "<tr>%s</tr>" % "".join(
+                ["<td class='col_data'>%s</td>" % x for x in colVals] + \
+                ["<td class='col_input'></td>" for x in toCode]
+            )
+        html += "</table>"
 
-        # three words...
-        for i in range(len(wTokens) - 2):
-            word = " ".join([wTokens[i], wTokens[i + 1], wTokens[i + 2]])
-            if word in self.w2c:
-                # print word
-                mySuccessfulCodes += self.w2c[word]
+        return html
 
-        return mySuccessfulCodes
+    def generateHandCodingSheets_linear(self, info=["firstSentence", "guess"], toCode=["guess"]):
+        html = ""
 
-    def extractCodesDetailed(self, doc):
+        html += """
+        <style>
+            td.col_input {
+                height: 2em;
+            }
+            table {
+                width: 100%;
+            }
+            pre {
+                white-space: pre-wrap;
+                margin: 0.2em;
+            }
+        </style>
+        """
 
-        mySuccessfulCodes = []
+        for d in self.obituaries:
+            for x in info:
+                html += "<b>%s: </b> <pre>%s</pre>" % (x, d[x])
 
-        wTokens = nlp.word_tokenize(doc)
+            html += "<table>"
+            html += "<tr>%s</tr>" % "".join("<td><b>%s</b></td>" % x for x in toCode)
+            html += "<tr>%s</tr>" % "".join(
+                ["<td class='col_input'></td>" for x in toCode]
+            )
+            html += "</table>"
 
-        # one word...
-        for i in range(len(wTokens)):
-            word = wTokens[i]
-            if word in self.w2c:
-                # print word
-                mySuccessfulCodes += [
-                    {
-                        "code": c,
-                        "word": word
-                    } for c in self.w2c[word]
-                ]
+            html += "<hr>"
 
-        # two words...
-        for i in range(len(wTokens) - 1):
-            word = " ".join([wTokens[i], wTokens[i + 1]])
-            if word in self.w2c:
-                # print word
-                mySuccessfulCodes += [
-                    {
-                        "code": c,
-                        "word": word
-                    } for c in self.w2c[word]
-                    ]
+        return html
 
-        # three words...
-        for i in range(len(wTokens) - 2):
-            word = " ".join([wTokens[i], wTokens[i + 1], wTokens[i + 2]])
-            if word in self.w2c:
-                # print word
-                mySuccessfulCodes += [
-                    {
-                        "code": c,
-                        "word": word
-                    } for c in self.w2c[word]
-                    ]
-
-        return mySuccessfulCodes
-
-
-    def extractCodesOnly2000(self, doc):
-        mySuccessfulCodes = []
-
-        wTokens = nlp.word_tokenize( doc )
-
-        # one word...
-        for i in range( len( wTokens ) ):
-            word = wTokens[i]
-            if word in self.w2c:
-                for c in self.w2c[word]:
-                    if "2000" in c:
-                        mySuccessfulCodes.append(c)
-
-        # two words...
-        for i in range( len( wTokens ) - 1 ):
-            word = " ".join( [wTokens[i], wTokens[i+1]] )
-            if word in self.w2c:
-                for c in self.w2c[word]:
-                    if "2000" in c:
-                        mySuccessfulCodes.append(c)
-
-
-        # three words...
-        for i in range( len( wTokens ) - 2 ):
-            word = " ".join( [wTokens[i], wTokens[i+1], wTokens[i+2]] )
-            if word in self.w2c:
-                for c in self.w2c[word]:
-                    if "2000" in c:
-                        mySuccessfulCodes.append(c)
-
-
-        return mySuccessfulCodes
 
 def extractFirstSentence(body):
     sentences = nlp.sent_tokenize(body)
@@ -903,13 +983,12 @@ def extractFirstSentence(body):
 
     return fS
 
-
 def getRandomDocs(num):
     from random import sample
     return sample( allDocs, num )
 
 def regenerateW2C(expandSynonyms = False):
-
+    import numpy as np
     codegen = []
 
     if False:
