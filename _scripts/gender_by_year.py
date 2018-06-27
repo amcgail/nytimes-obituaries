@@ -22,6 +22,6 @@ ym = [ mcount[x] / (mcount[x]+fcount[x]) for x in xs ]
 yf = [ fcount[x] / (mcount[x]+fcount[x]) for x in xs ]
 
 fig, ax = plt.subplots()
-ax.stackplot(xs, ym, yf, labels=['male', 'female'])
+ax.area(xs, ym, yf, labels=['male', 'female'])
 ax.legend(loc='lower right')
 plt.show()
