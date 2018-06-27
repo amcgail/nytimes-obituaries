@@ -1,4 +1,24 @@
 code,source,term
+super:013,occ2000_updated.xls,engineer
+super:022,occ2000_updated.xls,educator
+super:016,occ2000_updated.xls,scientist
+super:001,occ2000_updated.xls,manager
+super:001,occ2000_updated.xls,businessman
+super:001,occ2000_updated.xls,businessperson
+super:001,occ2000_updated.xls,industrialist
+super:001,occ2000_updated.xls,director
+super:098,occ2000_updated.xls,field marshall
+super:098,occ2000_updated.xls,general
+super:098,occ2000_updated.xls,colonel
+super:098,occ2000_updated.xls,army major
+super:098,occ2000_updated.xls,army captain
+super:098,occ2000_updated.xls,admiral
+super:098,occ2000_updated.xls,commodore
+super:098,occ2000_updated.xls,navy captain
+super:098,occ2000_updated.xls,airforce captain
+super:098,occ2000_updated.xls,soldier
+super:098,occ2000_updated.xls,private
+super:098,occ2000_updated.xls,corporal
 OCC_2000,occ2000_updated.xls,revised occtitle
 050,occ2000_updated.xls,advance agent
 050,occ2000_updated.xls,artist's representative
@@ -5917,7 +5937,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 243,occ2000_updated.xls,hospital librarian
 243,occ2000_updated.xls,institution librarian
 243,occ2000_updated.xls,law librarian
-243,occ2000_updated.xls,librarian
 243,occ2000_updated.xls,professional librarian
 243,occ2000_updated.xls,library professional
 243,occ2000_updated.xls,manager of  circulation
@@ -13159,7 +13178,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 276,hand-coding.csv,football_player
 275,hand-coding.csv,virtuoso
 003,hand-coding.csv,politician.n.01
-186,hand-coding.csv,scholar
 proponent,hand-coding.csv,politician.n.02
 165,hand-coding.csv,epidemiologist
 260,hand-coding.csv,painter
