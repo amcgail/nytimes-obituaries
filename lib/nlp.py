@@ -535,7 +535,7 @@ def extractLexical(doc, name):
 
 def getTuples(words, minTuple, maxTuple):
     def ntuples(N):
-        return [tuple(words[i:i + N]) for i in range(len(words) - N)]
+        return [tuple(words[i:i + N]) for i in range(len(words) - N + 1)]
 
     allTuples = []
     for i in range(minTuple, maxTuple+1):

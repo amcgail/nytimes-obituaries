@@ -60,7 +60,7 @@ with open(inFn) as inF:
         sentences = sent_tokenize(r['fullBody'])
         
         if len(sentences) < 2:
-            print("skipping(tooFewSentences)", r['fName'])
+            # print("skipping(tooFewSentences)", r['fName'])
             continue
         
         firstSentence = sentences[0].strip()
