@@ -33,6 +33,12 @@ def _problematic_for_pickling(val):
     if isinstance(val, nlp.spacy.tokens.doc.Doc):
         return True
 
+
+def nocache(f):
+    f.to_cache = False
+    return f
+
+
 class Doc:
     def __init__(self, init_info={}):
         # the info it's initialized with has "_" before it, so everything on top is coded.
@@ -259,23 +265,46 @@ class Doc:
         return verbs
 
     def _prop_guess(self):
-        words = self["firstSentence"].split()
-
-        def ntuples(N):
-            return [ " ".join(words[i:i+N]) for i in range(len(words)-N) ]
-
-        allTuples = words + ntuples(2) + ntuples(3) + ntuples(4)
-
         guess = []
 
-        for tup in allTuples:
-            if tup in term2code:
-                c = term2code[tup]["code"]
-                guess.append({
-                    "where": "first_sentence",
-                    "word": tup,
-                    "occ": [c]
-                })
+        words = nlp.word_tokenize( self["firstSentence"] )
+
+        max_tuples = 4
+        current_tuples = max_tuples
+
+        process_now = nlp.getTuples( words, minTuple=4, maxTuple=4 )
+
+        while current_tuples > 0:
+            # print(process_now, current_tuples)
+
+            dont_process_next = set()
+
+            for tup in process_now:
+                tocheck = " ".join(tup).lower()
+                if tocheck in term2code:
+                    c = term2code[tocheck]["code"]
+                    guess.append({
+                        "where": "first_sentence",
+                        "word": tocheck,
+                        "occ": [c]
+                    })
+
+                    dont_process_next.update( nlp.getTuples(
+                        list(tup),
+                        minTuple=current_tuples-1,
+                        maxTuple=current_tuples-1
+                    ) )
+
+            # print(dont_process_next)
+
+            process_now = set(nlp.getTuples(
+                words,
+                minTuple=current_tuples-1,
+                maxTuple=current_tuples-1
+            ))
+            process_now = process_now.difference(dont_process_next)
+
+            current_tuples -= 1
 
         return guess
 
@@ -631,7 +660,10 @@ class Coder:
 
         loadDir = path.join(path.dirname(__file__), '..', 'codeDumps', loadDirName)
 
-        assert(os.path.isdir(loadDir))
+        if not os.path.isdir(loadDir):
+            print("Load directory '%s' not found. Please select from the following:" % loadDirName)
+            print( ",".join( os.listdir(path.join(path.dirname(__file__), '..', 'codeDumps') ) ) )
+            return
 
         toLoad = os.listdir(loadDir)
 
@@ -694,7 +726,7 @@ class Coder:
         for d in self.obituaries:
             thisOneSucks = False
             for k in kwargs:
-                if not d.info[ k ] == kwargs[ k ]:
+                if not d[ k ] == kwargs[ k ]:
                     thisOneSucks = True
                     break
             if not thisOneSucks:
@@ -1236,8 +1268,11 @@ for code in codes:
 #             struct = "|".join(ss)
 #             break
 
+class _keydefaultdict(dict):
+    __missing__ = lambda self, key: key
+
 def _codeToName():
-    c2n = {}
+    c2n = _keydefaultdict()
     officialTitlesFn = path.join(path.dirname(__file__), '..', 'coding', 'occ2000.officialTitles.csv')
     with open(officialTitlesFn) as officialTitlesF:
         for row in DictReader(officialTitlesF):
