@@ -16,13 +16,7 @@ basedir = path.join( path.dirname(__file__), '..', ".." )
 sys.path.append( path.join( basedir, 'lib' ) )
 import occ
 
-sCount = Counter()
-#mycoder.loadPreviouslyCoded("bagOfWords10000")
-
-i = int( sys.argv[1] )
-print( "DOING %s" % i )
-
 mycoder = occ.Coder()
-mycoder.loadDocs(start=10000 * i, N=10000, rand=False)
+mycoder.loadPreviouslyCoded("codingAll")
 mycoder.codeAll(["guess"])
-mycoder.dumpCodes("codingAll_%s" % i)
+mycoder.dumpCodes("codingAll")
