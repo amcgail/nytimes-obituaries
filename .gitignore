@@ -6,3 +6,4 @@ fact-extractor/*
 data/*
 **/*.swp
 .idea/*
+**/.~lock*

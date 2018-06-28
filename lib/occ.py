@@ -1106,12 +1106,39 @@ def regenerateW2C(expandSynonyms = False):
     print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
     workbook = xlrd.open_workbook(occ2000Fn)
 
+    super_wksht = workbook.sheet_by_index(17)
+
+    for row in range(1, 500):
+        try:
+            code = super_wksht.cell(row, 0).value
+        except IndexError:
+            break
+
+        term = super_wksht.cell(row, 2).value
+        if type(term) == int:
+            continue
+
+        term = term.lower()
+        terms = term.split("|")
+
+        for term in terms:
+            term = term.strip()
+            if term == "":
+                continue
+
+            codegen.append({
+                "term": term,
+                "code": "super:%03d" % int(code),
+                "source": "occ2000_updated.xls"
+            })
+            # print((code, term))
+
     for wksheet_i in list(range(3, 17)):
         worksheet = workbook.sheet_by_index(wksheet_i)
         print("Working on worksheet %s" % wksheet_i)
 
         for row in range(10000):
-            print(row)
+            #print(row)
             try:
                 code = worksheet.cell(row, 0).value
             except IndexError:
@@ -1203,6 +1230,8 @@ def regenerateW2C(expandSynonyms = False):
     # IF THERE ARE MULTIPLE DETERMINATIONS FOR A SINGLE WORD, SKIP
     unique_term_code = set( (x['term'],x['code']) for x in codegen )
     count_terms = Counter( x[0] for x in unique_term_code )
+    skip = sorted(set([ x['term'] for x in codegen if count_terms[ x['term'] ] != 1 ]))
+    print("SKIPPING %s" % skip)
     codegen = [ x for x in codegen if count_terms[ x['term'] ] == 1 ]
 
     if expandSynonyms:
