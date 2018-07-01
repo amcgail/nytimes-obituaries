@@ -17,7 +17,7 @@ def subclassOf(what):
     sparquery = """SELECT ?name
     WHERE
     {
-         ?subClass (wdt:P279)* %s .
+         ?subClass wdt:P279 %s .
          ?theThing wdt:P31 ?subClass .
          ?theThing rdfs:label ?name .
          FILTER(LANG(?name) = "en")
