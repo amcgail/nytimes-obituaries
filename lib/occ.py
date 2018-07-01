@@ -18,7 +18,7 @@ import xlrd
 
 import g
 import nlp
-import wiki
+import wikidata
 
 csv.field_size_limit(500 * 1024 * 1024)
 allDocs = list( DictReader( open( path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" ) ) ) )
@@ -375,7 +375,7 @@ class Doc:
         lookhimup = set()
 
         if len(self["name"]) > 0:
-            words = wiki.lookupFamous(self["name"])
+            words = wikidata.lookupOccupationalTitles(self["name"])
             for x in words:
                 lookhimup.update(coding.getOccCodes(x))
 
