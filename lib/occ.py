@@ -103,6 +103,9 @@ class Doc:
     def __setitem__(self, key, value):
         self._prop_cache[key] = value
 
+    def __delitem__(self, key):
+        del self._prop_cache[key]
+
     def keys(self):
         return self._prop_cache.keys()
 
@@ -264,49 +267,90 @@ class Doc:
                 verbs.append(str(x))
         return verbs
 
-    def _prop_guess(self):
-        guess = []
+    def _prop_OCC(self):
+        def check(s):
+            found = []
 
-        words = nlp.word_tokenize( self["firstSentence"] )
+            words = nlp.word_tokenize(s)
+            words = [nlp.lemmatize(x) for x in words]
+            sets = nlp.getCloseUnorderedSets(words, minTuple=1, maxTuple=4, maxBuffer=2)
+            for fs in sets:
 
-        max_tuples = 4
-        current_tuples = max_tuples
+                if fs in set2code:
+                    c = set2code[fs]
 
-        process_now = nlp.getTuples( words, minTuple=4, maxTuple=4 )
-
-        while current_tuples > 0:
-            # print(process_now, current_tuples)
-
-            dont_process_next = set()
-
-            for tup in process_now:
-                tocheck = " ".join(tup).lower()
-                if tocheck in term2code:
-                    c = term2code[tocheck]["code"]
-                    guess.append({
-                        "where": "first_sentence",
-                        "word": tocheck,
+                    found.append({
+                        "word": " ".join(fs),
                         "occ": [c]
                     })
 
-                    dont_process_next.update( nlp.getTuples(
-                        list(tup),
-                        minTuple=current_tuples-1,
-                        maxTuple=current_tuples-1
-                    ) )
+            return found
 
-            # print(dont_process_next)
+        found_first = check(self["firstSentence"])
+        found_title = check(self["title"])
 
-            process_now = set(nlp.getTuples(
-                words,
-                minTuple=current_tuples-1,
-                maxTuple=current_tuples-1
-            ))
-            process_now = process_now.difference(dont_process_next)
+        # we want to keep track of "where"
+        [ x.update({"where": "firstSentence"}) for x in found_first ]
+        [ x.update({"where": "title"}) for x in found_title ]
 
-            current_tuples -= 1
+        return found_first + found_title
 
-        return guess
+    def _OLDER_prop_OCC(self):
+
+        def check(s):
+            found = []
+
+            words = nlp.word_tokenize( s.lower() )
+            words += ["-"] + nlp.word_tokenize( s.lower() )
+
+            # This algorithm proceeds from largest to smallest tuples, making sure not to count any codes inside codes
+
+            max_tuples = 4
+            current_tuples = max_tuples
+
+            process_now = nlp.getTuples( words, minTuple=4, maxTuple=4 )
+
+            while current_tuples > 0:
+                # print(process_now, current_tuples)
+
+                dont_process_next = set()
+
+                for tup in process_now:
+                    tocheck = " ".join(tup)
+                    if tocheck in term2code:
+                        c = term2code[tocheck]["code"]
+                        found.append({
+                            "word": tocheck,
+                            "occ": [c]
+                        })
+
+                        dont_process_next.update( nlp.getTuples(
+                            list(tup),
+                            minTuple=current_tuples-1,
+                            maxTuple=current_tuples-1
+                        ) )
+
+                # print(dont_process_next)
+
+                process_now = set(nlp.getTuples(
+                    words,
+                    minTuple=current_tuples-1,
+                    maxTuple=current_tuples-1
+                ))
+                process_now = process_now.difference(dont_process_next)
+
+                current_tuples -= 1
+
+            return found
+
+        found_first = check(self["firstSentence"])
+        found_title = check(self["title"])
+
+        # we want to keep track of "where"
+        [ x.update({"where": "firstSentence"}) for x in found_first ]
+        [ x.update({"where": "title"}) for x in found_title ]
+
+        return found_first + found_title
 
     def _WAIT_prop_OCC_syntax(self):
         coding = self.myCoder
@@ -1266,6 +1310,7 @@ def regenerateW2C(expandSynonyms = False):
 
 codes = None
 term2code = {}
+set2code = {}
 CSV_fn = path.join(path.dirname(__file__), "..", "w2c_source", "compiledCodes.csv")
 print("Loading term-code associations into variable 'codes' from %s..." % CSV_fn)
 print("Loading term dictionary into variable 'term2code' from %s..." % CSV_fn)
@@ -1276,6 +1321,10 @@ with open(CSV_fn, 'r') as outCodesF:
 
 for code in codes:
     term2code[ code["term"] ] = code
+
+    words = nlp.word_tokenize( code["term"] )
+    words = [nlp.lemmatize(x) for x in words]
+    set2code[ frozenset(words) ] = code
 
 # startStruct = [
 #     ['DET', 'NOUN', 'PUNCT', 'NOUN', 'PUNCT', 'CCONJ', 'NOUN'],
