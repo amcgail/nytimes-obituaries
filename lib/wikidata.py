@@ -12,16 +12,23 @@ sparql.setReturnFormat(JSON)
 
 search_url = "https://www.wikidata.org/w/api.php?%s"
 
-sparquery = """SELECT ?occ
-WHERE
-{
-	%s wdt:P106 ?mainOcc .
-     ?mainOcc (wdt:P279)* ?superOcc .
-     ?superOcc rdfs:label ?occ .
-     ?superOcc wdt:P31 wd:Q28640 .
-     FILTER(LANG(?occ) = "en")
-}
-"""   
+def subclassOf(what):
+    # e.g. subclassOf("Q7210356") == political organization
+    sparquery = """SELECT ?name
+    WHERE
+    {
+         ?subClass (wdt:P279)* %s .
+         ?theThing wdt:P31 ?subClass .
+         ?theThing rdfs:label ?name .
+         FILTER(LANG(?name) = "en")
+    }
+    """ % what
+
+    sparql.setQuery(sparquery)
+    r = sparql.query().convert()
+    retNames = [x['name']['value'] for x in r['results']['bindings']]
+
+    return retNames
 
 def companyNames():
     csparquery = """SELECT ?clab
@@ -36,14 +43,15 @@ def companyNames():
     
     sparql.setQuery(csparquery)
     r = sparql.query().convert()
-    
-    print(r['results']['bindings'])
-    return
+
+    cnames = [ x['clab']['value'] for x in r['results']['bindings'] ]
+
+    return cnames
 
 if "famousDict" not in locals():
     famousDict = {}
 
-def lookupFamous(name):
+def lookupOccupationalTitles(name):
     import urllib
     import json
 
@@ -56,7 +64,18 @@ def lookupFamous(name):
         "language":"en",
         "format":"json"
     }
-    
+
+    sparquery = """SELECT ?occ
+    WHERE
+    {
+    	%s wdt:P106 ?mainOcc .
+         ?mainOcc (wdt:P279)* ?superOcc .
+         ?superOcc rdfs:label ?occ .
+         ?superOcc wdt:P31 wd:Q28640 .
+         FILTER(LANG(?occ) = "en")
+    }
+    """
+
     with urllib.request.urlopen( search_url % urllib.parse.urlencode(query) ) as response:
         r = json.loads(response.read().decode('utf-8'))
         if r['success'] != 1 or len(r['search']) == 0:
