@@ -18,7 +18,7 @@ import xlrd
 
 import g
 import nlp
-import wikidata
+import wiki
 
 csv.field_size_limit(500 * 1024 * 1024)
 allDocs = list( DictReader( open( path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" ) ) ) )
@@ -277,7 +277,7 @@ class Doc:
             for fs in sets:
 
                 if fs in set2code:
-                    c = set2code[fs]
+                    c = set2code[fs]["code"]
 
                     found.append({
                         "word": " ".join(fs),
@@ -375,7 +375,7 @@ class Doc:
         lookhimup = set()
 
         if len(self["name"]) > 0:
-            words = wikidata.lookupOccupationalTitles(self["name"])
+            words = wiki.lookupOccupationalTitles(self["name"])
             for x in words:
                 lookhimup.update(coding.getOccCodes(x))
 
@@ -654,7 +654,7 @@ class Doc:
     def codedFirstSentenceHtml(self):
         html = self["firstSentence"]
 
-        for x in self['guess']:
+        for x in self['OCC']:
             repl = r"\1<b>\2 (%s)</b>\3" % ",".join(x['occ'])
             html = re.sub( r"([^a-zA-Z]|^)(%s)([^a-zA-Z]|$)" % re.escape(x['word']), repl=repl, string=html )
 
@@ -915,26 +915,26 @@ class Coder:
         OCCcomb = Counter()
 
         for d in self.obituaries:
-            guesses = list(chain.from_iterable(y['occ'] for y in d.guess))
+            guesses = list(chain.from_iterable(y['occ'] for y in d['OCC']))
             if len(guesses) == 1:
                 OCCsingle.update(guesses)
 
         # should it be fractional?
         for d in self.obituaries:
-            guesses = list(chain.from_iterable(y['occ'] for y in d.guess))
+            guesses = list(chain.from_iterable(y['occ'] for y in d['OCC']))
             for y in guesses:
                 OCCmultiple[y] += 1. / len(guesses)
 
         # or tuples?
         for d in self.obituaries:
-            guesses = list(set(chain.from_iterable(y['occ'] for y in d.guess)))
+            guesses = list(set(chain.from_iterable(y['occ'] for y in d['OCC'])))
             guesses = tuple(sorted(guesses))
             OCCcomb[guesses] += 1
 
         OCCgraph = Counter()
         # we could build a graph
         for d in self.obituaries:
-            guesses = list(set(chain.from_iterable(y['occ'] for y in d.guess)))
+            guesses = list(set(chain.from_iterable(y['occ'] for y in d['OCC'])))
             for x1 in guesses:
                 for x2 in guesses:
                     if x1 >= x2:
@@ -949,11 +949,11 @@ class Coder:
             for occ, count in OCCsingle.most_common(20):
                 w("<h2 id='%s'>%s had %s obituaries</h2>" % (occ, occ, count))
                 for doc in self.obituaries:
-                    guesses = list(chain.from_iterable(guess['occ'] for guess in doc.guess))
+                    guesses = list(chain.from_iterable(guess['occ'] for guess in doc['OCC']))
                     if len(guesses) == 1 and guesses[0] == occ:
                         w("<p>%s</p>" % doc['spacyFirstSentence'])
 
-    def generateHandCodingSheets_table(self, info=["firstSentence", "guess"], toCode=["guess"]):
+    def generateHandCodingSheets_table(self, info=["firstSentence", "guess"], toCode=["OCC"]):
         colNames = info + [ "corrected <b>%s</b>" % x for x in toCode ]
 
         col_data = 75 / len(info)
@@ -987,7 +987,7 @@ class Coder:
 
         return html
 
-    def generateHandCodingSheets_linear(self, info=["firstSentence", "guess"], toCode=["guess"]):
+    def generateHandCodingSheets_linear(self, info=["firstSentence", "OCC"], toCode=["OCC"]):
         html = ""
 
         html += """

@@ -12,7 +12,7 @@ from collections import Counter
 
 basedir = path.join(path.dirname(__file__), "..")
 sys.path.append(path.join(basedir, 'lib'))
-import occ, wikidata, g, nlp
+import occ, wiki, g, nlp
 
 app = Flask(__name__, static_url_path='/static')
 

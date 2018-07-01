@@ -2,8 +2,10 @@ import occ
 
 coder = occ.Coder()
 coder.loadPreviouslyCoded("codingAll")
-for x in coder.obituaries:
-    del x["guess"]
+# coder.codeAll(["OCC"])
 
-coder.codeAll(["OCC"])
+for obit in coder.obituaries:
+    for occ in obit["OCC"]:
+        occ['occ'] = [ x['code'] for x in occ['occ'] ]
+
 coder.dumpCodes("codingAll")

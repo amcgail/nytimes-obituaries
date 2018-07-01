@@ -18,5 +18,5 @@ import occ
 
 mycoder = occ.Coder()
 mycoder.loadPreviouslyCoded("codingAll")
-mycoder.codeAll(["guess"])
+mycoder.codeAll(["OCC"])
 mycoder.dumpCodes("codingAll")
