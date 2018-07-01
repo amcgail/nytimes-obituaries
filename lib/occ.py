@@ -651,6 +651,25 @@ class Doc:
     # _----------------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------------
 
+    def codeSummary(self):
+        html = """
+        <style>
+        .code {
+            padding: 5px;
+            display: inline-block;
+            margin: 5px;
+            border: 1px solid;
+        }
+        </style>
+        """
+        for x in self["OCC"]:
+            html += "<div class='code'>"
+            for k,v in x.items():
+                html += "<b>%s</b> %s <br>" % (k,v)
+            html += "</div>"
+
+        return html
+
     def codedFirstSentenceHtml(self):
         html = self["firstSentence"]
 
