@@ -454,6 +454,25 @@ def extractLexical(doc, name):
         "was": list(whatHeWas)
     }
 
+class _lemmatizerC:
+    def __init__(self):
+        self.lemmatizer = None
+
+    def load(self):
+        if self.lemmatizer is not None:
+            return
+
+        print("Loading lemmatizer...")
+        from nltk.stem import WordNetLemmatizer
+        self.lemmatizer = WordNetLemmatizer()
+
+
+    def __call__(self, *args, **kwargs):
+        self.load()
+        return self.lemmatizer.lemmatize(*args, **kwargs)
+
+lemmatize = _lemmatizerC()
+
 #==============================================================================
 # months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 # months += [ m[:3] for m in months ]
@@ -533,6 +552,16 @@ def extractLexical(doc, name):
 #
 #     hyponymSets[w1] = myhyp
 
+# Efficiency notes:
+#
+# getTuples:
+#   20 word sentence, 1-4 tuples
+#   = 20 + 19 + 18 + 17 = 74
+#
+# getCloseUnorderedTuples:
+#    20 word sentence, 1-4 tuples
+#    = 20 + 19*2
+
 def getTuples(words, minTuple, maxTuple):
     def ntuples(N):
         return [tuple(words[i:i + N]) for i in range(len(words) - N + 1)]
@@ -541,7 +570,26 @@ def getTuples(words, minTuple, maxTuple):
     for i in range(minTuple, maxTuple+1):
         allTuples += ntuples(i)
 
-    return allTuples
+    return list(set(allTuples))
+
+def getCloseUnorderedSets(words, minTuple, maxTuple, maxBuffer=1):
+    from itertools import combinations, chain
+
+    def ntuples(N):
+        return set(frozenset(words[i:i + N]) for i in range(len(words) - N + 1))
+
+    allSets = set()
+    for i in range(minTuple, maxTuple+1):
+
+        for buffer in range(maxBuffer+1):
+
+
+            originalTuples = ntuples(i + buffer)
+            toAdd = set( frozenset(y) for y in chain.from_iterable( combinations(x, i) for x in originalTuples ) )
+
+            allSets.update(toAdd)
+
+    return allSets
 
 def tupleBaggerAndSearch(doc, dictionary):
     allTuples = getTuples(word_tokenize(doc), 1, 4)
