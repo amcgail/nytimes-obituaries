@@ -14,6 +14,8 @@ FROM MEETING:
 	stable way of referring easily (with a number) to cases, deleting, retrieving, etc.
 		maybe include date in the ID number
 	go through the old processing thingies n stuff --
+	generate a CSV for hand-coding, along with IDS
+		1% of 60k is 600 --
 
 LAST MEETING:
 
@@ -29,12 +31,14 @@ LAST MEETING:
 	Add a jupyter folder that provides a log of program changes,
 		running text file, describing changes made to the code --
 		only do retrospective if I think it's good for me..
+	
 	Occ roles linked to name (Adm. Dewey, The Rev. Upright, Dr. Doolittle)
+	
 	Capability to search for a given string, in title and/or first sentence (currently can search whole article)
 		**done**
 	Eliminate occupations that are not the obituarized: “secretary to the president”, “he once met the president”, “medical examiner says he is dead”
 	Tough: actors described as stars, but played a doctor on TV --
-	we should explore and test the "director of X", "authority on X" coding strategy
+		we should explore and test the "director of X", "authority on X" coding strategy
 	occupation of kinships? cool!
 
 	TODAY:
@@ -60,5 +64,3 @@ LAST MEETING:
 		now, any all-caps shit is removed
 		made the (AP) matching more general
 		captured 80% of cases I saw, and ideas about the few exceptions
-
-	we should somewhat expand and test the synset occupations vocabulary
