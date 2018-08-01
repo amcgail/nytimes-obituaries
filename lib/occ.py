@@ -757,7 +757,7 @@ class Coder:
             with open(inFn) as inF:
                 for info in DictReader(inF):
                     i += 1
-                    if i % 100 == 0:
+                    if i % 100 == 0 and False:
                         print(i)
                     thisFn = "%s.pickle" % info['fName']
                     if not thisFn in toLoad:
