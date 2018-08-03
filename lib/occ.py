@@ -280,9 +280,14 @@ class Doc:
 
             words = nlp.word_tokenize(s)
             words = [nlp.lemmatize(x) for x in words]
-            sets = nlp.getCloseUnorderedSets(words, minTuple=1, maxTuple=4, maxBuffer=2)
-            for fs in sets:
 
+            sets = set()
+            sets.update( nlp.getCloseUnorderedSets(words, minTuple=1, maxTuple=1, maxBuffer=0) )
+            sets.update(nlp.getCloseUnorderedSets(words, minTuple=2, maxTuple=2, maxBuffer=1))
+            sets.update(nlp.getCloseUnorderedSets(words, minTuple=3, maxTuple=3, maxBuffer=2))
+            sets.update(nlp.getCloseUnorderedSets(words, minTuple=4, maxTuple=4, maxBuffer=2))
+
+            for fs in sets:
                 if fs in set2code:
                     c = set2code[fs]["code"]
 
@@ -301,8 +306,8 @@ class Doc:
 
             return found
 
-        found_first = check(self["firstSentence"])
-        found_title = check(self["title"])
+        found_first = check(self["firstSentence"].lower())
+        found_title = check(self["title"].lower())
 
         # we want to keep track of "where"
         [ x.update({"where": "firstSentence"}) for x in found_first ]
@@ -1276,12 +1281,16 @@ def regenerateW2C(expandSynonyms = False):
                 if term == "":
                     continue
 
+                try:
+                    int(code)
+                except:
+                    continue
+
                 codegen.append({
                     "term": term,
-                    "code": code,
+                    "code": "%03d" % int(code),
                     "source": "occ2000_updated.xls"
                 })
-                #print((code, term))
 
     # my hand-coding
     if False:
@@ -1291,14 +1300,15 @@ def regenerateW2C(expandSynonyms = False):
                 c['source'] = "hand-coding.csv"
                 codegen.append(c)
 
-    # all except agent.n.02
-    for x in nlp.wn.synset('representative.n.01').hypernyms():
-        if x != nlp.wn.synset('agent.n.02'):
-            codegen.append({
-                "term": x.name(),
-                "code": "003",
-                "source": "hand-coded-synset"
-            })
+    if False:
+        # all except agent.n.02
+        for x in nlp.wn.synset('representative.n.01').hypernyms():
+            if x != nlp.wn.synset('agent.n.02'):
+                codegen.append({
+                    "term": x.name(),
+                    "code": "003",
+                    "source": "hand-coded-synset"
+                })
 
     # add alternative words, whose codes are themselves
     altClass = ["volunteer", "thief", "defender", "champion", "veteran",
@@ -1324,8 +1334,8 @@ def regenerateW2C(expandSynonyms = False):
     # IF THERE ARE MULTIPLE DETERMINATIONS FOR A SINGLE WORD, SKIP
     unique_term_code = set( (x['term'],x['code']) for x in codegen )
     count_terms = Counter( x[0] for x in unique_term_code )
-    skip = sorted(set([ x['term'] for x in codegen if count_terms[ x['term'] ] != 1 ]))
-    print("SKIPPING %s" % skip)
+    skip = sorted(set([ "%s: %s"% (x['term'],x['code']) for x in codegen if count_terms[ x['term'] ] != 1 ]))
+    print("\n".join( skip ))
     codegen = [ x for x in codegen if count_terms[ x['term'] ] == 1 ]
 
     if expandSynonyms:

@@ -1,10 +1,11 @@
 import occ
 
-occ.regenerateW2C()
+if False:
+    occ.regenerateW2C()
 
 coder = occ.Coder()
 coder.loadPreviouslyCoded("codingAll", rand=False)
-coder.codeAll()
+coder.codeAll(['OCC'])
 
 if False:
     for obit in coder.obituaries:

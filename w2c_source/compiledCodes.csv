@@ -42,7 +42,6 @@ super:098,occ2000_updated.xls,submarine captain
 super:098,occ2000_updated.xls,submarine commander
 super:098,occ2000_updated.xls,army private
 super:098,occ2000_updated.xls,corporal
-OCC_2000,occ2000_updated.xls,revised occtitle
 050,occ2000_updated.xls,advance agent
 050,occ2000_updated.xls,artist's representative
 050,occ2000_updated.xls,author's agent
@@ -74,7 +73,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 050,occ2000_updated.xls,promotional representative
 050,occ2000_updated.xls,talent scout
 050,occ2000_updated.xls,theatrical agent
-OCC_2000,occ2000_updated.xls,revised occtitle
 001,occ2000_updated.xls,board chairman
 001,occ2000_updated.xls,chair of the board of directors
 001,occ2000_updated.xls,chair of the governing board
@@ -129,14 +127,14 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 001,occ2000_updated.xls,city manager
 001,occ2000_updated.xls,mayor
 001,occ2000_updated.xls,mayoress
-1.0,occ2000_updated.xls,monarch
-1.0,occ2000_updated.xls,king
-1.0,occ2000_updated.xls,emperor
-1.0,occ2000_updated.xls,tsar
-1.0,occ2000_updated.xls,sovereign
-1.0,occ2000_updated.xls,empress
-1.0,occ2000_updated.xls,mikado
-1.0,occ2000_updated.xls,prince
+001,occ2000_updated.xls,monarch
+001,occ2000_updated.xls,king
+001,occ2000_updated.xls,emperor
+001,occ2000_updated.xls,tsar
+001,occ2000_updated.xls,sovereign
+001,occ2000_updated.xls,empress
+001,occ2000_updated.xls,mikado
+001,occ2000_updated.xls,prince
 001,occ2000_updated.xls,president
 001,occ2000_updated.xls,prime minister
 001,occ2000_updated.xls,premier
@@ -242,7 +240,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 003,occ2000_updated.xls,u.s. senator
 003,occ2000_updated.xls,us senator
 003,occ2000_updated.xls,member of the senate
-OCC_2000,occ2000_updated.xls,revised occtitle
 004,occ2000_updated.xls,account executive
 004,occ2000_updated.xls,advertising director
 004,occ2000_updated.xls,advertising executive
@@ -1067,7 +1064,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 043,occ2000_updated.xls,water registrar
 043,occ2000_updated.xls,watermaster
 043,occ2000_updated.xls,winemaker
-OCC_2000,occ2000_updated.xls,revised occtitle
 051,occ2000_updated.xls,assembler
 051,occ2000_updated.xls,buying agent
 051,occ2000_updated.xls,cattle broker
@@ -1629,7 +1625,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 095,occ2000_updated.xls,licensed bondsman
 095,occ2000_updated.xls,operations officer
 095,occ2000_updated.xls,professional bondsman
-OCC_2000,occ2000_updated.xls,revised occtitle
 100,occ2000_updated.xls,artificial intelligence specialist
 100,occ2000_updated.xls,business systems analyst
 100,occ2000_updated.xls,computer analyst
@@ -2687,7 +2682,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 156,occ2000_updated.xls,transit man
 156,occ2000_updated.xls,transit man of surveying
 156,occ2000_updated.xls,surveying transit man
-OCC_2000,occ2000_updated.xls,revised occtitle
 160,occ2000_updated.xls,agricultural consultant
 160,occ2000_updated.xls,agricultural researcher
 160,occ2000_updated.xls,agricultural scientist
@@ -3343,7 +3337,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 196,occ2000_updated.xls,vector control specialist
 196,occ2000_updated.xls,water tester
 196,occ2000_updated.xls,weather observer
-OCC_2000,occ2000_updated.xls,revised occtitle
 200,occ2000_updated.xls,a.s.a.t.  c.o.r.e. counselor
 200,occ2000_updated.xls,asat core counselor
 200,occ2000_updated.xls,core counselor
@@ -3659,7 +3652,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 206,occ2000_updated.xls,teacher for youth
 206,occ2000_updated.xls,traveling missionary
 206,occ2000_updated.xls,verger
-OCC_2000,occ2000_updated.xls,revised occtitle
 210,occ2000_updated.xls,legal arbitrator
 210,occ2000_updated.xls,attorney
 210,occ2000_updated.xls,attorney at law
@@ -3789,7 +3781,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 215,occ2000_updated.xls,title officer
 215,occ2000_updated.xls,title searcher
 215,occ2000_updated.xls,trial examiner
-OCC_2000,occ2000_updated.xls,revised occtitle
 220,occ2000_updated.xls,apparel machinery instructor
 220,occ2000_updated.xls,apparel machinary professor
 220,occ2000_updated.xls,professor of apparel machinary
@@ -4194,7 +4185,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 255,occ2000_updated.xls,farm management supervisor
 255,occ2000_updated.xls,home management supervisor
 255,occ2000_updated.xls,consultant teacher
-OCC_2000,occ2000_updated.xls,revised occtitle
 260,occ2000_updated.xls,animator
 260,occ2000_updated.xls,apprentice painter
 260,occ2000_updated.xls,apprentice cartoonist
@@ -4449,16 +4439,24 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,athletic champion
 272,occ2000_updated.xls,track star
 272,occ2000_updated.xls,track champion
+272,occ2000_updated.xls,sprinter
+272,occ2000_updated.xls,runner
+272,occ2000_updated.xls,marathoner
 272,occ2000_updated.xls,quartermiler
+272,occ2000_updated.xls,miler
+272,occ2000_updated.xls,hurdler
 272,occ2000_updated.xls,shotputter
 272,occ2000_updated.xls,javelin thrower
 272,occ2000_updated.xls,discus thrower
+272,occ2000_updated.xls,pentathlete
 272,occ2000_updated.xls,decathlete
 272,occ2000_updated.xls,triathlete
 272,occ2000_updated.xls,long jumper
 272,occ2000_updated.xls,high jumper
 272,occ2000_updated.xls,triple jumper
+272,occ2000_updated.xls,pole vaulter
 272,occ2000_updated.xls,pole-vaulter
+272,occ2000_updated.xls,olympian
 272,occ2000_updated.xls,olympic champion
 272,occ2000_updated.xls,olympic star
 272,occ2000_updated.xls,gold medallist
@@ -4468,14 +4466,32 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,auto racer
 272,occ2000_updated.xls,car racer
 272,occ2000_updated.xls,ball player
+272,occ2000_updated.xls,ballplayer
 272,occ2000_updated.xls,baseball coach
+272,occ2000_updated.xls,baseball player
+272,occ2000_updated.xls,catcher
+272,occ2000_updated.xls,first baseman
+272,occ2000_updated.xls,second baseman
+272,occ2000_updated.xls,shortstop
 272,occ2000_updated.xls,3d baseman
+272,occ2000_updated.xls,third baseman
+272,occ2000_updated.xls,infielder
+272,occ2000_updated.xls,outfielder
+272,occ2000_updated.xls,left fielder
+272,occ2000_updated.xls,center fielder
+272,occ2000_updated.xls,right fielder
+272,occ2000_updated.xls,reliever
+272,occ2000_updated.xls,pinch hitter
+272,occ2000_updated.xls,slugger
+272,occ2000_updated.xls,designated hitter
 272,occ2000_updated.xls,utility infielder
+272,occ2000_updated.xls,fielder
 272,occ2000_updated.xls,baseball star
 272,occ2000_updated.xls,baseball scout
 272,occ2000_updated.xls,baseball umpire
 272,occ2000_updated.xls,basketball coach
 272,occ2000_updated.xls,basketball head coach
+272,occ2000_updated.xls,basketball player
 272,occ2000_updated.xls,basketball center
 272,occ2000_updated.xls,basketball guuard
 272,occ2000_updated.xls,basketball forward
@@ -4508,10 +4524,18 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,assistant coach
 272,occ2000_updated.xls,offensive coordintor
 272,occ2000_updated.xls,defensive coordinator
+272,occ2000_updated.xls,football player
 272,occ2000_updated.xls,football star
+272,occ2000_updated.xls,quarterback
+272,occ2000_updated.xls,running back
+272,occ2000_updated.xls,rusher
+272,occ2000_updated.xls,fullback
+272,occ2000_updated.xls,halfback
 272,occ2000_updated.xls,blocking back
 272,occ2000_updated.xls,offensive tackle
 272,occ2000_updated.xls,offensive lineman
+272,occ2000_updated.xls,tight end
+272,occ2000_updated.xls,flanker
 272,occ2000_updated.xls,wide receiver
 272,occ2000_updated.xls,defensive lineman
 272,occ2000_updated.xls,defensive tackle
@@ -4520,24 +4544,33 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,football center
 272,occ2000_updated.xls,defensive end
 272,occ2000_updated.xls,pass rusher
+272,occ2000_updated.xls,linebacker
+272,occ2000_updated.xls,cornerback
 272,occ2000_updated.xls,defensive back
 272,occ2000_updated.xls,nickel back
+272,occ2000_updated.xls,punter
 272,occ2000_updated.xls,punt receiver
 272,occ2000_updated.xls,kickoff receiver
 272,occ2000_updated.xls,kickoff returner
 272,occ2000_updated.xls,punt returner
 272,occ2000_updated.xls,special teams player
+272,occ2000_updated.xls,place-kicker
 272,occ2000_updated.xls,golf pro
 272,occ2000_updated.xls,golfer
+272,occ2000_updated.xls,gymnast
+272,occ2000_updated.xls,hockey player
 272,occ2000_updated.xls,hockey goalie
 272,occ2000_updated.xls,hockey forward
 272,occ2000_updated.xls,hockey defenseman
 272,occ2000_updated.xls,hockey star
+272,occ2000_updated.xls,soccer player
 272,occ2000_updated.xls,soccer coach
+272,occ2000_updated.xls,goalkeeper
 272,occ2000_updated.xls,midfielder
 272,occ2000_updated.xls,soccer scorer
 272,occ2000_updated.xls,goal scorer
 272,occ2000_updated.xls,soccer star
+272,occ2000_updated.xls,lacrosse player
 272,occ2000_updated.xls,cricket player
 272,occ2000_updated.xls,volleyball pklayer
 272,occ2000_updated.xls,handball player
@@ -4556,6 +4589,10 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,paddock judge
 272,occ2000_updated.xls,physical director
 272,occ2000_updated.xls,pit steward
+272,occ2000_updated.xls,pitcher
+272,occ2000_updated.xls,reliever
+272,occ2000_updated.xls,hurler
+272,occ2000_updated.xls,southpaw
 272,occ2000_updated.xls,placing judge
 272,occ2000_updated.xls,pool player
 272,occ2000_updated.xls,snooker player
@@ -4572,8 +4609,11 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,scorer of athletic event
 272,occ2000_updated.xls,baseball scout
 272,occ2000_updated.xls,basketball scout
+272,occ2000_updated.xls,skater
+272,occ2000_updated.xls,skier
 272,occ2000_updated.xls,snowboarder
 272,occ2000_updated.xls,skiing champion
+272,occ2000_updated.xls,ski jumper
 272,occ2000_updated.xls,ski champion
 272,occ2000_updated.xls,ski racer
 272,occ2000_updated.xls,ski jumping champion
@@ -4582,8 +4622,10 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,stewardess
 272,occ2000_updated.xls,stock car driver
 272,occ2000_updated.xls,sulky driver
+272,occ2000_updated.xls,swimmer
 272,occ2000_updated.xls,channel swimmer
 272,occ2000_updated.xls,marathon swimmer
+272,occ2000_updated.xls,alpinist
 272,occ2000_updated.xls,martial artist
 272,occ2000_updated.xls,sailor
 272,occ2000_updated.xls,yachtsman
@@ -4632,6 +4674,7 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 272,occ2000_updated.xls,swimming instructor
 272,occ2000_updated.xls,teacher of swimming
 272,occ2000_updated.xls,instructor of swimming
+272,occ2000_updated.xls,tennis player
 272,occ2000_updated.xls,tennis champion
 272,occ2000_updated.xls,singles player
 272,occ2000_updated.xls,doubles player
@@ -4679,17 +4722,21 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 274,occ2000_updated.xls,stripper
 274,occ2000_updated.xls,exotic dancer
 274,occ2000_updated.xls,tap dancer
+275,occ2000_updated.xls,accompanist
 275,occ2000_updated.xls,music arranger
 275,occ2000_updated.xls,band director
 275,occ2000_updated.xls,band leader
 275,occ2000_updated.xls,band master
+275,occ2000_updated.xls,bugler
 275,occ2000_updated.xls,bull fiddle player
 275,occ2000_updated.xls,calliope player
 275,occ2000_updated.xls,cantor
 275,occ2000_updated.xls,psalmist
+275,occ2000_updated.xls,cellist
 275,occ2000_updated.xls,choir leader
 275,occ2000_updated.xls,choir singer
 275,occ2000_updated.xls,choirmaster
+275,occ2000_updated.xls,chorister
 275,occ2000_updated.xls,chorus
 275,occ2000_updated.xls,chorus master
 275,occ2000_updated.xls,church organist
@@ -4697,7 +4744,11 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 275,occ2000_updated.xls,concert artist
 275,occ2000_updated.xls,concert pianist
 275,occ2000_updated.xls,concert singer
+275,occ2000_updated.xls,cornetist
+275,occ2000_updated.xls,drummer
 275,occ2000_updated.xls,free lance musician
+275,occ2000_updated.xls,guitar player
+275,occ2000_updated.xls,harpist
 275,occ2000_updated.xls,instrumentalist
 275,occ2000_updated.xls,maestro
 275,occ2000_updated.xls,minister of music
@@ -4714,21 +4765,35 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 275,occ2000_updated.xls,orchestra director
 275,occ2000_updated.xls,orchestra leader
 275,occ2000_updated.xls,orchestrator
+275,occ2000_updated.xls,organist
+275,occ2000_updated.xls,pianist
+275,occ2000_updated.xls,piano player
 275,occ2000_updated.xls,recording artist
+275,occ2000_updated.xls,singer
+275,occ2000_updated.xls,bass
+275,occ2000_updated.xls,baritone
+275,occ2000_updated.xls,tenor
+275,occ2000_updated.xls,soprano
 275,occ2000_updated.xls,mezzo soprano
+275,occ2000_updated.xls,rapper
+275,occ2000_updated.xls,soloist
 275,occ2000_updated.xls,song writer
 275,occ2000_updated.xls,songwriter
 275,occ2000_updated.xls,singer-songwriter
+275,occ2000_updated.xls,trombonist
+275,occ2000_updated.xls,trumpeter
+275,occ2000_updated.xls,violinist
 275,occ2000_updated.xls,vocal artist
-276.0,occ2000_updated.xls,chess player
-276.0,occ2000_updated.xls,chess champion
-276.0,occ2000_updated.xls,chess prodigy
-276.0,occ2000_updated.xls,grandmaster
-276.0,occ2000_updated.xls,bridge player
-276.0,occ2000_updated.xls,bridge champion
-276.0,occ2000_updated.xls,bridge partner
-276.0,occ2000_updated.xls,poker player
-276.0,occ2000_updated.xls,poker champion
+275,occ2000_updated.xls,vocalist
+276,occ2000_updated.xls,chess player
+276,occ2000_updated.xls,chess champion
+276,occ2000_updated.xls,chess prodigy
+276,occ2000_updated.xls,grandmaster
+276,occ2000_updated.xls,bridge player
+276,occ2000_updated.xls,bridge champion
+276,occ2000_updated.xls,bridge partner
+276,occ2000_updated.xls,poker player
+276,occ2000_updated.xls,poker champion
 276,occ2000_updated.xls,amusement park entertainer
 276,occ2000_updated.xls,aquatic performer
 276,occ2000_updated.xls,astrologer
@@ -5152,7 +5217,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 296,occ2000_updated.xls,best boy
 296,occ2000_updated.xls,densitometer reader
 296,occ2000_updated.xls,radar operator
-OCC_2000,occ2000_updated.xls,revised occtitle
 300,occ2000_updated.xls,chiropractor
 300,occ2000_updated.xls,doctor of chiropractic
 301,occ2000_updated.xls,d.d.s.
@@ -5213,60 +5277,94 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 305,occ2000_updated.xls,pharmacy intern
 305,occ2000_updated.xls,prescriptionist
 305,occ2000_updated.xls,registered pharmacist
+306,occ2000_updated.xls,allergist
 306,occ2000_updated.xls,allopathic doctor
+306,occ2000_updated.xls,anesthesiologist
 306,occ2000_updated.xls,aurist
 306,occ2000_updated.xls,aviation medicine specialist
+306,occ2000_updated.xls,cardiologist
 306,occ2000_updated.xls,cardiovascular disease specialist
 306,occ2000_updated.xls,cardiovascular surgeon
 306,occ2000_updated.xls,clinical fellow
 306,occ2000_updated.xls,clinical pathologist
 306,occ2000_updated.xls,county health officer
+306,occ2000_updated.xls,dermatologist
 306,occ2000_updated.xls,diagnostic radiologist
+306,occ2000_updated.xls,diagnostician
 306,occ2000_updated.xls,doctor
 306,occ2000_updated.xls,doctor of medicine
 306,occ2000_updated.xls,doctor of osteopathy
+306,occ2000_updated.xls,ear specialist
 306,occ2000_updated.xls,emergency medicine specialist
 306,occ2000_updated.xls,externe
+306,occ2000_updated.xls,eye doctor
 306,occ2000_updated.xls,eye physician
 306,occ2000_updated.xls,eye specialist
 306,occ2000_updated.xls,family practitioner
 306,occ2000_updated.xls,flight surgeon
 306,occ2000_updated.xls,forensic pathologist
+306,occ2000_updated.xls,gastroenterologist
+306,occ2000_updated.xls,general practitioner
+306,occ2000_updated.xls,gynecologist
+306,occ2000_updated.xls,heart specialist
+306,occ2000_updated.xls,hematologist
 306,occ2000_updated.xls,hospice fellow
 306,occ2000_updated.xls,hospital fellow
 306,occ2000_updated.xls,immunologist
+306,occ2000_updated.xls,internist
 306,occ2000_updated.xls,laryngologist
 306,occ2000_updated.xls,medical doctor
 306,occ2000_updated.xls,medical examiner
 306,occ2000_updated.xls,medical pathologist
 306,occ2000_updated.xls,medical resident
+306,occ2000_updated.xls,medical specialist
 306,occ2000_updated.xls,nephrologist
 306,occ2000_updated.xls,neurological surgeon
+306,occ2000_updated.xls,neurologist
 306,occ2000_updated.xls,neuropsychiatrist
+306,occ2000_updated.xls,neurosurgeon
 306,occ2000_updated.xls,o.b. specialist
 306,occ2000_updated.xls,ob/gyn
+306,occ2000_updated.xls,obstetrician
 306,occ2000_updated.xls,occupational medicine specialist
 306,occ2000_updated.xls,occupational physician
+306,occ2000_updated.xls,oculist
+306,occ2000_updated.xls,ophthalmologist
 306,occ2000_updated.xls,orthopedic surgeon
+306,occ2000_updated.xls,orthopedist
 306,occ2000_updated.xls,osteopath
 306,occ2000_updated.xls,osteopathic physician
 306,occ2000_updated.xls,osteopathic resident
+306,occ2000_updated.xls,otolaryngologist
+306,occ2000_updated.xls,otorhinolaryngologist
+306,occ2000_updated.xls,pathologist
 306,occ2000_updated.xls,pediatric allergist
 306,occ2000_updated.xls,pediatric cardiologist
+306,occ2000_updated.xls,pediatrician
+306,occ2000_updated.xls,pediatrist
 306,occ2000_updated.xls,physiatrist
 306,occ2000_updated.xls,physical medicine and rehabilitation specialist
 306,occ2000_updated.xls,physician
+306,occ2000_updated.xls,plastic surgeon
 306,occ2000_updated.xls,police surgeon
 306,occ2000_updated.xls,preventive medicine specialist
+306,occ2000_updated.xls,proctologist
+306,occ2000_updated.xls,psychiatrist
+306,occ2000_updated.xls,psychoanalyst
 306,occ2000_updated.xls,public health doctor
 306,occ2000_updated.xls,pulmonary disease specialist
+306,occ2000_updated.xls,radiologist
 306,occ2000_updated.xls,resident doctor
 306,occ2000_updated.xls,resident intern
+306,occ2000_updated.xls,resident physician
+306,occ2000_updated.xls,rheumatologist
 306,occ2000_updated.xls,rhinologist
 306,occ2000_updated.xls,roentgenologist
+306,occ2000_updated.xls,surgeon
 306,occ2000_updated.xls,therapeutic radiologist
 306,occ2000_updated.xls,thoracic surgeon
 306,occ2000_updated.xls,tuberculosis specialist
+306,occ2000_updated.xls,urologist
 306,occ2000_updated.xls,x ray physician
 311,occ2000_updated.xls,assistant anesthologist
 311,occ2000_updated.xls,anesthologist assistant
@@ -5444,7 +5542,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 326,occ2000_updated.xls,naturopathic doctor
 326,occ2000_updated.xls,naturopathic physician
 326,occ2000_updated.xls,sanipractic physician
-OCC_2000,occ2000_updated.xls,revised occtitle
 331,occ2000_updated.xls,dental hygienist
 331,occ2000_updated.xls,oral hygienist
 332,occ2000_updated.xls,cat scanner operator
@@ -5882,7 +5979,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 365,occ2000_updated.xls,veterinary attendant
 365,occ2000_updated.xls,visual training aide
 365,occ2000_updated.xls,weight reduction specialist
-OCC_2000,occ2000_updated.xls,revised occtitle
 370,occ2000_updated.xls,city jailer
 370,occ2000_updated.xls,correction officer head
 370,occ2000_updated.xls,jailer chief
@@ -6263,7 +6359,6 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 395,occ2000_updated.xls,victim advocate clerk
 395,occ2000_updated.xls,victims advocate specialist
 395,occ2000_updated.xls,victim advocate specialist
-OCC_2000,occ2000_updated.xls,revised occtitle
 400,occ2000_updated.xls,chef
 400,occ2000_updated.xls,chef de cuisine
 400,occ2000_updated.xls,chef de froid
@@ -11427,243 +11522,350 @@ OCC_2000,occ2000_updated.xls,revised occtitle
 770,occ2000_updated.xls,quarterman
 770,occ2000_updated.xls,remelt furnace expediter
 770,occ2000_updated.xls,station chief
-OCC_2000,occ2000_updated.xls,revised occtitle
-306.0,occ2000_updated.xls,sawbones
-306.0,occ2000_updated.xls,head-shrinker
-306.0,occ2000_updated.xls,radiotherapist
-306.0,occ2000_updated.xls,ear doctor
-306.0,occ2000_updated.xls,ent man
-306.0,occ2000_updated.xls,accoucheur
-306.0,occ2000_updated.xls,ear-nose-and-throat doctor
-306.0,occ2000_updated.xls,baby doctor
-306.0,occ2000_updated.xls,angiologist
-306.0,occ2000_updated.xls,perinatologist
-306.0,occ2000_updated.xls,cosmetic surgeon
-306.0,occ2000_updated.xls,primary care physician
-306.0,occ2000_updated.xls,medical intern
-306.0,occ2000_updated.xls,anaesthetist
-306.0,occ2000_updated.xls,amputator
-306.0,occ2000_updated.xls,alienist
-306.0,occ2000_updated.xls,operating surgeon
-306.0,occ2000_updated.xls,gynaecologist
-306.0,occ2000_updated.xls,rhinolaryngologist
-306.0,occ2000_updated.xls,skin doctor
-306.0,occ2000_updated.xls,hakim
-306.0,occ2000_updated.xls,paediatrician
-306.0,occ2000_updated.xls,hakeem
-306.0,occ2000_updated.xls,oncologist
-306.0,occ2000_updated.xls,heart surgeon
-306.0,occ2000_updated.xls,brain doctor
-306.0,occ2000_updated.xls,country doctor
-306.0,occ2000_updated.xls,woman's doctor
-306.0,occ2000_updated.xls,haematologist
-306.0,occ2000_updated.xls,geriatrician
-306.0,occ2000_updated.xls,house physician
-306.0,occ2000_updated.xls,otologist
-306.0,occ2000_updated.xls,gerontologist
-306.0,occ2000_updated.xls,family doctor
-306.0,occ2000_updated.xls,anesthetist
-306.0,occ2000_updated.xls,orthopaedist
-306.0,occ2000_updated.xls,aetiologist
-306.0,occ2000_updated.xls,brain surgeon
-306.0,occ2000_updated.xls,abortionist
-306.0,occ2000_updated.xls,medical extern
-275.0,occ2000_updated.xls,alto saxophonist
-275.0,occ2000_updated.xls,rhythm and blues musician
-275.0,occ2000_updated.xls,prima donna
-275.0,occ2000_updated.xls,madrigalist
-275.0,occ2000_updated.xls,songster
-275.0,occ2000_updated.xls,songstress
-275.0,occ2000_updated.xls,opera star
-275.0,occ2000_updated.xls,vocalizer
-275.0,occ2000_updated.xls,harmoniser
-275.0,occ2000_updated.xls,yodeller
-275.0,occ2000_updated.xls,flute player
-275.0,occ2000_updated.xls,syncopator
-275.0,occ2000_updated.xls,recitalist
-275.0,occ2000_updated.xls,vibist
-275.0,occ2000_updated.xls,coloratura
-275.0,occ2000_updated.xls,koto player
-275.0,occ2000_updated.xls,vocaliser
-275.0,occ2000_updated.xls,alto
-275.0,occ2000_updated.xls,carillonneur
-275.0,occ2000_updated.xls,percussionist
-275.0,occ2000_updated.xls,violoncellist
-275.0,occ2000_updated.xls,clarinettist
-275.0,occ2000_updated.xls,bagpiper
-275.0,occ2000_updated.xls,jongleur
-275.0,occ2000_updated.xls,oboist
-275.0,occ2000_updated.xls,tympanist
-275.0,occ2000_updated.xls,voice
-275.0,occ2000_updated.xls,harper
-275.0,occ2000_updated.xls,lutanist
-275.0,occ2000_updated.xls,castrato
-275.0,occ2000_updated.xls,bassoonist
-275.0,occ2000_updated.xls,torch singer
-275.0,occ2000_updated.xls,lieder singer
-275.0,occ2000_updated.xls,timpanist
-275.0,occ2000_updated.xls,clarinetist
-275.0,occ2000_updated.xls,harpsichordist
-275.0,occ2000_updated.xls,coloratura soprano
-275.0,occ2000_updated.xls,balladeer
-275.0,occ2000_updated.xls,jazz musician
-275.0,occ2000_updated.xls,cymbalist
-275.0,occ2000_updated.xls,lutist
-275.0,occ2000_updated.xls,tenor saxophonist
-275.0,occ2000_updated.xls,tenorist
-275.0,occ2000_updated.xls,gambist
-275.0,occ2000_updated.xls,rock star
-275.0,occ2000_updated.xls,diva
-275.0,occ2000_updated.xls,violist
-275.0,occ2000_updated.xls,caroler
-275.0,occ2000_updated.xls,flutist
-275.0,occ2000_updated.xls,mezzo
-275.0,occ2000_updated.xls,saxophonist
-275.0,occ2000_updated.xls,contralto
-275.0,occ2000_updated.xls,bassist
-275.0,occ2000_updated.xls,choirboy
-275.0,occ2000_updated.xls,xylophonist
-275.0,occ2000_updated.xls,accordionist
-275.0,occ2000_updated.xls,hornist
-275.0,occ2000_updated.xls,rock 'n' roll musician
-275.0,occ2000_updated.xls,rock star
-275.0,occ2000_updated.xls,pipe major
-275.0,occ2000_updated.xls,troubadour
-275.0,occ2000_updated.xls,vibraphonist
-275.0,occ2000_updated.xls,trombone player
-275.0,occ2000_updated.xls,countertenor
-275.0,occ2000_updated.xls,jazzman
-275.0,occ2000_updated.xls,keyboardist
-275.0,occ2000_updated.xls,sitar player
-275.0,occ2000_updated.xls,barytone
-275.0,occ2000_updated.xls,operatic star
-275.0,occ2000_updated.xls,altoist
-275.0,occ2000_updated.xls,bandsman
-275.0,occ2000_updated.xls,flautist
-275.0,occ2000_updated.xls,fiddler
-275.0,occ2000_updated.xls,lutenist
-275.0,occ2000_updated.xls,crooner
-275.0,occ2000_updated.xls,folk singer
-275.0,occ2000_updated.xls,accompanyist
-275.0,occ2000_updated.xls,basso
-275.0,occ2000_updated.xls,thrush
-275.0,occ2000_updated.xls,recorder player
-275.0,occ2000_updated.xls,poet-singer
-275.0,occ2000_updated.xls,mezzo-soprano
-275.0,occ2000_updated.xls,caroller
-275.0,occ2000_updated.xls,saxist
-275.0,occ2000_updated.xls,guitarist
-275.0,occ2000_updated.xls,canary
-275.0,occ2000_updated.xls,warbler
-275.0,occ2000_updated.xls,harmonizer
-272.0,occ2000_updated.xls,dribbler
-272.0,occ2000_updated.xls,ice-skater
-272.0,occ2000_updated.xls,forward passer
-272.0,occ2000_updated.xls,escalader
-272.0,occ2000_updated.xls,rollerblader
-272.0,occ2000_updated.xls,cricketer
-272.0,occ2000_updated.xls,bush leaguer
-272.0,occ2000_updated.xls,sportswoman
-272.0,occ2000_updated.xls,bowler
-272.0,occ2000_updated.xls,goalie
-272.0,occ2000_updated.xls,wing
-272.0,occ2000_updated.xls,roller-skater
-272.0,occ2000_updated.xls,langlaufer
-272.0,occ2000_updated.xls,right-handed pitcher
-272.0,occ2000_updated.xls,passer
-272.0,occ2000_updated.xls,field general
-272.0,occ2000_updated.xls,ice-hockey player
-272.0,occ2000_updated.xls,utility man
-272.0,occ2000_updated.xls,tackle
-272.0,occ2000_updated.xls,weightlifter
-272.0,occ2000_updated.xls,fieldsman
-272.0,occ2000_updated.xls,tightrope walker
-272.0,occ2000_updated.xls,funambulist
-272.0,occ2000_updated.xls,rock climber
-272.0,occ2000_updated.xls,speedskater
-272.0,occ2000_updated.xls,bounder
-272.0,occ2000_updated.xls,bench warmer
-272.0,occ2000_updated.xls,winger
-272.0,occ2000_updated.xls,tobogganist
-272.0,occ2000_updated.xls,breaststroker
-272.0,occ2000_updated.xls,netkeeper
-272.0,occ2000_updated.xls,wicket-keeper
-272.0,occ2000_updated.xls,batter
-272.0,occ2000_updated.xls,right-hander
-272.0,occ2000_updated.xls,starting pitcher
-272.0,occ2000_updated.xls,footballer
-272.0,occ2000_updated.xls,road runner
-272.0,occ2000_updated.xls,signal caller
-272.0,occ2000_updated.xls,left-hander
-272.0,occ2000_updated.xls,pass receiver
-272.0,occ2000_updated.xls,sporting man
-272.0,occ2000_updated.xls,minor leaguer
-272.0,occ2000_updated.xls,screwballer
-272.0,occ2000_updated.xls,dropkicker
-272.0,occ2000_updated.xls,slider
-272.0,occ2000_updated.xls,kicker
-272.0,occ2000_updated.xls,ball carrier
-272.0,occ2000_updated.xls,mountaineer
-272.0,occ2000_updated.xls,backstroker
-272.0,occ2000_updated.xls,sportsman
-272.0,occ2000_updated.xls,twirler
-272.0,occ2000_updated.xls,major leaguer
-272.0,occ2000_updated.xls,batsman
-272.0,occ2000_updated.xls,line backer
-272.0,occ2000_updated.xls,hitter
-272.0,occ2000_updated.xls,marathon runner
-272.0,occ2000_updated.xls,free agent
-272.0,occ2000_updated.xls,second sacker
-272.0,occ2000_updated.xls,shot putter
-272.0,occ2000_updated.xls,snapper
-272.0,occ2000_updated.xls,circus acrobat
-272.0,occ2000_updated.xls,pole jumper
-272.0,occ2000_updated.xls,lineman
-272.0,occ2000_updated.xls,placekicker
-272.0,occ2000_updated.xls,relief pitcher
-272.0,occ2000_updated.xls,sledder
-272.0,occ2000_updated.xls,mountain climber
-272.0,occ2000_updated.xls,vaulter
-272.0,occ2000_updated.xls,long-distance runner
-272.0,occ2000_updated.xls,switch-hitter
-272.0,occ2000_updated.xls,outdoor man
-272.0,occ2000_updated.xls,letterman
-272.0,occ2000_updated.xls,skateboarder
-272.0,occ2000_updated.xls,plunger
-272.0,occ2000_updated.xls,second-stringer
-272.0,occ2000_updated.xls,leaper
-272.0,occ2000_updated.xls,sharpshooter
-272.0,occ2000_updated.xls,left hander
-272.0,occ2000_updated.xls,jumper
-272.0,occ2000_updated.xls,netminder
-272.0,occ2000_updated.xls,tailback
-272.0,occ2000_updated.xls,speed skater
-272.0,occ2000_updated.xls,lifter
-272.0,occ2000_updated.xls,flanker back
-272.0,occ2000_updated.xls,cragsman
-272.0,occ2000_updated.xls,pass catcher
-272.0,occ2000_updated.xls,goaltender
-272.0,occ2000_updated.xls,ropewalker
-272.0,occ2000_updated.xls,ropedancer
-272.0,occ2000_updated.xls,lefthander
-272.0,occ2000_updated.xls,football hero
-272.0,occ2000_updated.xls,big leaguer
-272.0,occ2000_updated.xls,base runner
-272.0,occ2000_updated.xls,basketeer
-272.0,occ2000_updated.xls,balancer
-272.0,occ2000_updated.xls,wingback
-272.0,occ2000_updated.xls,split end
-272.0,occ2000_updated.xls,ball hawk
-272.0,occ2000_updated.xls,luger
-272.0,occ2000_updated.xls,four-minute man
-272.0,occ2000_updated.xls,little leaguer
-272.0,occ2000_updated.xls,sport
-272.0,occ2000_updated.xls,left-handed pitcher
-272.0,occ2000_updated.xls,first sacker
-272.0,occ2000_updated.xls,centerfielder
-272.0,occ2000_updated.xls,tackler
-272.0,occ2000_updated.xls,third sacker
-003,hand-coded-synset,negotiator.n.01
+306,occ2000_updated.xls,orthopedist
+306,occ2000_updated.xls,sawbones
+306,occ2000_updated.xls,head-shrinker
+306,occ2000_updated.xls,dermatologist
+306,occ2000_updated.xls,diagnostician
+306,occ2000_updated.xls,radiotherapist
+306,occ2000_updated.xls,ear doctor
+306,occ2000_updated.xls,ent man
+306,occ2000_updated.xls,anesthesiologist
+306,occ2000_updated.xls,general practitioner
+306,occ2000_updated.xls,accoucheur
+306,occ2000_updated.xls,ear-nose-and-throat doctor
+306,occ2000_updated.xls,rheumatologist
+306,occ2000_updated.xls,baby doctor
+306,occ2000_updated.xls,angiologist
+306,occ2000_updated.xls,pediatrician
+306,occ2000_updated.xls,neurosurgeon
+306,occ2000_updated.xls,gastroenterologist
+306,occ2000_updated.xls,perinatologist
+306,occ2000_updated.xls,pediatrist
+306,occ2000_updated.xls,otorhinolaryngologist
+306,occ2000_updated.xls,cosmetic surgeon
+306,occ2000_updated.xls,primary care physician
+306,occ2000_updated.xls,medical intern
+306,occ2000_updated.xls,plastic surgeon
+306,occ2000_updated.xls,allergist
+306,occ2000_updated.xls,surgeon
+306,occ2000_updated.xls,anaesthetist
+306,occ2000_updated.xls,amputator
+306,occ2000_updated.xls,ophthalmologist
+306,occ2000_updated.xls,alienist
+306,occ2000_updated.xls,operating surgeon
+306,occ2000_updated.xls,gynaecologist
+306,occ2000_updated.xls,rhinolaryngologist
+306,occ2000_updated.xls,skin doctor
+306,occ2000_updated.xls,hakim
+306,occ2000_updated.xls,paediatrician
+306,occ2000_updated.xls,hematologist
+306,occ2000_updated.xls,hakeem
+306,occ2000_updated.xls,oncologist
+306,occ2000_updated.xls,psychiatrist
+306,occ2000_updated.xls,heart surgeon
+306,occ2000_updated.xls,internist
+306,occ2000_updated.xls,neurologist
+306,occ2000_updated.xls,urologist
+306,occ2000_updated.xls,resident physician
+306,occ2000_updated.xls,obstetrician
+306,occ2000_updated.xls,brain doctor
+306,occ2000_updated.xls,ear specialist
+306,occ2000_updated.xls,country doctor
+306,occ2000_updated.xls,proctologist
+306,occ2000_updated.xls,woman's doctor
+306,occ2000_updated.xls,gynecologist
+306,occ2000_updated.xls,radiologist
+306,occ2000_updated.xls,haematologist
+306,occ2000_updated.xls,eye doctor
+306,occ2000_updated.xls,psychoanalyst
+306,occ2000_updated.xls,geriatrician
+306,occ2000_updated.xls,house physician
+306,occ2000_updated.xls,otologist
+306,occ2000_updated.xls,gerontologist
+306,occ2000_updated.xls,family doctor
+306,occ2000_updated.xls,anesthetist
+306,occ2000_updated.xls,otolaryngologist
+306,occ2000_updated.xls,heart specialist
+306,occ2000_updated.xls,medical specialist
+306,occ2000_updated.xls,oculist
+306,occ2000_updated.xls,pathologist
+306,occ2000_updated.xls,orthopaedist
+306,occ2000_updated.xls,aetiologist
+306,occ2000_updated.xls,cardiologist
+306,occ2000_updated.xls,brain surgeon
+306,occ2000_updated.xls,abortionist
+306,occ2000_updated.xls,medical extern
+275,occ2000_updated.xls,alto saxophonist
+275,occ2000_updated.xls,rhythm and blues musician
+275,occ2000_updated.xls,prima donna
+275,occ2000_updated.xls,madrigalist
+275,occ2000_updated.xls,songster
+275,occ2000_updated.xls,songstress
+275,occ2000_updated.xls,opera star
+275,occ2000_updated.xls,vocalizer
+275,occ2000_updated.xls,harmoniser
+275,occ2000_updated.xls,yodeller
+275,occ2000_updated.xls,flute player
+275,occ2000_updated.xls,syncopator
+275,occ2000_updated.xls,recitalist
+275,occ2000_updated.xls,vibist
+275,occ2000_updated.xls,coloratura
+275,occ2000_updated.xls,koto player
+275,occ2000_updated.xls,vocaliser
+275,occ2000_updated.xls,alto
+275,occ2000_updated.xls,carillonneur
+275,occ2000_updated.xls,percussionist
+275,occ2000_updated.xls,soprano
+275,occ2000_updated.xls,violoncellist
+275,occ2000_updated.xls,clarinettist
+275,occ2000_updated.xls,bagpiper
+275,occ2000_updated.xls,jongleur
+275,occ2000_updated.xls,singer
+275,occ2000_updated.xls,oboist
+275,occ2000_updated.xls,tympanist
+275,occ2000_updated.xls,baritone
+275,occ2000_updated.xls,voice
+275,occ2000_updated.xls,harper
+275,occ2000_updated.xls,lutanist
+275,occ2000_updated.xls,castrato
+275,occ2000_updated.xls,bassoonist
+275,occ2000_updated.xls,torch singer
+275,occ2000_updated.xls,lieder singer
+275,occ2000_updated.xls,timpanist
+275,occ2000_updated.xls,drummer
+275,occ2000_updated.xls,clarinetist
+275,occ2000_updated.xls,harpsichordist
+275,occ2000_updated.xls,coloratura soprano
+275,occ2000_updated.xls,organist
+275,occ2000_updated.xls,bass
+275,occ2000_updated.xls,balladeer
+275,occ2000_updated.xls,jazz musician
+275,occ2000_updated.xls,cymbalist
+275,occ2000_updated.xls,cellist
+275,occ2000_updated.xls,harpist
+275,occ2000_updated.xls,lutist
+275,occ2000_updated.xls,tenor saxophonist
+275,occ2000_updated.xls,tenorist
+275,occ2000_updated.xls,gambist
+275,occ2000_updated.xls,bugler
+275,occ2000_updated.xls,rock star
+275,occ2000_updated.xls,diva
+275,occ2000_updated.xls,violist
+275,occ2000_updated.xls,caroler
+275,occ2000_updated.xls,cornetist
+275,occ2000_updated.xls,flutist
+275,occ2000_updated.xls,vocalist
+275,occ2000_updated.xls,mezzo
+275,occ2000_updated.xls,saxophonist
+275,occ2000_updated.xls,soloist
+275,occ2000_updated.xls,contralto
+275,occ2000_updated.xls,bassist
+275,occ2000_updated.xls,choirboy
+275,occ2000_updated.xls,pianist
+275,occ2000_updated.xls,xylophonist
+275,occ2000_updated.xls,accordionist
+275,occ2000_updated.xls,hornist
+275,occ2000_updated.xls,violinist
+275,occ2000_updated.xls,rock 'n' roll musician
+275,occ2000_updated.xls,rock star
+275,occ2000_updated.xls,pipe major
+275,occ2000_updated.xls,chorister
+275,occ2000_updated.xls,troubadour
+275,occ2000_updated.xls,vibraphonist
+275,occ2000_updated.xls,trombone player
+275,occ2000_updated.xls,countertenor
+275,occ2000_updated.xls,jazzman
+275,occ2000_updated.xls,keyboardist
+275,occ2000_updated.xls,sitar player
+275,occ2000_updated.xls,barytone
+275,occ2000_updated.xls,operatic star
+275,occ2000_updated.xls,altoist
+275,occ2000_updated.xls,bandsman
+275,occ2000_updated.xls,flautist
+275,occ2000_updated.xls,fiddler
+275,occ2000_updated.xls,trumpeter
+275,occ2000_updated.xls,lutenist
+275,occ2000_updated.xls,crooner
+275,occ2000_updated.xls,guitar player
+275,occ2000_updated.xls,tenor
+275,occ2000_updated.xls,accompanist
+275,occ2000_updated.xls,piano player
+275,occ2000_updated.xls,folk singer
+275,occ2000_updated.xls,rapper
+275,occ2000_updated.xls,accompanyist
+275,occ2000_updated.xls,basso
+275,occ2000_updated.xls,thrush
+275,occ2000_updated.xls,recorder player
+275,occ2000_updated.xls,poet-singer
+275,occ2000_updated.xls,mezzo-soprano
+275,occ2000_updated.xls,caroller
+275,occ2000_updated.xls,saxist
+275,occ2000_updated.xls,guitarist
+275,occ2000_updated.xls,canary
+275,occ2000_updated.xls,warbler
+275,occ2000_updated.xls,harmonizer
+275,occ2000_updated.xls,trombonist
+272,occ2000_updated.xls,right fielder
+272,occ2000_updated.xls,dribbler
+272,occ2000_updated.xls,ice-skater
+272,occ2000_updated.xls,forward passer
+272,occ2000_updated.xls,escalader
+272,occ2000_updated.xls,rollerblader
+272,occ2000_updated.xls,cricketer
+272,occ2000_updated.xls,bush leaguer
+272,occ2000_updated.xls,tight end
+272,occ2000_updated.xls,sportswoman
+272,occ2000_updated.xls,bowler
+272,occ2000_updated.xls,gymnast
+272,occ2000_updated.xls,pole vaulter
+272,occ2000_updated.xls,goalie
+272,occ2000_updated.xls,wing
+272,occ2000_updated.xls,second baseman
+272,occ2000_updated.xls,roller-skater
+272,occ2000_updated.xls,baseball player
+272,occ2000_updated.xls,place-kicker
+272,occ2000_updated.xls,punter
+272,occ2000_updated.xls,tennis player
+272,occ2000_updated.xls,infielder
+272,occ2000_updated.xls,langlaufer
+272,occ2000_updated.xls,right-handed pitcher
+272,occ2000_updated.xls,passer
+272,occ2000_updated.xls,field general
+272,occ2000_updated.xls,ice-hockey player
+272,occ2000_updated.xls,ballplayer
+272,occ2000_updated.xls,swimmer
+272,occ2000_updated.xls,utility man
+272,occ2000_updated.xls,tackle
+272,occ2000_updated.xls,hurdler
+272,occ2000_updated.xls,weightlifter
+272,occ2000_updated.xls,shortstop
+272,occ2000_updated.xls,fieldsman
+272,occ2000_updated.xls,tightrope walker
+272,occ2000_updated.xls,funambulist
+272,occ2000_updated.xls,miler
+272,occ2000_updated.xls,rock climber
+272,occ2000_updated.xls,speedskater
+272,occ2000_updated.xls,alpinist
+272,occ2000_updated.xls,bounder
+272,occ2000_updated.xls,bench warmer
+272,occ2000_updated.xls,winger
+272,occ2000_updated.xls,tobogganist
+272,occ2000_updated.xls,football player
+272,occ2000_updated.xls,breaststroker
+272,occ2000_updated.xls,center fielder
+272,occ2000_updated.xls,netkeeper
+272,occ2000_updated.xls,lacrosse player
+272,occ2000_updated.xls,skater
+272,occ2000_updated.xls,wicket-keeper
+272,occ2000_updated.xls,batter
+272,occ2000_updated.xls,running back
+272,occ2000_updated.xls,right-hander
+272,occ2000_updated.xls,starting pitcher
+272,occ2000_updated.xls,designated hitter
+272,occ2000_updated.xls,footballer
+272,occ2000_updated.xls,road runner
+272,occ2000_updated.xls,signal caller
+272,occ2000_updated.xls,left-hander
+272,occ2000_updated.xls,fielder
+272,occ2000_updated.xls,pass receiver
+272,occ2000_updated.xls,quarterback
+272,occ2000_updated.xls,sporting man
+272,occ2000_updated.xls,minor leaguer
+272,occ2000_updated.xls,left fielder
+272,occ2000_updated.xls,hockey player
+272,occ2000_updated.xls,screwballer
+272,occ2000_updated.xls,dropkicker
+272,occ2000_updated.xls,slider
+272,occ2000_updated.xls,olympian
+272,occ2000_updated.xls,kicker
+272,occ2000_updated.xls,ball carrier
+272,occ2000_updated.xls,mountaineer
+272,occ2000_updated.xls,backstroker
+272,occ2000_updated.xls,sportsman
+272,occ2000_updated.xls,twirler
+272,occ2000_updated.xls,tennis player
+272,occ2000_updated.xls,major leaguer
+272,occ2000_updated.xls,batsman
+272,occ2000_updated.xls,skier
+272,occ2000_updated.xls,halfback
+272,occ2000_updated.xls,fullback
+272,occ2000_updated.xls,line backer
+272,occ2000_updated.xls,reliever
+272,occ2000_updated.xls,hitter
+272,occ2000_updated.xls,marathon runner
+272,occ2000_updated.xls,first baseman
+272,occ2000_updated.xls,free agent
+272,occ2000_updated.xls,second sacker
+272,occ2000_updated.xls,runner
+272,occ2000_updated.xls,southpaw
+272,occ2000_updated.xls,shot putter
+272,occ2000_updated.xls,snapper
+272,occ2000_updated.xls,circus acrobat
+272,occ2000_updated.xls,pole jumper
+272,occ2000_updated.xls,lineman
+272,occ2000_updated.xls,placekicker
+272,occ2000_updated.xls,cornerback
+272,occ2000_updated.xls,pinch hitter
+272,occ2000_updated.xls,basketball player
+272,occ2000_updated.xls,relief pitcher
+272,occ2000_updated.xls,sledder
+272,occ2000_updated.xls,mountain climber
+272,occ2000_updated.xls,vaulter
+272,occ2000_updated.xls,pitcher
+272,occ2000_updated.xls,long-distance runner
+272,occ2000_updated.xls,switch-hitter
+272,occ2000_updated.xls,sprinter
+272,occ2000_updated.xls,outdoor man
+272,occ2000_updated.xls,letterman
+272,occ2000_updated.xls,third baseman
+272,occ2000_updated.xls,marathoner
+272,occ2000_updated.xls,skateboarder
+272,occ2000_updated.xls,plunger
+272,occ2000_updated.xls,goalkeeper
+272,occ2000_updated.xls,second-stringer
+272,occ2000_updated.xls,leaper
+272,occ2000_updated.xls,sharpshooter
+272,occ2000_updated.xls,left hander
+272,occ2000_updated.xls,jumper
+272,occ2000_updated.xls,netminder
+272,occ2000_updated.xls,hurler
+272,occ2000_updated.xls,tailback
+272,occ2000_updated.xls,soccer player
+272,occ2000_updated.xls,speed skater
+272,occ2000_updated.xls,lifter
+272,occ2000_updated.xls,flanker back
+272,occ2000_updated.xls,cragsman
+272,occ2000_updated.xls,pass catcher
+272,occ2000_updated.xls,goaltender
+272,occ2000_updated.xls,ropewalker
+272,occ2000_updated.xls,ropedancer
+272,occ2000_updated.xls,outfielder
+272,occ2000_updated.xls,lefthander
+272,occ2000_updated.xls,football hero
+272,occ2000_updated.xls,linebacker
+272,occ2000_updated.xls,rusher
+272,occ2000_updated.xls,big leaguer
+272,occ2000_updated.xls,base runner
+272,occ2000_updated.xls,basketeer
+272,occ2000_updated.xls,balancer
+272,occ2000_updated.xls,wingback
+272,occ2000_updated.xls,catcher
+272,occ2000_updated.xls,split end
+272,occ2000_updated.xls,ski jumper
+272,occ2000_updated.xls,slugger
+272,occ2000_updated.xls,ball hawk
+272,occ2000_updated.xls,luger
+272,occ2000_updated.xls,four-minute man
+272,occ2000_updated.xls,little leaguer
+272,occ2000_updated.xls,sport
+272,occ2000_updated.xls,left-handed pitcher
+272,occ2000_updated.xls,flanker
+272,occ2000_updated.xls,first sacker
+272,occ2000_updated.xls,centerfielder
+272,occ2000_updated.xls,tackler
+272,occ2000_updated.xls,pentathlete
+272,occ2000_updated.xls,third sacker
 volunteer,alt,volunteer
 thief,alt,thief
 defender,alt,defender
