@@ -86,11 +86,8 @@ class _inquirer_lexicon:
     def countWords(self, lexiconName, doc):
         self.load()
 
-        count = 0
-        for x in word_tokenize( doc ):
-            if x.upper() in self.lexicon[lexiconName]:
-                count += 1
-        return count
+        toMatch = set( x.upper() for x in word_tokenize(doc) )
+        return len( toMatch & self.lexicon[lexiconName] )
 
 inquirer_lexicon = _inquirer_lexicon()
 

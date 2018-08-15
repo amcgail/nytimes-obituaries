@@ -271,7 +271,7 @@ class Doc:
         def check(s):
             found = []
 
-            words = nlp.word_tokenize(s)
+            words = nlp.word_tokenize(s.lower())
             words = [nlp.lemmatize(x) for x in words]
             sets = nlp.getCloseUnorderedSets(words, minTuple=1, maxTuple=4, maxBuffer=2)
             for fs in sets:
