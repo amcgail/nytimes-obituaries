@@ -143,11 +143,84 @@ class Doc:
         return datetime.datetime.strptime(self['_date'], "%B %d, %Y")
 
     def _prop_spacyName(self):
-        # name is ALMOST ALWAYS the first noun_chunk.
-        try:
-            return next( self['spacyFirstSentence'].noun_chunks )
-        except StopIteration:
-            return self['title']
+        name = None
+
+        print(self['firstSentence'])
+        # most consistently, it's the first noun chunk:
+        def isName(x):
+            if len(x.split()) < 2:
+                return False
+            if not nlp.isTitleCase(x):
+                return False
+            return True
+
+        # start with NER from spacy:
+        if name is None:
+            guesses = self['spacyFirstSentence'].ents
+            guesses = [x for x in guesses if x.label_ == 'PERSON' and isName(x.text)]
+            if len(guesses) > 0:
+                # just use the first one
+                # and we'll probably need expansion
+                name = guesses[0].text
+                print("NER for the win")
+
+        # first, expand. it many times doesn't get parens, or Dr. Rev. etc.
+        # we then need to look deeper, if it's a "Mr." "Mrs." or "Dr."
+
+        # then just try some noun chunking...
+        if name is None:
+            nc = list(self['spacyFirstSentence'].noun_chunks)
+            if len(nc) > 0:
+                nc = list(filter(isName, map(str, nc)))
+                if len(nc) > 0:
+                    name = nc[0]
+                    print("Noun Chunk Found!")
+
+        print(name)
+
+        if False:
+            # try spacy's NER:
+            guesses = self['spacyFirstSentence'].ents
+            guesses = [x for x in guesses if x.label_ == 'PERSON']
+            print("FS:", self['firstSentence'])
+            if len(guesses) > 0:
+                print("Found:", [x.text for x in guesses])
+
+        if True:
+            import re
+            # name is ALMOST ALWAYS the first noun_chunk.
+            fsname = None
+            nc = list( self['spacyFirstSentence'].noun_chunks )
+            if len(nc) > 0:
+                nc = list(filter(nlp.isTitleCase, map(str, nc)))
+                if len(nc) > 0:
+                    print(nc)
+                print("FS:", self['firstSentence'])
+            return
+
+            # also could just check that the words are in the title...
+            if fsname is not None:
+                t = self['title'].lower()
+                tw = set(nlp.word_tokenize(t))
+                fsnamew = set(nlp.word_tokenize(str(fsname).lower()))
+                if len(tw.intersection(fsnamew)) > 0:
+                    print(fsname)
+
+
+            # the title is a good check
+            if False:
+                tname = self['title']
+                pats = [
+                    "is dead",
+                    ",",
+                    "dies",
+                    "is slain",
+                    "of",
+                    "dead",
+
+                ]
+                for pat in pats:
+                    tname = re.split(pat, tname, flags=re.IGNORECASE)[0]
 
     def _prop_kinship(self):
         my_props = set()
@@ -1086,7 +1159,7 @@ def extractFirstSentence(body):
     reStartStrip = [
         "[A-Z\s\.]+,.{1,30}[0-9]+\s*", # city and date
         ".*\(AP\)\s*-*\s*", # AP tag
-        "[A-Z\. ]{5,}", #just all caps, probably bad --
+        "[A-Z\. ]{5,}[^a-zA-Z]", #just all caps, probably bad --, but ignore the first real letter :)
     ]
 
     for patt in reStartStrip:

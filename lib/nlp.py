@@ -604,3 +604,12 @@ def bagOfWordsSearch(bag, dictionary):
             extracted.append( dictionary[word] )
 
     return extracted
+
+def isTitleCase(str):
+    words = word_tokenize(str)
+    for w in words:
+        fl = w[0]
+        if fl.lower() == fl:
+            return False
+
+    return True
