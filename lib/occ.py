@@ -106,6 +106,9 @@ class Doc:
     def __delitem__(self, key):
         del self._prop_cache[key]
 
+    def __contains__(self, item):
+        return item in self._prop_cache
+
     def keys(self):
         return self._prop_cache.keys()
 
@@ -140,11 +143,84 @@ class Doc:
         return datetime.datetime.strptime(self['_date'], "%B %d, %Y")
 
     def _prop_spacyName(self):
-        # name is ALMOST ALWAYS the first noun_chunk.
-        try:
-            return next( self['spacyFirstSentence'].noun_chunks )
-        except StopIteration:
-            return self['title']
+        name = None
+
+        print(self['firstSentence'])
+        # most consistently, it's the first noun chunk:
+        def isName(x):
+            if len(x.split()) < 2:
+                return False
+            if not nlp.isTitleCase(x):
+                return False
+            return True
+
+        # start with NER from spacy:
+        if name is None:
+            guesses = self['spacyFirstSentence'].ents
+            guesses = [x for x in guesses if x.label_ == 'PERSON' and isName(x.text)]
+            if len(guesses) > 0:
+                # just use the first one
+                # and we'll probably need expansion
+                name = guesses[0].text
+                print("NER for the win")
+
+        # first, expand. it many times doesn't get parens, or Dr. Rev. etc.
+        # we then need to look deeper, if it's a "Mr." "Mrs." or "Dr."
+
+        # then just try some noun chunking...
+        if name is None:
+            nc = list(self['spacyFirstSentence'].noun_chunks)
+            if len(nc) > 0:
+                nc = list(filter(isName, map(str, nc)))
+                if len(nc) > 0:
+                    name = nc[0]
+                    print("Noun Chunk Found!")
+
+        print(name)
+
+        if False:
+            # try spacy's NER:
+            guesses = self['spacyFirstSentence'].ents
+            guesses = [x for x in guesses if x.label_ == 'PERSON']
+            print("FS:", self['firstSentence'])
+            if len(guesses) > 0:
+                print("Found:", [x.text for x in guesses])
+
+        if True:
+            import re
+            # name is ALMOST ALWAYS the first noun_chunk.
+            fsname = None
+            nc = list( self['spacyFirstSentence'].noun_chunks )
+            if len(nc) > 0:
+                nc = list(filter(nlp.isTitleCase, map(str, nc)))
+                if len(nc) > 0:
+                    print(nc)
+                print("FS:", self['firstSentence'])
+            return
+
+            # also could just check that the words are in the title...
+            if fsname is not None:
+                t = self['title'].lower()
+                tw = set(nlp.word_tokenize(t))
+                fsnamew = set(nlp.word_tokenize(str(fsname).lower()))
+                if len(tw.intersection(fsnamew)) > 0:
+                    print(fsname)
+
+
+            # the title is a good check
+            if False:
+                tname = self['title']
+                pats = [
+                    "is dead",
+                    ",",
+                    "dies",
+                    "is slain",
+                    "of",
+                    "dead",
+
+                ]
+                for pat in pats:
+                    tname = re.split(pat, tname, flags=re.IGNORECASE)[0]
 
     def _prop_kinship(self):
         my_props = set()
@@ -268,26 +344,43 @@ class Doc:
         return verbs
 
     def _prop_OCC(self):
+
+        full_name = self['name']
         def check(s):
             found = []
 
-            words = nlp.word_tokenize(s.lower())
-            words = [nlp.lemmatize(x) for x in words]
-            sets = nlp.getCloseUnorderedSets(words, minTuple=1, maxTuple=4, maxBuffer=2)
-            for fs in sets:
+            s = s.replace(full_name, "")
 
+            words = nlp.word_tokenize(s)
+            words = [nlp.lemmatize(x) for x in words]
+
+            sets = set()
+            sets.update( nlp.getCloseUnorderedSets(words, minTuple=1, maxTuple=1, maxBuffer=0) )
+            sets.update(nlp.getCloseUnorderedSets(words, minTuple=2, maxTuple=2, maxBuffer=1))
+            sets.update(nlp.getCloseUnorderedSets(words, minTuple=3, maxTuple=3, maxBuffer=2))
+            sets.update(nlp.getCloseUnorderedSets(words, minTuple=4, maxTuple=4, maxBuffer=2))
+
+            for fs in sets:
                 if fs in set2code:
                     c = set2code[fs]["code"]
 
                     found.append({
                         "word": " ".join(fs),
-                        "occ": [c]
+                        "occ": [c],
+                        "fs": fs
                     })
+
+            def is_subset_anyone(x):
+                for y in found:
+                    if x['fs'] != y['fs'] and x['fs'].issubset( y['fs'] ):
+                        return True
+
+            found = [x for x in found if not is_subset_anyone(x)]
 
             return found
 
-        found_first = check(self["firstSentence"])
-        found_title = check(self["title"])
+        found_first = check(self["firstSentence"].lower())
+        found_title = check(self["title"].lower())
 
         # we want to keep track of "where"
         [ x.update({"where": "firstSentence"}) for x in found_first ]
@@ -514,7 +607,7 @@ class Doc:
                     g.p("Skipping. Strange grammatical construction.")
                 coding.stateCounter.update(["strangeGrammar"])
 
-    def _prop_OCC_weighted(self):
+    def _WAIT_prop_OCC_weighted(self):
         fS = self["firstSentence"]
         name = self["name"]
 
@@ -691,7 +784,12 @@ class Doc:
 
         # we go through and rerun anything in toRecode
         for x in toRecode:
-            self[ x ] = getattr(self, "_prop_%s" % x)()
+            # simply remove all the attributes that are to be recoded
+            # this is necessary, otherwise some codings may rely on past iterations!
+            if x in self:
+                del self[ x ]
+
+            getattr(self, "_prop_%s" % x)()
 
         self._clear_spacy_props()
 
@@ -733,8 +831,12 @@ class Coder:
         def produceDocs():
             global numLoaded
             # loop through the entire CSV and see if any are in what I need to load.
+            i = 0
             with open(inFn) as inF:
                 for info in DictReader(inF):
+                    i += 1
+                    if i % 100 == 0 and False:
+                        print(i)
                     thisFn = "%s.pickle" % info['fName']
                     if not thisFn in toLoad:
                         continue
@@ -1050,9 +1152,14 @@ def extractFirstSentence(body):
     fS = sentences[0].strip()
     fS = " ".join( fS.split() )
 
+    # FAIRFAX, Va. <start>
+    # HOPKINSVILLE, Ky. <start>
+    # PORTLAND, Ore. <start>
+
     reStartStrip = [
-        "[A-Z\s]+,.{1,30}[0-9]+\s*", # city and date
-        "\(AP\) -\s*", # AP tag
+        "[A-Z\s\.]+,.{1,30}[0-9]+\s*", # city and date
+        ".*\(AP\)\s*-*\s*", # AP tag
+        "[A-Z\. ]{5,}[^a-zA-Z]", #just all caps, probably bad --, but ignore the first real letter :)
     ]
 
     for patt in reStartStrip:
@@ -1083,6 +1190,7 @@ def getRandomDocs(num):
     return sample( allDocs, num )
 
 def regenerateW2C(expandSynonyms = False):
+    print("Regenerating W2C correspondence")
     import numpy as np
     codegen = []
 
@@ -1165,7 +1273,7 @@ def regenerateW2C(expandSynonyms = False):
 
     # ---------------   ABDULLAH'S FILE   ----------------
     # now we're going to parse through Abdullah's file
-    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000.xls")
+    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000 ver 4.xls")
     print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
     workbook = xlrd.open_workbook(occ2000Fn)
 
@@ -1196,7 +1304,7 @@ def regenerateW2C(expandSynonyms = False):
             })
             # print((code, term))
 
-    for wksheet_i in list(range(3, 17)):
+    for wksheet_i in list(range(3, 17)) + [18]:
         worksheet = workbook.sheet_by_index(wksheet_i)
         print("Working on worksheet %s" % wksheet_i)
 
@@ -1246,28 +1354,34 @@ def regenerateW2C(expandSynonyms = False):
                 if term == "":
                     continue
 
+                try:
+                    int(code)
+                except:
+                    continue
+
                 codegen.append({
                     "term": term,
-                    "code": code,
+                    "code": "%03d" % int(code),
                     "source": "occ2000_updated.xls"
                 })
-                #print((code, term))
 
     # my hand-coding
-    handCFN = path.join(path.dirname(__file__), "..", "w2c_source", "hand-coding.csv")
-    with open(handCFN) as handCF:
-        for c in DictReader(handCF):
-            c['source'] = "hand-coding.csv"
-            codegen.append(c)
+    if False:
+        handCFN = path.join(path.dirname(__file__), "..", "w2c_source", "hand-coding.csv")
+        with open(handCFN) as handCF:
+            for c in DictReader(handCF):
+                c['source'] = "hand-coding.csv"
+                codegen.append(c)
 
-    # all except agent.n.02
-    for x in nlp.wn.synset('representative.n.01').hypernyms():
-        if x != nlp.wn.synset('agent.n.02'):
-            codegen.append({
-                "term": x.name(),
-                "code": "003",
-                "source": "hand-coded-synset"
-            })
+    if False:
+        # all except agent.n.02
+        for x in nlp.wn.synset('representative.n.01').hypernyms():
+            if x != nlp.wn.synset('agent.n.02'):
+                codegen.append({
+                    "term": x.name(),
+                    "code": "003",
+                    "source": "hand-coded-synset"
+                })
 
     # add alternative words, whose codes are themselves
     altClass = ["volunteer", "thief", "defender", "champion", "veteran",
@@ -1293,8 +1407,8 @@ def regenerateW2C(expandSynonyms = False):
     # IF THERE ARE MULTIPLE DETERMINATIONS FOR A SINGLE WORD, SKIP
     unique_term_code = set( (x['term'],x['code']) for x in codegen )
     count_terms = Counter( x[0] for x in unique_term_code )
-    skip = sorted(set([ x['term'] for x in codegen if count_terms[ x['term'] ] != 1 ]))
-    print("SKIPPING %s" % skip)
+    skip = sorted(set([ "%s: %s"% (x['term'],x['code']) for x in codegen if count_terms[ x['term'] ] != 1 ]))
+    print("\n".join( skip ))
     codegen = [ x for x in codegen if count_terms[ x['term'] ] == 1 ]
 
     if expandSynonyms:
@@ -1326,24 +1440,34 @@ def regenerateW2C(expandSynonyms = False):
             CSV_w.writerow(code)
 
     print( "CSV successfully written at '%s'" % CSV_fn)
+    print( "Reloading 'codes', 'set2code' and 'term2code'..." )
+    loadAssociations()
 
 codes = None
 term2code = {}
 set2code = {}
-CSV_fn = path.join(path.dirname(__file__), "..", "w2c_source", "compiledCodes.csv")
-print("Loading term-code associations into variable 'codes' from %s..." % CSV_fn)
-print("Loading term dictionary into variable 'term2code' from %s..." % CSV_fn)
 
-with open(CSV_fn, 'r') as outCodesF:
-    CSV_r = DictReader(outCodesF)
-    codes = list(CSV_r)
+def loadAssociations():
+    global codes
+    global term2code
+    global set2code
 
-for code in codes:
-    term2code[ code["term"] ] = code
+    CSV_fn = path.join(path.dirname(__file__), "..", "w2c_source", "compiledCodes.csv")
+    print("Loading term-code associations into variable 'codes' from %s..." % CSV_fn)
+    print("Loading term dictionary into variable 'term2code' from %s..." % CSV_fn)
 
-    words = nlp.word_tokenize( code["term"] )
-    words = [nlp.lemmatize(x) for x in words]
-    set2code[ frozenset(words) ] = code
+    with open(CSV_fn, 'r') as outCodesF:
+        CSV_r = DictReader(outCodesF)
+        codes = list(CSV_r)
+
+    for code in codes:
+        term2code[ code["term"] ] = code
+
+        words = nlp.word_tokenize( code["term"] )
+        words = [nlp.lemmatize(x) for x in words]
+        set2code[ frozenset(words) ] = code
+
+loadAssociations()
 
 # startStruct = [
 #     ['DET', 'NOUN', 'PUNCT', 'NOUN', 'PUNCT', 'CCONJ', 'NOUN'],
