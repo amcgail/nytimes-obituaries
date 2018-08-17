@@ -1,4 +1,5 @@
 from collections import defaultdict
+import occ
 import datetime
 
 from pymongo import MongoClient
@@ -178,7 +179,7 @@ class Extractor:
 
         allNonUTFChars = set()
 
-        for f in os.listdir(self.sourcedir):
+        for f in os.listdir(self.sourcedir)[:10]:
             self.docs.append( ParseUnit( path.join(self.sourcedir, f) ) )
 
         for d in self.docs:
@@ -203,26 +204,21 @@ if False:
 
 docs = [ y for x in extractor.docs for y in x.docs ]
 
-now = datetime.datetime.now()
-
-cid = db['codings'].insert({
-    "date": now,
-    "notes": "New extraction script, on the new MongoDB backend."
-})
-
+coder = occ.Coder()
 for d in docs:
-    assert(isinstance(d,Doc))
-    did = db['docs'].insert({
-        "fn_source": d.parseunit.fn,
-        "parse_script": __file__,
-        "date_extracted": now,
-        "codes": [
-            {
-                "doc_id": did,
-                "date_coded": now,
-                "val": v,
-                "name": "nyt_%s" % k
-            }
-            for k, v in d.parts.items()
-        ]
-    })
+    assert(isinstance(d, Doc))
+
+    docinfo = {
+        "nyt_%s" % k: v
+        for k, v in d.parts.items()
+    }
+    docinfo['fullBody'] = d.body
+    docinfo['originalFile'] = d.parseunit.fn
+
+    doc = occ.Doc()
+    doc._prop_cache = docinfo
+
+    coder.obituaries.append(doc)
+
+
+coder.dumpCodes("all_v2.0")
