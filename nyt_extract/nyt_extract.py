@@ -1,6 +1,7 @@
 from collections import defaultdict
 import occ
 import datetime
+from collections import Counter
 
 from pymongo import MongoClient
 db = MongoClient()['occ_coding']
@@ -43,7 +44,7 @@ class Doc:
         monthlist = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                      "November", "December"]
 
-        attributes = ["CORRECTION-DATE", "CORRECTION", "CATEGORY","URL","TITLE","ORGANIZATION","NAME", "LOAD-DATE", "GRAPHIC", "SECTION","LENGTH","TICKER","INDUSTRY","COUNTRY","STATE","CITY","COMPANY","GEOGRAPHIC","SUBJECT","PERSON","LANGUAGE","TYPE"]
+        attributes = ["BYLINE", "DATELINE", "CORRECTION-DATE", "CORRECTION", "CATEGORY","URL","TITLE","ORGANIZATION","NAME", "LOAD-DATE", "GRAPHIC", "SECTION","LENGTH","TICKER","INDUSTRY","COUNTRY","STATE","CITY","COMPANY","GEOGRAPHIC","SUBJECT","PERSON","LANGUAGE","TYPE"]
         reAllAttr = "(%s):" % "|".join(attributes)
 
         ###############################
@@ -179,7 +180,7 @@ class Extractor:
 
         allNonUTFChars = set()
 
-        for f in os.listdir(self.sourcedir)[:10]:
+        for f in os.listdir(self.sourcedir):
             self.docs.append( ParseUnit( path.join(self.sourcedir, f) ) )
 
         for d in self.docs:
@@ -204,8 +205,30 @@ if False:
 
 docs = [ y for x in extractor.docs for y in x.docs ]
 
+if False:
+    # need this to get IDs!
+    coder_ref = occ.Coder()
+    coder_ref.loadPreviouslyCoded("codingAll")
+
+    id_lookup = [
+        ( Counter( zip(d['fullBody'][:20][::2], d['fullBody'][:20][1::2]) ), d['id'] )
+        for d in coder_ref.obituaries
+    ]
+
+    id_lookup_b20 = {
+        d['id']: d['fullBody'][:20]
+        for d in coder_ref.obituaries
+    }
+
+    id_lookup_title = {
+        d['title'].strip(): d['id']
+        for d in coder_ref.obituaries
+    }
+
+    # del coder_ref
+
 coder = occ.Coder()
-for d in docs:
+for i, d in enumerate(docs):
     assert(isinstance(d, Doc))
 
     docinfo = {
@@ -214,11 +237,38 @@ for d in docs:
     }
     docinfo['fullBody'] = d.body
     docinfo['originalFile'] = d.parseunit.fn
+    docinfo['id'] = i
+    docinfo['_title'] = d.title
+    docinfo['date'] = datetime.datetime.strptime(d.date, "%B %d, %Y")
+
+    if False:
+        f20 = d.body[:20]
+        if False:
+            cfb = Counter(zip(f20[::2], f20[1::2]))
+            differences = [
+                (sum((cfb - x[0]).values()), x[1])
+                for x in id_lookup
+            ]
+            id = min(differences, key=lambda x: x[0])[1]
+
+        id = id_lookup_title[ d.title.strip() ]
+
+        print("ID:",id)
+        print(f20)
+        print(id_lookup_b20[id])
+
+    if False:
+        try:
+            docinfo['id'] = id_lookup[ d.body.strip()[:15] ]
+        except KeyError:
+            print(i)
+            print( d.body )
+            raise
 
     doc = occ.Doc()
+    doc.isCoded = True
     doc._prop_cache = docinfo
 
     coder.obituaries.append(doc)
-
 
 coder.dumpCodes("all_v2.0")

@@ -133,19 +133,20 @@ class Doc:
     def _get_all_props(self):
         return [x[len("_prop_"):] for x in self._get_all_prop_methods()]
 
+    # the following two are no longer used
     def _prop_title(self):
         t = self['_title']
         t = t.split("\n")[-1].strip()  # gets rid of those gnarly prefixes
         return t
 
-    def _prop_date(self):
+    def __prop_date(self):
         import datetime
         return datetime.datetime.strptime(self['_date'], "%B %d, %Y")
 
     def _prop_spacyName(self):
         name = None
 
-        print(self['firstSentence'])
+        #print(self['firstSentence'])
         # most consistently, it's the first noun chunk:
         def isName(x):
             if len(x.split()) < 2:
@@ -162,7 +163,7 @@ class Doc:
                 # just use the first one
                 # and we'll probably need expansion
                 name = guesses[0].text
-                print("NER for the win")
+                #print("NER for the win")
 
         # first, expand. it many times doesn't get parens, or Dr. Rev. etc.
         # we then need to look deeper, if it's a "Mr." "Mrs." or "Dr."
@@ -174,9 +175,12 @@ class Doc:
                 nc = list(filter(isName, map(str, nc)))
                 if len(nc) > 0:
                     name = nc[0]
-                    print("Noun Chunk Found!")
+                    #print("Noun Chunk Found!")
 
-        print(name)
+        if name is None:
+            name = "<name not found>"
+        return name
+        #print(name)
 
         if False:
             # try spacy's NER:
@@ -194,8 +198,9 @@ class Doc:
             if len(nc) > 0:
                 nc = list(filter(nlp.isTitleCase, map(str, nc)))
                 if len(nc) > 0:
-                    print(nc)
-                print("FS:", self['firstSentence'])
+                    # print(nc)
+                    pass
+                # print("FS:", self['firstSentence'])
             return
 
             # also could just check that the words are in the title...
@@ -204,7 +209,8 @@ class Doc:
                 tw = set(nlp.word_tokenize(t))
                 fsnamew = set(nlp.word_tokenize(str(fsname).lower()))
                 if len(tw.intersection(fsnamew)) > 0:
-                    print(fsname)
+                    #print(fsname)
+                    pass
 
 
             # the title is a good check
@@ -814,6 +820,8 @@ class Coder:
             self.w2c[ code['term'] ] = code['code']
 
     def loadPreviouslyCoded(self, loadDirName, N=None, rand=True):
+        from random import shuffle
+
         import humanize
         import os
         from os import path
@@ -827,29 +835,22 @@ class Coder:
             return
 
         toLoad = os.listdir(loadDir)
+        if rand:
+            shuffle(toLoad)
+        toLoad = toLoad[:N]
 
-        def produceDocs():
-            global numLoaded
-            # loop through the entire CSV and see if any are in what I need to load.
-            i = 0
-            with open(inFn) as inF:
-                for info in DictReader(inF):
-                    i += 1
-                    if i % 100 == 0 and False:
-                        print(i)
-                    thisFn = "%s.pickle" % info['fName']
-                    if not thisFn in toLoad:
-                        continue
+        #self.obituaries = []
+        new_obituaries = []
+        for fn in toLoad:
+            d = Doc({})
+            with open(path.join(loadDir, fn), 'rb') as thisF:
+                d.load(thisF.read())
 
-                    d = Doc(info)
-                    with open(path.join(loadDir, thisFn), 'rb') as thisF:
-                        d.load(thisF.read())
+            new_obituaries.append(d)
 
-                    yield d
+        print("Successfully loaded %s documents." % len(new_obituaries))
 
-        self.obituaries = g.select(produceDocs(), N=N, rand=rand)
-
-        print("Successfully loaded %s documents." % len(self.obituaries))
+        self.obituaries.extend(new_obituaries)
 
         mod_time = os.stat(loadDir).st_mtime
         mod_dt = datetime.fromtimestamp(int(mod_time))
@@ -874,7 +875,7 @@ class Coder:
         for d in self.obituaries:
             assert(isinstance(d, Doc))
 
-            outfn = path.join(dumpDir, "%s.pickle" % d['_fName'])
+            outfn = path.join(dumpDir, "%s.pickle" % d['id'])
 
             with open( outfn, 'wb' ) as outf:
                 outf.write( d.dump() )
