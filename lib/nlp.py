@@ -603,8 +603,9 @@ def bagOfWordsSearch(bag, dictionary):
     return extracted
 
 def isTitleCase(str):
-    words = word_tokenize(str)
+    words = str.split()
     for w in words:
+        w = w.strip()
         fl = w[0]
         if fl.lower() == fl:
             return False

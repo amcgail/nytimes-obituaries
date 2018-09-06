@@ -3,15 +3,13 @@ import occ
 if False:
     occ.regenerateW2C()
 
-coding = "all_v2.0"
+coding_in = "v2.0_extract"
+#coding = "codingAll"
+#coding_out = coding_in
+coding_out = "v2.0"
 
 coder = occ.Coder()
-coder.loadPreviouslyCoded(coding, rand=False)
+coder.loadPreviouslyCoded(coding_in, rand=False)
 coder.codeAll(['OCC'])
 
-if False:
-    for obit in coder.obituaries:
-        for occ in obit["OCC"]:
-            occ['occ'] = [ x['code'] for x in occ['occ'] ]
-
-coder.dumpCodes(coding)
+coder.dumpCodes(coding_out)

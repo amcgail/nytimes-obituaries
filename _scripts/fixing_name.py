@@ -1,10 +1,12 @@
 import occ
 
 coder = occ.Coder()
-coder.loadPreviouslyCoded("codingAll", N=1000, rand=False)
+coder.loadPreviouslyCoded("all_v2.0", N=300, rand=False)
 
 for x in coder.obituaries:
-    x._prop_spacyName()
+    print("-------------------------")
+    print(x._prop_spacyName())
+    print(x['firstSentence'])
 
 """
 Faith Whitney Ziesing, a former trustee of Sarah Lawrence College, died of cancer last Friday at her home in Princeton, N.J. She was 75 years old.

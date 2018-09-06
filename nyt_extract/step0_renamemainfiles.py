@@ -14,7 +14,8 @@ import numpy as np
 from os import path
 
 
-source2 = "/home/alec/data projects/NYTIMESobituaries" # File path where all files are located
+#source2 = "/home/alec/data projects/NYTIMESobituaries" # File path where all files are located
+source2 = "../" # File path where all files are located
 
 os.chdir(source2)
 

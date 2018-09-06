@@ -3,8 +3,8 @@ import occ
 import csv
 import os
 
-outfn = "hand_coding_6.csv"
-noutput = 300
+outfn = "hand_coding_7_10more.csv"
+noutput = 10
 
 coder = occ.Coder()
 coder.loadPreviouslyCoded("codingAll", N=noutput*2, rand=True)

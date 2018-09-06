@@ -12,7 +12,7 @@ from collections import Counter
 from csv import DictReader, DictWriter
 from csv import reader
 from itertools import chain
-from os import path
+from os import path, remove
 
 import xlrd
 
@@ -43,13 +43,16 @@ class Doc:
     def __init__(self, init_info={}):
         # the info it's initialized with has "_" before it, so everything on top is coded.
         init_info = {
-            "_%s"%k: v
+            "_%s"%k : v
             for k,v in init_info.items()
         }
         self._prop_cache = init_info
 
         self.isCoded = False
         self.myCoder = None
+
+    def destroy(self):
+        remove(self['_relfn'])
 
     def dump(self):
         if not self.isCoded:
@@ -69,7 +72,7 @@ class Doc:
         import pickle
         d = pickle.loads(d)
 
-        self._prop_cache = d
+        self._prop_cache.update(d)
 
         self.isCoded = True
 
@@ -820,12 +823,15 @@ class Coder:
             self.w2c[ code['term'] ] = code['code']
 
     def loadPreviouslyCoded(self, loadDirName, N=None, rand=True):
-        from random import shuffle
+        from random import shuffle, seed
+        from time import time
 
         import humanize
         import os
         from os import path
         from datetime import datetime
+
+        seed(time())
 
         loadDir = path.join(path.dirname(__file__), '..', 'codeDumps', loadDirName)
 
@@ -842,8 +848,9 @@ class Coder:
         #self.obituaries = []
         new_obituaries = []
         for fn in toLoad:
-            d = Doc({})
-            with open(path.join(loadDir, fn), 'rb') as thisF:
+            relfn = path.join(loadDir, fn)
+            d = Doc({"relfn": relfn})
+            with open(relfn, 'rb') as thisF:
                 d.load(thisF.read())
 
             new_obituaries.append(d)
@@ -1160,7 +1167,9 @@ def extractFirstSentence(body):
     reStartStrip = [
         "[A-Z\s\.]+,.{1,30}[0-9]+\s*", # city and date
         ".*\(AP\)\s*-*\s*", # AP tag
-        "[A-Z\. ]{5,}[^a-zA-Z]", #just all caps, probably bad --, but ignore the first real letter :)
+        #".*-{2,}\s*", # Blah Blah Blah -- Start of thing is here
+        "[A-Z]{3,},?\s+[A-Za-z]+\s*(\(.*\))?\s*(--)?\s*", # e.g. MONTEVIDEO, Uruguay (with optional parens :() --
+        "([A-Z]{2,}[:\.,]?\s*)+[^a-zA-Z]*", #just all caps, probably bad --, but ignore the first real letter :)
     ]
 
     for patt in reStartStrip:
@@ -1274,7 +1283,7 @@ def regenerateW2C(expandSynonyms = False):
 
     # ---------------   ABDULLAH'S FILE   ----------------
     # now we're going to parse through Abdullah's file
-    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000 ver 4.xls")
+    occ2000Fn = path.join(path.dirname(__file__), "..", "w2c_source", "occ2000 ver 4a2.xls")
     print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
     workbook = xlrd.open_workbook(occ2000Fn)
 
@@ -1384,19 +1393,20 @@ def regenerateW2C(expandSynonyms = False):
                     "source": "hand-coded-synset"
                 })
 
-    # add alternative words, whose codes are themselves
-    altClass = ["volunteer", "thief", "defender", "champion", "veteran",
-                "leader",
-                "philanthropist",
-                "benefactor",
-                "widow"]
+    if False:
+        # add alternative words, whose codes are themselves
+        altClass = ["volunteer", "thief", "defender", "champion", "veteran",
+                    "leader",
+                    "philanthropist",
+                    "benefactor",
+                    "widow"]
 
-    for aC in altClass:
-        codegen.append({
-            "term": aC,
-            "code": aC,
-            "source": "alt"
-        })
+        for aC in altClass:
+            codegen.append({
+                "term": aC,
+                "code": aC,
+                "source": "alt"
+            })
 
     # strip whitespace from terms
     for code in codegen:

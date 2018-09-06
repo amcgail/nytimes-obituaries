@@ -3,8 +3,8 @@ import occ
 import datetime
 from collections import Counter
 
-from pymongo import MongoClient
-db = MongoClient()['occ_coding']
+#from pymongo import MongoClient
+#db = MongoClient()['occ_coding']
 
 missedTags = defaultdict(str)
 
@@ -30,7 +30,7 @@ class Doc:
             self.parts[p] = v
 
         paras = re.split("[\r\n]{4}", self.body)
-        paras = [ "".join(re.split("[\r\n]", x)) for x in paras ]
+        paras = [ " ".join(re.split("[\r\n\s]+", x)) for x in paras ]
         self.body = "\n\n".join(paras)
 
     def extract_attributes(self):
@@ -54,6 +54,11 @@ class Doc:
         head = re.split(reAllAttr, fullThing)[0]
 
         self.head = head
+        try:
+            self.doc_id = int(re.findall("([0-9]+) of [0-9]+ DOCUMENTS", head)[0])
+        except IndexError:
+            raise CannotBeParsed()
+
         title = re.split("[0-9]+ of [0-9]+ DOCUMENTS", head)
         if len(title) < 2:
             # print(fullThing, self.parseunit.fn)
@@ -206,17 +211,19 @@ if False:
 docs = [ y for x in extractor.docs for y in x.docs ]
 
 if False:
+    nmatch = 20
+
     # need this to get IDs!
     coder_ref = occ.Coder()
     coder_ref.loadPreviouslyCoded("codingAll")
 
     id_lookup = [
-        ( Counter( zip(d['fullBody'][:20][::2], d['fullBody'][:20][1::2]) ), d['id'] )
+        ( Counter( zip(d['fullBody'][:nmatch][::2], d['fullBody'][:nmatch][1::2]) ), d['id'] )
         for d in coder_ref.obituaries
     ]
 
     id_lookup_b20 = {
-        d['id']: d['fullBody'][:20]
+        d['id']: d['fullBody'][:nmatch]
         for d in coder_ref.obituaries
     }
 
@@ -239,12 +246,16 @@ for i, d in enumerate(docs):
     docinfo['originalFile'] = d.parseunit.fn
     docinfo['id'] = i
     docinfo['_title'] = d.title
+    docinfo['_d_id'] = d.doc_id
     docinfo['date'] = datetime.datetime.strptime(d.date, "%B %d, %Y")
 
+    # trying to figure out ID
+    # current methods take too long!
+
     if False:
-        f20 = d.body[:20]
+        first = d.body[:nmatch]
         if False:
-            cfb = Counter(zip(f20[::2], f20[1::2]))
+            cfb = Counter(zip(first[::2], first[1::2]))
             differences = [
                 (sum((cfb - x[0]).values()), x[1])
                 for x in id_lookup
@@ -254,7 +265,7 @@ for i, d in enumerate(docs):
         id = id_lookup_title[ d.title.strip() ]
 
         print("ID:",id)
-        print(f20)
+        print(first)
         print(id_lookup_b20[id])
 
     if False:
@@ -271,4 +282,4 @@ for i, d in enumerate(docs):
 
     coder.obituaries.append(doc)
 
-coder.dumpCodes("all_v2.0")
+coder.dumpCodes("v2.0_extract")
