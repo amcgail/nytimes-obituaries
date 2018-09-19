@@ -1339,6 +1339,8 @@ def regenerateW2C(expandSynonyms = False):
                 break
 
             terms = term.split("|")
+            if wksheet_i == 18:
+                print(terms, code)
 
             justDelete = [
                 "\ specified, not listed",
@@ -1366,14 +1368,21 @@ def regenerateW2C(expandSynonyms = False):
 
                 try:
                     int(code)
-                except:
-                    continue
+                    codegen.append({
+                        "term": term,
+                        "code": "%03d" % int(code),
+                        "source": "occ2000_updated.xls"
+                    })
+                except ValueError:
+                    if type(code) == str and len(code) and code[0] == "s":
+                        print("HERE!")
+                        codegen.append({
+                            "term": term,
+                            "code": code,
+                            "source": "occ2000_updated.xls"
+                        })
 
-                codegen.append({
-                    "term": term,
-                    "code": "%03d" % int(code),
-                    "source": "occ2000_updated.xls"
-                })
+
 
     # my hand-coding
     if False:

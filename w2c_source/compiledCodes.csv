@@ -239,7 +239,6 @@ super:982,occ2000_updated.xls,enlisted tactical operations and weapons specialis
 002,occ2000_updated.xls,sewer supervisor
 002,occ2000_updated.xls,water control supervisor
 002,occ2000_updated.xls,waterworks supervisor
-002,occ2000_updated.xls,under secretary
 002,occ2000_updated.xls,water superintendent
 002,occ2000_updated.xls,zoo director
 003,occ2000_updated.xls,alderman
@@ -11801,3 +11800,32 @@ super:982,occ2000_updated.xls,enlisted tactical operations and weapons specialis
 770,occ2000_updated.xls,quarterman
 770,occ2000_updated.xls,remelt furnace expediter
 770,occ2000_updated.xls,station chief
+supergroup,occ2000_updated.xls,generic occ term
+s043,occ2000_updated.xls,manager
+s043,occ2000_updated.xls,executive
+s043,occ2000_updated.xls,administrator
+s043,occ2000_updated.xls,businessman
+s043,occ2000_updated.xls,businesswoman
+s043,occ2000_updated.xls,businessperson
+s043,occ2000_updated.xls,industrialist
+s043,occ2000_updated.xls,entrepreneur
+s043,occ2000_updated.xls,tycoon
+s043,occ2000_updated.xls,official
+s043,occ2000_updated.xls,assistant deputy
+s130,occ2000_updated.xls,engineer
+s160,occ2000_updated.xls,scientist
+s160,occ2000_updated.xls,researcher
+s220,occ2000_updated.xls,teacher
+s220,occ2000_updated.xls,educator
+s220,occ2000_updated.xls,lecturer
+s220,occ2000_updated.xls,instuctor
+s220,occ2000_updated.xls,scholar
+s220,occ2000_updated.xls,philosopher
+s220,occ2000_updated.xls,intellectual
+s220,occ2000_updated.xls,theorist
+s220,occ2000_updated.xls,theoretician
+s980,occ2000_updated.xls,soldier
+s980,occ2000_updated.xls,army man
+s980,occ2000_updated.xls,navy man
+s980,occ2000_updated.xls,airman
+s992,occ2000_updated.xls,unemployed worker

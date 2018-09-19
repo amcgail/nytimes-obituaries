@@ -1,12 +1,12 @@
 import occ
 
-if False:
+if True:
     occ.regenerateW2C()
 
-coding_in = "v2.0_extract"
+coding_in = "v2.1"
 #coding = "codingAll"
 #coding_out = coding_in
-coding_out = "v2.0"
+coding_out = "v2.1"
 
 coder = occ.Coder()
 coder.loadPreviouslyCoded(coding_in, rand=False)

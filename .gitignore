@@ -9,3 +9,4 @@ data/*
 .idea/*
 **/.~lock*
 codeDumps/*
+venv

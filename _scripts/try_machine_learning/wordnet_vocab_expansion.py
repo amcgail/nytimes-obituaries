@@ -7,7 +7,7 @@ if False:
     coder.codeAll()
     coder.dumpCodes("smallTest")
 
-coder.loadPreviouslyCoded("smallTest")
+coder.loadPreviouslyCoded("codingAll", N=25000, rand=False)
 
 from collections import Counter
 from itertools import chain
@@ -65,17 +65,23 @@ def all_hypernyms( word ):
 hyper_occ_counter = defaultdict(lambda: defaultdict(int))
 word_occ_counter = defaultdict(lambda: defaultdict(int))
 
+# just go through first sentences and tabulate words that correspond to occs
 for obit in coder.obituaries:
     words = nlp.word_tokenize( obit["firstSentence"] )
     words = map(str.lower, words)
-    words = map(nlp.lemmatize, words)
+    words = set(map(nlp.lemmatize, words))
 
-    for occ in obit["OCC"]:
-        for code in occ['occ']:
-            for word in words:
-                word_occ_counter[word][code] += 1
+    occs = set( chain.from_iterable(x['occ'] for x in obit["OCC"]) )
+    if len(occs) != 1:
+        continue
+
+    code = list(occs)[0]
+
+    for word in words:
+        word_occ_counter[word][code] += 1
 
 
+# now expand each word into its hypernyms
 for word in word_occ_counter:
 
     vals = sorted(word_occ_counter[word].values())
@@ -100,7 +106,6 @@ for word in word_occ_counter:
     hypers = all_hypernyms(word)
     for hyper in hypers:
         hyper_occ_counter[hyper][code] += 1
-
 
 CSV = []
 CSV.append(["OCC", "term", "synset"])

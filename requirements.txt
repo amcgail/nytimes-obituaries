@@ -6,3 +6,4 @@ pptree
 SPARQLWrapper
 xlrd
 humanize
+tensorflow-gpu
