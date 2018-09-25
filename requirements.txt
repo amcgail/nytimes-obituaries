@@ -7,3 +7,6 @@ SPARQLWrapper
 xlrd
 humanize
 tensorflow-gpu
+gender_guesser
+geopy
+scipy

@@ -798,7 +798,7 @@ class Doc:
             if x in self:
                 del self[ x ]
 
-            getattr(self, "_prop_%s" % x)()
+            self[ x ]
 
         self._clear_spacy_props()
 
