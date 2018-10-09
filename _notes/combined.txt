@@ -1,6 +1,23 @@
-October 2:
+October 9:
+	update the codings in the cloud (done)
+		create a script to do this for you (done)
+	organize the nytimes obituaries directory
+
+	upgrade the Jupyter computer (done)
+
+	create a search engine for the obituaries
+
+	export all extracted meta-data, so others can play around with it
+
+	investigate OCC coding match more thoroughly
+		and brainstorm
+		think about "attention mechanism"
+		address Strang's emails
+	
 	ingest earlier obituaries
-	comparing two groups of obituaries for the differences in language
+
+October 2:
+	comparing two groups of obituaries for the differences in language (done)
 	finding memes which emerge in the obituaries, and persist [ARGHH]
 		which memes co-occur?
 
@@ -15,6 +32,13 @@ before September 27:
 	going back into original files themselves
 		cleaning up the cleaning code,
 		re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
+
+Just an idea:
+	I'm provisioning a more expensive computer.
+	I could totally rent it by the hour, and for example shut it down at night,
+		or the many days that no one uses it!
+	After an hour of inactivity it could shut down.
+	This seems like an easy fix, and would allow us to run it with a lot more power :)
 
 make sure the jupyter notebook is really what's going on
 	they don't have the codings!!

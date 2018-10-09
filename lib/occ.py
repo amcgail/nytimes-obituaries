@@ -280,10 +280,10 @@ class Doc:
 
         return my_props
 
-    def _prop_fullBody(self):
-        fb = re.sub(r"\s+", " ", self['_fullBody'])
-        fb = fb.strip()
-        return fb
+    #def _prop_fullBody(self):
+    #    fb = re.sub(r"\s+", " ", self['_fullBody'])
+    #    fb = fb.strip()
+    #    return fb
 
     def _prop_proper_nouns(self):
         proper_nouns = []
@@ -801,7 +801,6 @@ class Doc:
             self[ x ]
 
         self._clear_spacy_props()
-
 
 class Coder:
 

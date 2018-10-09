@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Doing it!"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+rsync -rv dev:/home/ec2-user/nytimes-obituaries/codeDumps/codingAll/ $DIR/../codeDumps/codingAll/
