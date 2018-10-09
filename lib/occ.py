@@ -646,7 +646,7 @@ class Doc:
         w['did'] = 5
         w['fS'] = min(1, 6 * 10. / len(fS)) if len(fS) > 0 else 1
         w['f500'] = 0.5 * 6 * 10. / 500
-        w['body'] = min(0.1, 0.1 * 6 * 10. / len(self['_fullBody'])) if len(self['_fullBody']) > 0 else 1
+        w['body'] = min(0.1, 0.1 * 6 * 10. / len(self['_fullBody'])) if len(self['fullBody']) > 0 else 1
 
         # print w
         for x in set(fsC.keys() + f500C.keys() + bodyC.keys()):
@@ -665,8 +665,8 @@ class Doc:
         # then idk do something...
 
     def _prop_gender(self):
-        male = nlp.inquirer_lexicon.countWords("MALE", self['_fullBody'])
-        female = nlp.inquirer_lexicon.countWords("Female", self['_fullBody'])
+        male = nlp.inquirer_lexicon.countWords("MALE", self['fullBody'])
+        female = nlp.inquirer_lexicon.countWords("Female", self['fullBody'])
 
         # if the results are unconclusive from this simple check:
         if male + female < 4 or abs(male - female) / (male + female) < 0.25:

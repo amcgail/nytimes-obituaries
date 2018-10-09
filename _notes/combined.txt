@@ -1,11 +1,34 @@
+October 2:
+	ingest earlier obituaries
+	comparing two groups of obituaries for the differences in language
+	finding memes which emerge in the obituaries, and persist [ARGHH]
+		which memes co-occur?
+
+September 27:
+	last name + date of death name search (done)
+	assess false positives (done)
+	assess these things at supergroup level (done)
+	export assessments to CSV (done)
+
+before September 27:
+	get abdullah's 200 001's
+	going back into original files themselves
+		cleaning up the cleaning code,
+		re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
+
+
 what can Lily do?
 ideas for Lily
+
+	eliminating duplicates
+
 	features / facts which can be extracted from the text
+		race / ethnicity
+		when and where did they die?
 
-	comparing two groups of obituaries for the differences in language
+	deaths vary by 20% over course of year. does this affect things?
 
-	finding memes which emerge in the obituaries, and persist
-		which memes co-occur?
+	
 
 	clustering 
 		of documents
@@ -16,18 +39,8 @@ ideas for Lily
 		maybe I need something simpler
 			which I can explain myself lol
 
-	eliminating duplicates
-
-	when and where did they die?
-
 Gary King
 	aggregates can do a good job, even though individual accuracy not so good
-
-ingest earlier obituaries
-
-last name + date of death name search
-
-get abdullah's 200 001's
 
 basis for assessing language change over time
 
@@ -56,9 +69,6 @@ M/F which words were used?
 
 more accurate name detection.
 more comprehensive 1st sentence fixes
-going back into original files themselves
-	cleaning up the cleaning code,
-	re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
 domains	
 Occ roles linked to name (Adm. Dewey, The Rev. Upright, Dr. Doolittle)
 Eliminate occupations that are not the obituarized: “secretary to the president”, “he once met the president”, “medical examiner says he is dead”

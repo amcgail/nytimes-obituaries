@@ -4,9 +4,9 @@ import csv
 import os
 from random import sample
 from itertools import chain
-from datetime.datetime import
+#from datetime.datetime import
 
-outfn = "001.200.csv"
+outfn = "001.200.2.csv"
 outputdir = path.join(path.dirname(__file__), "..", "exports")
 noutput = 200
 
@@ -19,7 +19,7 @@ args_to_output = {
 }
 
 coder = occ.Coder()
-coder.loadPreviouslyCoded("v2.1")
+coder.loadPreviouslyCoded("v2.1", rand=True)
 
 obits_filter_occ = list(filter( lambda x: "001" in chain.from_iterable(y['occ'] for y in x['OCC']), coder.obituaries ))
 
