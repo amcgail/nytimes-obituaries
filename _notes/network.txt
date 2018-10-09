@@ -1,0 +1,41 @@
+context:
+	He headed the department of religion and for several semesters ran a joint seminar with Paul Tillich on theology and the history of religion.
+	The son of an Army officer, Leon Samuel Roudiez Jr. was born in Bronxville, N.Y., and raised in Germany and France. 
+	With one of his former students, Robert D. Hume, he rediscovered and republished a satirical comedy that had been banned by Charles II in 1669
+
+todo for me:
+	** find or recreate the script used to get this network
+	1/10 or 1/6 of the population, so we don't crash our computers
+
+lists
+	congress, governors, presidents --
+	attourney generals
+	mayors
+	ny state officials
+	olympic medalists
+
+weighting edges by # of names
+	maybe # of names in sentence --
+weighting edges by position in the obit
+
+interested in extracting actual interactions
+	grammatical parsing -- 
+	specific phrases to identify
+	what about kinship networks
+
+gender, and other attributes as correlates to network position,
+and also maybe properties of the obit and network position --
+
+emergence of referential obits over time?
+	in different OCCs?
+
+pick smaller samples
+	justices
+	governors
+	artists
+	CEOs
+
+what about looking at a person who was in a bunch of obituaries, and were themselves obiturized.
+	who was mentioned in their obituary? --- --- ---
+
+which domains are socially dense?
