@@ -1,3 +1,28 @@
+make sure the jupyter notebook is really what's going on
+	they don't have the codings!!
+	and code everything
+
+give them the actual count of codings for OCC code
+	to see if the distribution is the same
+
+inter-coder reliability by OCC code
+
+false and false positives for full body
+try parsing to focus *where* occupation words are likely to show up
+	maybe loking at the "change" between two methods (how many more false positives / errors / w/e)
+
+verbs for classification?
+revive the wikidata linkage
+supergroup inter-coder agreement
+network
+	probably linked to people who do all kinds of things --
+	what about multimodal ties?
+		based on context of the name
+	and people in certain structural relations
+documentation
+	load a CSV
+	get attributes
+
 what can Lily do?
 ideas for Lily
 	features / facts which can be extracted from the text
