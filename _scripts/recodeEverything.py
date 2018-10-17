@@ -1,6 +1,6 @@
 import occ
 
-if False:
+if True:
     occ.regenerateW2C()
 
 coding_in = "v2.1"
@@ -10,7 +10,12 @@ coding_out = "v2.1"
 
 coder = occ.Coder()
 coder.loadPreviouslyCoded(coding_in, rand=False)
-coder.codeAll()
+
+#print("\n".join( sorted(coder.obituaries[0].keys())) )
+
+coder.codeAll(["OCC"])
+
+#print("\n".join( sorted(coder.obituaries[0].keys())) )
 
 #print(coder.obituaries[0]._prop_cache)
 #print("OCC" in coder.obituaries[0]._prop_cache)

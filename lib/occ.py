@@ -280,10 +280,10 @@ class Doc:
 
         return my_props
 
-    def _prop_fullBody(self):
-        fb = re.sub(r"\s+", " ", self['_fullBody'])
-        fb = fb.strip()
-        return fb
+    #def _prop_fullBody(self):
+    #    fb = re.sub(r"\s+", " ", self['_fullBody'])
+    #    fb = fb.strip()
+    #    return fb
 
     def _prop_proper_nouns(self):
         proper_nouns = []
@@ -395,7 +395,7 @@ class Doc:
         [ x.update({"where": "firstSentence"}) for x in found_first ]
         [ x.update({"where": "title"}) for x in found_title ]
 
-        return found_first + found_title
+        return set( chain.from_iterable( x['occ'] for x in found_first + found_title ) )
 
     def _OLDER_prop_OCC(self):
 
@@ -646,7 +646,7 @@ class Doc:
         w['did'] = 5
         w['fS'] = min(1, 6 * 10. / len(fS)) if len(fS) > 0 else 1
         w['f500'] = 0.5 * 6 * 10. / 500
-        w['body'] = min(0.1, 0.1 * 6 * 10. / len(self['_fullBody'])) if len(self['_fullBody']) > 0 else 1
+        w['body'] = min(0.1, 0.1 * 6 * 10. / len(self['_fullBody'])) if len(self['fullBody']) > 0 else 1
 
         # print w
         for x in set(fsC.keys() + f500C.keys() + bodyC.keys()):
@@ -665,8 +665,8 @@ class Doc:
         # then idk do something...
 
     def _prop_gender(self):
-        male = nlp.inquirer_lexicon.countWords("MALE", self['_fullBody'])
-        female = nlp.inquirer_lexicon.countWords("Female", self['_fullBody'])
+        male = nlp.inquirer_lexicon.countWords("MALE", self['fullBody'])
+        female = nlp.inquirer_lexicon.countWords("Female", self['fullBody'])
 
         # if the results are unconclusive from this simple check:
         if male + female < 4 or abs(male - female) / (male + female) < 0.25:
@@ -801,7 +801,6 @@ class Doc:
             self[ x ]
 
         self._clear_spacy_props()
-
 
 class Coder:
 
@@ -1287,32 +1286,34 @@ def regenerateW2C(expandSynonyms = False):
     print("Extracting terms from Abdullah's OCC codes file %s" % occ2000Fn)
     workbook = xlrd.open_workbook(occ2000Fn)
 
-    super_wksht = workbook.sheet_by_index(17)
+    if False:
+        # parsing the super worksheet separately from others --
+        super_wksht = workbook.sheet_by_index(18)
 
-    for row in range(1, 500):
-        try:
-            code = super_wksht.cell(row, 0).value
-        except IndexError:
-            break
+        for row in range(1, 500):
+            try:
+                code = super_wksht.cell(row, 0).value
+            except IndexError:
+                break
 
-        term = super_wksht.cell(row, 2).value
-        if type(term) == int:
-            continue
-
-        term = term.lower()
-        terms = term.split("|")
-
-        for term in terms:
-            term = term.strip()
-            if term == "":
+            term = super_wksht.cell(row, 2).value
+            if type(term) == int:
                 continue
 
-            codegen.append({
-                "term": term,
-                "code": "super:%03d" % int(code),
-                "source": "occ2000_updated.xls"
-            })
-            # print((code, term))
+            term = term.lower()
+            terms = term.split("|")
+
+            for term in terms:
+                term = term.strip()
+                if term == "":
+                    continue
+
+                codegen.append({
+                    "term": term,
+                    "code": "super:%03d" % int(code),
+                    "source": "occ2000_updated.xls"
+                })
+                # print((code, term))
 
     for wksheet_i in list(range(3, 17)) + [18]:
         worksheet = workbook.sheet_by_index(wksheet_i)

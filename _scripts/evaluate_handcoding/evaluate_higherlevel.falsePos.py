@@ -5,6 +5,10 @@ from collections import defaultdict
 from itertools import chain
 from pprint import pprint
 from collections import Counter
+import os
+import csv
+
+outCSV = os.path.join( os.path.dirname(__file__), "../../exports/coding_eval.supergroup.csv" )
 
 supergroups = {
     "s043": [2] + list(range(4,44)),
@@ -83,6 +87,8 @@ def get_supergroup(x):
     except ValueError:
         pass
 
+    if x == "001a":
+        x = "001"
     return "s^%s" % x
     raise Exception("%s not found" % x)
 
@@ -90,6 +96,7 @@ def get_supergroup(x):
 counters = defaultdict(int)
 total_counter = Counter()
 missed_counter = Counter()
+false_pos_counter = Counter()
 
 #for i in range(1, 101):
 for i in range(1, 1001):
@@ -144,13 +151,42 @@ for i in range(1, 1001):
     if (not len(hand_code)):
         counters['no hand code'] += 1
 
+    if len(machine_code - hand_code):
+        counters['false positives'] += 1
+
     counters['total'] += 1
     missed_counter.update(hand_code.difference(machine_code))
     total_counter.update(hand_code)
+    false_pos_counter.update(machine_code - hand_code)
 
-pprint(dict(counters))
-for k in sorted(list(total_counter.keys())):
-    print( "%s: missed %s / %s" % (k, missed_counter[k], total_counter[k]))
+if False:
+    pprint(dict(counters))
+    for k in sorted(list(total_counter.keys())):
+        print( "%s: missed %s / %s" % (k, missed_counter[k], total_counter[k]))
+
+def get_metric(k):
+    t = total_counter[k]
+    fp = false_pos_counter[k]
+    m = missed_counter[k]
+    hit = t - m
+
+    if fp == 0:
+        return "inf"
+
+    return "%.03f" % (hit / fp)
+
+with open(outCSV, "w") as csvf:
+    csvw = csv.writer(csvf)
+    all_keys = sorted(total_counter.keys())
+    csvw.writerow("supergroup,missed,falsePos,total,howgood".split(","))
+    for k in all_keys:
+        csvw.writerow([
+            k,
+            missed_counter[k],
+            false_pos_counter[k],
+            total_counter[k],
+            get_metric(k)
+        ])
 
 """
 {'disagree, but agree on something': 193,
