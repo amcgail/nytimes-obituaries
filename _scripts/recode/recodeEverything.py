@@ -6,14 +6,14 @@ if True:
 coding_in = "v2.1"
 #coding = "codingAll"
 #coding_out = coding_in
-coding_out = "v2.1.fullBody"
+coding_out = "v2.1"
 
 coder = occ.Coder()
 coder.loadPreviouslyCoded(coding_in, rand=False)
 
 #print("\n".join( sorted(coder.obituaries[0].keys())) )
 
-coder.codeAll(["OCC"])
+coder.codeAll(["gender","age","whatTheyWere","whatTheyDid","name","first_name","last_name"])
 
 #print("\n".join( sorted(coder.obituaries[0].keys())) )
 

@@ -26,13 +26,16 @@ for i in range(1, 1001):
     id = int(worksheet.cell(i, 9).value)
     occ = worksheet.cell(i, 2).value
 
-    try:
-        if int(occ) != 1:
+    if False:
+        try:
+            if int(occ) != 1:
+                continue
+        except ValueError:
             continue
-    except ValueError:
-        continue
 
-    ids.append(id)
+    ids.append((id,occ))
+
+ids = sorted(ids)
 
 with open(join(dirname(__file__), "ceos.txt"), 'w') as outf:
     for id in ids:

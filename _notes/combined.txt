@@ -1,8 +1,15 @@
+October 15
+	
+	find some obituaries of people from Abdullah's list
+	detect businesses from the text
+		did I lose all the stuff I've done...?
+		maybe it's all in github...
+
+	memes
 October 10:
 	export all extracted meta-data, so others can play around with it (done)
 	
 	ingest earlier obituaries (only half way done!)
-
 
 October 9:
 	update the codings in the cloud (done)
@@ -43,6 +50,33 @@ TODOS
 		address Strang's emails
 
 	detecting companies
+
+
+make practical accomplishments for strang.
+for example, I'm probably writing this methodological paper, so get cracking! have you really understood anything yet?
+why do I know nothing.
+I need some solid steps forward I can make instead of just staring at code that doesn't work.
+small, baby steps, that are practical
+like the Jupyter notebook
+
+btw small step: jupyter notebook
+
+I should do my work small steps at a time. baby steps, as efficient as possible.
+if not possible, push it off (more accurately, brainstorm about it and then push it off)
+
+for the meme analysis:
+just ignore those words which are super infrequent --
+	well, don't ignore them, but replace them with a null character while counting!
+
+machine-learning ideas
+	it'd be good to present the current state of the machine-learning endeavor to the group schematically.
+		helping them to understand the steps I'm undertaking could help them contribute in meaningful ways
+		I need good ideas about features to include in the algorithm, new ways of structuring the algorithm, and other data to take into consideration
+
+
+make sure the jupyter notebook is really what's going on
+	they don't have the codings!!
+	and code everything
 
 	move forward on networks
 

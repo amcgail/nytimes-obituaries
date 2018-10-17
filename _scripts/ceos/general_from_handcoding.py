@@ -35,10 +35,12 @@ for i in range(1, 1001):
 
     ids.append((id,occ))
 
+ids = sample(ids, 200)
 ids = sorted(ids)
 
+
 with open(join(dirname(__file__), "ceos.txt"), 'w') as outf:
-    for id in ids:
+    for id, occ in ids:
 
         for _ in range(1):
             outf.write("-----------------%s-----------------------\n" % str(id))
