@@ -1,3 +1,9 @@
+October 10:
+	export all extracted meta-data, so others can play around with it (done)
+	
+	ingest earlier obituaries (only half way done!)
+
+
 October 9:
 	update the codings in the cloud (done)
 		create a script to do this for you (done)
@@ -7,14 +13,7 @@ October 9:
 
 	create a search engine for the obituaries (tried, too much time dude...)
 
-	export all extracted meta-data, so others can play around with it
-
-	investigate OCC coding match more thoroughly
-		and brainstorm
-		think about "attention mechanism"
-		address Strang's emails
-	
-	ingest earlier obituaries
+	create mechanism to turn jupyter notebook on and off depending on use (tried...)
 
 October 2:
 	comparing two groups of obituaries for the differences in language (done)
@@ -33,115 +32,137 @@ before September 27:
 		cleaning up the cleaning code,
 		re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
 
-Just an idea:
-	I'm provisioning a more expensive computer.
-	I could totally rent it by the hour, and for example shut it down at night,
-		or the many days that no one uses it!
-	After an hour of inactivity it could shut down.
-	This seems like an easy fix, and would allow us to run it with a lot more power :)
 
-make sure the jupyter notebook is really what's going on
-	they don't have the codings!!
-	and code everything
+TODOS
 
-give them the actual count of codings for OCC code
-	to see if the distribution is the same
+	fix the titles!
 
-inter-coder reliability by OCC code
+	investigate OCC coding match more thoroughly
+		and brainstorm
+		think about "attention mechanism"
+		address Strang's emails
 
-false and false positives for full body
-try parsing to focus *where* occupation words are likely to show up
-	maybe loking at the "change" between two methods (how many more false positives / errors / w/e)
+	detecting companies
 
-verbs for classification?
-revive the wikidata linkage
-supergroup inter-coder agreement
-network
-	probably linked to people who do all kinds of things --
-	what about multimodal ties?
-		based on context of the name
-	and people in certain structural relations
-documentation
-	load a CSV
-	get attributes
+	move forward on networks
 
-what can Lily do?
-ideas for Lily
 
-	eliminating duplicates
+IDEAS:
 
-	features / facts which can be extracted from the text
-		race / ethnicity
-		when and where did they die?
+	from David:
+		preliminary searches suggest some problems with s043 vocabulary but should be resolvable thru first sentence parsing...the term "official" arises sometimes as the reporter of death rather than as the obituarized's occupation
 
-	deaths vary by 20% over course of year. does this affect things?
+		would be good to go over progress when we have some more tables of true and false positives, and more generally develop a plan ... I will be in the department tomorrow and the rest of the week 
 
-	
+	Just an idea:
+		I'm provisioning a more expensive computer.
+		I could totally rent it by the hour, and for example shut it down at night,
+			or the many days that no one uses it!
+		After an hour of inactivity it could shut down.
+		This seems like an easy fix, and would allow us to run it with a lot more power :)
 
-	clustering 
-		of documents
-		of sentences
-		of "what they did" words
+	make sure the jupyter notebook is really what's going on
+		they don't have the codings!!
+		and code everything
 
-		via word-cooccurrence / LDA
-		maybe I need something simpler
-			which I can explain myself lol
+	give them the actual count of codings for OCC code
+		to see if the distribution is the same
 
-Gary King
-	aggregates can do a good job, even though individual accuracy not so good
+	inter-coder reliability by OCC code
 
-basis for assessing language change over time
+	false and false positives for full body
+	try parsing to focus *where* occupation words are likely to show up
+		maybe loking at the "change" between two methods (how many more false positives / errors / w/e)
 
-how much inter-coder agreement do we need?
+	verbs for classification?
+	revive the wikidata linkage
+	supergroup inter-coder agreement
+	network
+		probably linked to people who do all kinds of things --
+		what about multimodal ties?
+			based on context of the name
+		and people in certain structural relations
+	documentation
+		load a CSV
+		get attributes
 
-attention model
-	within quotes simply excluded
-	the relations to words around them
+	what can Lily do?
+	ideas for Lily
 
-can I automatically determine varying levels of abstraction
-	what does this even mean?
-	from a note on a piece of paper
+		eliminating duplicates
 
-as input to machine learning:
-	co-occurrence of lists of organizations
-	also, links based on names that co-occur
+		features / facts which can be extracted from the text
+			race / ethnicity
+			when and where did they die?
 
-career, as sequence of occupations
+		deaths vary by 20% over course of year. does this affect things?
 
-read quant-linguistics papers and apply them
-	in the spirit of NLP & social interaction
+		
 
-length of obit by gender, OCC, age, words in the article, etc.
+		clustering 
+			of documents
+			of sentences
+			of "what they did" words
 
-M/F which words were used?
+			via word-cooccurrence / LDA
+			maybe I need something simpler
+				which I can explain myself lol
 
-more accurate name detection.
-more comprehensive 1st sentence fixes
-domains	
-Occ roles linked to name (Adm. Dewey, The Rev. Upright, Dr. Doolittle)
-Eliminate occupations that are not the obituarized: “secretary to the president”, “he once met the president”, “medical examiner says he is dead”
-Tough: actors described as stars, but played a doctor on TV --
-	we should explore and test the "director of X", "authority on X" coding strategy
+	Gary King
+		aggregates can do a good job, even though individual accuracy not so good
 
-analysis of fit for supergroups
+	basis for assessing language change over time
 
-1) fixing small errors ... 
-deleting the "not an obit" cases (there are 6 of these), 
-for purposes of occ testing, combine 001a with 001.
+	how much inter-coder agreement do we need?
 
-2) employ the occ automated coding to mirror as closely as possible the method that abdullah and I settled on for hand coding (where the basic idea was to have limited, targeted examination of the full body) 
+	attention model
+		within quotes simply excluded
+		the relations to words around them
 
-	what we did
-	a) always examine both title and first sentence for occ vocabulary
-	b) if no terms found in title and first sentence, examine the full body of the article for any occ terms 
-	c) if find a supergroup but not 3 digit occ in the title or first sentence, examine the full body to disambiguate that supergroup (see if can code at 3 digit level), but modify any other codes
+	can I automatically determine varying levels of abstraction
+		what does this even mean?
+		from a note on a piece of paper
 
-	as I think about it, not easy to mirror this since we didnt add any info to distinguish whether looked at the full body or not ... best first approx is to only look at title and first sentence, maybe can improve on this later!
+	as input to machine learning:
+		co-occurrence of lists of organizations
+		also, links based on names that co-occur
 
-3) how to assess fit...
+	career, as sequence of occupations
 
-	in the output you sent by email, you show "fit" at the 3 digit level, like "001: missed 44/151". I assume this means that there are 151 appearances of 001 in the consensus hand coded 1000 documents, and 107 of these were identified as 001 in our occ vocabulary while 44 were not identified as 001
+	read quant-linguistics papers and apply them
+		in the spirit of NLP & social interaction
 
-	would be good also to look at the flipside, for example, how many documents were auto coded as 001, and how many of these did the consensus hand coding call 001... informative perhaps to have a table where 3 digit occs are the rows, and columns are (a) number appearing in hand coded (b) number in auto occ coded (c) number in both hand and auto occ coded
+	length of obit by gender, OCC, age, words in the article, etc.
 
-	would be good also to have the same kind of table but at the supergroup level of granularity... combining those actually coded as supergroups and also their 3 digit members
+	M/F which words were used?
+
+	more accurate name detection.
+	more comprehensive 1st sentence fixes
+	domains	
+	Occ roles linked to name (Adm. Dewey, The Rev. Upright, Dr. Doolittle)
+	Eliminate occupations that are not the obituarized: “secretary to the president”, “he once met the president”, “medical examiner says he is dead”
+	Tough: actors described as stars, but played a doctor on TV --
+		we should explore and test the "director of X", "authority on X" coding strategy
+
+	analysis of fit for supergroups
+
+	1) fixing small errors ... 
+	deleting the "not an obit" cases (there are 6 of these), 
+	for purposes of occ testing, combine 001a with 001.
+
+	2) employ the occ automated coding to mirror as closely as possible the method that abdullah and I settled on for hand coding (where the basic idea was to have limited, targeted examination of the full body) 
+
+		what we did
+		a) always examine both title and first sentence for occ vocabulary
+		b) if no terms found in title and first sentence, examine the full body of the article for any occ terms 
+		c) if find a supergroup but not 3 digit occ in the title or first sentence, examine the full body to disambiguate that supergroup (see if can code at 3 digit level), but modify any other codes
+
+		as I think about it, not easy to mirror this since we didnt add any info to distinguish whether looked at the full body or not ... best first approx is to only look at title and first sentence, maybe can improve on this later!
+
+	3) how to assess fit...
+
+		in the output you sent by email, you show "fit" at the 3 digit level, like "001: missed 44/151". I assume this means that there are 151 appearances of 001 in the consensus hand coded 1000 documents, and 107 of these were identified as 001 in our occ vocabulary while 44 were not identified as 001
+
+		would be good also to look at the flipside, for example, how many documents were auto coded as 001, and how many of these did the consensus hand coding call 001... informative perhaps to have a table where 3 digit occs are the rows, and columns are (a) number appearing in hand coded (b) number in auto occ coded (c) number in both hand and auto occ coded
+
+		would be good also to have the same kind of table but at the supergroup level of granularity... combining those actually coded as supergroups and also their 3 digit members

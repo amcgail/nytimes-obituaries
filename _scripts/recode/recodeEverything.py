@@ -6,7 +6,7 @@ if True:
 coding_in = "v2.1"
 #coding = "codingAll"
 #coding_out = coding_in
-coding_out = "v2.1"
+coding_out = "v2.1.fullBody"
 
 coder = occ.Coder()
 coder.loadPreviouslyCoded(coding_in, rand=False)
