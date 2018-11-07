@@ -276,7 +276,7 @@ for i, d in enumerate(docs):
             print( d.body )
             raise
 
-    doc = occ.Doc()
+    doc = occ.Obituary()
     doc.isCoded = True
     doc._prop_cache = docinfo
 

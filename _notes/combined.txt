@@ -1,55 +1,66 @@
-October 15
-	
-	find some obituaries of people from Abdullah's list
-	detect businesses from the text
-		did I lose all the stuff I've done...?
-		maybe it's all in github...
-
-	memes
-October 10:
-	export all extracted meta-data, so others can play around with it (done)
-	
-	ingest earlier obituaries (only half way done!)
-
-October 9:
-	update the codings in the cloud (done)
-		create a script to do this for you (done)
-	organize the nytimes obituaries directory
-
-	upgrade the Jupyter computer (done)
-
-	create a search engine for the obituaries (tried, too much time dude...)
-
-	create mechanism to turn jupyter notebook on and off depending on use (tried...)
-
-October 2:
-	comparing two groups of obituaries for the differences in language (done)
-	finding memes which emerge in the obituaries, and persist [ARGHH]
-		which memes co-occur?
-
-September 27:
-	last name + date of death name search (done)
-	assess false positives (done)
-	assess these things at supergroup level (done)
-	export assessments to CSV (done)
-
-before September 27:
-	get abdullah's 200 001's
-	going back into original files themselves
-		cleaning up the cleaning code,
-		re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
+todos for right now
+    extract unique names from the obituaries
+    have all algorithms outputs available [all versions of OCC], as well as code
+    built-in documentation to each attribute
+    each attribute in its own file
+    make extra room for information in the attributes
+        [load only certain attributes, to save data, when loading from Pickles]
+        [compute/load attributes on demand, quickly]
+        [maybe simply a mongo DB table]
+        [have max memory limit]
 
 
-TODOS
 
-	fix the titles!
 
-	investigate OCC coding match more thoroughly
-		and brainstorm
-		think about "attention mechanism"
-		address Strang's emails
 
-	detecting companies
+
+
+
+
+
+
+
+
+
+
+
+
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 make practical accomplishments for strang.
@@ -61,7 +72,7 @@ like the Jupyter notebook
 
 btw small step: jupyter notebook
 
-I should do my work small steps at a time. baby steps, as efficient as possible.
+I should do my work 4 small steps at a time. baby steps, as efficient as possible.
 if not possible, push it off (more accurately, brainstorm about it and then push it off)
 
 for the meme analysis:
@@ -73,130 +84,117 @@ machine-learning ideas
 		helping them to understand the steps I'm undertaking could help them contribute in meaningful ways
 		I need good ideas about features to include in the algorithm, new ways of structuring the algorithm, and other data to take into consideration
 
-
 make sure the jupyter notebook is really what's going on
 	they don't have the codings!!
 	and code everything
 
-	move forward on networks
+give them the actual count of codings for OCC code
+	to see if the distribution is the same
 
+inter-coder reliability by OCC code
 
-IDEAS:
+false and false positives for full body
+try parsing to focus *where* occupation words are likely to show up
+	maybe loking at the "change" between two methods (how many more false positives / errors / w/e)
 
-	from David:
-		preliminary searches suggest some problems with s043 vocabulary but should be resolvable thru first sentence parsing...the term "official" arises sometimes as the reporter of death rather than as the obituarized's occupation
+verbs for classification?
+revive the wikidata linkage
+supergroup inter-coder agreement
+network
+	probably linked to people who do all kinds of things --
+	what about multimodal ties?
+		based on context of the name
+	and people in certain structural relations
+documentation
+	load a CSV
+	get attributes
 
-		would be good to go over progress when we have some more tables of true and false positives, and more generally develop a plan ... I will be in the department tomorrow and the rest of the week 
+what can Lily do?
+ideas for Lily
+	features / facts which can be extracted from the text
 
-	Just an idea:
-		I'm provisioning a more expensive computer.
-		I could totally rent it by the hour, and for example shut it down at night,
-			or the many days that no one uses it!
-		After an hour of inactivity it could shut down.
-		This seems like an easy fix, and would allow us to run it with a lot more power :)
+	comparing two groups of obituaries for the differences in language
 
-	make sure the jupyter notebook is really what's going on
-		they don't have the codings!!
-		and code everything
+	finding memes which emerge in the obituaries, and persist
+		which memes co-occur?
 
-	give them the actual count of codings for OCC code
-		to see if the distribution is the same
+	clustering 
+		of documents
+		of sentences
+		of "what they did" words
 
-	inter-coder reliability by OCC code
+		via word-cooccurrence / LDA
+		maybe I need something simpler
+			which I can explain myself lol
 
-	false and false positives for full body
-	try parsing to focus *where* occupation words are likely to show up
-		maybe loking at the "change" between two methods (how many more false positives / errors / w/e)
+	eliminating duplicates
 
-	verbs for classification?
-	revive the wikidata linkage
-	supergroup inter-coder agreement
-	network
-		probably linked to people who do all kinds of things --
-		what about multimodal ties?
-			based on context of the name
-		and people in certain structural relations
-	documentation
-		load a CSV
-		get attributes
+	when and where did they die?
 
-	what can Lily do?
-	ideas for Lily
+Gary King
+	aggregates can do a good job, even though individual accuracy not so good
 
-		eliminating duplicates
+ingest earlier obituaries
 
-		features / facts which can be extracted from the text
-			race / ethnicity
-			when and where did they die?
+last name + date of death name search
 
-		deaths vary by 20% over course of year. does this affect things?
+get abdullah's 200 001's
 
-		
+basis for assessing language change over time
 
-		clustering 
-			of documents
-			of sentences
-			of "what they did" words
+how much inter-coder agreement do we need?
 
-			via word-cooccurrence / LDA
-			maybe I need something simpler
-				which I can explain myself lol
+attention model
+	within quotes simply excluded
+	the relations to words around them
 
-	Gary King
-		aggregates can do a good job, even though individual accuracy not so good
+can I automatically determine varying levels of abstraction
+	what does this even mean?
+	from a note on a piece of paper
 
-	basis for assessing language change over time
+as input to machine learning:
+	co-occurrence of lists of organizations
+	also, links based on names that co-occur
 
-	how much inter-coder agreement do we need?
+career, as sequence of occupations
 
-	attention model
-		within quotes simply excluded
-		the relations to words around them
+read quant-linguistics papers and apply them
+	in the spirit of NLP & social interaction
 
-	can I automatically determine varying levels of abstraction
-		what does this even mean?
-		from a note on a piece of paper
+length of obit by gender, OCC, age, words in the article, etc.
 
-	as input to machine learning:
-		co-occurrence of lists of organizations
-		also, links based on names that co-occur
+M/F which words were used?
 
-	career, as sequence of occupations
+more accurate name detection.
+more comprehensive 1st sentence fixes
+going back into original files themselves
+	cleaning up the cleaning code,
+	re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
+domains	
+Occ roles linked to name (Adm. Dewey, The Rev. Upright, Dr. Doolittle)
+Eliminate occupations that are not the obituarized: “secretary to the president”, “he once met the president”, “medical examiner says he is dead”
+Tough: actors described as stars, but played a doctor on TV --
+	we should explore and test the "director of X", "authority on X" coding strategy
 
-	read quant-linguistics papers and apply them
-		in the spirit of NLP & social interaction
+analysis of fit for supergroups
 
-	length of obit by gender, OCC, age, words in the article, etc.
+1) fixing small errors ... 
+deleting the "not an obit" cases (there are 6 of these), 
+for purposes of occ testing, combine 001a with 001.
 
-	M/F which words were used?
+2) employ the occ automated coding to mirror as closely as possible the method that abdullah and I settled on for hand coding (where the basic idea was to have limited, targeted examination of the full body) 
 
-	more accurate name detection.
-	more comprehensive 1st sentence fixes
-	domains	
-	Occ roles linked to name (Adm. Dewey, The Rev. Upright, Dr. Doolittle)
-	Eliminate occupations that are not the obituarized: “secretary to the president”, “he once met the president”, “medical examiner says he is dead”
-	Tough: actors described as stars, but played a doctor on TV --
-		we should explore and test the "director of X", "authority on X" coding strategy
+	what we did
+	a) always examine both title and first sentence for occ vocabulary
+	b) if no terms found in title and first sentence, examine the full body of the article for any occ terms 
+	c) if find a supergroup but not 3 digit occ in the title or first sentence, examine the full body to disambiguate that supergroup (see if can code at 3 digit level), but modify any other codes
 
-	analysis of fit for supergroups
+	as I think about it, not easy to mirror this since we didnt add any info to distinguish whether looked at the full body or not ... best first approx is to only look at title and first sentence, maybe can improve on this later!
 
-	1) fixing small errors ... 
-	deleting the "not an obit" cases (there are 6 of these), 
-	for purposes of occ testing, combine 001a with 001.
+3) how to assess fit...
 
-	2) employ the occ automated coding to mirror as closely as possible the method that abdullah and I settled on for hand coding (where the basic idea was to have limited, targeted examination of the full body) 
+	in the output you sent by email, you show "fit" at the 3 digit level, like "001: missed 44/151". I assume this means that there are 151 appearances of 001 in the consensus hand coded 1000 documents, and 107 of these were identified as 001 in our occ vocabulary while 44 were not identified as 001
 
-		what we did
-		a) always examine both title and first sentence for occ vocabulary
-		b) if no terms found in title and first sentence, examine the full body of the article for any occ terms 
-		c) if find a supergroup but not 3 digit occ in the title or first sentence, examine the full body to disambiguate that supergroup (see if can code at 3 digit level), but modify any other codes
+	would be good also to look at the flipside, for example, how many documents were auto coded as 001, and how many of these did the consensus hand coding call 001... informative perhaps to have a table where 3 digit occs are the rows, and columns are (a) number appearing in hand coded (b) number in auto occ coded (c) number in both hand and auto occ coded
 
-		as I think about it, not easy to mirror this since we didnt add any info to distinguish whether looked at the full body or not ... best first approx is to only look at title and first sentence, maybe can improve on this later!
-
-	3) how to assess fit...
-
-		in the output you sent by email, you show "fit" at the 3 digit level, like "001: missed 44/151". I assume this means that there are 151 appearances of 001 in the consensus hand coded 1000 documents, and 107 of these were identified as 001 in our occ vocabulary while 44 were not identified as 001
-
-		would be good also to look at the flipside, for example, how many documents were auto coded as 001, and how many of these did the consensus hand coding call 001... informative perhaps to have a table where 3 digit occs are the rows, and columns are (a) number appearing in hand coded (b) number in auto occ coded (c) number in both hand and auto occ coded
-
-		would be good also to have the same kind of table but at the supergroup level of granularity... combining those actually coded as supergroups and also their 3 digit members
+	would be good also to have the same kind of table but at the supergroup level of granularity... combining those actually coded as supergroups and also their 3 digit members

@@ -7,11 +7,12 @@ Created on Fri Apr 27 12:57:10 2018
 """
 
 import csv
+import pprint
 import re
 from collections import Counter
 from csv import DictReader, DictWriter
 from csv import reader
-from itertools import chain
+from itertools import chain, groupby
 from os import path, remove
 
 import xlrd
@@ -19,6 +20,7 @@ import xlrd
 import g
 import nlp
 import wiki
+
 
 csv.field_size_limit(500 * 1024 * 1024)
 allDocs = list( DictReader( open( path.join( path.dirname(__file__), "..", "data","extracted.all.nice.csv" ) ) ) )
@@ -33,13 +35,12 @@ def _problematic_for_pickling(val):
     if isinstance(val, nlp.spacy.tokens.doc.Doc):
         return True
 
-
 def nocache(f):
     f.to_cache = False
     return f
 
 
-class Doc:
+class Obituary:
     def __init__(self, init_info={}):
         # the info it's initialized with has "_" before it, so everything on top is coded.
         init_info = {
@@ -51,10 +52,10 @@ class Doc:
         self.isCoded = False
         self.myCoder = None
 
-    def destroy(self):
+    def destroy_in_memory(self):
         remove(self['_relfn'])
 
-    def dump(self):
+    def to_pickle(self):
         if not self.isCoded:
             raise Exception("Cannot dump what's not been coded!")
 
@@ -68,7 +69,7 @@ class Doc:
 
         return pickle.dumps(d)
 
-    def load(self, d):
+    def from_pickle(self, d):
         import pickle
         d = pickle.loads(d)
 
@@ -83,24 +84,38 @@ class Doc:
     # _----------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------
-    #           This section defines all the functionality of this object as a picklable dictionary,
-    #                                  with lazy-generated attributes
+    #           This section defines all the functionality of this object as a picklable dictionary
     # _----------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------
 
     def __getitem__(self, item):
-        method_name = "_prop_%s" % item
-
         if item in self._prop_cache:
             return self._prop_cache[item]
 
-        if not hasattr(self, method_name):
-            raise AttributeError("This obituary has no property %s, and doesn't know how to generate it." % item)
+        """
+        else:
+            raise AttributeError("%s not loaded for obituary with info: %s" % (
+                item,
+                pprint.pformat(self._prop_cache, indent=2)
+            ))
+        """
 
-        val = getattr(self, method_name)()
+        """
+        we need to calculate it when it wasn't loaded
+        """
+
+
+        assert(isinstance(self.myCoder, Coder))
+
+        # these have already been automatically extracted by the coder from the attributes folder
+        prop = self.myCoder.attributeCoders[item]( self )
+        assert(isinstance(prop, g.SingleAttributeCoder))
+
+        val = prop.run()
         self._prop_cache[item] = val
+
         return val
 
     def __setitem__(self, key, value):
@@ -111,6 +126,9 @@ class Doc:
 
     def __contains__(self, item):
         return item in self._prop_cache
+
+
+
 
     def keys(self):
         return self._prop_cache.keys()
@@ -126,6 +144,12 @@ class Doc:
             del self._prop_cache[k]
 
     def _get_all_prop_methods(self):
+        """
+        Returns every property method that exists. Everything that can be coded.
+        Meta-method which runs through the attributes of this class.
+        :return:
+        """
+
         import inspect
         all_methods = inspect.getmembers(self, predicate=inspect.ismethod)
         all_method_names = [ x[0] for x in all_methods ]
@@ -134,617 +158,13 @@ class Doc:
         return list(prop_methods)
 
     def _get_all_props(self):
+        """
+        Returns every property name that exists. Everything that can be coded.
+
+        :return:
+        """
+
         return [x[len("_prop_"):] for x in self._get_all_prop_methods()]
-
-    # the following two are no longer used
-    def _prop_title(self):
-        t = self['_title']
-        t = t.split("\n")[-1].strip()  # gets rid of those gnarly prefixes
-        return t
-
-    def __prop_date(self):
-        import datetime
-        return datetime.datetime.strptime(self['_date'], "%B %d, %Y")
-
-    def _prop_spacyName(self):
-        name = None
-
-        #print(self['firstSentence'])
-        # most consistently, it's the first noun chunk:
-        def isName(x):
-            if len(x.split()) < 2:
-                return False
-            if not nlp.isTitleCase(x):
-                return False
-            return True
-
-        # start with NER from spacy:
-        if name is None:
-            guesses = self['spacyFirstSentence'].ents
-            guesses = [x for x in guesses if x.label_ == 'PERSON' and isName(x.text)]
-            if len(guesses) > 0:
-                # just use the first one
-                # and we'll probably need expansion
-                name = guesses[0].text
-                #print("NER for the win")
-
-        # first, expand. it many times doesn't get parens, or Dr. Rev. etc.
-        # we then need to look deeper, if it's a "Mr." "Mrs." or "Dr."
-
-        # then just try some noun chunking...
-        if name is None:
-            nc = list(self['spacyFirstSentence'].noun_chunks)
-            if len(nc) > 0:
-                nc = list(filter(isName, map(str, nc)))
-                if len(nc) > 0:
-                    name = nc[0]
-                    #print("Noun Chunk Found!")
-
-        if name is None:
-            name = "<name not found>"
-        return name
-        #print(name)
-
-        if False:
-            # try spacy's NER:
-            guesses = self['spacyFirstSentence'].ents
-            guesses = [x for x in guesses if x.label_ == 'PERSON']
-            print("FS:", self['firstSentence'])
-            if len(guesses) > 0:
-                print("Found:", [x.text for x in guesses])
-
-        if True:
-            import re
-            # name is ALMOST ALWAYS the first noun_chunk.
-            fsname = None
-            nc = list( self['spacyFirstSentence'].noun_chunks )
-            if len(nc) > 0:
-                nc = list(filter(nlp.isTitleCase, map(str, nc)))
-                if len(nc) > 0:
-                    # print(nc)
-                    pass
-                # print("FS:", self['firstSentence'])
-            return
-
-            # also could just check that the words are in the title...
-            if fsname is not None:
-                t = self['title'].lower()
-                tw = set(nlp.word_tokenize(t))
-                fsnamew = set(nlp.word_tokenize(str(fsname).lower()))
-                if len(tw.intersection(fsnamew)) > 0:
-                    #print(fsname)
-                    pass
-
-
-            # the title is a good check
-            if False:
-                tname = self['title']
-                pats = [
-                    "is dead",
-                    ",",
-                    "dies",
-                    "is slain",
-                    "of",
-                    "dead",
-
-                ]
-                for pat in pats:
-                    tname = re.split(pat, tname, flags=re.IGNORECASE)[0]
-
-    def _prop_kinship(self):
-        my_props = set()
-
-        toSearch = self['firstSentence']
-
-        # don't want lexicon (or a name) to be spotted in the "died on the 3rd with is family"
-        toSearch = toSearch.split("died")[0]
-        toSearch = toSearch.split("dead")[0]
-        toSearch = toSearch.split("killed")[0]
-        toSearch = toSearch.split("drowned")[0]
-
-        # their own name might get confusing for this analysis...
-        toSearch = toSearch.replace(self["name"], "")
-
-        # intelligent tokenization
-        toSearchWords = nlp.word_tokenize( toSearch )
-
-        kinMatch = 0
-        kinMatchStronger = 0
-
-        lexicon = nlp.inquirer_lexicon["KIN"]
-
-        for x in toSearchWords:
-            if x.upper() in lexicon:
-                kinMatch += 1
-        for x in nlp.getTuples( toSearchWords, 2, 2 ):
-            if x[0].upper() in lexicon and x[1].upper() == "OF":
-                kinMatchStronger += 1
-
-        if kinMatch > 0:
-            my_props.add("lex_match")
-        if kinMatchStronger > 0:
-            my_props.add("lex_match_strong")
-
-        # I also need a full name that matches in the last name...
-        for names in nlp.getTuples(toSearchWords, 2, 3):
-            # must be capitalized...
-            if any( x[0].lower() == x[0] for x in names ):
-                continue
-
-            # last must be the same name!
-            if names[-1].lower() != self["last_name"]:
-                continue
-
-            my_props.add("name_match")
-            break
-
-        return my_props
-
-    #def _prop_fullBody(self):
-    #    fb = re.sub(r"\s+", " ", self['_fullBody'])
-    #    fb = fb.strip()
-    #    return fb
-
-    def _prop_proper_nouns(self):
-        proper_nouns = []
-
-        for chunk in self['spacyFullBody'].noun_chunks:
-
-            #ch = chunk.text
-            #ch.replace("\n", " ")
-            #ch.replace("  ", " ")
-            #ch = ch.strip()
-
-            if chunk.text == chunk.text.lower():
-                continue
-
-            # words that aren't spaces...
-            chunk = list(chunk)
-            chunk = [x for x in chunk if x.pos_ != 'SPACE']
-
-            # expand if necessary
-            nextWord = chunk[-1]
-            if nextWord.i + 1 < len(nextWord.doc):
-                nextWord = nextWord.doc[nextWord.i + 1]
-
-                # if it has capitalization, keep going.
-                while str(nextWord).lower() != str(nextWord) or nextWord.pos_ == 'SPACE':
-                    # skip spaces...
-                    if nextWord.pos_ != 'SPACE':
-                        chunk.append(nextWord)
-
-                    if nextWord.i + 1 >= len(nextWord.doc):
-                        break
-
-                    nextWord = nextWord.doc[nextWord.i + 1]
-
-            # turn the chunk into a string.
-            ch = " ".join([str(w) for w in chunk])
-
-            proper_nouns.append(ch)
-
-        return proper_nouns
-
-    def _prop___extractLexical(self):
-        return nlp.extractLexical(self["spacyFullBody"], self["name"])
-
-    def _prop_whatTheyWere(self):
-        return self["__extractLexical"]["was"]
-
-    def _prop_whatTheyDid(self):
-        return self["__extractLexical"]["did"]
-
-    def _prop_nouns(self):
-        doc = self["spacyFullBody"]
-
-        nouns = []
-        for x in doc:
-            if x.pos_ == "NOUN":
-                nouns.append(str(x))
-        return nouns
-
-    def _prop_verbs(self):
-        doc = self["spacyFullBody"]
-
-        verbs = []
-        for x in doc:
-            if x.pos_ == "VERB":
-                verbs.append(str(x))
-        return verbs
-
-    def _prop_OCC(self):
-
-        full_name = self['name']
-        def check(s):
-            found = []
-
-            s = s.replace(full_name, "")
-
-            words = nlp.word_tokenize(s)
-            words = [nlp.lemmatize(x) for x in words]
-
-            sets = set()
-            sets.update( nlp.getCloseUnorderedSets(words, minTuple=1, maxTuple=1, maxBuffer=0) )
-            sets.update(nlp.getCloseUnorderedSets(words, minTuple=2, maxTuple=2, maxBuffer=1))
-            sets.update(nlp.getCloseUnorderedSets(words, minTuple=3, maxTuple=3, maxBuffer=2))
-            sets.update(nlp.getCloseUnorderedSets(words, minTuple=4, maxTuple=4, maxBuffer=2))
-
-            for fs in sets:
-                if fs in set2code:
-                    c = set2code[fs]["code"]
-
-                    found.append({
-                        "word": " ".join(fs),
-                        "occ": [c],
-                        "fs": fs
-                    })
-
-            def is_subset_anyone(x):
-                for y in found:
-                    if x['fs'] != y['fs'] and x['fs'].issubset( y['fs'] ):
-                        return True
-
-            found = [x for x in found if not is_subset_anyone(x)]
-
-            return found
-
-        found_first = check(self["firstSentence"].lower())
-        found_title = check(self["title"].lower())
-
-        # we want to keep track of "where"
-        [ x.update({"where": "firstSentence"}) for x in found_first ]
-        [ x.update({"where": "title"}) for x in found_title ]
-
-        return set( chain.from_iterable( x['occ'] for x in found_first + found_title ) )
-
-    def _OLDER_prop_OCC(self):
-
-        def check(s):
-            found = []
-
-            words = nlp.word_tokenize( s.lower() )
-            words += ["-"] + nlp.word_tokenize( s.lower() )
-
-            # This algorithm proceeds from largest to smallest tuples, making sure not to count any codes inside codes
-
-            max_tuples = 4
-            current_tuples = max_tuples
-
-            process_now = nlp.getTuples( words, minTuple=4, maxTuple=4 )
-
-            while current_tuples > 0:
-                # print(process_now, current_tuples)
-
-                dont_process_next = set()
-
-                for tup in process_now:
-                    tocheck = " ".join(tup)
-                    if tocheck in term2code:
-                        c = term2code[tocheck]["code"]
-                        found.append({
-                            "word": tocheck,
-                            "occ": [c]
-                        })
-
-                        dont_process_next.update( nlp.getTuples(
-                            list(tup),
-                            minTuple=current_tuples-1,
-                            maxTuple=current_tuples-1
-                        ) )
-
-                # print(dont_process_next)
-
-                process_now = set(nlp.getTuples(
-                    words,
-                    minTuple=current_tuples-1,
-                    maxTuple=current_tuples-1
-                ))
-                process_now = process_now.difference(dont_process_next)
-
-                current_tuples -= 1
-
-            return found
-
-        found_first = check(self["firstSentence"])
-        found_title = check(self["title"])
-
-        # we want to keep track of "where"
-        [ x.update({"where": "firstSentence"}) for x in found_first ]
-        [ x.update({"where": "title"}) for x in found_title ]
-
-        return found_first + found_title
-
-    def _WAIT_prop_OCC_syntax(self):
-        coding = self.myCoder
-        assert isinstance(coding, Coder)
-
-        self.isCoded = True
-        self.myCoder = coding
-
-        if len(self['spacyFirstSentence']) == 0:
-            if self.myCoder.debug:
-                g.p("Skipping. No content after trim.")
-            coding.stateCounter.update(["zeroLengthSkip"])
-            return
-
-        if self.myCoder.debug:
-            g.p.depth = 0
-            g.p()
-            g.p(self['spacyFirstSentence'])
-
-            g.p.depth += 1
-
-        lookhimup = set()
-
-        if len(self["name"]) > 0:
-            words = wiki.lookupOccupationalTitles(self["name"])
-            for x in words:
-                lookhimup.update(coding.getOccCodes(x))
-
-            if len(lookhimup) > 0:
-                if self.myCoder.debug:
-                    g.p("WikiData returns %s which gives OCC %s" % (words, lookhimup))
-
-        if self.myCoder.debug:
-            g.p("Extracted name: %s" % self["name"])
-
-        # extract information from the title
-        dieWords = ['dies', 'die', 'dead']
-        t = self['title']
-        ts = [x.strip() for x in re.split(r'[;,]|--', t)]
-        ts = ts[1:]  # the name is always the first one
-
-        for tp in ts:
-            tpW = [x.lower() for x in nlp.word_tokenize(tp)]
-            hasDeathWord = False
-            for dW in dieWords:
-                if dW in tpW:
-                    hasDeathWord = True
-            if hasDeathWord:
-                continue
-
-            # if it's a number, continue
-            try:
-                int(tp)
-                continue
-            except:
-                pass
-
-            if self.myCoder.debug:
-                g.p("Extracted from title:", tp)
-
-        didSomething = False
-
-        guesses = []
-
-        # Alec McGail, scientist and genius, died today.
-        nameChildren = list(self["spacyName"].root.children)
-        apposHooks = list(filter(lambda x: x.dep_ == 'appos', nameChildren))
-
-        if len(apposHooks) > 0:
-            didSomething = True
-
-            # painter, scientist, and architect
-            baseNouns = nlp.followRecursive(apposHooks, 'conj')
-
-            # one of the first **novelists**
-            for i, x in enumerate(baseNouns):
-                if nlp.isPrepPhrase(x) and str(x) == 'one':
-                    baseNouns[i] = nlp.enterPrepPhrase(x)[0]
-
-            # now that the important "what they were" nouns are identified,
-            #   identify what OCC they are
-            for n in baseNouns:
-                result = coding.nounOCC(n)
-
-                coding.stateCounter.update([result['state']])
-                coding.count(space=result['state'], key=result['word'])
-
-                guesses.append(result)
-
-        self.guess = guesses
-
-        # Alec McGail, who ..., died today.
-        relcls = list(filter(lambda x: x.dep_ == 'relcl', nameChildren))
-
-        if len(relcls) > 0:
-            g.p.depth += 1
-
-        for relcl in relcls:
-            # need to follow advcl and conj
-            goDeep = nlp.followRecursive(relcl, ['advcl', 'conj'])
-            be = ['was', 'became']
-            for v in goDeep:
-                # as _
-                followPreps = nlp.followRecursive(v, ['relcl', 'prep', 'pobj'])
-                asWhat = [x for x in followPreps if next(x.ancestors).text == 'as' and x.pos_ == 'pobj']
-
-                if self.myCoder.debug and len(asWhat):
-                    g.p('whoAs', asWhat)
-
-                if len(asWhat):
-                    didSomething = True
-
-                # who was a scientist and inventor
-                if v.pos_ == 'VERB':
-                    if v.text in be:
-                        for vc in v.children:
-                            if vc.dep_ != 'attr':
-                                continue
-
-                            if self.myCoder.debug:
-                                g.p('Expanded be verb', vc, vc.dep_)
-
-                            # guesses.append(result)
-                            didSomething = True
-
-        finalGuess = []
-        for guess in guesses:
-            if len(guess['occ']) != 1:
-                continue
-            finalGuess.append(guess['occ'][0])
-
-        if self.myCoder.debug:
-            g.p("finalGuess", finalGuess)
-
-        if False:
-            moreGuesses = []
-            # more stupid guesses...
-            # literally expand every noun
-
-            for w in self['spacyFirstSentence']:
-                if w.pos_ != 'NOUN':
-                    continue
-                guess = coding.nounOCC(w)
-                moreGuesses.append(guess)
-
-            stupidFinalGuess = []
-            for guess in moreGuesses:
-                stupidFinalGuess += guess['occ']
-
-            if self.myCoder.debug:
-                g.p("stupidFinalGuess", stupidFinalGuess)
-
-                if set(stupidFinalGuess) != set(finalGuess):
-                    g.p("And they're different!", extrad=1)
-
-        if not didSomething:
-            if len(lookhimup) > 0:
-                coding.stateCounter.update(["justWikidata"])
-            else:
-                if self.myCoder.debug:
-                    g.p("Skipping. Strange grammatical construction.")
-                coding.stateCounter.update(["strangeGrammar"])
-
-    def _WAIT_prop_OCC_weighted(self):
-        fS = self["firstSentence"]
-        name = self["name"]
-
-        allCodes = []
-
-        wasDidC = []
-        wasDidC += nlp.bagOfWordsSearch(self["whatTheyDid"], term2code)
-        wasDidC += nlp.bagOfWordsSearch(self["whatTheyWere"], term2code)
-
-        for x in wasDidC:
-            allCodes.append({
-                "where": "wasDid",
-                "word": x['term'],
-                "occ": x['code']
-            })
-
-        def justCodes(l):
-            return [x['code'] for x in l]
-
-        wasDidC = Counter(justCodes(wasDidC))
-        fsC = Counter(justCodes(nlp.tupleBaggerAndSearch(fS, term2code)))
-        f500C = Counter(justCodes(nlp.tupleBaggerAndSearch(self['_first500'], term2code)))
-        bodyC = Counter(justCodes(nlp.tupleBaggerAndSearch(self['_fullBody'], term2code)))
-
-        weightedC = {}
-        w = {}
-        w['did'] = 5
-        w['fS'] = min(1, 6 * 10. / len(fS)) if len(fS) > 0 else 1
-        w['f500'] = 0.5 * 6 * 10. / 500
-        w['body'] = min(0.1, 0.1 * 6 * 10. / len(self['_fullBody'])) if len(self['fullBody']) > 0 else 1
-
-        # print w
-        for x in set(fsC.keys() + f500C.keys() + bodyC.keys()):
-            weightedC[x] = wasDidC[x] * w['did'] + fsC[x] * w['fS'] + f500C[x] * w['f500'] + bodyC[x] * w['body']
-
-        # this is the confidence of our favorite...
-        confidence = max(weightedC.values()) if len(weightedC) > 0 else -1
-
-        # order list by the confidences...
-        rankedC = sorted(weightedC.items(), key=lambda x: -x[1])
-
-        # and take the top 3
-        topC = rankedC[:3]
-        topC = [list(x) for x in topC]
-
-        # then idk do something...
-
-    def _prop_gender(self):
-        male = nlp.inquirer_lexicon.countWords("MALE", self['fullBody'])
-        female = nlp.inquirer_lexicon.countWords("Female", self['fullBody'])
-
-        # if the results are unconclusive from this simple check:
-        if male + female < 4 or abs(male - female) / (male + female) < 0.25:
-            guess = nlp.gender_detector.get_gender(self["first_name"])
-            if guess in ["male","female"]:
-                return guess
-
-            # if this even didn't work!
-            return "unknown"
-
-        if male > female:
-            return "male"
-        return "female"
-
-    def _prop_name(self):
-        return str(self['spacyName']).strip()
-
-    def _prop_first_name(self):
-        return nlp.first_name(self["name"])
-
-    def _prop_last_name(self):
-        return nlp.last_name(self["name"])
-
-    def _prop_spacyFullBody(self):
-        return nlp.spacy_parse(self['fullBody'])
-
-    def _prop_firstSentence(self):
-        return extractFirstSentence(self['fullBody']).strip()
-
-    def _prop_spacyFirstSentence(self):
-        return nlp.spacy_parse(self["firstSentence"])
-
-    def _prop_age(self):
-        g.p.pdepth = 0
-
-        lastName = self["name"].split()[-1]
-
-        rgxs = [
-            r"(?:Mr\.?|Mrs\.?)\s*%s\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?" % re.escape(lastName),
-            r"(?:She|He)\s*was\s*([0-9]{1,3})(?:\s*years\s*old)?",
-            r"died.*at\s+the\s+age\s+of\s+([0-9]{1,3})",
-            r"was\s*([0-9]{1,3})\s*years\s*old",
-            r"was\s*([0-9]{1,3})",
-            r"([0-9]{1,3})\s*years\s*old",
-            r"was\s*believed\s*to\s*be([^,\.]*)",
-            r"was\s*in\s*(?:his|her)\s*([^,\.]*)",
-            r"([0-9]{1,3})",
-        ]
-
-        sents = list(self['spacyFullBody'].sents)
-
-        foundReasonableAge = False
-        # look for these sentences, in order
-        for rgx in rgxs:
-            for s in sents:
-                fAge = re.findall(rgx, s.text)
-                if len(fAge) == 0:
-                    continue
-
-                for sAge in fAge:
-                    try:
-                        age = int(sAge)
-                        if age > 120 or age < 5:
-                            continue
-
-                        foundReasonableAge = True
-                        break
-                    except ValueError:
-                        continue
-
-                if foundReasonableAge:
-                    break
-
-            if foundReasonableAge:
-                break
-
-        if foundReasonableAge:
-            return age
 
     # _----------------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------------
@@ -802,6 +222,10 @@ class Doc:
 
         self._clear_spacy_props()
 
+
+from pymongo import MongoClient
+attributeDb = MongoClient()['nytimes_obituaries']['coded_attributes']
+
 class Coder:
 
     def __init__(self, debug=False, mode="firstSentence"):
@@ -813,15 +237,101 @@ class Coder:
         self.stateCounter = Counter()
         self.specificCounters = {}
 
-        # Generate the W2C dictionary, used for all coding
-        self.generateW2C()
+        self.attributeCoders = None
+        self.loadAttributes()
 
-    def generateW2C(self):
-        self.w2c = {}
-        for code in codes:
-            self.w2c[ code['term'] ] = code['code']
+    def loadAttributes(self):
+        from os import listdir
+        from importlib import import_module
+        import inspect
+
+        attributesDir = "attributes"
+
+        for fn in listdir(attributesDir):
+            name = ".".join(fn.split(".")[:-1])
+            module = import_module("attributes.%s" % name)
+
+            classesWithin = inspect.getmembers(module, inspect.isclass)
+            for cname, c in classesWithin:
+                self.attributeCoders[cname] = c
+
+    def codeAllIntoMongo(self):
+
+        # code all the obits
+        for obit in self.obituaries:
+            assert (isinstance(obit, Obituary))
+
+            for cname, c in self.attributeCoders.items():
+
+                # skip silly shit
+                if not isinstance(c, g.PropertyCoder):
+                    continue
+
+                # recode it
+                del obit[cname]
+                coding_result = obit[cname]
+
+        self.dumpCodesMongo()
+
+    def dumpCodesMongo(self):
+        from datetime import datetime
+
+        attributeDb.drop()
+
+        codingTime = datetime.now()
+
+        bulkop = attributeDb.initialize_ordered_bulk_op()
+        for obit in self.obituaries:
+            assert(isinstance(obit, Obituary))
+
+            for cname, c in self.attributeCoders.items():
+
+                # skip silly shit
+                if not isinstance(c, g.PropertyCoder):
+                    continue
+
+                # note that I'm just using whatever's here --
+                # this could well be stale if one isn't careful
+                coding_result = obit[cname]
+
+                retval = bulkop.insert({
+                    "key": cname,
+                    "value": coding_result,
+                    "obit": obit['id'],
+                    "whenCoded": codingTime
+                })
+
+        retval = bulkop.execute()
+
+    def loadFromMongoAttributes(self, attrs_all_obits):
+        """
+        Loads data from a Mongo query returning objects of form
+            {
+                "key": _,
+                "value": _,
+                "obit": _,
+                "whenCoded": _
+            }
+        :param attrs_all_obits:
+        :return:
+        """
+
+        for obit_id, attrs_this_obit in groupby(attrs_all_obits, lambda attr_info: attr_info["obit"]):
+            attrs = {}
+            for key, codings in groupby(attrs_this_obit, lambda x: x["key"]):
+                most_recent_coding = min( codings, key=lambda x: x['whenCoded'] )
+                attrs[ key ] = most_recent_coding['val']
+
+            new_obituary = Obituary( attrs )
+            self.obituaries.append(new_obituary)
+
 
     def loadPreviouslyCoded(self, loadDirName, N=None, rand=True):
+        # depreciated
+        import warnings
+        warnings.warn("deprecated", DeprecationWarning)
+
+
         from random import shuffle, seed
         from time import time
 
@@ -844,13 +354,14 @@ class Coder:
             shuffle(toLoad)
         toLoad = toLoad[:N]
 
+        # actually loads the thing from DB or File or WE
         #self.obituaries = []
         new_obituaries = []
         for fn in toLoad:
             relfn = path.join(loadDir, fn)
-            d = Doc({"relfn": relfn})
+            d = Obituary({"relfn": relfn})
             with open(relfn, 'rb') as thisF:
-                d.load(thisF.read())
+                d.from_pickle(thisF.read())
 
             new_obituaries.append(d)
 
@@ -879,19 +390,19 @@ class Coder:
         os.mkdir(dumpDir)
 
         for d in self.obituaries:
-            assert(isinstance(d, Doc))
+            assert(isinstance(d, Obituary))
 
             outfn = path.join(dumpDir, "%s.pickle" % d['id'])
 
             with open( outfn, 'wb' ) as outf:
-                outf.write( d.dump() )
+                outf.write(d.to_pickle())
 
     def loadDocs(self, N=None, start=0, rand=True):
         with open(inFn) as inF:
             rows = DictReader(inF)
             rows = g.select(rows, N=N, start=start, rand=rand)
 
-        self.obituaries = [Doc(dict(x)) for x in rows]
+        self.obituaries = [Obituary(dict(x)) for x in rows]
 
     def findObitsByInfo(self, **kwargs):
         found = []
@@ -1528,3 +1039,6 @@ def _codeToName():
     return c2n
 
 codeToName = _codeToName()
+
+def nice_occ(nasty_occ):
+    return set(chain.from_iterable( x['occ'] for x in nasty_occ ))

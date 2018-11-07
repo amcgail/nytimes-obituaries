@@ -18,10 +18,12 @@ worksheet = workbook.sheet_by_index(0)
 import occ
 coder = occ.Coder()
 
+# ------------ LOAD DOCS -------------------
 print("Loading documents")
 
 coder.loadPreviouslyCoded("v2.1")
 
+# ------------ PARSE THE SHIT --------------
 print("Generating the last name dictionary")
 
 lastNameToObits = defaultdict(list)
@@ -36,36 +38,39 @@ for i in range(497):
     name_str = worksheet.cell(i, 3).value
     ceo_name = HumanName( name_str )
 
+
     candidates = lastNameToObits[ ceo_name.last ]
-    strong_candidates = list(filter( lambda x: x['hn'].first == ceo_name.first, candidates ))
 
-    if not len(strong_candidates):
-        continue
+    def isMatch(obit):
+        a = obit['hn']
+        b = ceo_name
 
-    # strongest candidates shouldn't disagree on anything!
-    def super_strong_name_match(a, b):
-        a, b = a.as_dict(), b.as_dict()
-        ks = set(list(a.keys()) + list(b.keys()))
+        # first names have to equal exactly
+        if a.first != b.first:
+            return False
 
-        for k in ks:
-            if k not in a or k not in b:
-                continue
+        # last names have to equal exactly
+        if a.last != b.last:
+            return False
 
-            if a[k] != '' and b[k] != '':
-                if k == 'middle':
-                    if len(a[k]) < 3 or len(b[k]) < 3:
-                        if a[k][0] == b[k][0]:
-                            continue
+        # middle names are more complicated
+        am = a.middle
+        bm = b.middle
+        if len(am) and len(bm):
 
-                if a[k] != b[k]:
+            if len(am) <= 2 or len(bm) <=2:
+                # am or bm are initials
+                if am[0] != bm[0]:
+                    # initial and name/initial don't match
+                    return False
+            else:
+                # both am and bm aren't middle initials
+                if am != bm:
                     return False
 
         return True
 
-    strongest_candidates = list(filter( lambda x: super_strong_name_match(x['hn'], ceo_name), candidates))
-
-    if not len(strongest_candidates):
-        continue
+    strong_candidates = list(filter(isMatch, candidates))
 
     for c in strong_candidates:
         rows.append({

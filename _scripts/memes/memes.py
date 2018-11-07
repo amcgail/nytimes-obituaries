@@ -9,35 +9,6 @@ from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
-"""
-Need to think of a more efficient way to do this.
-We're looking for trends in counts of these substrings over time.
-
-ALSO we're only interested in how many obits these show up in.
-
-0.
-GENERATE PLACEHOLDERS
-    a. whenever he/she/name shows up, where it refers to the name of the person, replace it with <dead_person>
-    b. dates with <date>
-    c. companies with <company>
-    d. names with <name>
-    e. cities
-    f. hospitals
-    g. 
-
-1.
-DON'T RECORD SO MANY!
-We can start by narrowing down the substrings to look at.
-We want those which are not too uncommon.
-That is, they must occur at least enough to see a trend
-    (how much is that?)
-    we have between 1000 and 3000 obits per year.
-    a phrase is important if it occurs in at least 50 (100?) in any given year
-    
-so start by narrowing down the total counts (get rid of those which occur in less than 50 obits overall)
- 
-"""
-
 if not os.path.exists("month_counts.pickle"):
     import occ
 
@@ -55,6 +26,7 @@ if not os.path.exists("month_counts.pickle"):
     year_counter = defaultdict(Counter)
     decade_counter = defaultdict(Counter)
     total_counter = Counter()
+
 
     for x in obits:
         tup = nlp.getTuples( nlp.word_tokenize(x['fullBody']), 3, 8 )

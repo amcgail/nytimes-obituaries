@@ -5,13 +5,16 @@ Created on Fri Apr 27 12:46:36 2018
 
 @author: alec
 """
+import collections
 import re
+from operator import itemgetter
 
 import spacy
 
 from nltk.corpus import wordnet as wn
 from pptree import print_tree
 from nltk import word_tokenize, sent_tokenize
+from nameparser import HumanName as HumanNameOld
 
 import g
 from g import debug
@@ -86,8 +89,12 @@ class _inquirer_lexicon:
     def countWords(self, lexiconName, doc):
         self.load()
 
-        toMatch = set( x.upper() for x in word_tokenize(doc) )
-        return len( toMatch & self.lexicon[lexiconName] )
+        count = 0
+        for x in word_tokenize(doc):
+            if x.upper() in self.lexicon[lexiconName]:
+                count += 1
+
+        return count
 
 inquirer_lexicon = _inquirer_lexicon()
 
@@ -95,7 +102,6 @@ def first_name(name):
     name = name.lower()
     not_first_names = ["mr","dr",""]
     names = re.split(r'[\.\s]', name)
-
     inc = 0
     first = names[inc]
     while first in not_first_names:
@@ -611,3 +617,231 @@ def isTitleCase(str):
             return False
 
     return True
+
+class HumanName(HumanNameOld):
+    def __init__(self, *args, **kwargs):
+        self._gender = None
+        super(HumanName, self).__init__(*args, **kwargs)
+
+    @property
+    def gender(self):
+        # generate the property if we don't have it already
+        if self._gender is None:
+            gendr = 'unknown'
+            if self.first:
+                gendr = gender_detector.get_gender(self.first)
+            if self.title:
+                if self.title.lower() in ['princess', 'ms.', 'mrs.', 'queen']:
+                    gendr = 'female'
+                if self.title.lower() in ['mr.', 'prince', 'king']:
+                    gendr = 'male'
+
+            self._gender = gendr
+
+        return self._gender
+
+    def supercedes(self, compare):
+        import string
+
+        # if the last name is there, it must match
+        if compare.last != self.last:
+            return False
+
+        # if the first name is there, it must match
+        if compare.first:
+            # handling initials
+            if self.is_an_initial(compare.first) or self.is_an_initial(self.first):
+                if self.first[0].lower() != compare.first[0].lower():
+                    return False
+            else:
+                if self.first != compare.first:
+                    return False
+
+        if compare.middle and self.middle:
+            # handling initials
+            if self.is_an_initial(compare.middle) or self.is_an_initial(self.middle):
+                if self.middle[0].lower() != compare.middle[0].lower():
+                    return False
+            else:
+                if self.middle != compare.middle:
+                    return False
+
+        # make sure the genders match --
+        if not compare.first and compare.title:
+            # Mr. Mrs.
+            m = ["Mr."]
+            f = ["Mrs.", "Ms."]
+
+            if compare.title in m and self.gender == 'female':
+                print("Skipping", compare)
+                return False
+            elif compare.title in f and self.gender == 'male':
+                print("Skipping", compare)
+                return False
+
+        return True
+
+
+def isFullName(string):
+    blacklist = ["university", "universities", "college", "city", "center", "medical", "county", "school", 'hospital']
+    l = string.lower()
+    for b in blacklist:
+        if b in l:
+            return False
+
+    if len(string.split()) < 2:
+        return False
+    if not isTitleCase(string):
+        return False
+
+    n = HumanName(string)
+    if not n.first:
+        return False
+
+    if gender_detector.get_gender(n.first) == 'unknown':
+        # if there's a first name, it should be gendered
+        return False
+
+    return True
+
+
+def replace_many_ranges_at_once( str, ranges, withWhat ):
+    # need to sort the ranges for this to work
+    # this should sort by the first element of each range, which is what we want
+
+    if type(withWhat) != list:
+        return replace_many_ranges_at_once(str, ranges, [withWhat]*len(ranges))
+
+    sorting_enumeration = sorted( enumerate(ranges), key=itemgetter(1) )
+    indices = list(map(itemgetter(0), sorting_enumeration))
+    ranges = list(map(itemgetter(1), sorting_enumeration))
+
+    withWhat = list(map(lambda i: withWhat[i], indices))
+
+    parts = []
+    current_i = 0
+    for range_i, range in enumerate(ranges):
+        # cut to the start of the range
+        parts.append(str[ current_i : range[0] ])
+        # add the what
+        parts.append(withWhat[range_i])
+        # update current_i
+        current_i = range[1]+1
+
+    parts.append(str[current_i:])
+
+    return "".join(parts)
+
+def tokenize_list_as(full_body, to_replace, withWhat):
+    for rep in to_replace:
+        full_body = re.sub(
+            "([^a-zA-Z])%s([^a-zA-Z])" % re.escape(rep), # need to find non-word chars around it
+            r'\1%s\2'%withWhat, # need to preserve the whitespace
+            full_body
+        )
+
+    return full_body
+
+def tokenize_ents_spacy(full_body, ent_types):
+    # must be from this collection!
+    assert not len(set(ent_types) - {"GPE","PERSON","DATE","NORP","PRODUCT","ORG"})
+
+    fb_spacy = spacy_parse(full_body)
+
+    replacement_info = [ (x.start_char, x.end_char-1, x.label_) for x in fb_spacy.ents if x.label_ in ent_types ]
+    ranges = list(map( itemgetter(0, 1), replacement_info ))
+    withWhat = list(map(itemgetter(2), replacement_info))
+    withWhat = list(map(lambda x: "<sp:%s>"%x, withWhat))
+
+    return replace_many_ranges_at_once(full_body, ranges=ranges, withWhat=withWhat)
+
+def tokenize_name(full_body, name):
+    debug_level = 0
+
+    mpp = ["he", "his", "him", "himself"]
+    fpp = ["she", "her", "hers", "herself"]
+
+    fb_spacy = spacy_parse(full_body)
+    name_to_replace = HumanName(name)
+
+    to_replace = []
+
+    if debug_level:
+        print("------------------------")
+        print(name, name_to_replace.gender)
+        print(full_body)
+
+    # look for any time they actually say the guy's name, but maybe in another way
+    # Mr. Marcelloni was great man...
+    for noun_chunk in fb_spacy.noun_chunks:
+        maybename_str = str(noun_chunk)
+        compare = HumanName(maybename_str)
+
+        if not name_to_replace.supercedes( compare ):
+            continue
+
+        to_replace.append(noun_chunk)
+
+    # now we're interested in
+    personal_pronouns = filter(lambda x: x.tag_ in ['PRP','PRP$'], fb_spacy)
+    mypp = mpp * (name_to_replace.gender == 'male') + fpp * (name_to_replace.gender == 'female') + (mpp+fpp) * (name_to_replace.gender not in ['female','male'])
+    personal_pronouns = filter(lambda x: str(x).lower() in mypp, personal_pronouns)
+
+    name_mentions = list(filter(lambda x: isFullName(str(x)), fb_spacy.noun_chunks))
+
+    # because pp are always gendered, I can filter those names whose gender doesn't match
+    def exclude_by_gender( ogender, name_str ):
+        #print("exclusion script", ogender, name_str)
+        name = HumanName(name_str)
+        if name.first:
+            fnameGender = gender_detector.get_gender(name.first)
+            if ogender == 'male' and fnameGender =='female':
+                return False
+            if ogender == 'female' and fnameGender =='male':
+                return False
+
+        if name.title:
+            if ogender == 'male' and name.title.lower() in ['ms.','mrs.']:
+                return False
+            if ogender == 'female' and name.title.lower() in ['mr.']:
+                return False
+
+        return True
+
+    print(name_mentions)
+    name_mentions = list(filter(lambda x: exclude_by_gender(ogender=name_to_replace.gender, name_str=str(x)), name_mentions))
+    print(name_mentions)
+
+    if debug_level > 1:
+        print("NAMES:", name_mentions)
+
+    for pp in personal_pronouns:
+
+        # idk any other way to do this. create a span and then get start_char
+        ppspan = pp.doc[pp.i:pp.i+1]
+        ppstart = ppspan.start_char
+
+        name_mentions_before_me = filter(lambda x: x.start_char < ppstart, name_mentions)
+        try:
+            last_name_mention = max(name_mentions_before_me, key=lambda x: x.start_char)
+        except ValueError:
+            # there were none before me...
+            continue
+
+        # make sure his name was the last one spoken
+        if not name_to_replace.supercedes( HumanName(str(last_name_mention)) ):
+            continue
+
+        if debug_level > 1:
+            print(pp, last_name_mention)
+            print(ppspan.sent, last_name_mention.sent)
+
+        to_replace.append(ppspan)
+
+    if debug_level > 0:
+        print(to_replace)
+
+    ranges = [ (x.start_char, x.end_char-1) for x in to_replace ]
+    tokenized = replace_many_ranges_at_once(full_body, ranges, "<obiturized>")
+
+    return tokenized

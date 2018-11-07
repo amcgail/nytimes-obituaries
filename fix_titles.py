@@ -11,7 +11,7 @@ with open(inFn) as inF:
     allEntries = list(dr)
 
 for i, e in enumerate(allEntries):
-    doc = occ.Doc(e)
+    doc = occ.Obituary(e)
     if i % 100 == 0:
         print( "%s / %s" % (i, len(allEntries) ) )
     e['name'] = str(doc.nameS)

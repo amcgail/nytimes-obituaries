@@ -83,7 +83,7 @@ def getRandom(num):
     ret = []
 
     for d in docs:
-        assert(isinstance(d, occ.Doc))
+        assert(isinstance(d, occ.Obituary))
         if d['fName'] not in fidToCode:
             continue
 

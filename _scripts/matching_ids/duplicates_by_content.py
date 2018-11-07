@@ -16,7 +16,7 @@ if False:
 
         for doc in v[1:]:
             print("destroying '%s'" % doc['id'])
-            doc.destroy()
+            doc.destroy_in_memory()
 
 # ANOTHER WAY :(
 todelete = []
@@ -39,5 +39,5 @@ for i,doc in enumerate(coder.obituaries):
             print("---" + d['title'])
 
 for x in todelete:
-    assert(isinstance(x, occ.Doc))
-    x.destroy()
+    assert(isinstance(x, occ.Obituary))
+    x.destroy_in_memory()
