@@ -1,13 +1,12 @@
-from g import PropertyCoder, PropertyHelper
+from g import PropertyCoder, PropertyHelper, OldPropertyCoder
 
-class lexicalAttributes(PropertyCoder):
-
+class lexicalAttributes(OldPropertyCoder):
 
     def run(self):
         import nlp
         return nlp.extractLexical(self.ofWhat["spacyFullBody"], self.ofWhat["name"])
 
-class _OLDEROCC(PropertyCoder):
+class _OLDEROCC(OldPropertyCoder):
 
 
     def run(self):
@@ -69,7 +68,7 @@ class _OLDEROCC(PropertyCoder):
         return found_first + found_title
 
 
-class OCC_syntax(PropertyCoder):
+class OCC_syntax(OldPropertyCoder):
 
     def run(self):
         import g
@@ -232,7 +231,7 @@ class OCC_syntax(PropertyCoder):
 
 
 
-class _WAITOCC_weighted(PropertyCoder):
+class _WAITOCC_weighted(OldPropertyCoder):
 
 
     def run(self):

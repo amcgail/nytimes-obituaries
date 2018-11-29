@@ -705,6 +705,35 @@ def isFullName(string):
     return True
 
 
+def isPossibleFullName(string):
+    blacklist = ["university", "universities", "college", "city", "center", "medical", "county", "school", 'hospital']
+    l = string.lower().split()
+
+    if len(l) < 2:
+        return False
+    for b in blacklist:
+        if b in l:
+            return False
+
+    if not isTitleCase(string):
+        return False
+
+    n = HumanName(string)
+    if not n.first:
+        return False
+
+    if len(n.last) < 2:
+        return False
+
+    # must be ASCII
+    if not all( (65 <= ord(x) <= 122) for x in n.first+n.last ):
+        return False
+
+    return True
+
+
+
+
 def replace_many_ranges_at_once( str, ranges, withWhat ):
     # need to sort the ranges for this to work
     # this should sort by the first element of each range, which is what we want
@@ -845,3 +874,49 @@ def tokenize_name(full_body, name):
     tokenized = replace_many_ranges_at_once(full_body, ranges, "<obiturized>")
 
     return tokenized
+
+
+def extractFirstSentence(body):
+    sentences = nlp.sent_tokenize(body)
+
+    if len(sentences) < 2:
+        # print("skipping(tooFewSentences)")
+        return ""
+
+    fS = sentences[0].strip()
+    fS = " ".join( fS.split() )
+
+    # FAIRFAX, Va. <start>
+    # HOPKINSVILLE, Ky. <start>
+    # PORTLAND, Ore. <start>
+
+    reStartStrip = [
+        "[A-Z\s\.]+,.{1,30}[0-9]+\s*", # city and date
+        ".*\(AP\)\s*-*\s*", # AP tag
+        #".*-{2,}\s*", # Blah Blah Blah -- Start of thing is here
+        "[A-Z]{3,},?\s+[A-Za-z]+\s*(\(.*\))?\s*(--)?\s*", # e.g. MONTEVIDEO, Uruguay (with optional parens :() --
+        "([A-Z]{2,}[:\.,]?\s*)+[^a-zA-Z]*", #just all caps, probably bad --, but ignore the first real letter :)
+    ]
+
+    for patt in reStartStrip:
+        findTag = re.match(patt, fS)
+        if findTag:
+            fS = fS[findTag.end():]
+
+    if "," not in fS:
+        fS += " " + " ".join( sentences[1].strip().split() )
+
+    fS = fS.replace("Late Edition - Final\n", "")
+    fS = fS.replace("Correction Appended\n", "")
+    fS = fS.replace("The New York Times on the Web\n", "")
+    fS = fS.replace("National Edition\n", "")
+
+    # for those "LONDON --"s
+    fS = re.sub(r'^[A-Z\s\(\)]*(--)\s+', '', fS)
+
+    # OMG
+    # this simply gets rid of a date at the beginning of the line.
+    monthDateRe = r"^(\b\d{1,2}\D{0,3})?\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|(Nov|Dec)(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2})\.?\s*"
+    fS = re.sub(monthDateRe, '', fS)
+
+    return fS

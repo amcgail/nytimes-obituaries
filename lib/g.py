@@ -196,3 +196,7 @@ class PropertyCoder(SingleAttributeCoder):
 class PropertyHelper(SingleAttributeCoder):
     def __init__(self, ofWhat):
         super().__init__(ofWhat)
+
+class OldPropertyCoder(SingleAttributeCoder):
+    def __init__(self, ofWhat):
+        super().__init__(ofWhat)

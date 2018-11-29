@@ -1,25 +1,19 @@
-from g import PropertyCoder, PropertyHelper
-
-# the following two are no longer used
-class title(PropertyCoder):
+import g
 
 
-    def run(self):
-        t = self.ofWhat['_title']
-        t = t.split("\n")[-1].strip()  # gets rid of those gnarly prefixes
-        return t
+"""
+# this is parsed by previous shit
 
-
-class date(PropertyCoder):
+class date(g.PropertyCoder):
 
 
     def run(self):
         import datetime
         return datetime.datetime.strptime(self.ofWhat['_date'], "%B %d, %Y")
+"""
 
 
-
-class spacyName(PropertyHelper):
+class spacyName(g.PropertyHelper):
 
     def run(self):
         import nlp
@@ -104,7 +98,11 @@ class spacyName(PropertyHelper):
                 for pat in pats:
                     tname = re.split(pat, tname, flags=re.IGNORECASE)[0]
 
-class kinship(PropertyCoder):
+class kinship(g.PropertyCoder):
+    """
+    Just some test documentation.
+    This should describe what this property coder does...
+    """
 
     def run(self):
         import nlp
@@ -155,10 +153,10 @@ class kinship(PropertyCoder):
             my_props.add("name_match")
             break
 
-        return my_props
+        return list(my_props)
 
 
-class proper_nouns(PropertyCoder):
+class proper_nouns(g.PropertyCoder):
 
 
     def run(self):
@@ -204,21 +202,21 @@ class proper_nouns(PropertyCoder):
 
 
 
-class whatTheyWere(PropertyCoder):
+class whatTheyWere(g.PropertyCoder):
 
 
     def run(self):
-        return self.ofWhat["__extractLexical"]["was"]
+        return self.ofWhat["lexicalAttributes"]["was"]
 
 
-class whatTheyDid(PropertyCoder):
+class whatTheyDid(g.PropertyCoder):
 
 
     def run(self):
-        return self.ofWhat["__extractLexical"]["did"]
+        return self.ofWhat["lexicalAttributes"]["did"]
 
 
-class nouns(PropertyCoder):
+class nouns(g.PropertyCoder):
 
 
     def run(self):
@@ -231,7 +229,7 @@ class nouns(PropertyCoder):
         return ret
 
 
-class verbs(PropertyCoder):
+class verbs(g.PropertyCoder):
 
 
     def run(self):
@@ -244,7 +242,7 @@ class verbs(PropertyCoder):
         return ret
 
 
-class OCC(PropertyCoder):
+class OCC(g.PropertyCoder):
 
 
     def run(self):
@@ -295,12 +293,12 @@ class OCC(PropertyCoder):
         [x.update({"where": "firstSentence"}) for x in found_first]
         [x.update({"where": "title"}) for x in found_title]
 
-        return set(chain.from_iterable(x['occ'] for x in found_first + found_title))
+        return list(set(chain.from_iterable(x['occ'] for x in found_first + found_title)))
 
 
 
 
-class gender(PropertyCoder):
+class gender(g.PropertyCoder):
 
 
     def run(self):
@@ -325,14 +323,14 @@ class gender(PropertyCoder):
         return "female"
 
 
-class name(PropertyCoder):
+class name(g.PropertyCoder):
 
 
     def run(self):
         return str(self.ofWhat['spacyName']).strip()
 
 
-class human_name(PropertyCoder):
+class human_name(g.PropertyHelper):
 
 
     def run(self):
@@ -340,14 +338,14 @@ class human_name(PropertyCoder):
         return nlp.HumanName(self.ofWhat["name"])
 
 
-class first_name(PropertyCoder):
+class first_name(g.PropertyCoder):
 
 
     def run(self):
         return self.ofWhat['human_name'].first
 
 
-class last_name(PropertyCoder):
+class last_name(g.PropertyCoder):
 
 
     def run(self):
@@ -355,7 +353,7 @@ class last_name(PropertyCoder):
 
 
 
-class spacyFullBody(PropertyCoder):
+class spacyFullBody(g.PropertyHelper):
 
 
     def run(self):
@@ -363,15 +361,15 @@ class spacyFullBody(PropertyCoder):
         return nlp.spacy_parse(self.ofWhat['fullBody'])
 
 
-class firstSentence(PropertyCoder):
+class firstSentence(g.PropertyCoder):
 
 
     def run(self):
-        from occ import extractFirstSentence
+        from nlp import extractFirstSentence
         return extractFirstSentence(self.ofWhat['fullBody']).strip()
 
 
-class spacyFirstSentence(PropertyHelper):
+class spacyFirstSentence(g.PropertyHelper):
 
 
     def run(self):
@@ -379,7 +377,7 @@ class spacyFirstSentence(PropertyHelper):
         return nlp.spacy_parse(self.ofWhat["firstSentence"])
 
 
-class age(PropertyCoder):
+class age(g.PropertyCoder):
 
 
     def run(self):

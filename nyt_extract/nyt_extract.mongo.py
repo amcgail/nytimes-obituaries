@@ -285,12 +285,3 @@ for i, d in enumerate(docs):
     doc._prop_cache = docinfo
 
     coder.obituaries.append(doc)
-
-coder.dumpCodesMongo([
-    "fullBody",
-    "originalFile",
-    "id",
-    "_title",
-    "_d_id",
-    "date"
-])

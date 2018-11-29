@@ -19,7 +19,7 @@ import xlrd
 
 import g
 import nlp
-import wiki
+import env
 
 
 csv.field_size_limit(500 * 1024 * 1024)
@@ -34,11 +34,6 @@ def _problematic_for_pickling(val):
         return True
     if isinstance(val, nlp.spacy.tokens.doc.Doc):
         return True
-
-def nocache(f):
-    f.to_cache = False
-    return f
-
 
 class Obituary:
     def __init__(self, init_info={}):
@@ -69,9 +64,13 @@ class Obituary:
 
         return pickle.dumps(d)
 
-    def from_pickle(self, d):
+    def from_pickle(self, d, attrs=None):
         import pickle
         d = pickle.loads(d)
+
+        # filter the dictionary, if that's what you ask for
+        if attrs is not None:
+            d = dict( (k,v) for (k,v) in d.items() if k in attrs )
 
         self._prop_cache.update(d)
 
@@ -106,11 +105,13 @@ class Obituary:
         we need to calculate it when it wasn't loaded
         """
 
-
-        assert(isinstance(self.myCoder, Coder))
+        #assert(isinstance(self.myCoder, Coder))
 
         # these have already been automatically extracted by the coder from the attributes folder
-        prop = self.myCoder.attributeCoders[item]( self )
+        if item not in attributeCoders:
+            raise Exception("%s not loaded and we don't know how to create it" % item)
+
+        prop = attributeCoders[item]( self )
         assert(isinstance(prop, g.SingleAttributeCoder))
 
         val = prop.run()
@@ -142,29 +143,6 @@ class Obituary:
 
         for k in todel:
             del self._prop_cache[k]
-
-    def _get_all_prop_methods(self):
-        """
-        Returns every property method that exists. Everything that can be coded.
-        Meta-method which runs through the attributes of this class.
-        :return:
-        """
-
-        import inspect
-        all_methods = inspect.getmembers(self, predicate=inspect.ismethod)
-        all_method_names = [ x[0] for x in all_methods ]
-        prop_methods = filter(lambda x: x[:len("_prop")] == "_prop", all_method_names)
-
-        return list(prop_methods)
-
-    def _get_all_props(self):
-        """
-        Returns every property name that exists. Everything that can be coded.
-
-        :return:
-        """
-
-        return [x[len("_prop_"):] for x in self._get_all_prop_methods()]
 
     # _----------------------------------------------------------------------------------------------------------------
     # _----------------------------------------------------------------------------------------------------------------
@@ -202,14 +180,11 @@ class Obituary:
         return html
 
     # bag of words approach
-    def code(self, coding, toRecode=None):
-        assert isinstance(coding, Coder)
-
+    def code(self, toRecode=None):
         if toRecode is None:
             toRecode = self._get_all_props()
 
         self.isCoded = True
-        self.myCoder = coding
 
         # we go through and rerun anything in toRecode
         for x in toRecode:
@@ -223,11 +198,97 @@ class Obituary:
         self._clear_spacy_props()
 
 
-from pymongo import MongoClient
-attributeDb = MongoClient()['nytimes_obituaries']['coded_attributes']
+
+def codeAll(loadDirName, toRecode=None, debug=False, N=None):
+    # depreciated
+    import warnings
+    warnings.warn("deprecated", DeprecationWarning)
+
+    from time import time
+
+    import os
+    from os import path
+    from datetime import timedelta
+
+    loadDir = path.join(env.codeDumpDir, loadDirName)
+
+    if not os.path.isdir(loadDir):
+        print("Load directory '%s' not found. Please select from the following:" % loadDirName)
+        print(",".join(os.listdir(env.codeDumpDir)))
+        return
+
+    toLoad = os.listdir(loadDir)
+    if N is not None:
+        toLoad = toLoad[:N]
+
+
+    lastPrintTime = time()
+    startTime = time()
+    ndocs = len(toLoad)
+
+    # actually loads the thing from DB or File or WE
+    for index, fn in enumerate(toLoad):
+
+        # every now and then, let us know how it's going!
+        if time() - lastPrintTime > 5:
+            secondsLeft = int( ( float(ndocs) - index ) * (time() - startTime) / index )
+            print("coding document %s/%s. ETA: %s" % (index, ndocs, timedelta(seconds=secondsLeft)))
+            lastPrintTime = time()
+
+        relfn = path.join(loadDir, fn)
+        d = Obituary({"relfn": relfn})
+        with open(relfn, 'rb') as thisF:
+            # loads everything
+            d.from_pickle(thisF.read(), attrs=None)
+
+        d.code(toRecode=toRecode)
+
+        # now press it back into a pickle!
+        if not debug:
+            with open(relfn, "wb") as pf:
+                pf.write(d.to_pickle())
+
+    print("Successfully coded %s documents." % len(toLoad))
+
+attributeCoders = {}
+def _loadAttributes():
+    global attributeCoders
+    from os import listdir
+    from importlib import import_module
+    import inspect
+
+    attributesDir = path.join( path.dirname(__file__), "attributes" )
+
+    for fn in listdir(attributesDir):
+        print("Parsing file",fn)
+        name = ".".join(fn.split(".")[:-1])
+        if name == "":
+            continue
+
+        module = import_module("attributes.%s" % name)
+
+        classesWithin = inspect.getmembers(module, inspect.isclass)
+        for cname, c in classesWithin:
+            # print("Found attribute", cname)
+            attributeCoders[cname] = c
+_loadAttributes()
+
+def attributeNames():
+    """
+    This boy gives all the codable attributes defined in view of the coders..
+    It checks the subclasses of the values inside "attributeCoders", and returns names.
+
+    :return:
+    """
+    return [ k for k,v in attributeCoders.items() if issubclass(v, g.PropertyCoder) ]
+
+def attributeDocumentation( attrName ):
+    return attributeCoders[attrName].__doc__
+
+#from pymongo import MongoClient
+#attributeDb = MongoClient()['nytimes_obituaries']['coded_attributes']
 
 class Coder:
-
     def __init__(self, debug=False, mode="firstSentence"):
         self.debug = debug
 
@@ -237,62 +298,127 @@ class Coder:
         self.stateCounter = Counter()
         self.specificCounters = {}
 
-        self.attributeCoders = None
-        self.loadAttributes()
+    """
+    def codeAttrsIntoMongo(self, attrs):
 
-    def loadAttributes(self):
-        from os import listdir
-        from importlib import import_module
-        import inspect
+        from time import time
+        from datetime import timedelta
 
-        attributesDir = "attributes"
+        lastPrintTime = time()
+        startTime = time()
+        ndocs = len(self.obituaries)
 
-        for fn in listdir(attributesDir):
-            name = ".".join(fn.split(".")[:-1])
-            module = import_module("attributes.%s" % name)
+        # code all the obits
+        for index, obit in enumerate(self.obituaries):
+            assert (isinstance(obit, Obituary))
 
-            classesWithin = inspect.getmembers(module, inspect.isclass)
-            for cname, c in classesWithin:
-                self.attributeCoders[cname] = c
+            # every now and then, let us know how it's going!
+            if time() - lastPrintTime > 5:
+                secondsLeft = int( ( float(ndocs) - index ) * (time() - startTime) / index )
+                print("coding document %s/%s. ETA: %s" % (index, ndocs, timedelta(seconds=secondsLeft)))
+                lastPrintTime = time()
+
+            for attr in attrs:
+                if attr not in attributeCoders:
+                    raise Exception("Attribute %s not in available coders" % attr)
+
+                c = attributeCoders[attr]
+
+                if not issubclass(c, g.PropertyCoder):
+                    raise Exception("Attribute %s is just a helper..." % attr)
+
+                if attr in list(obit.keys()):
+                    del obit[attr]
+
+                coding_result = obit[attr]
+
+        print("Done coding documents... dumping to Mongo")
+
+        self.dumpCodesMongo()
 
     def codeAllIntoMongo(self):
 
+        from time import time
+        from datetime import timedelta
+
+        lastPrintTime = time()
+        startTime = time()
+        ndocs = len(self.obituaries)
+
         # code all the obits
-        for obit in self.obituaries:
+        for index, obit in enumerate(self.obituaries):
             assert (isinstance(obit, Obituary))
 
-            for cname, c in self.attributeCoders.items():
+            # every now and then, let us know how it's going!
+            if time() - lastPrintTime > 5:
+                secondsLeft = int( ( float(ndocs) - index ) * (time() - startTime) / index )
+                print("coding document %s/%s. ETA: %s" % (index, ndocs, timedelta(seconds=secondsLeft)))
+                lastPrintTime = time()
+
+            for cname, c in attributeCoders.items():
 
                 # skip silly shit
-                if not isinstance(c, g.PropertyCoder):
+                if not issubclass(c, g.PropertyCoder):
                     continue
 
-                # recode it
-                del obit[cname]
+                if cname in list(obit.keys()):
+                    del obit[cname]
+
                 coding_result = obit[cname]
+
+        print("Done coding documents... dumping to Mongo")
 
         self.dumpCodesMongo()
 
     def dumpCodesMongo(self):
         from datetime import datetime
+        from time import time
+        from datetime import timedelta
+
+        lastPrintTime = time()
+        startTime = time()
+        ndocs = len(self.obituaries)
 
         attributeDb.drop()
 
         codingTime = datetime.now()
 
         bulkop = attributeDb.initialize_ordered_bulk_op()
-        for obit in self.obituaries:
+        for index, obit in enumerate(self.obituaries):
             assert(isinstance(obit, Obituary))
+            # print(obit['id'])
 
-            for cname, c in self.attributeCoders.items():
 
+            # every now and then, let us know how it's going!
+            if time() - lastPrintTime > 5:
+                secondsLeft = int( ( float(ndocs) - index ) * (time() - startTime) / index )
+                print("coding document %s/%s. ETA: %s" % (index, ndocs, timedelta(seconds=secondsLeft)))
+                lastPrintTime = time()
+
+
+            accounted_for = set()
+
+            for cname, c in attributeCoders.items():
+                accounted_for.add(cname)
+
+                #print(c)
                 # skip silly shit
-                if not isinstance(c, g.PropertyCoder):
+                if not issubclass(c, g.PropertyCoder):
                     continue
 
                 # note that I'm just using whatever's here --
                 # this could well be stale if one isn't careful
                 coding_result = obit[cname]
+                #print("coded", cname, "as")
+                #print(coding_result)
+
+                if False:
+                    pprint.pprint({
+                        "key": cname,
+                        "value": coding_result,
+                        "obit": obit['id'],
+                        "whenCoded": codingTime
+                    })
 
                 retval = bulkop.insert({
                     "key": cname,
@@ -301,10 +427,26 @@ class Coder:
                     "whenCoded": codingTime
                 })
 
-        retval = bulkop.execute()
+                #print("cname:",cname)
 
+            # and of course the leftovers that weren't generated
+            for key, value in obit._prop_cache.items():
+                if key in accounted_for:
+                    continue
+
+                #print("key:",key)
+
+                retval = bulkop.insert({
+                    "key": key,
+                    "value": value,
+                    "obit": obit['id'],
+                    "whenCoded": -1
+                })
+
+        retval = bulkop.execute()
+    
     def loadFromMongoAttributes(self, attrs_all_obits):
-        """
+        ""(")
         Loads data from a Mongo query returning objects of form
             {
                 "key": _,
@@ -314,19 +456,21 @@ class Coder:
             }
         :param attrs_all_obits:
         :return:
-        """
+        ""(")
 
         for obit_id, attrs_this_obit in groupby(attrs_all_obits, lambda attr_info: attr_info["obit"]):
             attrs = {}
             for key, codings in groupby(attrs_this_obit, lambda x: x["key"]):
                 most_recent_coding = min( codings, key=lambda x: x['whenCoded'] )
-                attrs[ key ] = most_recent_coding['val']
+                attrs[ key ] = most_recent_coding['value']
 
-            new_obituary = Obituary( attrs )
+            new_obituary = Obituary()
+            new_obituary._prop_cache = attrs
+            new_obituary.myCoder = self
             self.obituaries.append(new_obituary)
+    """
 
-
-    def loadPreviouslyCoded(self, loadDirName, N=None, rand=True):
+    def loadPreviouslyCoded(self, loadDirName, N=None, rand=True, attrs=None):
         # depreciated
         import warnings
         warnings.warn("deprecated", DeprecationWarning)
@@ -342,11 +486,11 @@ class Coder:
 
         seed(time())
 
-        loadDir = path.join(path.dirname(__file__), '..', 'codeDumps', loadDirName)
+        loadDir = path.join(env.codeDumpDir, loadDirName)
 
         if not os.path.isdir(loadDir):
             print("Load directory '%s' not found. Please select from the following:" % loadDirName)
-            print( ",".join( os.listdir(path.join(path.dirname(__file__), '..', 'codeDumps') ) ) )
+            print( ",".join( os.listdir( env.codeDumpDir ) ) )
             return
 
         toLoad = os.listdir(loadDir)
@@ -360,8 +504,9 @@ class Coder:
         for fn in toLoad:
             relfn = path.join(loadDir, fn)
             d = Obituary({"relfn": relfn})
+            d.myCoder = self
             with open(relfn, 'rb') as thisF:
-                d.from_pickle(thisF.read())
+                d.from_pickle(thisF.read(), attrs=attrs)
 
             new_obituaries.append(d)
 
@@ -504,26 +649,6 @@ class Coder:
         # specificCounters[result['state']].update(result['occ'])
         self.specificCounters[space].update([key])
 
-    def codeAll(self, toRecode=None, verbose=False):
-        from time import time
-        from datetime import timedelta
-
-        lastPrintTime = time()
-        startTime = time()
-        ndocs = len(self.obituaries)
-
-        for index, d in enumerate(self.obituaries):
-            if verbose:
-                print("coding document %s" % index)
-
-            # every now and then, let us know how it's going!
-            if time() - lastPrintTime > 5:
-                secondsLeft = int( ( float(ndocs) - index ) * (time() - startTime) / index )
-                print("coding document %s/%s. ETA: %s" % (index, ndocs, timedelta(seconds=secondsLeft)))
-                lastPrintTime = time()
-
-            d.code(coding=self, toRecode=toRecode)
-
     def getSentences(self, word):
         for res in self.allResults:
             words = [x['word'] for x in res['guesses']]
@@ -660,58 +785,12 @@ class Coder:
         return html
 
 
-def extractFirstSentence(body):
-    sentences = nlp.sent_tokenize(body)
-
-    if len(sentences) < 2:
-        # print("skipping(tooFewSentences)")
-        return ""
-
-    fS = sentences[0].strip()
-    fS = " ".join( fS.split() )
-
-    # FAIRFAX, Va. <start>
-    # HOPKINSVILLE, Ky. <start>
-    # PORTLAND, Ore. <start>
-
-    reStartStrip = [
-        "[A-Z\s\.]+,.{1,30}[0-9]+\s*", # city and date
-        ".*\(AP\)\s*-*\s*", # AP tag
-        #".*-{2,}\s*", # Blah Blah Blah -- Start of thing is here
-        "[A-Z]{3,},?\s+[A-Za-z]+\s*(\(.*\))?\s*(--)?\s*", # e.g. MONTEVIDEO, Uruguay (with optional parens :() --
-        "([A-Z]{2,}[:\.,]?\s*)+[^a-zA-Z]*", #just all caps, probably bad --, but ignore the first real letter :)
-    ]
-
-    for patt in reStartStrip:
-        findTag = re.match(patt, fS)
-        if findTag:
-            fS = fS[findTag.end():]
-
-    if "," not in fS:
-        fS += " " + " ".join( sentences[1].strip().split() )
-
-    fS = fS.replace("Late Edition - Final\n", "")
-    fS = fS.replace("Correction Appended\n", "")
-    fS = fS.replace("The New York Times on the Web\n", "")
-    fS = fS.replace("National Edition\n", "")
-
-    # for those "LONDON --"s
-    fS = re.sub(r'^[A-Z\s\(\)]*(--)\s+', '', fS)
-
-    # OMG
-    # this simply gets rid of a date at the beginning of the line.
-    monthDateRe = r"^(\b\d{1,2}\D{0,3})?\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|(Nov|Dec)(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2})\.?\s*"
-    fS = re.sub(monthDateRe, '', fS)
-
-    return fS
-
 def getRandomDocs(num):
     from random import sample
     return sample( allDocs, num )
 
 def regenerateW2C(expandSynonyms = False):
     print("Regenerating W2C correspondence")
-    import numpy as np
     codegen = []
 
     if False:
