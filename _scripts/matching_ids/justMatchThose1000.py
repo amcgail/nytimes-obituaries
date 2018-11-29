@@ -66,7 +66,7 @@ for i in range(1, 1001):
 
     if len(matches) > 1:
         for obit, _ in matches[1:]:
-            obit.destroy()
+            obit.destroy_in_memory()
 
     match = matches[0]
     id = match[0]['id']
@@ -101,7 +101,7 @@ for i in range(1, 1001):
 
     if len(ids) > 1:
         for id in ids[1:]:
-            coder.findObitByInfo(id=id).destroy()
+            coder.findObitByInfo(id=id).destroy_in_memory()
 
     id = ids[0]
 

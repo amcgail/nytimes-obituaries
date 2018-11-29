@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
+from abc import ABC
 
 debug = False
 
@@ -169,3 +170,33 @@ def getsize(obj_0):
         return size
 
     return inner(obj_0)
+
+import abc
+
+
+class SingleAttributeCoder:
+    def __init__(self, ofWhat):
+        from collections import Counter
+        from occ import Obituary
+
+        assert(isinstance(ofWhat, Obituary))
+        self.ofWhat = ofWhat
+        self.debug = False
+
+        self.stateCounter = Counter()
+
+    @abc.abstractmethod
+    def run(self):
+        pass
+
+class PropertyCoder(SingleAttributeCoder):
+    def __init__(self, ofWhat):
+        super().__init__(ofWhat)
+
+class PropertyHelper(SingleAttributeCoder):
+    def __init__(self, ofWhat):
+        super().__init__(ofWhat)
+
+class OldPropertyCoder(SingleAttributeCoder):
+    def __init__(self, ofWhat):
+        super().__init__(ofWhat)

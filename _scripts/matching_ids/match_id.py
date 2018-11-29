@@ -172,7 +172,7 @@ if step==1:
     nones = 0
 
     for i, d in enumerate(coder.obituaries):
-        assert(isinstance(d, occ.Doc))
+        assert(isinstance(d, occ.Obituary))
 
         if i % 100 == 0:
             print( "%s / %s" % (i, len(coder.obituaries)))

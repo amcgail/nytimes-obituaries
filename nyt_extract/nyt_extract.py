@@ -64,8 +64,12 @@ class Doc:
             # print(fullThing, self.parseunit.fn)
             raise CannotBeParsed()
         title = title[1]
-        title = " ".join(title.split("\n")[3:])
+        title_parts = re.split("[\r\n]+", title)
+        print(title_parts)
+        title = "\n".join( title_parts[3:] )
         self.title = title.strip()
+
+        print(self.title)
 
         self.name = re.split(r'[`\=~!@#$%^&*()_+\[\]{};\'\\:"|<,/<>?]', title)[0]
 
@@ -260,13 +264,13 @@ for i, d in enumerate(docs):
                 (sum((cfb - x[0]).values()), x[1])
                 for x in id_lookup
             ]
-            id = min(differences, key=lambda x: x[0])[1]
+            min_id = min(differences, key=lambda x: x[0])[1]
 
-        id = id_lookup_title[ d.title.strip() ]
+        min_id = id_lookup_title[ d.title.strip()]
 
-        print("ID:",id)
+        print("ID:", min_id)
         print(first)
-        print(id_lookup_b20[id])
+        print(id_lookup_b20[min_id])
 
     if False:
         try:
@@ -276,7 +280,7 @@ for i, d in enumerate(docs):
             print( d.body )
             raise
 
-    doc = occ.Doc()
+    doc = occ.Obituary()
     doc.isCoded = True
     doc._prop_cache = docinfo
 

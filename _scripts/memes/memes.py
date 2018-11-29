@@ -27,6 +27,7 @@ if not os.path.exists("month_counts.pickle"):
     decade_counter = defaultdict(Counter)
     total_counter = Counter()
 
+
     for x in obits:
         tup = nlp.getTuples( nlp.word_tokenize(x['fullBody']), 3, 8 )
 

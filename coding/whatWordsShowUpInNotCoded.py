@@ -4,8 +4,7 @@ import sys
 from collections import Counter
 from os import path
 
-from nlp import extractLexical
-from occ import extractFirstSentence
+from nlp import extractLexical, extractFirstSentence
 
 sys.path.append( path.join( path.dirname(__file__), '..', 'lib' ) )
 from g import *

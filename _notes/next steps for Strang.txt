@@ -1,0 +1,119 @@
+
+
+Meeting to discuss:
+
+	ingest the older obituaries!
+		** can't find the file **
+
+
+
+
+TODO:
+
+	last name + date of death search
+
+
+
+(make sure to address his email)
+
+just ideas, no pressure
+
+	can I link documents by phrases that distinguish them,
+	group them based on these,
+	and thereby generate OCC codes, or at least approximately so?
+
+		I could use N-nearest neighbors, to connect them via these phrases to obituaries for which we know the OCC code.
+
+		so I take a weighted sum of other docs
+			based on the similarity between tf-idf vectors of n-grams
+
+		I could also include a learning component into this if I was really feeling saucy, but this could be a great first step
+
+		we still are going to want some sort of attention mechanism, either first-sentence-only, something hard-coded, or a softer mechanism which looks all around
+
+	I know that if we focus on the names people are connected to the above method of linking should work. I'd like to give this a try -- seems promising.
+
+		The general method is as follows:
+
+		extract all the names mentioned in the article. universities, businesses, long phrases which seem to have some importance, etc.
+
+		then find all other obituaries which contain those phrases,
+
+		then take another step,
+
+		and another,
+
+		as long as you can stand [can I simply express this as matrix multiplication, thus making it quite efficient?]
+
+		you'll finally get to obituaries which are coded.
+
+		based on the distance through the graph, and the strengths, we could infer the OCC code.
+
+	I can extend the above method to any extraction from the obituary, and I could probably include a learning element, where there is differential focus on some and other links, possibly based on some latent properties of the words [maybe pre-learned word vectors?]
+
+what are some simpler steps I can take to move this project forward?
+
+	a way to track linguistic change over time
+
+		-- I fond a great paper -- Kulkarni et al
+			this seems to be focusing on the semantic changes of the words
+
+		what exactly do I want?
+		given a subset of obituaries, I want to know the changes in the vocabulary used in those obituaries
+
+			do I have enough data to do this??
+			1000 per year, but in some reasonable subset I could only have 25 per year.
+			thus the # of words total is quite low -- too low to talk about distributions of the usage of a specific word over time
+			but of course I could restrict myself only to those words which occur frequently enough to make some conclusion
+
+			we would like to associate occupations to perspective shifts
+
+		 (using fighting words between time periods?)
+
+		 change in what they were, and what they did, over time
+
+		 also, could simply track the emergence of memes.
+		 	which phrases didn't exist whatsoever, and emerged?
+		 	and how did they change over time?
+		 	and how is this reflected by more general patterns in society?
+		 		is this unique to the obituaries?
+		 		isolate those which are!
+
+		and individual words!
+			create time-series of individual words over time
+			"search" them for distinctive patterns
+				of emergence, resurgence, cycles, etc
+				grouping words which have similar patterns
+
+	ingest the older obituaries!
+		** can't find the file **
+
+	try to identify those "not an obituary"
+
+	eliminate duplicates!
+
+	what about careers as sequences of occupational identifications through the obituary -- can I identify this, and classify them / categorize them?
+
+	just look at the length of obituary in relation to OCC, gender, age, and **over time** [[ e.g., are the spikes in obits directly corresponding to shortening of obits? ]]
+
+	compare M/F with fighting words to try and identify what are characteristic of each
+
+		 by the way, is there a good way to remove the influence of another category (e.g. kinship)?
+		 	the best way seems to be to simply isolate the kinship and non-kinships, and identify within these.
+
+	think of things for this Lily Chen to do!
+
+	figure out this whole TensorBoard thing -- 
+
+	figure out this whole AWS rent-a-huge-machine thing --
+
+	where did they die? hospital location? where born? where prominently worked?
+
+	comparing word counts from different lexicons -- can we identify patterns over time?
+
+	putting the "coding"s into a database somewhere, for easier access, plotting, and analysis! ((why the hell haven't I done this yet?))
+		the current method is pretty limited
+
+		I can simply use postgresql to store it all --
+		shouldn't take too much memory --
+		and then searches etc can be extremely quick, and not require loading EVERYTHING into memory!

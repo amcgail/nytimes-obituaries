@@ -11,3 +11,4 @@ gender_guesser
 geopy
 scipy
 xlutils
+Pygments

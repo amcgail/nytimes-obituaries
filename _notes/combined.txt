@@ -1,44 +1,88 @@
-October 9:
-	update the codings in the cloud (done)
-		create a script to do this for you (done)
-	organize the nytimes obituaries directory
+todos for right now
+    extract unique names from the obituaries
+    have all algorithms outputs available [all versions of OCC], as well as code
+    built-in documentation to each attribute
+    each attribute in its own file
+    make extra room for information in the attributes
+        [load only certain attributes, to save data, when loading from Pickles]
+        [compute/load attributes on demand, quickly]
+        [maybe simply a mongo DB table]
+        [have max memory limit]
 
-	upgrade the Jupyter computer (done)
 
-	create a search engine for the obituaries (tried, too much time dude...)
 
-	export all extracted meta-data, so others can play around with it
 
-	investigate OCC coding match more thoroughly
-		and brainstorm
-		think about "attention mechanism"
-		address Strang's emails
-	
-	ingest earlier obituaries
 
-October 2:
-	comparing two groups of obituaries for the differences in language (done)
-	finding memes which emerge in the obituaries, and persist [ARGHH]
-		which memes co-occur?
 
-September 27:
-	last name + date of death name search (done)
-	assess false positives (done)
-	assess these things at supergroup level (done)
-	export assessments to CSV (done)
 
-before September 27:
-	get abdullah's 200 001's
-	going back into original files themselves
-		cleaning up the cleaning code,
-		re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
 
-Just an idea:
-	I'm provisioning a more expensive computer.
-	I could totally rent it by the hour, and for example shut it down at night,
-		or the many days that no one uses it!
-	After an hour of inactivity it could shut down.
-	This seems like an easy fix, and would allow us to run it with a lot more power :)
+
+
+
+
+
+
+
+
+
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+make practical accomplishments for strang.
+for example, I'm probably writing this methodological paper, so get cracking! have you really understood anything yet?
+why do I know nothing.
+I need some solid steps forward I can make instead of just staring at code that doesn't work.
+small, baby steps, that are practical
+like the Jupyter notebook
+
+btw small step: jupyter notebook
+
+I should do my work 4 small steps at a time. baby steps, as efficient as possible.
+if not possible, push it off (more accurately, brainstorm about it and then push it off)
+
+for the meme analysis:
+just ignore those words which are super infrequent --
+	well, don't ignore them, but replace them with a null character while counting!
+
+machine-learning ideas
+	it'd be good to present the current state of the machine-learning endeavor to the group schematically.
+		helping them to understand the steps I'm undertaking could help them contribute in meaningful ways
+		I need good ideas about features to include in the algorithm, new ways of structuring the algorithm, and other data to take into consideration
 
 make sure the jupyter notebook is really what's going on
 	they don't have the codings!!
@@ -67,16 +111,12 @@ documentation
 
 what can Lily do?
 ideas for Lily
-
-	eliminating duplicates
-
 	features / facts which can be extracted from the text
-		race / ethnicity
-		when and where did they die?
 
-	deaths vary by 20% over course of year. does this affect things?
+	comparing two groups of obituaries for the differences in language
 
-	
+	finding memes which emerge in the obituaries, and persist
+		which memes co-occur?
 
 	clustering 
 		of documents
@@ -87,8 +127,18 @@ ideas for Lily
 		maybe I need something simpler
 			which I can explain myself lol
 
+	eliminating duplicates
+
+	when and where did they die?
+
 Gary King
 	aggregates can do a good job, even though individual accuracy not so good
+
+ingest earlier obituaries
+
+last name + date of death name search
+
+get abdullah's 200 001's
 
 basis for assessing language change over time
 
@@ -117,6 +167,9 @@ M/F which words were used?
 
 more accurate name detection.
 more comprehensive 1st sentence fixes
+going back into original files themselves
+	cleaning up the cleaning code,
+	re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
 domains	
 Occ roles linked to name (Adm. Dewey, The Rev. Upright, Dr. Doolittle)
 Eliminate occupations that are not the obituarized: “secretary to the president”, “he once met the president”, “medical examiner says he is dead”

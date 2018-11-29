@@ -31,9 +31,6 @@ if 'nlp' not in locals():
     print("NOTE: this variable is huge, and can eat up memory. Don't load in multiple terminals.")
     nlp = spacy.load('en')
     
-    
-    
-    
 import gender_guesser.detector as gender
 g = gender.Detector()
 
@@ -43,9 +40,6 @@ def isname(x):
         
     # if any word has a gender, we good    
     return g.get_gender(x) in ['male', 'female']
-
-
-    
     
 search_url = "https://www.wikidata.org/w/api.php?%s"
 
