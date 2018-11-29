@@ -1,6 +1,8 @@
+import sys
+sys.path.append("/home/ec2-user/nytimes-obituaries/lib")
 import occ
 
-if True:
+if False:
     occ.regenerateW2C()
 
 coding_in = "v2.1"
@@ -13,7 +15,7 @@ coder.loadPreviouslyCoded(coding_in, rand=False)
 
 #print("\n".join( sorted(coder.obituaries[0].keys())) )
 
-coder.codeAll(["OCC"])
+coder.codeAll(["gender"])
 
 #print("\n".join( sorted(coder.obituaries[0].keys())) )
 
