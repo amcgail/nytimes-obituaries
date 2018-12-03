@@ -1,6 +1,6 @@
 from g import PropertyCoder, PropertyHelper, OldPropertyCoder
 
-class lexicalAttributes(OldPropertyCoder):
+class lexicalAttributes(PropertyCoder):
 
     def run(self):
         import nlp

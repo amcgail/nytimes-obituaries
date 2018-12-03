@@ -6,4 +6,12 @@ if False:
     occ.regenerateW2C()
 
 coding_in = "v2.1"
-occ.codeAll(loadDirName="v2.1", toRecode=["namesInObit"], debug=False)
+occ.codeAll(loadDirName=coding_in, toRecode=[
+    "spacy_ents",
+    "spacy_ents_PERSON",
+    "spacy_ents_GPE",
+    "spacy_ents_NORP",
+    "spacy_ents_ORG",
+    "whatTheyWere",
+    "whatTheyDid"
+], debug=False)

@@ -269,8 +269,16 @@ def _loadAttributes():
 
         classesWithin = inspect.getmembers(module, inspect.isclass)
         for cname, c in classesWithin:
+            if c == g.PropertyCoder or c == g.PropertyHelper:
+                continue
+            if not issubclass(c, g.SingleAttributeCoder):
+                continue
+            if issubclass(c, g.OldPropertyCoder):
+                continue
+
             # print("Found attribute", cname)
             attributeCoders[cname] = c
+
 _loadAttributes()
 
 def attributeNames():
@@ -284,6 +292,96 @@ def attributeNames():
 
 def attributeDocumentation( attrName ):
     return attributeCoders[attrName].__doc__
+
+def testAttributeCoding(loadDirName, attrName, Ntest=20, debugAttrs=None, condition=None):
+    # definitely want to reload the attributes before starting...
+    # makes it super easy for testing
+    if debugAttrs is None:
+        debugAttrs = ["id", "fullBody"]
+
+    if condition is None:
+        condition = lambda x: True
+
+    from time import time
+
+    import os
+    from os import path
+    from datetime import timedelta
+    from random import shuffle
+
+    loadDir = path.join(env.codeDumpDir, loadDirName)
+
+    if not os.path.isdir(loadDir):
+        print("Load directory '%s' not found. Please select from the following:" % loadDirName)
+        print(",".join(os.listdir(env.codeDumpDir)))
+        return
+
+    toLoad = os.listdir(loadDir)
+    shuffle(toLoad)
+
+    progress = 0
+    startTime = 0
+
+    # actually loads the thing from DB or File or WE
+    for index, fn in enumerate(toLoad):
+
+        # want to skip the first, to give a reasonable estimate
+        if progress == 1:
+            startTime = time()
+
+        relfn = path.join(loadDir, fn)
+        d = Obituary({"relfn": relfn})
+        with open(relfn, 'rb') as thisF:
+            # loads everything
+            d.from_pickle(thisF.read(), attrs=None)
+
+        if not condition(d):
+            continue
+
+        d.code(toRecode=[attrName])
+        print("------- Obit Info     -------")
+        for x in debugAttrs:
+            print(x, ":")
+            print(d[x])
+            print()
+        print("------- Coding result -------")
+        print(d[attrName])
+
+        progress += 1
+
+        if progress >= Ntest:
+            break
+
+    finishTime = time()
+
+    print("Successfully coded %s documents." % progress)
+    #diff = finishTime - startTime
+    #totalTime = 60000 * diff / ndocs
+    #print("Took %0.3f seconds. Would take %s to code 60k." % (diff, timedelta(seconds=totalTime)))
+    #print("This should be an overestimate, because we skipped some by your condition...")
+
+def obitFromId(loadDirName, id, attrs=None):
+    import os
+
+    loadDir = path.join(env.codeDumpDir, loadDirName)
+
+    if not os.path.isdir(loadDir):
+        print("Load directory '%s' not found. Please select from the following:" % loadDirName)
+        print(",".join(os.listdir(env.codeDumpDir)))
+        return
+
+    toLoadFn = os.path.join( loadDir, "%s.pickle" % id )
+
+    # actually loads the thing from DB or File or WE
+
+    relfn = path.join(loadDir, toLoadFn)
+    d = Obituary({"relfn": relfn})
+    d.myCoder = None
+
+    with open(relfn, 'rb') as thisF:
+        d.from_pickle(thisF.read(), attrs=attrs)
+
+    return d
 
 #from pymongo import MongoClient
 #attributeDb = MongoClient()['nytimes_obituaries']['coded_attributes']

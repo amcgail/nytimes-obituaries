@@ -31,10 +31,13 @@ class testNames(unittest.TestCase):
         self.assertFalse(name_no1.supercedes( HumanName("Dr. Alec Patricia McGail")))
         self.assertTrue(name_no1.supercedes( HumanName("Dr. A. McGail")))
 
+        self.assertFalse(name_no1.supercedes(HumanName("Alec McGail Jr.")))
+
         name_no2 = HumanName("Dr. A. M. (Johnny) Fischer III")
         self.assertTrue(name_no2.supercedes(HumanName("Mr. Fischer")))
-        self.assertTrue(name_no2.supercedes(HumanName("Andy Fischer")))
-        self.assertTrue(name_no2.supercedes(HumanName("Andrew Marklehovitch Fischer")))
+        self.assertTrue(name_no2.supercedes(HumanName("Andy Fischer III")))
+        self.assertFalse(name_no2.supercedes(HumanName("Andy Fischer")))
+        self.assertTrue(name_no2.supercedes(HumanName("Andrew Marklehovitch Fischer III")))
         self.assertTrue(name_no2.supercedes(HumanName("Ms. Fischer")))
 
     def test_name_identification(self):

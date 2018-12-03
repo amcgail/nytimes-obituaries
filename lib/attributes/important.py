@@ -329,9 +329,44 @@ class name(g.PropertyCoder):
     def run(self):
         return str(self.ofWhat['spacyName']).strip()
 
+class name_by_most_common(g.PropertyCoder):
+    def run(self):
+        from nlp import isPossibleFullName, HumanName
+        from functools import partial
+
+        fb = self.ofWhat['spacyFullBody']
+
+        all_possible_names = [str(x) for x in fb.ents if x.label_ == 'PERSON']
+        all_possible_names = list(map(HumanName, all_possible_names))
+
+        possible_full_names = [str(x) for x in fb.ents if x.label_ == 'PERSON']
+        possible_full_names = list(filter(isPossibleFullName, possible_full_names))
+        possible_full_names = list(map(HumanName, possible_full_names))
+
+        def custom_supercede_relation(big, small):
+            if len(small.original.split()) <= 1:
+                # either first or last name match adds to count
+                return small.original in [big.last, big.first]
+            else:
+                return big.supercedes(small)
+
+        counts = {}
+        for fname in possible_full_names:
+            c = len(list(filter(partial(custom_supercede_relation, fname), all_possible_names)))
+            counts[fname.original] = c
+
+        if len(counts) == 0:
+            return "<no name found>"
+
+        bestCount = max(counts.values())
+        print(counts)
+
+        # we always take the first in the case of a tie
+        for name, count in counts.items():
+            if count == bestCount:
+                return name
 
 class human_name(g.PropertyHelper):
-
 
     def run(self):
         import nlp

@@ -657,6 +657,7 @@ class HumanName(HumanNameOld):
                 if self.first != compare.first:
                     return False
 
+        # if the middle name is there, it must match
         if compare.middle and self.middle:
             # handling initials
             if self.is_an_initial(compare.middle) or self.is_an_initial(self.middle):
@@ -667,6 +668,7 @@ class HumanName(HumanNameOld):
                     return False
 
         # make sure the genders match --
+        # note -- only if there's no first name
         if not compare.first and compare.title:
             # Mr. Mrs.
             m = ["Mr."]
@@ -678,6 +680,13 @@ class HumanName(HumanNameOld):
             elif compare.title in f and self.gender == 'male':
                 print("Skipping", compare)
                 return False
+
+        # also, Jr.'s are important!
+        # only if there's a first name and last name
+        if compare.first and compare.last:
+            if compare.suffix or self.suffix:
+                if compare.suffix != self.suffix:
+                    return False
 
         return True
 

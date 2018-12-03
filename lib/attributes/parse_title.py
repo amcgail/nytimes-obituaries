@@ -12,7 +12,11 @@ class title(g.PropertyCoder):
         return last_line.strip()
 
 
-class title_helper(g.PropertyHelper):
+class title_info(g.PropertyCoder):
+    """
+    Extracts the information contained in the title, to the best of its ability.
+    This does a pretty great job.
+    """
 
     def hasNumber(self, x):
         return any(y.strip().isnumeric() for y in x.split())
@@ -72,7 +76,13 @@ class title_helper(g.PropertyHelper):
     def run(self):
         t = self.ofWhat['title']
 
-        ret = {}
+        ret = {
+            "name":None,
+            "age":None,
+            "desc":None,
+            "desc2":None,
+            "unparsed":None
+        }
 
         if ";" in t:
             parts = t.split(";")
@@ -84,20 +94,4 @@ class title_helper(g.PropertyHelper):
         else:
             ret.update(self.parseCommas(t))
 
-
-        print(t)
-        print(ret)
-
         return ret
-
-
-class title_name(g.PropertyCoder):
-    def run(self):
-        from nlp import isPossibleFullName
-
-        tp = self.ofWhat['title_parts']
-        print(tp)
-        tp = list( filter(isPossibleFullName, tp) )
-        print(tp)
-        return tp
-

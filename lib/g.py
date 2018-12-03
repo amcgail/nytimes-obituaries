@@ -189,6 +189,12 @@ class SingleAttributeCoder:
     def run(self):
         pass
 
+    def __getitem__(self, item):
+        return self.ofWhat[item]
+
+    def __getattr__(self, item):
+        return self.ofWhat[item]
+
 class PropertyCoder(SingleAttributeCoder):
     def __init__(self, ofWhat):
         super().__init__(ofWhat)
