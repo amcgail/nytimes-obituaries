@@ -648,7 +648,7 @@ class HumanName(HumanNameOld):
             return False
 
         # if the first name is there, it must match
-        if compare.first:
+        if compare.first and self.first:
             # handling initials
             if self.is_an_initial(compare.first) or self.is_an_initial(self.first):
                 if self.first[0].lower() != compare.first[0].lower():
