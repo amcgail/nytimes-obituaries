@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-.*
-*.pyc
-=======
-**/.spyderworkspace
-**/*.pyc
-data/*
->>>>>>> e6222db528f966531e42cb4606237bd7703236bc

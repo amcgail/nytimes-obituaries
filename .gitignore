@@ -10,3 +10,4 @@ data/*
 **/.~lock*
 codeDumps/*
 venv
+**/__pycache__/**
