@@ -106,7 +106,7 @@ class _inquirer_lexicon:
 
     def getWords(self, lexiconName, doc):
         self.load()
-        res = {}
+        res = set()
 
         count = 0
         for x in word_tokenize(doc):
