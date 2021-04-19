@@ -1,0 +1,501 @@
+from,to,n
+Lyndon B. Johnson,John F. Kennedy,286
+Richard M. Nixon,Lyndon B. Johnson,210
+Richard M. Nixon,John F. Kennedy,193
+Ronald Reagan,Richard M. Nixon,183
+Richard M. Nixon,Gerald R. Ford,162
+Ronald Reagan,Jimmy Carter,154
+Richard M. Nixon,Jimmy Carter,145
+Richard M. Nixon,Dwight D. Eisenhower,115
+Ronald Reagan,Lyndon B. Johnson,104
+Lyndon B. Johnson,Jimmy Carter,99
+Ronald Reagan,John F. Kennedy,99
+John F. Kennedy,Dwight D. Eisenhower,97
+John F. Kennedy,Jimmy Carter,93
+Jimmy Carter,Gerald R. Ford,92
+Ronald Reagan,George Bush,88
+Lyndon B. Johnson,Dwight D. Eisenhower,83
+Ronald Reagan,Bill Clinton,80
+Ronald Reagan,Gerald R. Ford,77
+Robert F. Kennedy,John F. Kennedy,76
+Harry S. Truman,Dwight D. Eisenhower,69
+John F. Kennedy,Harry S. Truman,68
+Dizzy Gillespie,Charlie Parker,68
+Richard M. Nixon,Bill Clinton,66
+Jimmy Carter,Bill Clinton,62
+Ronald Reagan,Dwight D. Eisenhower,62
+Harry S. Truman,Franklin D. Roosevelt,61
+John V. Lindsay,Abraham D. Beame,59
+Richard M. Nixon,George Bush,56
+Richard M. Nixon,Nelson A. Rockefeller,55
+Lyndon B. Johnson,Harry S. Truman,55
+Robert F. Kennedy,Lyndon B. Johnson,54
+Richard M. Nixon,Henry A. Kissinger,54
+John F. Kennedy,Bill Clinton,51
+Lee Harvey Oswald,John F. Kennedy,51
+George Bush,Bill Clinton,51
+John V. Lindsay,Edward I. Koch,50
+Lyndon B. Johnson,Gerald R. Ford,49
+John F. Kennedy,Franklin D. Roosevelt,48
+Richard Burton,Elizabeth Taylor,48
+Richard M. Nixon,Harry S. Truman,46
+Robert Rauschenberg,Jasper Johns,46
+George W. Bush,Bill Clinton,46
+Robert F. Kennedy,Richard M. Nixon,45
+Nelson A. Rockefeller,John V. Lindsay,45
+John F. Kennedy,Jacqueline Kennedy,45
+Frank Sinatra,Bing Crosby,44
+John F. Kennedy,Gerald R. Ford,44
+Lyndon B. Johnson,Bill Clinton,42
+Lyndon B. Johnson,Hubert H. Humphrey,42
+Franklin D. Roosevelt,Dwight D. Eisenhower,42
+Frank Sinatra,Dean Martin,42
+John F. Kennedy,Edward M. Kennedy,40
+Richard M. Nixon,Hubert H. Humphrey,40
+Richard M. Nixon,Franklin D. Roosevelt,40
+Jerry Lewis,Dean Martin,40
+Edward I. Koch,Abraham D. Beame,39
+Martin Luther King Jr.,John F. Kennedy,39
+Spiro T. Agnew,Richard M. Nixon,39
+Martin Luther King Jr.,Lyndon B. Johnson,39
+John F. Kennedy,Hubert H. Humphrey,38
+Mario M. Cuomo,Hugh L. Carey,38
+Miles Davis,Dizzy Gillespie,38
+Ronald Reagan,Nelson A. Rockefeller,38
+Richard M. Nixon,Barry Goldwater,37
+Lynn Fontanne,Alfred Lunt,37
+Nelson A. Rockefeller,Hugh L. Carey,37
+Louis Armstrong,Benny Goodman,37
+Robert Rauschenberg,Andy Warhol,37
+Ronald Reagan,Franklin D. Roosevelt,36
+Fulgencio Batista,Fidel Castro,36
+John Paul II,John Paul,36
+Richard M. Nixon,George W. Bush,35
+Edward I. Koch,David N. Dinkins,35
+Robert F. Wagner,John V. Lindsay,35
+Judy Garland,Frank Sinatra,35
+Roy Lichtenstein,Andy Warhol,35
+Robert Kennedy,Robert F. Kennedy,34
+Richard M. Nixon,Edward M. Kennedy,34
+Miles Davis,Charlie Parker,34
+Jimmy Carter,George Bush,33
+Sammy Davis Jr.,Frank Sinatra,33
+Nelson A. Rockefeller,Gerald R. Ford,32
+Lyndon B. Johnson,Barry Goldwater,32
+Jimmy Carter,Henry A. Kissinger,32
+Ronald Reagan,George W. Bush,32
+Nelson A. Rockefeller,Lyndon B. Johnson,32
+Spencer Tracy,Katharine Hepburn,32
+Lyndon B. Johnson,Franklin D. Roosevelt,32
+Jimmy Carter,Dwight D. Eisenhower,32
+Nelson A. Rockefeller,John F. Kennedy,32
+Robert F. Kennedy,Martin Luther King Jr.,32
+Sarah Vaughan,Ella Fitzgerald,32
+Mao Zedong,Deng Xiaoping,31
+Mario M. Cuomo,Edward I. Koch,31
+Lincoln Kirstein,George Balanchine,31
+Ronald Reagan,Barry Goldwater,31
+Frank Sinatra,Ella Fitzgerald,31
+Muhammad Ali,Cassius Clay,31
+Richard M. Nixon,Joseph R. McCarthy,31
+Gerald R. Ford,Dwight D. Eisenhower,31
+Ronald Reagan,Nancy Reagan,30
+Leonard Bernstein,Aaron Copland,30
+Bob Hope,Bing Crosby,30
+John F. Kennedy,Adlai E. Stevenson,30
+Ronald Reagan,Mikhail S. Gorbachev,30
+John F. Kennedy,George Bush,30
+Nelson A. Rockefeller,Malcolm Wilson,29
+Doris Humphrey,Charles Weidman,29
+Ronald Reagan,Henry A. Kissinger,29
+Louis Armstrong,Dizzy Gillespie,29
+Lee Harvey Oswald,Jack Ruby,29
+Mikhail S. Gorbachev,Boris N. Yeltsin,29
+Robert S. McNamara,Lyndon B. Johnson,28
+Jack Kerouac,Allen Ginsberg,28
+Lyndon B. Johnson,George Bush,28
+Ronald Reagan,Edward M. Kennedy,28
+Ella Fitzgerald,Dizzy Gillespie,28
+Richard M. Nixon,John N. Mitchell,28
+Ronald Reagan,Robert F. Kennedy,28
+Yoko Ono,John Lennon,28
+Miles Davis,John Coltrane,28
+Jerry Lee Lewis,Elvis Presley,27
+Rudolph W. Giuliani,David N. Dinkins,27
+Charlie Parker,Benny Goodman,27
+Tommy Dorsey,Benny Goodman,27
+Richard M. Nixon,Martin Luther King Jr.,27
+Johnny Cash,Elvis Presley,27
+Woody Guthrie,Pete Seeger,27
+John F. Kennedy,Frank Sinatra,27
+Benny Goodman,Artie Shaw,27
+Tony Bennett,Frank Sinatra,27
+Gerald R. Ford,George Bush,27
+John F. Kennedy,Fidel Castro,27
+Lou Gehrig,Babe Ruth,26
+Frank Sinatra,Benny Goodman,26
+Jasper Johns,Andy Warhol,26
+Richard Rodgers,Oscar Hammerstein,26
+Nikita S. Khrushchev,John F. Kennedy,26
+Franklin D. Roosevelt,Eleanor Roosevelt,26
+Betty Comden,Adolph Green,26
+Paul VI,John Paul II,26
+Frank Sinatra,Elvis Presley,26
+Ronald Reagan,Martin Luther King Jr.,26
+Ronald Reagan,Harry S. Truman,26
+Robert F. Kennedy,Jimmy Carter,25
+Thomas E. Dewey,Harry S. Truman,25
+Robert F. Kennedy,Edward M. Kennedy,25
+Merce Cunningham,John Cage,25
+Ronald Reagan,Hubert H. Humphrey,25
+Lyndon Johnson,Lyndon B. Johnson,25
+Gene Kelly,Fred Astaire,25
+Thomas E. Dewey,Nelson A. Rockefeller,25
+Sammy Davis Jr.,Dean Martin,25
+Martha Graham,Doris Humphrey,24
+Sam Snead,Ben Hogan,24
+Mario M. Cuomo,John V. Lindsay,24
+Richard M. Nixon,George McGovern,24
+Vladimir V. Putin,Mikhail S. Gorbachev,24
+Jimmy Carter,Edward M. Kennedy,24
+Dizzy Gillespie,Coleman Hawkins,23
+Martin Luther King Jr.,Jimmy Carter,23
+Robert F. Wagner,Nelson A. Rockefeller,23
+Nelson A. Rockefeller,Mario M. Cuomo,23
+Lyndon B. Johnson,Henry A. Kissinger,23
+Jimmy Carter,Harry S. Truman,23
+Frank Sinatra,Barbra Streisand,23
+Merce Cunningham,Martha Graham,23
+Lyndon B. Johnson,Edward M. Kennedy,23
+Joseph R. McCarthy,Dwight D. Eisenhower,23
+John F. Kennedy,Jack Ruby,23
+Jackie Robinson,Branch Rickey,23
+Robert F. Wagner,Abraham D. Beame,23
+Rudolph W. Giuliani,Edward I. Koch,23
+Nelson A. Rockefeller,Franklin D. Roosevelt,23
+Hugh L. Carey,Edward I. Koch,23
+Tommy Dorsey,Frank Sinatra,22
+Tennessee Williams,Arthur Miller,22
+Nelson A. Rockefeller,Jimmy Carter,22
+Martin Luther King Jr.,Coretta Scott King,22
+Jessica Tandy,Hume Cronyn,22
+Louis Armstrong,Ella Fitzgerald,22
+James Cagney,Humphrey Bogart,22
+Vladimir V. Putin,Boris N. Yeltsin,22
+Jawaharlal Nehru,Indira Gandhi,22
+Lyndon B. Johnson,John V. Lindsay,22
+Jerome Robbins,George Balanchine,22
+Winston Churchill,Harry S. Truman,22
+Dizzy Gillespie,Benny Goodman,22
+Richard M. Nixon,Nikita S. Khrushchev,22
+Robert S. McNamara,John F. Kennedy,21
+Gracie Allen,George Burns,21
+Ronald Reagan,Robert H. Bork,21
+Martha Graham,George Balanchine,21
+Billie Holiday,Benny Goodman,21
+Martin Luther King Jr.,Bill Clinton,21
+Hugh L. Carey,Abraham D. Beame,21
+Marilyn Monroe,Elizabeth Taylor,21
+John Coltrane,Charlie Parker,21
+John V. Lindsay,David N. Dinkins,21
+Richard M. Nixon,John D. Ehrlichman,21
+Lyndon B. Johnson,George W. Bush,21
+Joan Baez,Bob Dylan,21
+Bruce Springsteen,Bob Dylan,21
+Joe DiMaggio,Babe Ruth,21
+Ronald Reagan,George H. W. Bush,21
+Richard Nixon,Richard M. Nixon,21
+Ella Fitzgerald,Billie Holiday,21
+Robert Kennedy,John F. Kennedy,21
+Richard M. Nixon,John V. Lindsay,21
+Laurence Olivier,John Gielgud,20
+Jason Robards,Colleen Dewhurst,20
+Ralph Richardson,John Gielgud,20
+Carl Bernstein,Bob Woodward,20
+Frank Sinatra,Doris Day,20
+Spencer Tracy,Clark Gable,20
+Sam Rayburn,Lyndon B. Johnson,20
+Merv Griffin,Johnny Carson,20
+Jimmy Carter,George W. Bush,20
+James Bond,Ian Fleming,20
+Henry A. Kissinger,Gerald R. Ford,20
+Nelson A. Rockefeller,Abraham D. Beame,20
+Perry Como,Frank Sinatra,20
+Robert Redford,Paul Newman,20
+Jimmy Carter,Franklin D. Roosevelt,20
+Winston Churchill,Franklin D. Roosevelt,20
+Pete Seeger,Joan Baez,20
+Lyndon B. Johnson,Adlai E. Stevenson,20
+Marilyn Monroe,Frank Sinatra,20
+John F. Kennedy,Barry Goldwater,20
+Lester Young,Charlie Parker,20
+Ella Fitzgerald,Charlie Parker,20
+Nikita S. Khrushchev,Leonid I. Brezhnev,20
+Nat King Cole,Frank Sinatra,20
+Louis Armstrong,Charlie Parker,20
+Sarah Vaughan,Charlie Parker,20
+John Coltrane,Dizzy Gillespie,20
+Mikhail S. Gorbachev,Leonid I. Brezhnev,20
+John V. Lindsay,Hugh L. Carey,20
+Martin Luther King Jr.,John Lewis,20
+Fred Astaire,Frank Sinatra,20
+Nelson A. Rockefeller,Edward I. Koch,20
+John F. Kennedy,Eleanor Roosevelt,20
+Leonard Bernstein,Harold C. Schonberg,20
+Edward M. Kennedy,Bill Clinton,20
+Jimmy Carter,Hubert H. Humphrey,20
+Mark Rothko,Jackson Pollock,19
+Richard M. Nixon,Archibald Cox,19
+Dwight D. Eisenhower,Adlai E. Stevenson,19
+Spiro T. Agnew,Gerald R. Ford,19
+Jerry Rubin,Abbie Hoffman,19
+Michael Schwerner,Andrew Goodman,19
+Sonny Liston,Muhammad Ali,19
+Leonard Bernstein,Jerome Robbins,19
+John F. Kennedy,George W. Bush,19
+Elvis Presley,Bob Dylan,19
+Peggy Lee,Frank Sinatra,19
+Robert Kennedy,Lyndon B. Johnson,19
+Lionel Hampton,Benny Goodman,19
+Lyndon B. Johnson,George C. Wallace,19
+Joseph R. McCarthy,John F. Kennedy,19
+Ginger Rogers,Fred Astaire,19
+Richard M. Nixon,Elliot L. Richardson,19
+Dwight D. Eisenhower,Bill Clinton,19
+Teddy Wilson,Benny Goodman,19
+Thomas E. Dewey,Dwight D. Eisenhower,19
+Gene Kelly,Frank Sinatra,19
+Elizabeth Taylor,Audrey Hepburn,19
+Stan Getz,Dizzy Gillespie,19
+George Bush,Dwight D. Eisenhower,19
+George W. Bush,George Bush,19
+Sarah Vaughan,Dizzy Gillespie,19
+Nelson A. Rockefeller,Dwight D. Eisenhower,19
+Humphrey Bogart,Bette Davis,19
+Frank Sinatra,Elizabeth Taylor,19
+Marilyn Monroe,John F. Kennedy,19
+Richard Burton,Laurence Olivier,19
+Roy Lichtenstein,Jasper Johns,19
+Ella Fitzgerald,Benny Goodman,18
+Elvis Presley,Carl Perkins,18
+Martin Luther King Jr.,James Earl Ray,18
+Ronald Reagan,George P. Shultz,18
+Katharine Hepburn,Elizabeth Taylor,18
+Robert H. Bork,Richard M. Nixon,18
+Joan Crawford,Clark Gable,18
+Roy Lichtenstein,Robert Rauschenberg,18
+Thomas E. Dewey,Richard M. Nixon,18
+Max Roach,Dizzy Gillespie,18
+Johnny Carson,Jack Paar,18
+Harry S. Truman,Eleanor Roosevelt,18
+Jerry Lewis,Frank Sinatra,18
+Pete Seeger,Bob Dylan,18
+Frank Sinatra,Bob Hope,18
+Willie Nelson,Elvis Presley,18
+Sonny Liston,Cassius Clay,18
+Boris Spassky,Bobby Fischer,18
+Coleman Hawkins,Charlie Parker,18
+Milton Berle,Bob Hope,18
+Richard M. Nixon,Adlai E. Stevenson,18
+Walter F. Mondale,Jimmy Carter,18
+Lyndon Johnson,John F. Kennedy,18
+Richard M. Nixon,Fidel Castro,18
+Charlie Parker,Charles Mingus,18
+Willie Nelson,Johnny Cash,18
+Edward Weston,Ansel Adams,18
+Mario M. Cuomo,David N. Dinkins,18
+Ronald Reagan,Margaret Thatcher,18
+Robert F. Kennedy,Hubert H. Humphrey,18
+Robert F. Kennedy,Nelson A. Rockefeller,18
+Jack Nicklaus,Arnold Palmer,18
+Robert F. Kennedy,Bill Clinton,18
+Tennessee Williams,Edward Albee,18
+Elvis Presley,Bing Crosby,18
+Malcolm Wilson,Hugh L. Carey,18
+Sarah Vaughan,Frank Sinatra,18
+John Kennedy,John F. Kennedy,17
+Yitzhak Rabin,Yasir Arafat,17
+Muhammad Ali,George Foreman,17
+Gene Krupa,Benny Goodman,17
+Jasper Johns,Frank Stella,17
+Harry James,Frank Sinatra,17
+Paul McCartney,John Lennon,17
+Nikita S. Khrushchev,Dwight D. Eisenhower,17
+Zhao Ziyang,Deng Xiaoping,17
+John Paul II,Benedict XVI,17
+Ralph Richardson,Laurence Olivier,17
+Gerald R. Ford,Bill Clinton,17
+Monica Lewinsky,Bill Clinton,17
+Vivien Leigh,Laurence Olivier,17
+Martha Graham,Jose Limon,17
+Ray Charles,Elvis Presley,17
+Byron Nelson,Ben Hogan,17
+Mario M. Cuomo,George E. Pataki,17
+Jimi Hendrix,Bob Dylan,17
+Walter Cronkite,Dan Rather,17
+Elvis Presley,Aretha Franklin,17
+Gerald R. Ford,Barry Goldwater,17
+Bill Clinton,Barack Obama,17
+Muhammad Ali,Joe Frazier,17
+Harry S. Truman,Douglas MacArthur,17
+Louis Armstrong,Billie Holiday,17
+Roger Moore,James Bond,17
+Hillary Rodham Clinton,Bill Clinton,17
+Perry Como,Bing Crosby,17
+Kirk Douglas,Burt Lancaster,17
+Louis Armstrong,Frank Sinatra,17
+Zhou Enlai,Mao Zedong,17
+Queen Elizabeth II,Margaret Thatcher,17
+Zubin Mehta,Leonard Bernstein,16
+Nelson A. Rockefeller,Jacob K. Javits,16
+Wilson Pickett,Aretha Franklin,16
+Sarah Vaughan,Billie Holiday,16
+Jose Limon,Doris Humphrey,16
+Nelson A. Rockefeller,Barry Goldwater,16
+Ronald Reagan,Fidel Castro,16
+Dizzy Gillespie,Charles Mingus,16
+Jimmy Carter,George McGovern,16
+Louis Armstrong,Benny Carter,16
+Yogi Berra,Casey Stengel,16
+William Carlos Williams,Ezra Pound,16
+John F. Kennedy,Henry A. Kissinger,16
+Martin Luther King Jr.,Ku Klux Klan,16
+John F. Kennedy,Earl Warren,16
+Spencer Tracy,Humphrey Bogart,16
+John Wayne,Henry Fonda,16
+John Coltrane,Charles Mingus,16
+Martha Graham,Hanya Holm,16
+Walter F. Mondale,Ronald Reagan,16
+William Shawn,Harold Ross,16
+Jack Benny,George Burns,16
+Robert F. Kennedy,Jacqueline Kennedy,16
+Tony Awards,Tony Award,16
+Robert F. Kennedy,John V. Lindsay,16
+Johnny Cash,Bob Dylan,16
+Lyndon B. Johnson,Jacqueline Kennedy,16
+Ringo Starr,George Harrison,16
+Marlon Brando,James Dean,16
+Pierre Boulez,Leonard Bernstein,16
+Richard M. Nixon,Barry M. Goldwater,16
+Woody Herman,Stan Kenton,16
+Rosa Parks,Martin Luther King Jr.,16
+Irving Berlin,Cole Porter,16
+Wilt Chamberlain,Bill Russell,16
+Whittaker Chambers,Alger Hiss,16
+William F. Buckley Jr.,Ronald Reagan,16
+Robert Rauschenberg,John Cage,16
+Rudolph W. Giuliani,John V. Lindsay,16
+Humphrey Bogart,Clark Gable,16
+John XXIII,John Paul II,16
+Sonny Rollins,Charlie Parker,16
+Walter Matthau,Jack Lemmon,16
+Pete Seeger,Alan Lomax,16
+Katharine Hepburn,Cary Grant,16
+Mikhail Baryshnikov,George Balanchine,16
+Jimi Hendrix,Janis Joplin,16
+Richard M. Nixon,Bob Woodward,16
+Marlon Brando,Elia Kazan,16
+Nelson Riddle,Frank Sinatra,15
+Sam Phillips,Elvis Presley,15
+Roy Campanella,Jackie Robinson,15
+George Harrison,Eric Clapton,15
+George Gershwin,Cole Porter,15
+Theodore H. White,Richard M. Nixon,15
+Lester Young,Dizzy Gillespie,15
+Virgil Thomson,Aaron Copland,15
+Lyndon B. Johnson,Earl Warren,15
+Marlon Brando,Katharine Hepburn,15
+Ronald Reagan,James A. Baker III,15
+Mark Rothko,Barnett Newman,15
+Gregory Corso,Allen Ginsberg,15
+Spiro T. Agnew,Ronald Reagan,15
+Humphrey Bogart,Edward G. Robinson,15
+Jimmy Carter,Barry Goldwater,15
+Yitzhak Rabin,Shimon Peres,15
+Woody Allen,Barbra Streisand,15
+Thurgood Marshall,Lyndon B. Johnson,15
+Wilt Chamberlain,Jerry West,15
+Doris Day,Bing Crosby,15
+Sam Snead,Byron Nelson,15
+Stan Getz,Charlie Parker,15
+Richard Nixon,John F. Kennedy,15
+Dwight D. Eisenhower,Douglas MacArthur,15
+Elizabeth Taylor,Bette Davis,15
+Winston Churchill,John F. Kennedy,15
+Johnny Carson,David Letterman,15
+Herbert Hoover,Franklin D. Roosevelt,15
+Jack Benny,Bing Crosby,15
+Bobby Jones,Ben Hogan,15
+Sarah Vaughan,Benny Goodman,15
+Katharine Hepburn,Humphrey Bogart,15
+John F. Kennedy,Dean Rusk,15
+Glenn Miller,Benny Goodman,15
+Michael Schwerner,James Chaney,15
+Peggy Lee,Benny Goodman,15
+George W. Bush,Barack Obama,15
+Salvador Allende,Augusto Pinochet,15
+Thurgood Marshall,Richard M. Nixon,15
+Joseph R. McCarthy,Harry S. Truman,15
+Ku Klux Klan,Andrew Goodman,15
+Katharine Hepburn,Bette Davis,15
+David N. Dinkins,Abraham D. Beame,15
+Lou Gehrig,Joe DiMaggio,15
+Dwight D. Eisenhower,Barry Goldwater,15
+Hubert H. Humphrey,Dwight D. Eisenhower,15
+Sam Rayburn,John F. Kennedy,15
+James Chaney,Andrew Goodman,15
+Marilyn Monroe,Arthur Miller,15
+Paul VI,John XXIII,15
+Paul McCartney,George Harrison,15
+Paul Newman,Marlon Brando,15
+Jimi Hendrix,Eric Clapton,15
+Max Roach,Charles Mingus,15
+Mike Stoller,Jerry Leiber,15
+Ferdinand E. Marcos,Corazon C. Aquino,15
+Lyndon B. Johnson,Joseph R. McCarthy,15
+Sammy Davis Jr.,John F. Kennedy,15
+Robert Kennedy,Richard M. Nixon,15
+Richard M. Nixon,George S. McGovern,15
+Max Roach,Charlie Parker,15
+Paul Taylor,Martha Graham,15
+Lyndon B. Johnson,Eugene J. McCarthy,15
+Charlie Parker,Billie Holiday,15
+Judy Garland,Gene Kelly,15
+Richard M. Nixon,Eugene J. McCarthy,15
+Marlon Brando,Gary Cooper,15
+John Kander,Fred Ebb,14
+John Cage,Jasper Johns,14
+Mickey Rooney,Judy Garland,14
+Martha Graham,John Martin,14
+Willie Nelson,Waylon Jennings,14
+Geoffrey Beene,Bill Blass,14
+Yasir Arafat,Shimon Peres,14
+John F. Kennedy,Douglas MacArthur,14
+Spiro T. Agnew,John F. Kennedy,14
+Eric Clapton,Bob Dylan,14
+Rudolf Nureyev,Mikhail Baryshnikov,14
+Leonard Bernstein,Betty Comden,14
+Ronald Reagan,Jesse Helms,14
+Robert Motherwell,Mark Rothko,14
+John F. Kennedy,George McGovern,14
+Elvis Presley,Dean Martin,14
+Judy Garland,Joan Crawford,14
+Eleanor Roosevelt,Dwight D. Eisenhower,14
+Leonard Bernstein,Igor Stravinsky,14
+Down Beat,Charlie Parker,14
+Ronald Reagan,Bob Dole,14
+Claes Oldenburg,Andy Warhol,14
+Quincy Jones,Dizzy Gillespie,14
+Woody Herman,Benny Goodman,14
+Judy Garland,Fred Astaire,14
+John S. Wilson,Benny Goodman,14
+Frank Sinatra,Dizzy Gillespie,14
+John Martin,George Balanchine,14
+John McCain,George W. Bush,14
+Stevie Wonder,Smokey Robinson,14
+Thurgood Marshall,Martin Luther King Jr.,14
+Richard M. Nixon,Earl Warren,14
+Judy Garland,Bing Crosby,14
+Joan Crawford,Greta Garbo,14
+Robert Rauschenberg,Frank Stella,14
+Stan Getz,Ella Fitzgerald,14

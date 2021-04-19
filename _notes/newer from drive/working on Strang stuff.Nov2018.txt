@@ -1,0 +1,15 @@
+
+working on Strang stuff
+November 28 2018
+
+	name extraction
+		multiple methods,
+		triangulate
+
+	simple cleaning up of code
+
+	identify CEO names from lists Abdullah generated
+
+	attempt at identifying company names from what Abdullah has
+
+	look at the older obituaries again

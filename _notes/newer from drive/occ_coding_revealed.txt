@@ -1,0 +1,84 @@
+Hi Alec
+
+
+A "occupational coding revealed" program might include the following:
+
+
+a few simple options on the sample thats examined: 
+(D) random sample or fixed sample (which facilitates looking at impact of changes); and separately, N
+
+display of the word-occupational code data structure
+
+display of obituary and how its coded, where user is able to look at the title, the first sentence, and the full entry (its good to be able to see all these, even if the routine is only working with the first sentence)
+if possible here to pinpoint what term is leading to the code in a text markup fashion, that would be great
+
+an option to look at the obituaries that dont receive a code, or that receive a particular code
+some simple summary statistics printed out, like percentage of the sample that receives a code, or percentage that receive each code
+
+It would be great if the user sees the program and can modify it to run in different ways -- with comments indicating how they can ask for different things
+
+i.e.,
+
+SampleType = "Random";
+
+/* options are "Random", "Fixed" */
+
+
+showing some of the underlying programming would promote learning by users (me, Abdullah, Katherine, Reid) even if there aren't options to modify, though there are also limiting benefits 
+
+David
+
+
+==================
+
+
+synonyms shouldn't always be expanded
+CSV should be visible and editable
+
+
+
+
+
+Hi Alec
+
+
+spent a little time exploring the website, its a great platform...Below are my first thoughts
+
+question: does the occ coding use the syntax parsed first sentences, or is it only looking for word matches?  if the latter, wouldnt it be reasonably quick to do experiments with larger (and different) samples than the 100 being accessed here -- am thinking we can have an option to load the previously coded 100 with parsing, for when thats used, but also to (a) load a random sample of size N without parsing, or a fixed set defined by index numbers also without parsing
+
+***
+in terms of working with the coding, a markup tool that displays the text being coded and the received code (Jim Smith was an {occ_201: electrical engineer} working for Boeing) would seem like the next key step in making it easy to see whats going one and pinpoint true positives and false positives.
+
+***
+re: the word-occupation associations, I'm puzzled  ... dont see the kinds of synonyms that the Census provided (in occ2000_updated Ashahid). 
+
+doesn't have much of the virtues of the occ long list of terms
+the other: 
+
+***
+The wordnet synonyms look useful in some cases and problematic in others.
+
+can easily go awry
+
+***
+in addition to working on the occ coding, a second set of tasks involves cleaning the title and name data, which still has things like "LATE EDITION" and only finds names when they are followed by a comma... maybe this could become another module on the webpage
+
+
+programming interface thoughts:
+
+great idea:
+***
+it would be great to have a read only folder that has program code, not for running but to see how different data objects and functions are defined ... for example I was wondering what are the fields of obituaries[i].info, I know about name,fullBody, and title ...
+
+
+I wrote some little bits of code and wanted to save them but didnt see how to copy/paste text thats in a  cell  ... is there a simple way? i was able to save a copy of the whole website but not just a string
+
+
+cheers, David
+
+
+ps Could skype early next week, to focus on the occ coding
+
+
+*** include ipums nice names in the coding environment
+*** notebook 

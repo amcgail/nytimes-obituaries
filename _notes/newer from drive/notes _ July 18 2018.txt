@@ -1,0 +1,66 @@
+BRAINSTORM:
+	OK --
+	What bad-ass things would I like to help out with / complete?
+
+	more accurate name detection.
+	more comprehensive 1st sentence fixes
+	going back into original files themselves
+		cleaning up the cleaning code,
+		re-running the cleaning scripts, fixing the small errors we've seen (and retrieving paragraphs)
+
+FROM MEETING:
+
+	immediately export a CSV or XLS of synsets
+	stable way of referring easily (with a number) to cases, deleting, retrieving, etc.
+		maybe include date in the ID number
+	go through the old processing thingies n stuff --
+	generate a CSV for hand-coding, along with IDS
+		1% of 60k is 600 --
+
+LAST MEETING:
+
+	think a little more about the hand coding system itself...
+
+	domains
+
+	and machine learning :D
+		maybe for generalization
+
+	TODO TASKS
+
+	Add a jupyter folder that provides a log of program changes,
+		running text file, describing changes made to the code --
+		only do retrospective if I think it's good for me..
+	
+	Occ roles linked to name (Adm. Dewey, The Rev. Upright, Dr. Doolittle)
+	
+	Capability to search for a given string, in title and/or first sentence (currently can search whole article)
+		**done**
+	Eliminate occupations that are not the obituarized: “secretary to the president”, “he once met the president”, “medical examiner says he is dead”
+	Tough: actors described as stars, but played a doctor on TV --
+		we should explore and test the "director of X", "authority on X" coding strategy
+	occupation of kinships? cool!
+
+	TODAY:
+
+	Eliminate name from occ words search, in title and first sentence (currently Joseph Smith could be identified as a smith)
+		maybe just case insensitive
+			President of the United States
+		maybe delete the name from the first sentence before processing
+
+		done, but I couldn't find any examples of it actually happening (smith, baker)
+			archer
+			butler
+			rector
+
+	Capability to see hits, false positives etc, for terms in synonym sets alone (makes easier to review how theyre performing. Otherwise have to wade thru the many occwords matches)
+		DONE --
+
+	Embedded terms (“vice president” should be linked to vice president, not president
+		DONE --
+
+	Some cases where the first sentence gets corrupted -- location, "NY TIMES" etc -- end up with a fragment of the first sentence as the first sentence.
+		fixed some good ones.
+		now, any all-caps shit is removed
+		made the (AP) matching more general
+		captured 80% of cases I saw, and ideas about the few exceptions
