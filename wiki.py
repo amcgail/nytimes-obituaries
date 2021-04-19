@@ -8,14 +8,16 @@ Created on Fri Apr 27 12:51:31 2018
 import re
 
 import wikipedia
-from SPARQLWrapper import SPARQLWrapper, JSON
 from dateutil import parser
 from wikipedia import PageError, DisambiguationError
 
-sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
-sparql.setReturnFormat(JSON)
+def sparql(query):
+    import requests
 
-search_url = "https://www.wikidata.org/w/api.php?%s"
+    url = 'https://query.wikidata.org/sparql'
+    r = requests.get(url, params = {'format': 'json', 'query': query})
+    data = r.json()
+    return data
 
 def subclassOf(what):
     # e.g. subclassOf("Q7210356") == political organization
@@ -29,8 +31,7 @@ def subclassOf(what):
     }
     """ % what
 
-    sparql.setQuery(sparquery)
-    r = sparql.query().convert()
+    r = sparql(sparquery)
     retNames = [x['name']['value'] for x in r['results']['bindings']]
 
     return retNames
@@ -52,8 +53,7 @@ def isXsubclassY(X, Y, params={}):
     }}
     """.format(**locals())
 
-    sparql.setQuery(sparquery)
-    r = sparql.query().convert()
+    r = sparql(sparquery)
     retNames = [ {y: x[y]['value'] for y in x} for x in r['results']['bindings'] ]
 
     return retNames
@@ -70,8 +70,7 @@ def subclassOf(what):
     }
     """ % what
 
-    sparql.setQuery(sparquery)
-    r = sparql.query().convert()
+    r = sparql(sparquery)
     retNames = [x['name']['value'] for x in r['results']['bindings']]
 
     return retNames
@@ -86,10 +85,8 @@ def companyNames():
          FILTER(LANG(?clab) = "en")
     }
     """
-    
-    sparql.setQuery(csparquery)
-    r = sparql.query().convert()
 
+    r = sparql(csparquery)    
     cnames = [ x['clab']['value'] for x in r['results']['bindings'] ]
 
     return cnames
@@ -128,8 +125,7 @@ def lookupOccupationalTitles(name):
             return []
         
         myid = r['search'][0]['id']
-        sparql.setQuery(sparquery % "wd:%s" % myid)
-        r2 = sparql.query().convert()
+        r2 = sparql(sparquery % "wd:%s" % myid)
         
         occs = set( [ x['occ']['value'] for x in r2['results']['bindings'] ] )
         famousDict[name] = occs
