@@ -104,6 +104,17 @@ class _inquirer_lexicon:
 
         return count
 
+    def getWords(self, lexiconName, doc):
+        self.load()
+        res = {}
+
+        count = 0
+        for x in word_tokenize(doc):
+            if x.upper() in self.lexicon[lexiconName]:
+                res.add(x.upper())
+
+        return res
+
 inquirer_lexicon = _inquirer_lexicon()
 
 def first_name(name):
